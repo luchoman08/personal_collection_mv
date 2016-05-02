@@ -1,3 +1,7 @@
+tinker_soft_usuarios:
+    resource: "@TinkerSoftUsuariosBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

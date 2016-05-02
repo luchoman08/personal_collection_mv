@@ -1,0 +1,3 @@
+tinker_soft_usuarios_homepage:
+    path:     /
+    defaults: { _controller: TinkerSoftUsuariosBundle:Default:index }
