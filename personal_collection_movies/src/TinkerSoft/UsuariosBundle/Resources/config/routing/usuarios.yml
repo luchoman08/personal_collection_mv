@@ -1,0 +1,24 @@
+usuarios_index:
+    path:     /
+    defaults: { _controller: "TinkerSoftUsuariosBundle:Usuarios:index" }
+    methods:  GET
+
+usuarios_show:
+    path:     /{id}/show
+    defaults: { _controller: "TinkerSoftUsuariosBundle:Usuarios:show" }
+    methods:  GET
+
+usuarios_new:
+    path:     /new
+    defaults: { _controller: "TinkerSoftUsuariosBundle:Usuarios:new" }
+    methods:  [GET, POST]
+
+usuarios_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "TinkerSoftUsuariosBundle:Usuarios:edit" }
+    methods:  [GET, POST]
+
+usuarios_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "TinkerSoftUsuariosBundle:Usuarios:delete" }
+    methods:  DELETE

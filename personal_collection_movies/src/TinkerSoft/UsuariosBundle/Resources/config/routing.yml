@@ -1,3 +1,7 @@
+tinker_soft_usuarios_usuarios:
+    resource: "@TinkerSoftUsuariosBundle/Resources/config/routing/usuarios.yml"
+    prefix:   /usuarios
+
 tinker_soft_usuarios_homepage:
     path:     /
     defaults: { _controller: TinkerSoftUsuariosBundle:Default:index }
