@@ -17,6 +17,7 @@ class UsuariosType extends AbstractType
         $builder
             ->add('nombre')
             ->add('apellidos')
+            ->add('nickname')
             ->add('correoElectronico',EmailType::class, array('label' => 'Correo Electronico: ', 'attr' => array('class' => 'form-control', 'placeholder' =>'Ej: alguien@dominio.com')))
             ->add('password')
             ->add('password')
