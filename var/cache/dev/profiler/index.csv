@@ -61,3 +61,6 @@ ee58d2,127.0.0.1,GET,http://localhost:8000/usuarios/new,1463103334,,500
 e1af61,127.0.0.1,GET,http://localhost:8000/usuarios/new,1463103335,,500
 c7dfef,127.0.0.1,GET,http://localhost:8000/usuarios/new,1463103354,,200
 3b682c,127.0.0.1,POST,http://localhost:8000/usuarios/new,1463103396,,200
+59803e,127.0.0.1,GET,http://127.0.0.1:8000/,1463104828,,200
+cee24d,127.0.0.1,GET,http://127.0.0.1:8000/usuarios,1463104832,,301
+b273a9,127.0.0.1,GET,http://127.0.0.1:8000/usuarios/,1463104833,,200
