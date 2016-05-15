@@ -23,7 +23,7 @@ class UsuariosType extends AbstractType
             ->add('nickname',TextType::class, array('label' => 'Nombre de usuario: ', 'attr' => array('class' => 'form-control')))
             ->add('correoElectronico',EmailType::class, array('label' => 'Correo Electronico: ', 'attr' => array('class' => 'form-control', 'placeholder' =>'Ej: alguien@dominio.com')))
             ->add('password',PasswordType::class, array('label' => 'Contraseña: ', 'attr' => array('class' => 'form-control')))
-            ->add('rol', NumberType:class,  array('label' => 'Rol: ', 'attr' => array('class' => 'form-control')))
+            ->add('rol', NumberType::class,  array('label' => 'Rol: ', 'attr' => array('class' => 'form-control')))
             
         ;
     }
