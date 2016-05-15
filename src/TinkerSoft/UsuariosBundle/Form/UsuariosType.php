@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 class UsuariosType extends AbstractType
 {
     /**
@@ -15,12 +17,11 @@ class UsuariosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('apellidos')
-            ->add('nickname')
+            ->add('nombre',TextType::class)
+            ->add('apellidos',TextType::class)
+            ->add('nickname',TextType::class)
             ->add('correoElectronico',EmailType::class, array('label' => 'Correo Electronico: ', 'attr' => array('class' => 'form-control', 'placeholder' =>'Ej: alguien@dominio.com')))
-            ->add('password')
-            ->add('password')
+            ->add('password',PasswordType::class)
             ->add('rol')
             ->add('estado')
         ;
