@@ -17,14 +17,12 @@ class __TwigTemplate_5850798e372ccda8bee53a2a89b554237264718fe245e9e115b88c4c9e8
     {
         // line 1
         echo "
-Hello World! > API
-
 ";
-        // line 4
+        // line 2
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "genres", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["genero"]) {
-            // line 5
+            // line 3
             echo twig_escape_filter($this->env, $this->getAttribute($context["genero"], "id", array()), "html", null, true);
             echo "  ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["genero"], "name", array()), "html", null, true);
@@ -48,11 +46,9 @@ Hello World! > API
 
     public function getDebugInfo()
     {
-        return array (  28 => 5,  24 => 4,  19 => 1,);
+        return array (  26 => 3,  22 => 2,  19 => 1,);
     }
 }
-/* */
-/* Hello World! > API*/
 /* */
 /* {% for genero in params.genres %}*/
 /* {{ genero.id  }}  {{ genero.name  }} <br />*/
