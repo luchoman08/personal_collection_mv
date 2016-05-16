@@ -27,6 +27,35 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         $context = $this->context;
         $request = $this->request;
 
+        if (0 === strpos($pathinfo, '/movie_database')) {
+            // api_the_movie_data_base_homepage
+            if (rtrim($pathinfo, '/') === '/movie_database') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'api_the_movie_data_base_homepage');
+                }
+
+                return array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\DefaultController::indexAction',  '_route' => 'api_the_movie_data_base_homepage',);
+            }
+
+            if (0 === strpos($pathinfo, '/movie_database/generos')) {
+                // generos
+                if (preg_match('#^/movie_database/generos(?:/(?P<_locale>[^/]++))?$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'generos')), array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\APIController::listaGenerosAction',  '_locale' => 'en',));
+                }
+
+                // generos_barra
+                if (rtrim($pathinfo, '/') === '/movie_database/generos') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'generos_barra');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\APIController::listaGenerosAction',  '_locale' => 'en',  '_route' => 'generos_barra',);
+                }
+
+            }
+
+        }
+
         if (0 === strpos($pathinfo, '/usuarios')) {
             // usuarios_index
             if (rtrim($pathinfo, '/') === '/usuarios') {

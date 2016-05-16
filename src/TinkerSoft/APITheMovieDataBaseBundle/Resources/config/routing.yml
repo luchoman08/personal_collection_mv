@@ -1,0 +1,14 @@
+api_the_movie_data_base_homepage:
+    path:     /
+    defaults: { _controller: APITheMovieDataBaseBundle:Default:index }
+  
+
+generos:
+    path:      /generos/{_locale}
+    defaults:  { _controller: APITheMovieDataBaseBundle:API:listaGeneros, _locale: en }
+    
+    
+generos_barra:
+    path:      /generos/
+    defaults:  { _controller: APITheMovieDataBaseBundle:API:listaGeneros, _locale: en }
+

@@ -100,6 +100,23 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        if (0 === strpos($pathinfo, '/movie_database')) {
+            // api_the_movie_data_base_homepage
+            if (rtrim($pathinfo, '/') === '/movie_database') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'api_the_movie_data_base_homepage');
+                }
+
+                return array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\DefaultController::indexAction',  '_route' => 'api_the_movie_data_base_homepage',);
+            }
+
+            // generos
+            if (0 === strpos($pathinfo, '/movie_database/generos') && preg_match('#^/movie_database/generos(?:/(?P<lenguaje>[^/]++))?$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'generos')), array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\APIController::listaGenerosAction',  'lenguaje' => 'en',));
+            }
+
+        }
+
         if (0 === strpos($pathinfo, '/usuarios')) {
             // usuarios_index
             if (rtrim($pathinfo, '/') === '/usuarios') {

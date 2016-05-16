@@ -79,6 +79,7 @@
   'DoctrineBundle:Collector:explain.html.twig' => '/home/ubuntu/workspace/personal_collection_mv/vendor/doctrine/doctrine-bundle/Resources/views/Collector/explain.html.twig',
   'DoctrineBundle:Collector:db.html.twig' => '/home/ubuntu/workspace/personal_collection_mv/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig',
   'TinkerSoftUsuariosBundle:Default:index.html.twig' => '/home/ubuntu/workspace/personal_collection_mv/src/TinkerSoft/UsuariosBundle/Resources/views/Default/index.html.twig',
+  'APITheMovieDataBaseBundle:Default:index.html.twig' => '/home/ubuntu/workspace/personal_collection_mv/src/TinkerSoft/APITheMovieDataBaseBundle/Resources/views/Default/index.html.twig',
   'DebugBundle:Profiler:dump.html.twig' => '/home/ubuntu/workspace/personal_collection_mv/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views/Profiler/dump.html.twig',
   'WebProfilerBundle:Profiler:ajax_layout.html.twig' => '/home/ubuntu/workspace/personal_collection_mv/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Profiler/ajax_layout.html.twig',
   'WebProfilerBundle:Profiler:toolbar.css.twig' => '/home/ubuntu/workspace/personal_collection_mv/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views/Profiler/toolbar.css.twig',

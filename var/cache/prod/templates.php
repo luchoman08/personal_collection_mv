@@ -79,6 +79,7 @@
   'DoctrineBundle:Collector:explain.html.twig' => '/home/ubuntu/workspace/personal_collection_mv/vendor/doctrine/doctrine-bundle/Resources/views/Collector/explain.html.twig',
   'DoctrineBundle:Collector:db.html.twig' => '/home/ubuntu/workspace/personal_collection_mv/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig',
   'TinkerSoftUsuariosBundle:Default:index.html.twig' => '/home/ubuntu/workspace/personal_collection_mv/src/TinkerSoft/UsuariosBundle/Resources/views/Default/index.html.twig',
+  'APITheMovieDataBaseBundle:Default:index.html.twig' => '/home/ubuntu/workspace/personal_collection_mv/src/TinkerSoft/APITheMovieDataBaseBundle/Resources/views/Default/index.html.twig',
   ':usuarios:index.html.twig' => '/home/ubuntu/workspace/personal_collection_mv/app/Resources/views/usuarios/index.html.twig',
   ':usuarios:new.html.twig' => '/home/ubuntu/workspace/personal_collection_mv/app/Resources/views/usuarios/new.html.twig',
   ':usuarios:show.html.twig' => '/home/ubuntu/workspace/personal_collection_mv/app/Resources/views/usuarios/show.html.twig',

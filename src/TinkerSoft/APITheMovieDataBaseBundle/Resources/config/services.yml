@@ -1,0 +1,4 @@
+services:
+#    api_the_movie_data_base.example:
+#        class: TinkerSoft\APITheMovieDataBaseBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
