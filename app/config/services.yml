@@ -4,6 +4,12 @@ parameters:
 #    parameter_name: value
 
 services:
+    app.default_controller:
+        class: AppBundle\Controller\DefaultController
+        
+    app.api_controller:
+        class: TinkerSoft\APITheMovieDataBaseBundle\Controller\APIController
+        
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

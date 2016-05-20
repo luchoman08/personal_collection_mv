@@ -27,6 +27,59 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         $context = $this->context;
         $request = $this->request;
 
+        if (0 === strpos($pathinfo, '/vista')) {
+            // vista_homepage
+            if (rtrim($pathinfo, '/') === '/vista') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'vista_homepage');
+                }
+
+                return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::indexAction',  '_route' => 'vista_homepage',);
+            }
+
+            if (0 === strpos($pathinfo, '/vista/buscar')) {
+                // pelicula
+                if (preg_match('#^/vista/buscar/(?P<consulta>[^/]++)/(?P<numero_pagina>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaAction',));
+                }
+
+                // pelicula_consulta_barra
+                if (preg_match('#^/vista/buscar/(?P<consulta>[^/]++)/?$#s', $pathinfo, $matches)) {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'pelicula_consulta_barra');
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaAction',  'numero_pagina' => 1,));
+                }
+
+                // pelicula_consulta_sin_barra
+                if (preg_match('#^/vista/buscar/(?P<consulta>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_sin_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaAction',  'numero_pagina' => 1,));
+                }
+
+            }
+
+            // generos_barra
+            if ($pathinfo === '/vista/generos') {
+                return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verListaGenerosAction',  '_route' => 'generos_barra',);
+            }
+
+            // pelicula_barra
+            if (rtrim($pathinfo, '/') === '/vista/buscar') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'pelicula_barra');
+                }
+
+                return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::indexAction',  '_route' => 'pelicula_barra',);
+            }
+
+            // mostrarPelicula_minuscula
+            if (0 === strpos($pathinfo, '/vista/mostrarpelicula') && preg_match('#^/vista/mostrarpelicula/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'mostrarPelicula_minuscula')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verPeliculaAction',));
+            }
+
+        }
+
         if (0 === strpos($pathinfo, '/movie_database')) {
             // api_the_movie_data_base_homepage
             if (rtrim($pathinfo, '/') === '/movie_database') {
@@ -37,21 +90,9 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\DefaultController::indexAction',  '_route' => 'api_the_movie_data_base_homepage',);
             }
 
-            if (0 === strpos($pathinfo, '/movie_database/generos')) {
-                // generos
-                if (preg_match('#^/movie_database/generos(?:/(?P<_locale>[^/]++))?$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'generos')), array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\APIController::listaGenerosAction',  '_locale' => 'en',));
-                }
-
-                // generos_barra
-                if (rtrim($pathinfo, '/') === '/movie_database/generos') {
-                    if (substr($pathinfo, -1) !== '/') {
-                        return $this->redirect($pathinfo.'/', 'generos_barra');
-                    }
-
-                    return array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\APIController::listaGenerosAction',  '_locale' => 'en',  '_route' => 'generos_barra',);
-                }
-
+            // mostrarPelicula
+            if (0 === strpos($pathinfo, '/movie_database/mostrarPelicula') && preg_match('#^/movie_database/mostrarPelicula/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'mostrarPelicula')), array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\APIController::obtenerPeliculaAction',));
             }
 
         }

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+
+<html>
+ <head>
+    <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="{{asset('assets/css/calificacion/star.css')}}">
+   <script src="{{asset('assets/js/calificacion/star.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+</head>   
+<title>{{params.title}}</title>
+<boyd>
+<h1>{{params.title}}</h1>
+{{params.overview}}
+<img src="https://image.tmdb.org/t/p/w185/{{params.backdrop_path}}" alt={{params.title}}>
+
+{%for trailer in params.results%}
+<p><iframe title="YouTube video player" src="https://www.youtube.com/embed/"{{trailer.key}} width="480" height="390" frameborder="0"></iframe></p>
+
+{%endfor%}
+<div class="rateyo-readonly-widg"></div>
+</body>
+
+    <script>
+        $(function() {
+
+            var rating = 3;
+
+
+            $("#c1").click(function() {
+                rating=0;
+                alert($("#c1").val());
+            });
+            $(".counter").text(rating);
+
+
+
+            $(".rateyo-readonly-widg").rateYo({
+                readOnly: false,
+                rating: rating,
+                numStars: 10,
+                precision: 10,
+                minValue: 1,
+                maxValue: 5
+            }).on("rateyo.change", function(e, data) {
+                $("#c1").val(data.rating);
+
+            });
+        });
+    </script>
+</html>

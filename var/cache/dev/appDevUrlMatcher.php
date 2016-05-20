@@ -100,21 +100,26 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        if (0 === strpos($pathinfo, '/movie_database')) {
-            // api_the_movie_data_base_homepage
-            if (rtrim($pathinfo, '/') === '/movie_database') {
+        if (0 === strpos($pathinfo, '/vista')) {
+            // vista_homepage
+            if (rtrim($pathinfo, '/') === '/vista') {
                 if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'api_the_movie_data_base_homepage');
+                    return $this->redirect($pathinfo.'/', 'vista_homepage');
                 }
 
-                return array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\DefaultController::indexAction',  '_route' => 'api_the_movie_data_base_homepage',);
+                return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::indexAction',  '_route' => 'vista_homepage',);
             }
 
-            // generos
-            if (0 === strpos($pathinfo, '/movie_database/generos') && preg_match('#^/movie_database/generos(?:/(?P<lenguaje>[^/]++))?$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'generos')), array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\APIController::listaGenerosAction',  'lenguaje' => 'en',));
+            // pelicula
+            if (0 === strpos($pathinfo, '/vista/buscar') && preg_match('#^/vista/buscar/(?P<consulta>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadoBusquedaAction',));
             }
 
+        }
+
+        // api_the_movie_data_base_homepage
+        if ($pathinfo === '/movie_database/R1') {
+            return array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\DefaultController::indexAction',  '_route' => 'api_the_movie_data_base_homepage',);
         }
 
         if (0 === strpos($pathinfo, '/usuarios')) {

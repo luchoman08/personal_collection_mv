@@ -32,6 +32,8 @@ class appProdProjectContainer extends Container
         $this->services = array();
         $this->methodMap = array(
             'annotation_reader' => 'getAnnotationReaderService',
+            'app.api_controller' => 'getApp_ApiControllerService',
+            'app.default_controller' => 'getApp_DefaultControllerService',
             'assets.context' => 'getAssets_ContextService',
             'assets.packages' => 'getAssets_PackagesService',
             'cache_clearer' => 'getCacheClearerService',
@@ -250,6 +252,32 @@ class appProdProjectContainer extends Container
     protected function getAnnotationReaderService()
     {
         return $this->services['annotation_reader'] = new \Doctrine\Common\Annotations\CachedReader(new \Doctrine\Common\Annotations\AnnotationReader(), new \Doctrine\Common\Cache\FilesystemCache((__DIR__.'/annotations')), false);
+    }
+
+    /*
+     * Gets the 'app.api_controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \TinkerSoft\APITheMovieDataBaseBundle\Controller\APIController A TinkerSoft\APITheMovieDataBaseBundle\Controller\APIController instance.
+     */
+    protected function getApp_ApiControllerService()
+    {
+        return $this->services['app.api_controller'] = new \TinkerSoft\APITheMovieDataBaseBundle\Controller\APIController();
+    }
+
+    /*
+     * Gets the 'app.default_controller' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \AppBundle\Controller\DefaultController A AppBundle\Controller\DefaultController instance.
+     */
+    protected function getApp_DefaultControllerService()
+    {
+        return $this->services['app.default_controller'] = new \AppBundle\Controller\DefaultController();
     }
 
     /*
@@ -1675,7 +1703,7 @@ class appProdProjectContainer extends Container
 
         $e = new \Symfony\Component\Security\Http\AccessMap();
 
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($e, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'main', $a, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '573954e67b08c5.24864289', $a, $c), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $e, $c)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($d, $d), 'main', NULL, NULL, NULL, $a, false));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($e, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'main', $a, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '573e57216e2ed0.90660815', $a, $c), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $e, $c)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($d, $d), 'main', NULL, NULL, NULL, $a, false));
     }
 
     /*
@@ -2642,6 +2670,7 @@ class appProdProjectContainer extends Container
         $instance->addPath(($this->targetDirs[3].'/vendor/doctrine/doctrine-bundle/Resources/views'), 'Doctrine');
         $instance->addPath(($this->targetDirs[3].'/src/TinkerSoft/UsuariosBundle/Resources/views'), 'TinkerSoftUsuarios');
         $instance->addPath(($this->targetDirs[3].'/src/TinkerSoft/APITheMovieDataBaseBundle/Resources/views'), 'APITheMovieDataBase');
+        $instance->addPath(($this->targetDirs[3].'/src/TinkerSoft/VistaBundle/Resources/views'), 'Vista');
         $instance->addPath(($this->targetDirs[3].'/app/Resources/views'));
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form'));
 
@@ -2820,7 +2849,7 @@ class appProdProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('573954e67b08c5.24864289')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('573e57216e2ed0.90660815')), true);
 
         $instance->setEventDispatcher($this->get('event_dispatcher'));
 
@@ -3015,6 +3044,7 @@ class appProdProjectContainer extends Container
                 'AppBundle' => 'AppBundle\\AppBundle',
                 'TinkerSoftUsuariosBundle' => 'TinkerSoft\\UsuariosBundle\\TinkerSoftUsuariosBundle',
                 'APITheMovieDataBaseBundle' => 'TinkerSoft\\APITheMovieDataBaseBundle\\APITheMovieDataBaseBundle',
+                'VistaBundle' => 'TinkerSoft\\VistaBundle\\VistaBundle',
             ),
             'kernel.charset' => 'UTF-8',
             'kernel.container_class' => 'appProdProjectContainer',

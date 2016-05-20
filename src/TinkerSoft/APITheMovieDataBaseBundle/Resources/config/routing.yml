@@ -3,12 +3,28 @@ api_the_movie_data_base_homepage:
     defaults: { _controller: APITheMovieDataBaseBundle:Default:index }
   
 
-generos:
-    path:      /generos/{_locale}
-    defaults:  { _controller: APITheMovieDataBaseBundle:API:listaGeneros, _locale: en }
+#generos:
+#    path:      /generos/{_locale}
+#    defaults:  { _controller: APITheMovieDataBaseBundle:API:listaGeneros, _locale: en }
     
     
-generos_barra:
-    path:      /generos/
-    defaults:  { _controller: APITheMovieDataBaseBundle:API:listaGeneros, _locale: en }
+#generos_barra:
+#    path:      /generos/
+#    defaults:  { _controller: APITheMovieDataBaseBundle:API:listaGeneros, _locale: en }
+    
+#pelicula:
+#    path:      /buscar/{consulta}/{numero_pagina}
+#    defaults:  { _controller: APITheMovieDataBaseBundle:API:buscarPelicula }
 
+#pelicula_consulta_barra:
+#    path:      /buscar/{consulta}/
+#    defaults:  { _controller: APITheMovieDataBaseBundle:API:buscarPelicula, numero_pagina 1}
+
+    
+#pelicula_barra:
+#    path:      /buscar/
+#    defaults:  { _controller: APITheMovieDataBaseBundle:Default:index }
+
+mostrarPelicula:
+  path:      /mostrarPelicula/{id} 
+  defaults:  { _controller: APITheMovieDataBaseBundle:API:obtenerPelicula }

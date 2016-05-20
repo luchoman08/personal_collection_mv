@@ -1,3 +1,7 @@
+vista:
+    resource: "@VistaBundle/Resources/config/routing.yml"
+    prefix:   /vista/
+
 api_the_movie_data_base:
     resource: "@APITheMovieDataBaseBundle/Resources/config/routing.yml"
     prefix:   /movie_database/

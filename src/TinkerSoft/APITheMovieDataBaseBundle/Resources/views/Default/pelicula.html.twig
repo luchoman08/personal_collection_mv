@@ -1,0 +1,14 @@
+<h1>Busqueda: Paginas:{{ params.page }} de {{ params.total_pages }} Resultados:{{ params.total_results }} </h1><br/><br/>
+
+{% for pagina in params.results %}
+
+<h3>Datos Película: </h3>
+<h4>Título:</h4>  {{ pagina.title }} </h4><br/>
+<h4>Título Original: </h4> {{ pagina.original_title }} <br/>
+<h4>Descripción: </h4> {{ pagina.overview  }}<br/>
+<h4>Fecha de Estreno: </h4> {{ pagina.release_date }} <br/>
+<h4>Cantidad de Votos: </h4> {{ pagina.vote_count  }}<br/>
+<h4>Valoración Promedio: </h4> {{ pagina.vote_average }} <br/>
+<h4>Popularidad: </h4> {{ pagina.popularity }} <br/><br/><br/>
+
+{% endfor %}

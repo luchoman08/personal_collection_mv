@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset('star/jquery.rateyo.min.css')}}" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+
+</head>
+<div id="{{params.id}}" class="rateyo-readonly-widg"></div>
+<body >
+  <title>{{params.title}}</title>
+<boyd>
+<h1>{{params.title}}</h1>
+{{params.overview}}
+<img src="https://image.tmdb.org/t/p/w185/{{params.backdrop_path}}" alt={{params.title}}>
+
+{%for trailer in params.results%}
+<p><iframe title="YouTube video player" src="https://www.youtube.com/embed/"{{trailer.key}} width="480" height="390" frameborder="0"></iframe></p>
+
+{%endfor%}
+
+
+
+    <script type="text/javascript" src="{{asset('star/jquery.rateyo.min.js')}}"></script>
+
+    <script>
+        $(function() {
+           
+            var rating = {{params.vote_average}};
+
+
+            $("#{{params.id}}").click(function() {
+                alert($("#c1").val(data.rating));
+            });
+            $(".counter").text(rating);
+
+
+
+            $("#{{params.id}}").rateYo({
+                readOnly: true,
+                rating: rating,
+                numStars: 10,
+                precision: 10,
+                minValue: 1,
+                maxValue: 10
+            }).on("rateyo.change", function(e, data) {
+                $("#{{params.id}}").val(data.rating);
+
+            });
+            
+          
+        });
+    </script>
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="bootstrap/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
