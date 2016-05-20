@@ -33,10 +33,14 @@ class __TwigTemplate_7a84e92db61bf06ceeda31184512e7d08db500cdcbe188b10243f97fd17
 
 
 </head>
-<div id=\"";
+<div><div id=\"";
         // line 12
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "id", array()), "html", null, true);
-        echo "\" class=\"rateyo-readonly-widg\"></div>
+        echo "\" class=\"rateyo-readonly-widg\"></div>calificaci&oacute;n: ";
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "vote_average", array()), "html", null, true);
+        echo "  <div>total votos: ";
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "vote_count", array()), "html", null, true);
+        echo "</div> </div>
 <body >
   <title>";
         // line 14
@@ -51,23 +55,25 @@ class __TwigTemplate_7a84e92db61bf06ceeda31184512e7d08db500cdcbe188b10243f97fd17
         // line 17
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "overview", array()), "html", null, true);
         echo "
-<img src=\"https://image.tmdb.org/t/p/w185/";
+<img src=\"https://image.tmdb.org/t/p/w1280/";
         // line 18
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "backdrop_path", array()), "html", null, true);
-        echo "\" alt=";
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "title", array()), "html", null, true);
-        echo ">
-
+        echo "\" alt=\"banner\">
+<img src= \"https://image.tmdb.org/t/p/w150/";
+        // line 19
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "poster_path", array()), "html", null, true);
+        echo "\" alt=\"poster\">
 ";
         // line 20
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "results", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["trailer"]) {
             // line 21
-            echo "<p><iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/\"";
+            echo "
+<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/";
+            // line 22
             echo twig_escape_filter($this->env, $this->getAttribute($context["trailer"], "key", array()), "html", null, true);
-            echo " width=\"480\" height=\"390\" frameborder=\"0\"></iframe></p>
-
+            echo "\" frameborder=\"0\" allowfullscreen></iframe>
 ";
         }
         $_parent = $context['_parent'];
@@ -108,7 +114,7 @@ class __TwigTemplate_7a84e92db61bf06ceeda31184512e7d08db500cdcbe188b10243f97fd17
                 readOnly: true,
                 rating: rating,
                 numStars: 10,
-                precision: 10,
+                precision: 1,
                 minValue: 1,
                 maxValue: 10
             }).on(\"rateyo.change\", function(e, data) {
@@ -145,7 +151,7 @@ class __TwigTemplate_7a84e92db61bf06ceeda31184512e7d08db500cdcbe188b10243f97fd17
 
     public function getDebugInfo()
     {
-        return array (  117 => 50,  106 => 42,  96 => 35,  90 => 32,  82 => 27,  77 => 24,  67 => 21,  63 => 20,  56 => 18,  52 => 17,  48 => 16,  43 => 14,  38 => 12,  30 => 7,  26 => 6,  19 => 1,);
+        return array (  123 => 50,  112 => 42,  102 => 35,  96 => 32,  88 => 27,  83 => 24,  75 => 22,  72 => 21,  68 => 20,  64 => 19,  60 => 18,  56 => 17,  52 => 16,  47 => 14,  38 => 12,  30 => 7,  26 => 6,  19 => 1,);
     }
 }
 /* <!DOCTYPE html>*/
@@ -159,17 +165,17 @@ class __TwigTemplate_7a84e92db61bf06ceeda31184512e7d08db500cdcbe188b10243f97fd17
 /* */
 /* */
 /* </head>*/
-/* <div id="{{params.id}}" class="rateyo-readonly-widg"></div>*/
+/* <div><div id="{{params.id}}" class="rateyo-readonly-widg"></div>calificaci&oacute;n: {{params.vote_average}}  <div>total votos: {{params.vote_count}}</div> </div>*/
 /* <body >*/
 /*   <title>{{params.title}}</title>*/
 /* <boyd>*/
 /* <h1>{{params.title}}</h1>*/
 /* {{params.overview}}*/
-/* <img src="https://image.tmdb.org/t/p/w185/{{params.backdrop_path}}" alt={{params.title}}>*/
-/* */
+/* <img src="https://image.tmdb.org/t/p/w1280/{{params.backdrop_path}}" alt="banner">*/
+/* <img src= "https://image.tmdb.org/t/p/w150/{{params.poster_path}}" alt="poster">*/
 /* {%for trailer in params.results%}*/
-/* <p><iframe title="YouTube video player" src="https://www.youtube.com/embed/"{{trailer.key}} width="480" height="390" frameborder="0"></iframe></p>*/
 /* */
+/* <iframe width="560" height="315" src="https://www.youtube.com/embed/{{trailer.key}}" frameborder="0" allowfullscreen></iframe>*/
 /* {%endfor%}*/
 /* */
 /* */
@@ -193,7 +199,7 @@ class __TwigTemplate_7a84e92db61bf06ceeda31184512e7d08db500cdcbe188b10243f97fd17
 /*                 readOnly: true,*/
 /*                 rating: rating,*/
 /*                 numStars: 10,*/
-/*                 precision: 10,*/
+/*                 precision: 1,*/
 /*                 minValue: 1,*/
 /*                 maxValue: 10*/
 /*             }).on("rateyo.change", function(e, data) {*/

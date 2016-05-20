@@ -9,17 +9,17 @@
 
 
 </head>
-<div id="{{params.id}}" class="rateyo-readonly-widg"></div>
+<div><div id="{{params.id}}" class="rateyo-readonly-widg"></div>calificaci&oacute;n: {{params.vote_average}}  <div>total votos: {{params.vote_count}}</div> </div>
 <body >
   <title>{{params.title}}</title>
 <boyd>
 <h1>{{params.title}}</h1>
 {{params.overview}}
-<img src="https://image.tmdb.org/t/p/w185/{{params.backdrop_path}}" alt={{params.title}}>
-
+<img src="https://image.tmdb.org/t/p/w1280/{{params.backdrop_path}}" alt="banner">
+<img src= "https://image.tmdb.org/t/p/w150/{{params.poster_path}}" alt="poster">
 {%for trailer in params.results%}
-<p><iframe title="YouTube video player" src="https://www.youtube.com/embed/"{{trailer.key}} width="480" height="390" frameborder="0"></iframe></p>
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/{{trailer.key}}" frameborder="0" allowfullscreen></iframe>
 {%endfor%}
 
 
@@ -43,7 +43,7 @@
                 readOnly: true,
                 rating: rating,
                 numStars: 10,
-                precision: 10,
+                precision: 1,
                 minValue: 1,
                 maxValue: 10
             }).on("rateyo.change", function(e, data) {
