@@ -27,13 +27,21 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         $context = $this->context;
         $request = $this->request;
 
-        // login_homepage
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'login_homepage');
+        if (0 === strpos($pathinfo, '/login')) {
+            // login_homepage
+            if (rtrim($pathinfo, '/') === '/login') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'login_homepage');
+                }
+
+                return array (  '_controller' => 'LoginBundle\\Controller\\LoginController::indexAction',  '_route' => 'login_homepage',);
             }
 
-            return array (  '_controller' => 'LoginBundle\\Controller\\DefaultController::indexAction',  '_route' => 'login_homepage',);
+            // login_action
+            if ($pathinfo === '/login/procesador') {
+                return array (  '_controller' => 'LoginBundle\\Controller\\LoginController::loginAction',  '_route' => 'login_action',);
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/vista')) {
