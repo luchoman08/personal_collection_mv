@@ -23,7 +23,7 @@ class __TwigTemplate_7a84e92db61bf06ceeda31184512e7d08db500cdcbe188b10243f97fd17
     <!-- Latest compiled and minified CSS -->
     <link rel=\"stylesheet\" href=\"";
         // line 6
-        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("bootstrap/css/bootstrap.min.css"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("bootstrap/dist/css/bootstrap.min.css"), "html", null, true);
         echo "\" crossorigin=\"anonymous\">
     <link rel=\"stylesheet\" href=\"";
         // line 7
@@ -41,50 +41,58 @@ class __TwigTemplate_7a84e92db61bf06ceeda31184512e7d08db500cdcbe188b10243f97fd17
         echo "  <div>total votos: ";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "vote_count", array()), "html", null, true);
         echo "</div> </div>
+<div id=\"calificacion\" class =\"rateyo-readonly-widg\"> </div>
+<div>mi calificaci&oacute;n</div>
 <body >
+    
   <title>";
-        // line 14
+        // line 17
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "title", array()), "html", null, true);
         echo "</title>
-<boyd>
+<h2>";
+        // line 18
+        echo twig_escape_filter($this->env, (isset($context["usuario"]) ? $context["usuario"] : null), "html", null, true);
+        echo " </h2>
 <h1>";
-        // line 16
+        // line 19
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "title", array()), "html", null, true);
         echo "</h1>
 ";
-        // line 17
+        // line 20
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "overview", array()), "html", null, true);
         echo "
+<button type=\"submit\" class=\"btn btn-default\">Marcar como vista</button>
+<button type=\"submit\" class=\"btn btn-default\">Adicionar a una lista</button>
 <img src=\"https://image.tmdb.org/t/p/w1280/";
-        // line 18
+        // line 23
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "backdrop_path", array()), "html", null, true);
         echo "\" alt=\"banner\">
 <img src= \"https://image.tmdb.org/t/p/w150/";
-        // line 19
+        // line 24
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "poster_path", array()), "html", null, true);
         echo "\" alt=\"poster\">
 ";
-        // line 20
+        // line 25
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "results", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["trailer"]) {
-            // line 21
+            // line 26
             echo "
-<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/";
-            // line 22
+<iframe width=\"560\"  height=\"315\" src=\"https://www.youtube.com/embed/";
+            // line 27
             echo twig_escape_filter($this->env, $this->getAttribute($context["trailer"], "key", array()), "html", null, true);
-            echo "\" frameborder=\"0\" allowfullscreen></iframe>
+            echo "?rel=0\" frameborder=\"0\" allowfullscreen></iframe>
 ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['trailer'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 24
+        // line 29
         echo "
 
 
     <script type=\"text/javascript\" src=\"";
-        // line 27
+        // line 32
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("star/jquery.rateyo.min.js"), "html", null, true);
         echo "\"></script>
 
@@ -92,23 +100,20 @@ class __TwigTemplate_7a84e92db61bf06ceeda31184512e7d08db500cdcbe188b10243f97fd17
         \$(function() {
            
             var rating = ";
-        // line 32
+        // line 37
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "vote_average", array()), "html", null, true);
         echo ";
 
 
-            \$(\"#";
-        // line 35
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "id", array()), "html", null, true);
-        echo "\").click(function() {
-                alert(\$(\"#c1\").val(data.rating));
+           \$(\"#calificacion\").click(function() {
+                alert(\$(\"#calificacion\").val());
             });
             \$(\".counter\").text(rating);
 
 
-
+            //puntuacion de usuarios de the movie database
             \$(\"#";
-        // line 42
+        // line 47
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "id", array()), "html", null, true);
         echo "\").rateYo({
                 readOnly: true,
@@ -116,15 +121,35 @@ class __TwigTemplate_7a84e92db61bf06ceeda31184512e7d08db500cdcbe188b10243f97fd17
                 numStars: 10,
                 precision: 1,
                 minValue: 1,
-                maxValue: 10
+                maxValue: 10,
+                 multiColor: {
+ 
+      \"startColor\": \"#FF0000\", //RED
+      \"endColor\"  : \"#00FF00\"  //GREEN
+    }
+                
             }).on(\"rateyo.change\", function(e, data) {
                 \$(\"#";
-        // line 50
+        // line 61
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "id", array()), "html", null, true);
         echo "\").val(data.rating);
 
             });
             
+                //puntuacion del usuario actual
+            \$(\"#calificacion\").rateYo({
+                readOnly: false,
+                rating: rating,
+                numStars: 10,
+                precision: 1,
+                minValue: 1,
+                maxValue: 10
+            }).on(\"rateyo.change\", function(e, data) {
+                \$(\"#calificacion\").val(data.rating);
+
+            });
+             
+ 
           
         });
     </script>
@@ -151,7 +176,7 @@ class __TwigTemplate_7a84e92db61bf06ceeda31184512e7d08db500cdcbe188b10243f97fd17
 
     public function getDebugInfo()
     {
-        return array (  123 => 50,  112 => 42,  102 => 35,  96 => 32,  88 => 27,  83 => 24,  75 => 22,  72 => 21,  68 => 20,  64 => 19,  60 => 18,  56 => 17,  52 => 16,  47 => 14,  38 => 12,  30 => 7,  26 => 6,  19 => 1,);
+        return array (  134 => 61,  117 => 47,  104 => 37,  96 => 32,  91 => 29,  83 => 27,  80 => 26,  76 => 25,  72 => 24,  68 => 23,  62 => 20,  58 => 19,  54 => 18,  50 => 17,  38 => 12,  30 => 7,  26 => 6,  19 => 1,);
     }
 }
 /* <!DOCTYPE html>*/
@@ -159,23 +184,28 @@ class __TwigTemplate_7a84e92db61bf06ceeda31184512e7d08db500cdcbe188b10243f97fd17
 /* */
 /* <head>*/
 /*     <!-- Latest compiled and minified CSS -->*/
-/*     <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}" crossorigin="anonymous">*/
+/*     <link rel="stylesheet" href="{{asset('bootstrap/dist/css/bootstrap.min.css')}}" crossorigin="anonymous">*/
 /*     <link rel="stylesheet" href="{{asset('star/jquery.rateyo.min.css')}}" rel="stylesheet" />*/
 /*     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>*/
 /* */
 /* */
 /* </head>*/
 /* <div><div id="{{params.id}}" class="rateyo-readonly-widg"></div>calificaci&oacute;n: {{params.vote_average}}  <div>total votos: {{params.vote_count}}</div> </div>*/
+/* <div id="calificacion" class ="rateyo-readonly-widg"> </div>*/
+/* <div>mi calificaci&oacute;n</div>*/
 /* <body >*/
+/*     */
 /*   <title>{{params.title}}</title>*/
-/* <boyd>*/
+/* <h2>{{usuario}} </h2>*/
 /* <h1>{{params.title}}</h1>*/
 /* {{params.overview}}*/
+/* <button type="submit" class="btn btn-default">Marcar como vista</button>*/
+/* <button type="submit" class="btn btn-default">Adicionar a una lista</button>*/
 /* <img src="https://image.tmdb.org/t/p/w1280/{{params.backdrop_path}}" alt="banner">*/
 /* <img src= "https://image.tmdb.org/t/p/w150/{{params.poster_path}}" alt="poster">*/
 /* {%for trailer in params.results%}*/
 /* */
-/* <iframe width="560" height="315" src="https://www.youtube.com/embed/{{trailer.key}}" frameborder="0" allowfullscreen></iframe>*/
+/* <iframe width="560"  height="315" src="https://www.youtube.com/embed/{{trailer.key}}?rel=0" frameborder="0" allowfullscreen></iframe>*/
 /* {%endfor%}*/
 /* */
 /* */
@@ -188,25 +218,45 @@ class __TwigTemplate_7a84e92db61bf06ceeda31184512e7d08db500cdcbe188b10243f97fd17
 /*             var rating = {{params.vote_average}};*/
 /* */
 /* */
-/*             $("#{{params.id}}").click(function() {*/
-/*                 alert($("#c1").val(data.rating));*/
+/*            $("#calificacion").click(function() {*/
+/*                 alert($("#calificacion").val());*/
 /*             });*/
 /*             $(".counter").text(rating);*/
 /* */
 /* */
-/* */
+/*             //puntuacion de usuarios de the movie database*/
 /*             $("#{{params.id}}").rateYo({*/
 /*                 readOnly: true,*/
 /*                 rating: rating,*/
 /*                 numStars: 10,*/
 /*                 precision: 1,*/
 /*                 minValue: 1,*/
-/*                 maxValue: 10*/
+/*                 maxValue: 10,*/
+/*                  multiColor: {*/
+/*  */
+/*       "startColor": "#FF0000", //RED*/
+/*       "endColor"  : "#00FF00"  //GREEN*/
+/*     }*/
+/*                 */
 /*             }).on("rateyo.change", function(e, data) {*/
 /*                 $("#{{params.id}}").val(data.rating);*/
 /* */
 /*             });*/
 /*             */
+/*                 //puntuacion del usuario actual*/
+/*             $("#calificacion").rateYo({*/
+/*                 readOnly: false,*/
+/*                 rating: rating,*/
+/*                 numStars: 10,*/
+/*                 precision: 1,*/
+/*                 minValue: 1,*/
+/*                 maxValue: 10*/
+/*             }).on("rateyo.change", function(e, data) {*/
+/*                 $("#calificacion").val(data.rating);*/
+/* */
+/*             });*/
+/*              */
+/*  */
 /*           */
 /*         });*/
 /*     </script>*/

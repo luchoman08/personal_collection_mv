@@ -10,4 +10,9 @@ class DefaultController extends Controller
     {
         return $this->render('APITheMovieDataBaseBundle:Default:index.html.twig');
     }
+    
+     public function calificarAction()
+    {
+       
+    }
 }

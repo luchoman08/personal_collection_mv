@@ -1,0 +1,44 @@
+TinkerSoft\UsuariosBundle\Entity\Valoracionpeliculas:
+    type: entity
+    table: valoracionpeliculas
+    indexes:
+        IDX_AE0C7B51DBF673EF:
+            columns:
+                - id_usuario_califica
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        idPeliculaTomatoes:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: id_pelicula_tomatoes
+        valoracion:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        fechaValoracion:
+            type: datetime
+            nullable: false
+            column: fecha_valoracion
+    manyToOne:
+        idUsuarioCalifica:
+            targetEntity: Usuarios
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_usuario_califica:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

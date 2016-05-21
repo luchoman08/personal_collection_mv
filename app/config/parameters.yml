@@ -1,11 +1,11 @@
 # This file is auto-generated during the composer install
 parameters:
 
-    database_host: ec2-54-243-249-65.compute-1.amazonaws.com
+    database_host: localhost
     database_port: 5432
-    database_name: db2nfep0451nvu
-    database_user: huzbmpygeprpvh
-    database_password: OjfpXaN8wXdePkHd2nFBycs72v
+    database_name: proyecto
+    database_user: root
+    database_password: root
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null

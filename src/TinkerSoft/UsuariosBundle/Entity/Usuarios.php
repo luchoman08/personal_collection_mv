@@ -226,4 +226,3 @@ class Usuarios
         return $this->estado;
     }
 }
-

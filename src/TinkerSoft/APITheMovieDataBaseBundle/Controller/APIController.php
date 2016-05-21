@@ -1,7 +1,7 @@
 <?php
 
 namespace TinkerSoft\APITheMovieDataBaseBundle\Controller;
-
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -49,7 +49,7 @@ class APIController extends Controller
         $trailersJSON = (array) json_decode($content);
         $infocompletaJSON=array_merge($peliculaJSON, $trailersJSON);
            return $this->render('mostrarPelicula.html.twig', array(
-            'params' => $infocompletaJSON
+            'params' => $infocompletaJSON,
         ));
        // return $infocompletaJSON;
         
