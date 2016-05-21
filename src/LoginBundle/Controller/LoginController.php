@@ -14,13 +14,14 @@ class LoginController extends Controller
      public function loginAction(Request $request)
     {
         
-       die($request->request->get('email'));
+      
         if($request->getMethod()=="POST")
         {
             $em = $this->getDoctrine()->getManager();
-
-            $usuario = $em->getRepository('TinkerSoftUsuariosBundle:Usuarios')->findOneBy(array('correoElectronico'=>$request->get('email')));
-            
+         
+              
+            $usfr = $em->getRepository('TinkerSoftUsuariosBundle:Usuarios')->findOneBy(array('correoElectronico'=>$request->request->get('email')));
+            echo $usfr->getNickname();
             
         }
         return $this->render('LoginBundle:Default:index.html.twig');
