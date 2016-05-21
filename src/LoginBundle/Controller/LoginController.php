@@ -14,7 +14,7 @@ class LoginController extends Controller
      public function loginAction(Request $request)
     {
         
-       die($request->query->get("email"));
+       die($request->request->get('email'));
         if($request->getMethod()=="POST")
         {
             $em = $this->getDoctrine()->getManager();
