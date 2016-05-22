@@ -1,5 +1,197 @@
+{% extends 'index.html.twig' %}
+{%block title%} Quality Mega Pixel {%endblock%}
+{%set i = 0%}
 
-{% for genero in params.genres %}
-{{ genero.id  }}  {{ genero.name  }} <br />
-{% endfor %}
+
+{%block tendencia%}
+
+    {%for pelicula in tendencia.results|slice(0,numPeliculasDivisibleTres)%}
+
+                <div class="col-sm-4 col-md-4">
+                    <a href="#" class="thumbnail movie">
+                        {% if pelicula.poster_path == "" %}
+                             <img src="{{asset('assets/images/movie.png')}}" alt="...">
+                             
+                        {% else %}
+                        
+                            <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">
+                        
+                        {% endif %}
+                        
+                        <div class="caption">
+                            <h5>{{ pelicula.title }}<div id="c{{i}}" value="0" class="rateyo-readonly-widg"></div></h5>
+                        </div>
+                    </a>
+                </div>
+                {%set i =( i + 1)%}
+    {%endfor%}
+{%endblock%}
+
+{%block mejorvaloradas%}
+{% set i = numPeliculasDivisibleTres %}
+    {%for pelicula in mejoresValoradas.results|slice(0,numPeliculasDivisibleTres)%}
+
+                <div class="col-sm-4 col-md-4">
+                    <a href="#" class="thumbnail movie">
+                        {% if pelicula.poster_path == "" %}
+                             <img src="{{asset('assets/images/movie.png')}}" alt="...">
+                             
+                        {% else %}
+                        
+                            <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">
+                        
+                        {% endif %}
+                        <div class="caption">
+                            <h5>{{ pelicula.title }}<div id="c{{i}}" value="0" class="rateyo-readonly-widg"></div></h5>
+                        </div>
+                    </a>
+                </div>
+                {%set i = i + 1%}
+    {%endfor%}
+{%endblock%}
+
+{%block estrenos%}
+{% set i = numPeliculasDivisibleTres * 2%}
+    {%for pelicula in estrenos.results|slice(0,numPeliculasDivisibleTres)%}
+
+                <div class="col-sm-4 col-md-4">
+                    <a href="#" class="thumbnail movie">
+                        {% if pelicula.poster_path == "" %}
+                             <img src="{{asset('assets/images/movie.png')}}" alt="...">
+                             
+                        {% else %}
+                        
+                            <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">
+                        
+                        {% endif %}
+                        <div class="caption">
+                            <h5>{{ pelicula.title }}<div id="c{{i}}" value="0" class="rateyo-readonly-widg"></div></h5>
+                        </div>
+                    </a>
+                </div>
+                {%set i =i + 1%}
+    {%endfor%}
+{%endblock%}
+
+{%block proximamente%}
+
+{% set i = numPeliculasDivisibleTres * 3%}
+    {%for pelicula in proximamente.results|slice(0,numPeliculasDivisibleTres)%}
+
+                <div class="col-sm-4 col-md-4">
+                    <a href="#" class="thumbnail movie">
+                        {% if pelicula.poster_path == "" %}
+                             <img src="{{asset('assets/images/movie.png')}}" alt="...">
+                             
+                        {% else %}
+                        
+                            <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">
+                        
+                        {% endif %}
+                        <div class="caption">
+                            <h5>{{ pelicula.title }}<div id="c{{i}}" value="0" class="rateyo-readonly-widg"></div></h5>
+                        </div>
+                    </a>
+                </div>
+                {%set i = i + 1%}
+    {%endfor%}
+{%endblock%}
+
+{%block ultimas%}
+
+{% set i = numPeliculasDivisibleTres * 4%}
+    {%for pelicula in ultimas.results|slice(0,numPeliculasDivisibleTres)%}
+
+                <div class="col-sm-4 col-md-4">
+                    <a href="#" class="thumbnail movie">
+                        {% if pelicula.poster_path == "" %}
+                             <img src="{{asset('assets/images/movie.png')}}" alt="...">
+                             
+                        {% else %}
+                        
+                            <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">
+                        
+                        {% endif %}
+                        <div class="caption">
+                            <h5>{{ pelicula.title }}<div id="c{{i}}" value="0" class="rateyo-readonly-widg"></div></h5>
+                        </div>
+                    </a>
+                </div>
+                {%set i = i + 1%}
+    {%endfor%}
+{%endblock%}
+
+
+
+
+{% set i = 0 %}
+
+{%block javascripts%}
+ {{ parent() }}
+<script>
+     $(function() {
+        {%for pelicula in tendencia.results|slice(0,numPeliculasDivisibleTres)%}
+            var rating = {{pelicula.vote_average}};
+            $(".counter").text(rating);
+            $("#c{{i}}").rateYo({
+                readOnly: true,
+                rating: rating,
+                numStars: 10,
+                precision: 10,
+                minValue: 1,
+                maxValue: 10
+            }).on("rateyo.change", function(e, data) {
+                $("#c{{i}}").val(data.rating);
+            });
+                {%set i = i + 1%}
+        {%endfor%}
+      {%for pelicula in mejoresValoradas.results|slice(0,numPeliculasDivisibleTres)%}
+            var rating = {{pelicula.vote_average}};
+            $(".counter").text(rating);
+            $("#c{{i}}").rateYo({
+                readOnly: true,
+                rating: rating,
+                numStars: 10,
+                precision: 10,
+                minValue: 1,
+                maxValue: 10
+            }).on("rateyo.change", function(e, data) {
+                $("#c{{i}}").val(data.rating);
+            });
+                {%set i = i + 1%}
+        {%endfor%}
+          {%for pelicula in estrenos.results|slice(0,numPeliculasDivisibleTres)%}
+            var rating = {{pelicula.vote_average}};
+            $(".counter").text(rating);
+            $("#c{{i}}").rateYo({
+                readOnly: true,
+                rating: rating,
+                numStars: 10,
+                precision: 10,
+                minValue: 1,
+                maxValue: 10
+            }).on("rateyo.change", function(e, data) {
+                $("#c{{i}}").val(data.rating);
+            });
+                {%set i = i + 1%}
+        {%endfor%}
+          {%for pelicula in proximamente.results|slice(0,numPeliculasDivisibleTres)%}
+            var rating = {{pelicula.vote_average}};
+            $(".counter").text(rating);
+            $("#c{{i}}").rateYo({
+                readOnly: true,
+                rating: rating,
+                numStars: 10,
+                precision: 10,
+                minValue: 1,
+                maxValue: 10
+            }).on("rateyo.change", function(e, data) {
+                $("#c{{i}}").val(data.rating);
+            });
+                {%set i = i + 1%}
+        {%endfor%}
+     });
+     </script>
+{%endblock%}
+
 

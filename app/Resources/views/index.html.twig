@@ -1,0 +1,273 @@
+{%extends 'base.html.twig'%}
+
+{%block stylesheets%}
+  
+    {{ parent() }}
+   
+    <!-- Custom styles for this template -->
+        <link rel="stylesheet" href="{{asset('star/jquery.rateyo.min.css')}}" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    
+{%endblock%}
+
+
+{% block body %}
+    <div class="cabezera"></div>
+
+    <nav class="navbar navbar-default">
+
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">QMP</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!--<ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Ingresar</a></li>
+
+                </ul>-->
+                <form class="navbar-form navbar-right buscar" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Buscar peliculas ... :)" size="50">
+                    </div>
+                    <button type="submit" class="btn btn-default">Buscar</button>
+                </form>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+
+    <div class="col-md-9 fondoContenido">
+
+
+        <center>
+            <!--<a data-toggle="tab" href="#tendencia" class="buttonBase button5">Tendencias</a>
+            <a data-toggle="tab" href="#estrenos" class="buttonBase button5">Estrenose</a>-->
+
+            <ul class="nav nav-pills nav-pills-custom">
+                <li class="active active-custom"><a data-toggle="tab" href="#tendencia">Tendencia</a></li>
+                <li><a data-toggle="tab" href="#top">Mejores valoradas</a></li>
+                <li><a data-toggle="tab" href="#estrenos">Estrenos</a></li>
+                <li><a data-toggle="tab" href="#proximamente">Proximamente</a></li>
+                <li><a data-toggle="tab" href="#ultimas">&Uacute;ltimas adicionadas</a></li>
+            </ul>
+
+
+        </center>
+        <!--<ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#tendencia">Tendencia</a></li>
+            <li><a data-toggle="tab" href="#estrenos">Estrenos</a></li>
+        </ul>-->
+        <div class="tab-content">
+            <br>
+            <div id="tendencia" class=" tab-pane fade in active ">
+               {%block tendencia%}
+               
+               {%endblock%}
+             
+
+             
+            </div>
+
+
+            <div id="top" class=" tab-pane fade">
+
+                {%block mejorvaloradas%}
+               
+                {%endblock%}
+                
+            </div>
+
+            <div id="estrenos" class="tab-pane fade">
+
+                {%block estrenos%}
+               
+                {%endblock%}
+
+            </div>
+
+            <div id="proximamente" class=" tab-pane fade">
+
+                {%block proximamente%}
+               
+                {%endblock%}
+
+
+            </div>
+            
+            <div id="ultimas" class=" tab-pane fade">
+
+                {%block ultimas%}
+               
+                {%endblock%}
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-3 columna-index-boostrap">
+        <div class="columna-index">
+
+            <form class="form-signin">
+                <label class="sr-only">username</label>
+                <input type="text" id="inputEmail" class="form-control" placeholder="username" required autofocus>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <div class="checkbox">
+                    <!--<label>
+            <input type="checkbox" value="recordarme"> Recordarme
+          </label>-->
+                </div>
+                <button class="btn btn-lg btn-default btn-block" type="submit">Ingresar</button>
+            </form>
+            <hr>
+            <h3> Actividad del sitio </h3>
+            <a class="pagina_feed_item_a" href="#">
+                <div class="pagina_feed_item">
+
+                    <label> Usuario_F88 </label>
+                    <br>
+                    <table>
+                        <tr>
+                            <td>Ice Age 2:</td>
+                            <td>
+                                <div class="rateyo-readonly-widg"></div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </a>
+            <a class="pagina_feed_item_a" href="#">
+                <div class="pagina_feed_item">
+
+                    <label> Usuario_K17 </label>
+                    <br>
+                    <table>
+                        <tr>
+                            <td>Matrix:</td>
+                            <td>
+                                <div class="rateyo-readonly-widg"></div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </a>
+            <a class="pagina_feed_item_a" href="#">
+                <div class="pagina_feed_item">
+
+                    <label> Usuario_U77 </label>
+                    <br>
+                    <table>
+                        <tr>
+                            <td>Zootopia:</td>
+                            <td>
+                                <div class="rateyo-readonly-widg"></div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </a>
+            <a class="pagina_feed_item_a" href="#">
+                <div class="pagina_feed_item">
+
+                    <label> Usuario_Q21 </label>
+                    <br>
+                    <table>
+                        <tr>
+                            <td>The Godfather:</td>
+                            <td>
+                                <div class="rateyo-readonly-widg"></div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </a>
+            <a class="pagina_feed_item_a" href="#">
+                <div class="pagina_feed_item">
+
+                    <label> Usuario_G55 </label>
+                    <br>
+                    <table>
+                        <tr>
+                            <td>Interstellar:</td>
+                            <td>
+                                <div class="rateyo-readonly-widg"></div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </a>
+            <a class="pagina_feed_item_a" href="#">
+                <div class="pagina_feed_item">
+
+                    <label> Usuario_E31 </label>
+                    <br>
+                    <table>
+                        <tr>
+                            <td>Buscando a Nemo:</td>
+                            <td>
+                                <div class="rateyo-readonly-widg"></div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </a>
+            <a class="pagina_feed_item_a" href="#">
+                <div class="pagina_feed_item">
+
+                    <label> Usuario_L64 </label>
+                    <br>
+                    <table>
+                        <tr>
+                            <td>Madagascar 3:</td>
+                            <td>
+                                <div class="rateyo-readonly-widg"></div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </a>
+
+
+
+        </div>
+
+    </div>
+
+    </div>
+
+    <div class="col-md-9 footerQMP">
+        <label>Copyright QMP &copy; 2016 Website by TinkerSoft</label>
+    </div>
+    
+    {% block javascripts %}
+    
+    <script type="text/javascript" src="{{asset('star/jquery.rateyo.min.js')}}"></script>
+
+   
+     
+
+
+    {{ parent() }}
+    {% endblock %}
+{% endblock %}

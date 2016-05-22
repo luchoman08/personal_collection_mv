@@ -51,7 +51,7 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                     return $this->redirect($pathinfo.'/', 'vista_homepage');
                 }
 
-                return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::indexAction',  '_route' => 'vista_homepage',);
+                return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::iniciarIndexAction',  '_route' => 'vista_homepage',);
             }
 
             if (0 === strpos($pathinfo, '/vista/buscar')) {
@@ -107,9 +107,21 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\DefaultController::indexAction',  '_route' => 'api_the_movie_data_base_homepage',);
             }
 
-            // mostrarPelicula
-            if (0 === strpos($pathinfo, '/movie_database/mostrarPelicula') && preg_match('#^/movie_database/mostrarPelicula/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'mostrarPelicula')), array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\APIController::obtenerPeliculaAction',));
+            if (0 === strpos($pathinfo, '/movie_database/mostrar')) {
+                // mostrarPelicula
+                if (0 === strpos($pathinfo, '/movie_database/mostrarPelicula') && preg_match('#^/movie_database/mostrarPelicula/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'mostrarPelicula')), array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\APIController::obtenerPeliculaAction',));
+                }
+
+                // mostrarTendencias
+                if (rtrim($pathinfo, '/') === '/movie_database/mostrarTendencias') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'mostrarTendencias');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\APIController::obtenerPeliculasTendenciaAction',  '_route' => 'mostrarTendencias',);
+                }
+
             }
 
         }

@@ -1,6 +1,6 @@
 vista_homepage:
     path:     /
-    defaults: { _controller: VistaBundle:Default:index }
+    defaults: { _controller: VistaBundle:Default:iniciarIndex }
     
 pelicula:
     path:      /buscar/{consulta}/{numero_pagina}
@@ -15,8 +15,6 @@ pelicula_consulta_sin_barra:
     path:      /buscar/{consulta}
     defaults:  { _controller: VistaBundle:Default:verResultadosBusqueda, numero_pagina 1}
 
-    
-    
 #generos:
 #    path:      /generos/{_locale}
 #    defaults:  { _controller: APITheMovieDataBaseBundle:API:listaGeneros, _locale: en }
@@ -26,8 +24,6 @@ generos_barra:
     path:      /generos
     defaults:  { _controller: VistaBundle:Default:verListaGeneros }
     
-
-
     
 pelicula_barra:
     path:      /buscar/
@@ -40,5 +36,4 @@ mostrarPelicula:
 mostrarPelicula_minuscula:
     path:      /mostrarpelicula/{id}
     defaults:  { _controller: VistaBundle:Default:verPelicula }
-
 

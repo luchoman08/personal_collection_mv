@@ -1,0 +1,322 @@
+.cabezera {
+    padding-top: 20px;
+    background-color: #f5f5f5;
+    height: 200px;
+    width: 100%;
+    /*http://blogdesuperheroes.es/wp-content/plugins/BdSGallery/BdSGaleria/44835.jpg*/
+    /*https://image.tmdb.org/t/p/w1280/50PW526P69UIeMaB1AdtuYj4XQa.jpg Ice Age*/
+    /*https://image.tmdb.org/t/p/w1000/d29F2JeMP1S6MQG4o5N6BCpRC3n.jpg Ace ventura*/
+    /*https://image.tmdb.org/t/p/w1000/aCCr1T0chen6nyjZkvAx5fTmyEB.jpg Ace Ventura 2*/
+    /*https://image.tmdb.org/t/p/w1000/tqI6IqpkSFZhKd5WGhGR1pH3pjd.jpg Evg*/
+    background: url("https://image.tmdb.org/t/p/w1000/tqI6IqpkSFZhKd5WGhGR1pH3pjd.jpg") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.movie {
+    padding-top: 20px;
+    height: 400px;
+}
+
+.movie > img {
+    height: 278px;
+    width: 185ps;
+}
+
+.movie:hover {
+    text-decoration: none;
+}
+
+.movie:link {
+    text-decoration: none;
+}
+
+.movie:visited {
+    text-decoration: none;
+}
+
+.movie:active {
+    text-decoration: none;
+}
+
+.sidebar-nav {
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #fff;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+.peliculaDetalle {
+    float: left;
+    background-color: #dfedd6;
+    height: 274px;
+}
+
+.titulo {
+    font-size: 19px;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.synopsis {
+    width: 60%;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.imgPelicula {
+    margin-right: 25px;
+}
+
+.trailer {
+    padding-top: 30px;
+}
+
+.trailerTitulo {
+    font-size: 25px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.buscar {
+    padding-right: 30%;
+}
+
+.fondo {
+    background-image: url("../images/fondo.png");
+}
+
+.fondoContenido {
+    padding-top: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.buttonBase {
+    border-radius: 4px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.buttonBase:hover {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.buttonBase:active {
+    text-decoration: none;
+    color: black;
+}
+
+.button5 {
+    background-color: #555555;
+}
+
+
+/* Black */
+
+.nav-pills-custom {
+    background-color: #555555;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #555555;
+    border-width: 1px;
+}
+
+.nav-pills-custom > li {
+    background-color: #555555;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #555555;
+    border-width: 1px;
+}
+
+.nav-pills-custom > li:hover {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.nav-pills-custom > li > a {
+    background-color: #555555;
+    color: white;
+}
+
+.nav-pills-custom > li > a:hover {
+    background-color: white;
+    color: black;
+}
+
+.nav-pills-custom > li.active > a {
+    background-color: white;
+    color: black;
+}
+
+.nav-pills-custom > li.active > a:hover {
+    background-color: white;
+    color: black;
+}
+
+.nav-pills-custom > li.active > a:focus {
+    background-color: white;
+    color: black;
+}
+
+.footerQMP {
+    height: 50px;
+    width: 100%;
+    background-color: #fff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.footerQMP > label {
+    padding-top: 15px;
+    font-weight: lighter;
+}
+
+.columna-index-boostrap {
+   /*background-color: purple;*/
+}
+
+.columna-index {
+    /*height: 100%;*/
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    width: 100%
+}
+
+.columna-index > label {
+    font-weight: inherit;
+    text-align: left;
+}
+
+.pagina_feed_item{
+    margin-top: 5px;
+    text-align: left;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-color: #ccc;
+    background-color: #fff;
+}
+
+.pagina_feed_item:hover{
+    margin-top: 5px;
+    text-align: left;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-color: #ccc;
+    background-color: #ccc;
+    cursor:pointer;
+}
+
+
+.pagina_feed_item_a > .pagina_feed_item {
+    cursor:pointer;
+    text-decoration: none;
+    color: #333;
+}
+
+.pagina_feed_item_a:hover{
+    cursor:pointer;
+    text-decoration: none;
+}
+
+.pagina_feed_item_a > .pagina_feed_item > label{
+    cursor:pointer;
+}
+
+
+.pagina_feed_item_a > .pagina_feed_item > td:hover{
+    cursor:pointer;
+}
+
+.pagina_feed_item_a > .pagina_feed_item > tr:hover{
+    cursor:pointer;
+}
+
+.pagina_feed_item_a > .pagina_feed_item > table:hover{
+    cursor:pointer;
+}
+
+.pagina_feed_item_a > .pagina_feed_item >.rateyo-readonly-widg:hover{
+    cursor:pointer;
+}
+
+ .jq-ry-container[readonly=readonly]{
+    cursor:pointer
+    
+}

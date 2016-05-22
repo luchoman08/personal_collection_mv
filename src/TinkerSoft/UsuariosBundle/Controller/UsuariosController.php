@@ -34,6 +34,8 @@ class UsuariosController extends Controller
         return $this->render('usuarios/index.html.twig', array(
             'usuarios' => $usuarios, 'usuario'=>$session->get('name'),
         ));
+        
+
     }
 
     /**

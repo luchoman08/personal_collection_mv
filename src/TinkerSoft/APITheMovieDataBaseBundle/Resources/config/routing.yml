@@ -28,3 +28,8 @@ api_the_movie_data_base_homepage:
 mostrarPelicula:
   path:      /mostrarPelicula/{id} 
   defaults:  { _controller: APITheMovieDataBaseBundle:API:obtenerPelicula }
+  
+  
+mostrarTendencias:
+  path:      /mostrarTendencias/
+  defaults:  { _controller: APITheMovieDataBaseBundle:API:obtenerPeliculasTendencia }
