@@ -14,7 +14,22 @@ pelicula_consulta_barra:
 pelicula_consulta_sin_barra:
     path:      /buscar/{consulta}
     defaults:  { _controller: VistaBundle:Default:verResultadosBusqueda, numero_pagina 1}
+    
+    
+    
+show:
+    path:      /secret/buscar/show/{consulta}/{numero_pagina}
+    defaults: { _controller: VistaBundle:Default:verResultadosBusquedaShow }
+    
 
+show_consulta_barra:
+    path:      /secret/buscar/show/{consulta}/
+    defaults:  { _controller: VistaBundle:Default:verResultadosBusquedaShow, numero_pagina 1}
+    
+show_consulta_sin_barra:
+    path:      /secret/buscar/show/{consulta}
+    defaults:  { _controller: VistaBundle:Default:verResultadosBusquedaShow, numero_pagina 1}
+    
 #generos:
 #    path:      /generos/{_locale}
 #    defaults:  { _controller: APITheMovieDataBaseBundle:API:listaGeneros, _locale: en }

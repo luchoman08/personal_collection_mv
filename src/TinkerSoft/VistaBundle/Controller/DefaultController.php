@@ -24,16 +24,28 @@ class DefaultController extends Controller
         return $this->render('VistaBundle:Default:index.html.twig', array('tendencia' => $tendencia,'mejoresValoradas' => $mejoresValoradas,'estrenos' => $estrenos,'proximamente' => $proximamente, 'ultimas' => $ultimas, 'numPeliculasDivisibleTres'=>$numPeliculasDivisibleTres));
     }
     
+    public function verResultadosBusquedaShowAction(Request $request, $consulta,$numero_pagina){
+        
+        //$session = new Session();
+        //$session = $request->getSession();
+        //echo $session->get('name');
+        
+        $datos = $this->get('app.api_controller')->buscarShowAction($consulta,$numero_pagina);
+        return $this->render('VistaBundle:Default:buscar.html.twig', array('params' => $datos, 'consulta' => $consulta));
+        
+    }
+    
     public function verResultadosBusquedaAction(Request $request, $consulta,$numero_pagina){
         
         //$session = new Session();
-        $session = $request->getSession();
-        echo $session->get('name');
+        //$session = $request->getSession();
+        //echo $session->get('name');
         
         $datos = $this->get('app.api_controller')->buscarPeliculaAction($consulta,$numero_pagina);
-        return $this->render('VistaBundle:Default:pelicula.html.twig', array('params' => $datos));
+        return $this->render('VistaBundle:Default:buscar.html.twig', array('params' => $datos, 'consulta' => $consulta));
         
     }
+
 
     
     public function verPeliculaAction($id){

@@ -14,25 +14,58 @@ class APIController extends Controller
     
     public function buscarPeliculaAction($consulta,$numero_pagina){
         
+        $consulta = str_replace(" ", "-", $consulta);
+        
         if(is_numeric($numero_pagina)){
             
             if($numero_pagina <= 0){
                     $numero_pagina = 1;
               }
             
+            if($numero_pagina > 1000){
+                    $numero_pagina = 1000;
+              }
+            
         }else{
             
             $numero_pagina = 1;
-            
+                
         }
         
         //&language=" . $this->languaje  ;
         
-        $urlAPI = "https://api.themoviedb.org/3/search/movie?query=" . $consulta . "&page=" . $numero_pagina . "&api_key=be961f58626a1b5bb01ccf04da21d18f";
+        $urlAPI = "https://api.themoviedb.org/3/search/movie?query=" . $consulta . "&page=" . $numero_pagina . "&include_adult=true&api_key=be961f58626a1b5bb01ccf04da21d18f";
         $content = file_get_contents($urlAPI);
         $contentJSON = (array) json_decode($content);
         return $contentJSON;
     }
+    
+    public function buscarShowAction($consulta,$numero_pagina){
+        
+        $consulta = str_replace(" ", "-", $consulta);
+        
+        if(is_numeric($numero_pagina)){
+            
+            if($numero_pagina <= 0){
+                    $numero_pagina = 1;
+              }
+            if($numero_pagina > 1000){
+                    $numero_pagina = 1000;
+              }
+        }else{
+            
+            $numero_pagina = 1;
+                
+        }
+        
+        //&language=" . $this->languaje  ;
+        
+        $urlAPI = "https://api.themoviedb.org/3/search/tv?query=" . $consulta . "&page=" . $numero_pagina . "&include_adult=true&api_key=be961f58626a1b5bb01ccf04da21d18f";
+        $content = file_get_contents($urlAPI);
+        $contentJSON = (array) json_decode($content);
+        return $contentJSON;
+    }
+    
     public function obtenerPeliculasTendenciaAction(Request $request){
         
         $urlAPI = "https://api.themoviedb.org/3/movie/popular?api_key=be961f58626a1b5bb01ccf04da21d18f";

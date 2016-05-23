@@ -1,0 +1,84 @@
+{%extends 'index.html.twig'%}
+{% block contenido %}
+    
+     <div class="resultados-header">N&uacute;mero de resultados para <b>{{ consulta }}</b>: {{params.total_results}}  Pagina:{{ params.page }} de {{ params.total_pages }} </div> <br>
+
+    {%set i=0%}
+    {%for pelicula in params.results%}
+    <div class="resultado">
+            {% if pelicula.poster_path == "" %}
+                
+                <img src="{{asset('assets/images/movie.png')}}" alt="...">
+                             
+                {% else %}
+                        
+                <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">
+                        
+            {% endif %}
+            <div class="resultado-articulo">
+                <label> {{pelicula.title}} <div id="c{{i}}" value="0" class="rateyo-readonly-widg"> </div> Fecha de estreno: {{pelicula.release_date}}</label><br>
+                {{pelicula.overview}} 
+            </div>
+            
+        </div>
+        {%set i= i + 1%}
+    {%endfor%} 
+        
+    <nav>
+            <ul class="pager">
+                
+                {% if params.page == 1 %}
+                
+                    <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> P&aacute;gina anterior</a></li>
+                             
+                {% else %}
+                        
+                    <li class="previous"><a href="{{ url('homepage') }}vista/buscar/{{ consulta }}/{{ params.page - 1 }}"><span aria-hidden="true">&larr;</span> P&aacute;gina anterior</a></li>
+                        
+                {% endif %}
+                
+                {% if params.page == params.total_pages %}
+                
+                    <li class="next disabled"><a href="#"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
+                    
+                {% elseif params.page >= 1000 %}
+                
+                     <li class="next disabled"><a href="#"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
+                
+                {% else %}
+                        
+                    <li class="next"><a href="{{ url('homepage') }}vista/buscar/{{ consulta }}/{{ params.page + 1 }}"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
+                    
+                {% endif %}
+                
+                
+            </ul>
+    </nav>
+       
+
+{% endblock %}
+
+{% set i = 0 %}
+
+{%block javascripts%}
+ {{ parent() }}
+<script>
+     $(function() {
+        {% for pelicula in params.results%}
+            var rating = {{pelicula.vote_average}};
+            $(".counter").text(rating);
+            $("#c{{i}}").rateYo({
+                readOnly: true,
+                rating: rating,
+                numStars: 10,
+                precision: 10,
+                minValue: 1,
+                maxValue: 10
+            }).on("rateyo.change", function(e, data) {
+                $("#c{{i}}").val(data.rating);
+            });
+                {%set i = i + 1%}
+        {%endfor%}
+     });
+    </script>   
+{%endblock%}

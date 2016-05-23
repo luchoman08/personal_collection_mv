@@ -8,7 +8,8 @@
     /*https://image.tmdb.org/t/p/w1000/d29F2JeMP1S6MQG4o5N6BCpRC3n.jpg Ace ventura*/
     /*https://image.tmdb.org/t/p/w1000/aCCr1T0chen6nyjZkvAx5fTmyEB.jpg Ace Ventura 2*/
     /*https://image.tmdb.org/t/p/w1000/tqI6IqpkSFZhKd5WGhGR1pH3pjd.jpg Evg*/
-    background: url("https://image.tmdb.org/t/p/w1000/tqI6IqpkSFZhKd5WGhGR1pH3pjd.jpg") no-repeat center center;
+    /*https://image.tmdb.org/t/p/original/k15COpeexV5Ad0tuLjBW2jQFoOz.jpg angri bers xD*/
+    background: url("https://image.tmdb.org/t/p/original/k15COpeexV5Ad0tuLjBW2jQFoOz.jpg") no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -316,7 +317,46 @@
     cursor:pointer;
 }
 
- .jq-ry-container[readonly=readonly]{
+.jq-ry-container[readonly=readonly]{
     cursor:pointer
     
 }
+
+.resultado{
+    
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 5px;
+    min-height: 137px;
+    border-radius: 5px;
+    background-color: #ededed;
+    margin-bottom: 10px;
+    
+}
+
+.resultado > img{
+    
+    float: left;
+    height: 127px;
+    width: 86px;
+    margin-left: 5px;
+    
+}
+
+.resultado-articulo{
+   
+   padding-left: 100px;
+   padding-bottom: 5px;
+    
+}
+
+.resultados-header{
+    
+    font-size: 15px;
+    font-style: oblique;
+    text-align: right;
+    margin-bottom: 0px;
+    
+}
+
