@@ -15,6 +15,10 @@ pelicula_consulta_sin_barra:
     path:      /buscar/{consulta}
     defaults:  { _controller: VistaBundle:Default:verResultadosBusqueda, numero_pagina 1}
     
+pelicula_consulta_con_barra:
+    path:      /buscar/
+    defaults:  { _controller: VistaBundle:Default:iniciarIndex}
+    
     
     
 show:

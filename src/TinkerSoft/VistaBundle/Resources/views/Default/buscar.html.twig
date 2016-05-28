@@ -1,26 +1,31 @@
 {%extends 'index.html.twig'%}
+{%block title%} QMP - Resultados de busqueda {%endblock%}
 {% block contenido %}
     
-     <div class="resultados-header">N&uacute;mero de resultados para <b>{{ consulta }}</b>: {{params.total_results}}  Pagina:{{ params.page }} de {{ params.total_pages }} </div> <br>
+     <div class="resultados-header">N&uacute;mero de resultados para <b>"{{ consulta }}"</b>: {{params.total_results}}  Pagina:{{ params.page }} de {{ params.total_pages }} </div> <br>
 
     {%set i=0%}
     {%for pelicula in params.results%}
+   
     <div class="resultado">
+         <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" target="_blank">
             {% if pelicula.poster_path == "" %}
                 
                 <img src="{{asset('assets/images/movie.png')}}" alt="...">
-                             
+                           
                 {% else %}
                         
                 <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">
                         
             {% endif %}
+             </a>  
             <div class="resultado-articulo">
                 <label> {{pelicula.title}} <div id="c{{i}}" value="0" class="rateyo-readonly-widg"> </div> Fecha de estreno: {{pelicula.release_date}}</label><br>
                 {{pelicula.overview}} 
             </div>
             
         </div>
+       
         {%set i= i + 1%}
     {%endfor%} 
         

@@ -12,11 +12,15 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
         $this->blocks = array(
             'stylesheets' => array($this, 'block_stylesheets'),
             'body' => array($this, 'block_body'),
+            'moviename' => array($this, 'block_moviename'),
+            'classcontenido' => array($this, 'block_classcontenido'),
+            'contenido' => array($this, 'block_contenido'),
             'tendencia' => array($this, 'block_tendencia'),
             'mejorvaloradas' => array($this, 'block_mejorvaloradas'),
             'estrenos' => array($this, 'block_estrenos'),
             'proximamente' => array($this, 'block_proximamente'),
             'ultimas' => array($this, 'block_ultimas'),
+            'barraderecha' => array($this, 'block_barraderecha'),
             'javascripts' => array($this, 'block_javascripts'),
         );
     }
@@ -55,7 +59,14 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
     public function block_body($context, array $blocks = array())
     {
         // line 15
-        echo "    <div class=\"cabezera\"></div>
+        echo "    <div id =\"cabezera\" class=\"cabezera\"> 
+    <div class=\"watermark\">
+           ";
+        // line 17
+        $this->displayBlock('moviename', $context, $blocks);
+        // line 18
+        echo "    </div> 
+    </div>
 
     <nav class=\"navbar navbar-default\">
 
@@ -66,7 +77,10 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
                     <span class=\"sr-only\">Toggle navigation</span>
                     <span class=\"icon-bar\"></span>
                 </button>
-                <a class=\"navbar-brand\" href=\"#\">QMP</a>
+                <a class=\"navbar-brand\" href=\"";
+        // line 30
+        echo $this->env->getExtension('routing')->getUrl("homepage");
+        echo "vista\">QMP</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -75,12 +89,12 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
                     <li><a href=\"#\">Ingresar</a></li>
 
                 </ul>-->
-                <form class=\"navbar-form navbar-right buscar\" role=\"search\">
+               <div class=\"navbar-form navbar-right buscar\" role=\"search\">
                     <div class=\"form-group\">
-                        <input type=\"text\" class=\"form-control\" placeholder=\"Buscar peliculas ... :)\" size=\"50\">
+                        <input type=\"text\" id =\"valorBuscar\" class=\"form-control\" placeholder=\"Buscar peliculas ... :)\" size=\"50\">
                     </div>
-                    <button type=\"submit\" class=\"btn btn-default\">Buscar</button>
-                </form>
+                    <button id = \"Buscar\" type=\"submit\" class=\"btn btn-default\">Buscar</button>
+               </div>
 
             </div>
             <!-- /.navbar-collapse -->
@@ -89,10 +103,51 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
     </nav>
 
 
-    <div class=\"col-md-9 fondoContenido\">
+    <div class=\"";
+        // line 53
+        $this->displayBlock('classcontenido', $context, $blocks);
+        echo "\">
 
+    ";
+        // line 55
+        $this->displayBlock('contenido', $context, $blocks);
+        // line 123
+        echo "
+    </div>
 
-        <center>
+    ";
+        // line 126
+        $this->displayBlock('barraderecha', $context, $blocks);
+        // line 263
+        echo "
+    </div>
+
+    <div class=\"col-md-9 footerQMP\">
+        <label>Copyright QMP &copy; 2016 Website by TinkerSoft</label>
+    </div>
+    
+    ";
+        // line 270
+        $this->displayBlock('javascripts', $context, $blocks);
+    }
+
+    // line 17
+    public function block_moviename($context, array $blocks = array())
+    {
+        echo "The Good Dinosaur";
+    }
+
+    // line 53
+    public function block_classcontenido($context, array $blocks = array())
+    {
+        echo "col-md-9 fondoContenido";
+    }
+
+    // line 55
+    public function block_contenido($context, array $blocks = array())
+    {
+        // line 56
+        echo "        <center>
             <!--<a data-toggle=\"tab\" href=\"#tendencia\" class=\"buttonBase button5\">Tendencias</a>
             <a data-toggle=\"tab\" href=\"#estrenos\" class=\"buttonBase button5\">Estrenose</a>-->
 
@@ -101,7 +156,7 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
                 <li><a data-toggle=\"tab\" href=\"#top\">Mejores valoradas</a></li>
                 <li><a data-toggle=\"tab\" href=\"#estrenos\">Estrenos</a></li>
                 <li><a data-toggle=\"tab\" href=\"#proximamente\">Proximamente</a></li>
-                <li><a data-toggle=\"tab\" href=\"#ultimas\">&Uacute;ltimas adicionadas</a></li>
+                <!--<li><a data-toggle=\"tab\" href=\"#ultimas\">&Uacute;ltimas adicionadas</a></li>-->
             </ul>
 
 
@@ -114,9 +169,9 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <br>
             <div id=\"tendencia\" class=\" tab-pane fade in active \">
                ";
-        // line 73
+        // line 77
         $this->displayBlock('tendencia', $context, $blocks);
-        // line 76
+        // line 80
         echo "             
 
              
@@ -126,27 +181,27 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <div id=\"top\" class=\" tab-pane fade\">
 
                 ";
-        // line 84
+        // line 88
         $this->displayBlock('mejorvaloradas', $context, $blocks);
-        // line 87
+        // line 91
         echo "                
             </div>
 
             <div id=\"estrenos\" class=\"tab-pane fade\">
 
                 ";
-        // line 92
+        // line 96
         $this->displayBlock('estrenos', $context, $blocks);
-        // line 95
+        // line 99
         echo "
             </div>
 
             <div id=\"proximamente\" class=\" tab-pane fade\">
 
                 ";
-        // line 100
+        // line 104
         $this->displayBlock('proximamente', $context, $blocks);
-        // line 103
+        // line 107
         echo "
 
             </div>
@@ -154,19 +209,63 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <div id=\"ultimas\" class=\" tab-pane fade\">
 
                 ";
-        // line 109
+        // line 113
         $this->displayBlock('ultimas', $context, $blocks);
-        // line 112
+        // line 116
         echo "
 
             </div>
 
         </div>
+        
+        ";
+    }
 
-    </div>
+    // line 77
+    public function block_tendencia($context, array $blocks = array())
+    {
+        // line 78
+        echo "               
+               ";
+    }
 
+    // line 88
+    public function block_mejorvaloradas($context, array $blocks = array())
+    {
+        // line 89
+        echo "               
+                ";
+    }
 
-    <div class=\"col-md-3 columna-index-boostrap\">
+    // line 96
+    public function block_estrenos($context, array $blocks = array())
+    {
+        // line 97
+        echo "               
+                ";
+    }
+
+    // line 104
+    public function block_proximamente($context, array $blocks = array())
+    {
+        // line 105
+        echo "               
+                ";
+    }
+
+    // line 113
+    public function block_ultimas($context, array $blocks = array())
+    {
+        // line 114
+        echo "               
+                ";
+    }
+
+    // line 126
+    public function block_barraderecha($context, array $blocks = array())
+    {
+        // line 127
+        echo "    <div class=\"col-md-3 columna-index-boostrap\">
         <div class=\"columna-index\">
 
             <form class=\"form-signin\">
@@ -179,7 +278,7 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <input type=\"checkbox\" value=\"recordarme\"> Recordarme
           </label>-->
                 </div>
-                <button class=\"btn btn-lg btn-default btn-block\" type=\"submit\">Ingresar</button>
+                <button class=\"btn btn-default\" type=\"submit\">Ingresar</button>
             </form>
             <hr>
             <h3> Actividad del sitio </h3>
@@ -301,74 +400,72 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
         </div>
 
     </div>
-
-    </div>
-
-    <div class=\"col-md-9 footerQMP\">
-        <label>Copyright QMP &copy; 2016 Website by TinkerSoft</label>
-    </div>
-    
     ";
-        // line 263
-        $this->displayBlock('javascripts', $context, $blocks);
     }
 
-    // line 73
-    public function block_tendencia($context, array $blocks = array())
-    {
-        // line 74
-        echo "               
-               ";
-    }
-
-    // line 84
-    public function block_mejorvaloradas($context, array $blocks = array())
-    {
-        // line 85
-        echo "               
-                ";
-    }
-
-    // line 92
-    public function block_estrenos($context, array $blocks = array())
-    {
-        // line 93
-        echo "               
-                ";
-    }
-
-    // line 100
-    public function block_proximamente($context, array $blocks = array())
-    {
-        // line 101
-        echo "               
-                ";
-    }
-
-    // line 109
-    public function block_ultimas($context, array $blocks = array())
-    {
-        // line 110
-        echo "               
-                ";
-    }
-
-    // line 263
+    // line 270
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 264
+        // line 271
         echo "    
     <script type=\"text/javascript\" src=\"";
-        // line 265
+        // line 272
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("star/jquery.rateyo.min.js"), "html", null, true);
         echo "\"></script>
+    <script>
 
+//no funca esa webada LOL pruebelo ahi
+
+\$('#valorBuscar').keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+       
+        var url = \"http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/\"+\$(\"#valorBuscar\").val();
+
+
+//chambonada por ahora prro :v my paila xddd eso solo era un from summit xddd
+
+window.location.href =url;
+    }
+});
+\$(\"#Buscar\").click(function () {
+     
+
+        var url = \"http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/\"+\$(\"#valorBuscar\").val();
+
+
+//chambonada por ahora prro :v my paila xddd eso solo era un from summit xddd
+
+window.location.href =url;
+
+        \$.ajax({
+            type: \"POST\",
+            url: url,
+            data: \$(\"#valorBuscar\").val(),
+            success: function (data)
+            {
+
+                
+
+                                 //\$(\"#mensaje\").html(data)
+                           
+                              //   document.getElementById('valorBuscar').innerHTML = data;
+                                 
+
+                             }
+
+                         });
+
+        
+
+    });
+    </script>
    
      
 
 
     ";
-        // line 271
+        // line 325
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
     ";
@@ -386,7 +483,7 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 
     public function getDebugInfo()
     {
-        return array (  372 => 271,  363 => 265,  360 => 264,  357 => 263,  352 => 110,  349 => 109,  344 => 101,  341 => 100,  336 => 93,  333 => 92,  328 => 85,  325 => 84,  320 => 74,  317 => 73,  313 => 263,  160 => 112,  158 => 109,  150 => 103,  148 => 100,  141 => 95,  139 => 92,  132 => 87,  130 => 84,  120 => 76,  118 => 73,  58 => 15,  55 => 14,  47 => 8,  41 => 5,  38 => 4,  35 => 3,  11 => 1,);
+        return array (  469 => 325,  413 => 272,  410 => 271,  407 => 270,  268 => 127,  265 => 126,  260 => 114,  257 => 113,  252 => 105,  249 => 104,  244 => 97,  241 => 96,  236 => 89,  233 => 88,  228 => 78,  225 => 77,  215 => 116,  213 => 113,  205 => 107,  203 => 104,  196 => 99,  194 => 96,  187 => 91,  185 => 88,  175 => 80,  173 => 77,  150 => 56,  147 => 55,  141 => 53,  135 => 17,  131 => 270,  122 => 263,  120 => 126,  115 => 123,  113 => 55,  108 => 53,  82 => 30,  68 => 18,  66 => 17,  62 => 15,  59 => 14,  51 => 8,  45 => 5,  42 => 4,  39 => 3,  11 => 1,);
     }
 }
 /* {%extends 'base.html.twig'%}*/
@@ -403,7 +500,11 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 /* */
 /* */
 /* {% block body %}*/
-/*     <div class="cabezera"></div>*/
+/*     <div id ="cabezera" class="cabezera"> */
+/*     <div class="watermark">*/
+/*            {%block moviename%}The Good Dinosaur{% endblock %}*/
+/*     </div> */
+/*     </div>*/
 /* */
 /*     <nav class="navbar navbar-default">*/
 /* */
@@ -414,7 +515,7 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 /*                     <span class="sr-only">Toggle navigation</span>*/
 /*                     <span class="icon-bar"></span>*/
 /*                 </button>*/
-/*                 <a class="navbar-brand" href="#">QMP</a>*/
+/*                 <a class="navbar-brand" href="{{ url('homepage') }}vista">QMP</a>*/
 /*             </div>*/
 /* */
 /*             <!-- Collect the nav links, forms, and other content for toggling -->*/
@@ -423,12 +524,12 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 /*                     <li><a href="#">Ingresar</a></li>*/
 /* */
 /*                 </ul>-->*/
-/*                 <form class="navbar-form navbar-right buscar" role="search">*/
+/*                <div class="navbar-form navbar-right buscar" role="search">*/
 /*                     <div class="form-group">*/
-/*                         <input type="text" class="form-control" placeholder="Buscar peliculas ... :)" size="50">*/
+/*                         <input type="text" id ="valorBuscar" class="form-control" placeholder="Buscar peliculas ... :)" size="50">*/
 /*                     </div>*/
-/*                     <button type="submit" class="btn btn-default">Buscar</button>*/
-/*                 </form>*/
+/*                     <button id = "Buscar" type="submit" class="btn btn-default">Buscar</button>*/
+/*                </div>*/
 /* */
 /*             </div>*/
 /*             <!-- /.navbar-collapse -->*/
@@ -437,9 +538,9 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 /*     </nav>*/
 /* */
 /* */
-/*     <div class="col-md-9 fondoContenido">*/
+/*     <div class="{% block classcontenido %}col-md-9 fondoContenido{% endblock %}">*/
 /* */
-/* */
+/*     {% block contenido %}*/
 /*         <center>*/
 /*             <!--<a data-toggle="tab" href="#tendencia" class="buttonBase button5">Tendencias</a>*/
 /*             <a data-toggle="tab" href="#estrenos" class="buttonBase button5">Estrenose</a>-->*/
@@ -449,7 +550,7 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 /*                 <li><a data-toggle="tab" href="#top">Mejores valoradas</a></li>*/
 /*                 <li><a data-toggle="tab" href="#estrenos">Estrenos</a></li>*/
 /*                 <li><a data-toggle="tab" href="#proximamente">Proximamente</a></li>*/
-/*                 <li><a data-toggle="tab" href="#ultimas">&Uacute;ltimas adicionadas</a></li>*/
+/*                 <!--<li><a data-toggle="tab" href="#ultimas">&Uacute;ltimas adicionadas</a></li>-->*/
 /*             </ul>*/
 /* */
 /* */
@@ -505,10 +606,12 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 /*             </div>*/
 /* */
 /*         </div>*/
+/*         */
+/*         {% endblock %}*/
 /* */
 /*     </div>*/
 /* */
-/* */
+/*     {% block barraderecha %}*/
 /*     <div class="col-md-3 columna-index-boostrap">*/
 /*         <div class="columna-index">*/
 /* */
@@ -522,7 +625,7 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 /*             <input type="checkbox" value="recordarme"> Recordarme*/
 /*           </label>-->*/
 /*                 </div>*/
-/*                 <button class="btn btn-lg btn-default btn-block" type="submit">Ingresar</button>*/
+/*                 <button class="btn btn-default" type="submit">Ingresar</button>*/
 /*             </form>*/
 /*             <hr>*/
 /*             <h3> Actividad del sitio </h3>*/
@@ -644,6 +747,7 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 /*         </div>*/
 /* */
 /*     </div>*/
+/*     {% endblock %}*/
 /* */
 /*     </div>*/
 /* */
@@ -654,7 +758,54 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 /*     {% block javascripts %}*/
 /*     */
 /*     <script type="text/javascript" src="{{asset('star/jquery.rateyo.min.js')}}"></script>*/
+/*     <script>*/
 /* */
+/* //no funca esa webada LOL pruebelo ahi*/
+/* */
+/* $('#valorBuscar').keypress(function(event){*/
+/*     var keycode = (event.keyCode ? event.keyCode : event.which);*/
+/*     if(keycode == '13'){*/
+/*        */
+/*         var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();*/
+/* */
+/* */
+/* //chambonada por ahora prro :v my paila xddd eso solo era un from summit xddd*/
+/* */
+/* window.location.href =url;*/
+/*     }*/
+/* });*/
+/* $("#Buscar").click(function () {*/
+/*      */
+/* */
+/*         var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();*/
+/* */
+/* */
+/* //chambonada por ahora prro :v my paila xddd eso solo era un from summit xddd*/
+/* */
+/* window.location.href =url;*/
+/* */
+/*         $.ajax({*/
+/*             type: "POST",*/
+/*             url: url,*/
+/*             data: $("#valorBuscar").val(),*/
+/*             success: function (data)*/
+/*             {*/
+/* */
+/*                 */
+/* */
+/*                                  //$("#mensaje").html(data)*/
+/*                            */
+/*                               //   document.getElementById('valorBuscar').innerHTML = data;*/
+/*                                  */
+/* */
+/*                              }*/
+/* */
+/*                          });*/
+/* */
+/*         */
+/* */
+/*     });*/
+/*     </script>*/
 /*    */
 /*      */
 /* */

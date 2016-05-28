@@ -74,6 +74,37 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_sin_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaAction',  'numero_pagina' => 1,));
                 }
 
+                // pelicula_consulta_con_barra
+                if (rtrim($pathinfo, '/') === '/vista/buscar') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'pelicula_consulta_con_barra');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::iniciarIndexAction',  '_route' => 'pelicula_consulta_con_barra',);
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/vista/secret/buscar/show')) {
+                // show
+                if (preg_match('#^/vista/secret/buscar/show/(?P<consulta>[^/]++)/(?P<numero_pagina>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'show')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaShowAction',));
+                }
+
+                // show_consulta_barra
+                if (preg_match('#^/vista/secret/buscar/show/(?P<consulta>[^/]++)/?$#s', $pathinfo, $matches)) {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'show_consulta_barra');
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'show_consulta_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaShowAction',  'numero_pagina' => 1,));
+                }
+
+                // show_consulta_sin_barra
+                if (preg_match('#^/vista/secret/buscar/show/(?P<consulta>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'show_consulta_sin_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaShowAction',  'numero_pagina' => 1,));
+                }
+
             }
 
             // generos_barra

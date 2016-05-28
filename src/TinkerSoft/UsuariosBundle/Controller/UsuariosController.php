@@ -28,7 +28,7 @@ class UsuariosController extends Controller
     $session->get('name');
     
         $em = $this->getDoctrine()->getManager();
-
+        //Poner como servicio ¬_¬
         $usuarios = $em->getRepository('TinkerSoftUsuariosBundle:Usuarios')->findAll();
 
         return $this->render('usuarios/index.html.twig', array(

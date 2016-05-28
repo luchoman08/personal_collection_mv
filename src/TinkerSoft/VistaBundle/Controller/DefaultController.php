@@ -48,8 +48,8 @@ class DefaultController extends Controller
 
 
     
-    public function verPeliculaAction($id){
-        $datos = $this->get('app.api_controller')->obtenerPeliculaAction($id);
+    public function verPeliculaAction(Request $request, $id){
+        $datos = $this->get('app.api_controller')->obtenerPeliculaAction($request, $id);
         return $this->render('VistaBundle:Default:mostrarPelicula.html.twig', array('params' => $datos));
     }
     

@@ -12,7 +12,11 @@
 
 
 {% block body %}
-    <div class="cabezera"></div>
+    <div id ="cabezera" class="cabezera"> 
+    <div class="watermark">
+           {%block moviename%}The Good Dinosaur{% endblock %}
+    </div> 
+    </div>
 
     <nav class="navbar navbar-default">
 
@@ -23,7 +27,7 @@
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">QMP</a>
+                <a class="navbar-brand" href="{{ url('homepage') }}vista">QMP</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -32,12 +36,12 @@
                     <li><a href="#">Ingresar</a></li>
 
                 </ul>-->
-                <form class="navbar-form navbar-right buscar" role="search">
+               <div class="navbar-form navbar-right buscar" role="search">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Buscar peliculas ... :)" size="50">
+                        <input type="text" id ="valorBuscar" class="form-control" placeholder="Buscar peliculas ... :)" size="50">
                     </div>
-                    <button type="submit" class="btn btn-default">Buscar</button>
-                </form>
+                    <button id = "Buscar" type="submit" class="btn btn-default">Buscar</button>
+               </div>
 
             </div>
             <!-- /.navbar-collapse -->
@@ -46,9 +50,9 @@
     </nav>
 
 
-    <div class="col-md-9 fondoContenido">
+    <div class="{% block classcontenido %}col-md-9 fondoContenido{% endblock %}">
 
-
+    {% block contenido %}
         <center>
             <!--<a data-toggle="tab" href="#tendencia" class="buttonBase button5">Tendencias</a>
             <a data-toggle="tab" href="#estrenos" class="buttonBase button5">Estrenose</a>-->
@@ -58,7 +62,7 @@
                 <li><a data-toggle="tab" href="#top">Mejores valoradas</a></li>
                 <li><a data-toggle="tab" href="#estrenos">Estrenos</a></li>
                 <li><a data-toggle="tab" href="#proximamente">Proximamente</a></li>
-                <li><a data-toggle="tab" href="#ultimas">&Uacute;ltimas adicionadas</a></li>
+                <!--<li><a data-toggle="tab" href="#ultimas">&Uacute;ltimas adicionadas</a></li>-->
             </ul>
 
 
@@ -114,10 +118,12 @@
             </div>
 
         </div>
+        
+        {% endblock %}
 
     </div>
 
-
+    {% block barraderecha %}
     <div class="col-md-3 columna-index-boostrap">
         <div class="columna-index">
 
@@ -131,7 +137,7 @@
             <input type="checkbox" value="recordarme"> Recordarme
           </label>-->
                 </div>
-                <button class="btn btn-lg btn-default btn-block" type="submit">Ingresar</button>
+                <button class="btn btn-default" type="submit">Ingresar</button>
             </form>
             <hr>
             <h3> Actividad del sitio </h3>
@@ -253,6 +259,7 @@
         </div>
 
     </div>
+    {% endblock %}
 
     </div>
 
@@ -263,7 +270,54 @@
     {% block javascripts %}
     
     <script type="text/javascript" src="{{asset('star/jquery.rateyo.min.js')}}"></script>
+    <script>
 
+//no funca esa webada LOL pruebelo ahi
+
+$('#valorBuscar').keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+       
+        var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();
+
+
+//chambonada por ahora prro :v my paila xddd eso solo era un from summit xddd
+
+window.location.href =url;
+    }
+});
+$("#Buscar").click(function () {
+     
+
+        var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();
+
+
+//chambonada por ahora prro :v my paila xddd eso solo era un from summit xddd
+
+window.location.href =url;
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#valorBuscar").val(),
+            success: function (data)
+            {
+
+                
+
+                                 //$("#mensaje").html(data)
+                           
+                              //   document.getElementById('valorBuscar').innerHTML = data;
+                                 
+
+                             }
+
+                         });
+
+        
+
+    });
+    </script>
    
      
 

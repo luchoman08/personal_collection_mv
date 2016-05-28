@@ -8,7 +8,7 @@
     {%for pelicula in tendencia.results|slice(0,numPeliculasDivisibleTres)%}
 
                 <div class="col-sm-4 col-md-4">
-                    <a href="#" class="thumbnail movie">
+                    <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">
                         {% if pelicula.poster_path == "" %}
                              <img src="{{asset('assets/images/movie.png')}}" alt="...">
                              
@@ -32,7 +32,7 @@
     {%for pelicula in mejoresValoradas.results|slice(0,numPeliculasDivisibleTres)%}
 
                 <div class="col-sm-4 col-md-4">
-                    <a href="#" class="thumbnail movie">
+                    <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">
                         {% if pelicula.poster_path == "" %}
                              <img src="{{asset('assets/images/movie.png')}}" alt="...">
                              
@@ -55,7 +55,7 @@
     {%for pelicula in estrenos.results|slice(0,numPeliculasDivisibleTres)%}
 
                 <div class="col-sm-4 col-md-4">
-                    <a href="#" class="thumbnail movie">
+                    <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">
                         {% if pelicula.poster_path == "" %}
                              <img src="{{asset('assets/images/movie.png')}}" alt="...">
                              
@@ -79,7 +79,7 @@
     {%for pelicula in proximamente.results|slice(0,numPeliculasDivisibleTres)%}
 
                 <div class="col-sm-4 col-md-4">
-                    <a href="#" class="thumbnail movie">
+                    <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">
                         {% if pelicula.poster_path == "" %}
                              <img src="{{asset('assets/images/movie.png')}}" alt="...">
                              
@@ -103,7 +103,7 @@
     {%for pelicula in ultimas.results|slice(0,numPeliculasDivisibleTres)%}
 
                 <div class="col-sm-4 col-md-4">
-                    <a href="#" class="thumbnail movie">
+                    <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">
                         {% if pelicula.poster_path == "" %}
                              <img src="{{asset('assets/images/movie.png')}}" alt="...">
                              

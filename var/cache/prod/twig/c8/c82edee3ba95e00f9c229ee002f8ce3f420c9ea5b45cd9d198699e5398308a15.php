@@ -54,7 +54,12 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
             // line 9
             echo "
                 <div class=\"col-sm-4 col-md-4\">
-                    <a href=\"#\" class=\"thumbnail movie\">
+                    <a href=\"";
+            // line 11
+            echo $this->env->getExtension('routing')->getUrl("homepage");
+            echo "vista/mostrarpelicula/";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "id", array()), "html", null, true);
+            echo "\" class=\"thumbnail movie\">
                         ";
             // line 12
             if (($this->getAttribute($context["pelicula"], "poster_path", array()) == "")) {
@@ -110,7 +115,12 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
             // line 33
             echo "
                 <div class=\"col-sm-4 col-md-4\">
-                    <a href=\"#\" class=\"thumbnail movie\">
+                    <a href=\"";
+            // line 35
+            echo $this->env->getExtension('routing')->getUrl("homepage");
+            echo "vista/mostrarpelicula/";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "id", array()), "html", null, true);
+            echo "\" class=\"thumbnail movie\">
                         ";
             // line 36
             if (($this->getAttribute($context["pelicula"], "poster_path", array()) == "")) {
@@ -165,7 +175,12 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
             // line 56
             echo "
                 <div class=\"col-sm-4 col-md-4\">
-                    <a href=\"#\" class=\"thumbnail movie\">
+                    <a href=\"";
+            // line 58
+            echo $this->env->getExtension('routing')->getUrl("homepage");
+            echo "vista/mostrarpelicula/";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "id", array()), "html", null, true);
+            echo "\" class=\"thumbnail movie\">
                         ";
             // line 59
             if (($this->getAttribute($context["pelicula"], "poster_path", array()) == "")) {
@@ -223,7 +238,12 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
             // line 80
             echo "
                 <div class=\"col-sm-4 col-md-4\">
-                    <a href=\"#\" class=\"thumbnail movie\">
+                    <a href=\"";
+            // line 82
+            echo $this->env->getExtension('routing')->getUrl("homepage");
+            echo "vista/mostrarpelicula/";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "id", array()), "html", null, true);
+            echo "\" class=\"thumbnail movie\">
                         ";
             // line 83
             if (($this->getAttribute($context["pelicula"], "poster_path", array()) == "")) {
@@ -281,7 +301,12 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
             // line 104
             echo "
                 <div class=\"col-sm-4 col-md-4\">
-                    <a href=\"#\" class=\"thumbnail movie\">
+                    <a href=\"";
+            // line 106
+            echo $this->env->getExtension('routing')->getUrl("homepage");
+            echo "vista/mostrarpelicula/";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "id", array()), "html", null, true);
+            echo "\" class=\"thumbnail movie\">
                         ";
             // line 107
             if (($this->getAttribute($context["pelicula"], "poster_path", array()) == "")) {
@@ -490,7 +515,7 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 
     public function getDebugInfo()
     {
-        return array (  476 => 193,  470 => 192,  468 => 191,  463 => 189,  452 => 181,  446 => 179,  441 => 178,  435 => 177,  433 => 176,  428 => 174,  417 => 166,  411 => 164,  406 => 163,  400 => 162,  398 => 161,  393 => 159,  382 => 151,  376 => 149,  371 => 148,  365 => 147,  363 => 146,  358 => 144,  347 => 136,  341 => 134,  337 => 133,  330 => 130,  327 => 129,  319 => 121,  317 => 120,  308 => 116,  305 => 115,  299 => 112,  296 => 111,  289 => 108,  287 => 107,  282 => 104,  277 => 103,  275 => 102,  272 => 101,  269 => 100,  261 => 97,  259 => 96,  250 => 92,  247 => 91,  241 => 88,  238 => 87,  231 => 84,  229 => 83,  224 => 80,  219 => 79,  217 => 78,  214 => 77,  211 => 76,  203 => 73,  201 => 72,  192 => 68,  189 => 67,  183 => 64,  180 => 63,  173 => 60,  171 => 59,  166 => 56,  161 => 55,  159 => 54,  156 => 53,  148 => 50,  146 => 49,  137 => 45,  134 => 44,  128 => 41,  125 => 40,  118 => 37,  116 => 36,  111 => 33,  106 => 32,  104 => 31,  101 => 30,  93 => 27,  91 => 26,  82 => 22,  78 => 20,  72 => 17,  69 => 16,  62 => 13,  60 => 12,  55 => 9,  51 => 8,  48 => 7,  45 => 6,  39 => 2,  35 => 1,  33 => 127,  31 => 3,  11 => 1,);
+        return array (  501 => 193,  495 => 192,  493 => 191,  488 => 189,  477 => 181,  471 => 179,  466 => 178,  460 => 177,  458 => 176,  453 => 174,  442 => 166,  436 => 164,  431 => 163,  425 => 162,  423 => 161,  418 => 159,  407 => 151,  401 => 149,  396 => 148,  390 => 147,  388 => 146,  383 => 144,  372 => 136,  366 => 134,  362 => 133,  355 => 130,  352 => 129,  344 => 121,  342 => 120,  333 => 116,  330 => 115,  324 => 112,  321 => 111,  314 => 108,  312 => 107,  306 => 106,  302 => 104,  297 => 103,  295 => 102,  292 => 101,  289 => 100,  281 => 97,  279 => 96,  270 => 92,  267 => 91,  261 => 88,  258 => 87,  251 => 84,  249 => 83,  243 => 82,  239 => 80,  234 => 79,  232 => 78,  229 => 77,  226 => 76,  218 => 73,  216 => 72,  207 => 68,  204 => 67,  198 => 64,  195 => 63,  188 => 60,  186 => 59,  180 => 58,  176 => 56,  171 => 55,  169 => 54,  166 => 53,  158 => 50,  156 => 49,  147 => 45,  144 => 44,  138 => 41,  135 => 40,  128 => 37,  126 => 36,  120 => 35,  116 => 33,  111 => 32,  109 => 31,  106 => 30,  98 => 27,  96 => 26,  87 => 22,  83 => 20,  77 => 17,  74 => 16,  67 => 13,  65 => 12,  59 => 11,  55 => 9,  51 => 8,  48 => 7,  45 => 6,  39 => 2,  35 => 1,  33 => 127,  31 => 3,  11 => 1,);
     }
 }
 /* {% extends 'index.html.twig' %}*/
@@ -503,7 +528,7 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 /*     {%for pelicula in tendencia.results|slice(0,numPeliculasDivisibleTres)%}*/
 /* */
 /*                 <div class="col-sm-4 col-md-4">*/
-/*                     <a href="#" class="thumbnail movie">*/
+/*                     <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">*/
 /*                         {% if pelicula.poster_path == "" %}*/
 /*                              <img src="{{asset('assets/images/movie.png')}}" alt="...">*/
 /*                              */
@@ -527,7 +552,7 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 /*     {%for pelicula in mejoresValoradas.results|slice(0,numPeliculasDivisibleTres)%}*/
 /* */
 /*                 <div class="col-sm-4 col-md-4">*/
-/*                     <a href="#" class="thumbnail movie">*/
+/*                     <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">*/
 /*                         {% if pelicula.poster_path == "" %}*/
 /*                              <img src="{{asset('assets/images/movie.png')}}" alt="...">*/
 /*                              */
@@ -550,7 +575,7 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 /*     {%for pelicula in estrenos.results|slice(0,numPeliculasDivisibleTres)%}*/
 /* */
 /*                 <div class="col-sm-4 col-md-4">*/
-/*                     <a href="#" class="thumbnail movie">*/
+/*                     <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">*/
 /*                         {% if pelicula.poster_path == "" %}*/
 /*                              <img src="{{asset('assets/images/movie.png')}}" alt="...">*/
 /*                              */
@@ -574,7 +599,7 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 /*     {%for pelicula in proximamente.results|slice(0,numPeliculasDivisibleTres)%}*/
 /* */
 /*                 <div class="col-sm-4 col-md-4">*/
-/*                     <a href="#" class="thumbnail movie">*/
+/*                     <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">*/
 /*                         {% if pelicula.poster_path == "" %}*/
 /*                              <img src="{{asset('assets/images/movie.png')}}" alt="...">*/
 /*                              */
@@ -598,7 +623,7 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 /*     {%for pelicula in ultimas.results|slice(0,numPeliculasDivisibleTres)%}*/
 /* */
 /*                 <div class="col-sm-4 col-md-4">*/
-/*                     <a href="#" class="thumbnail movie">*/
+/*                     <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">*/
 /*                         {% if pelicula.poster_path == "" %}*/
 /*                              <img src="{{asset('assets/images/movie.png')}}" alt="...">*/
 /*                              */

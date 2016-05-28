@@ -37,6 +37,15 @@ class APIController extends Controller
         $urlAPI = "https://api.themoviedb.org/3/search/movie?query=" . $consulta . "&page=" . $numero_pagina . "&include_adult=true&api_key=be961f58626a1b5bb01ccf04da21d18f";
         $content = file_get_contents($urlAPI);
         $contentJSON = (array) json_decode($content);
+        
+        if($numero_pagina > $contentJSON['total_pages']){
+            
+                    $numero_pagina = $contentJSON['total_pages'];
+                    $urlAPI = "https://api.themoviedb.org/3/search/movie?query=" . $consulta . "&page=" . $numero_pagina . "&include_adult=true&api_key=be961f58626a1b5bb01ccf04da21d18f";
+                    $content = file_get_contents($urlAPI);
+                    $contentJSON = (array) json_decode($content);
+                    
+              }
         return $contentJSON;
     }
     
@@ -63,6 +72,15 @@ class APIController extends Controller
         $urlAPI = "https://api.themoviedb.org/3/search/tv?query=" . $consulta . "&page=" . $numero_pagina . "&include_adult=true&api_key=be961f58626a1b5bb01ccf04da21d18f";
         $content = file_get_contents($urlAPI);
         $contentJSON = (array) json_decode($content);
+        
+        if($numero_pagina > $contentJSON['total_pages']){
+            
+                    $numero_pagina = $contentJSON['total_pages'];
+                    $urlAPI = "https://api.themoviedb.org/3/search/tv?query=" . $consulta . "&page=" . $numero_pagina . "&include_adult=true&api_key=be961f58626a1b5bb01ccf04da21d18f";
+                    $content = file_get_contents($urlAPI);
+                    $contentJSON = (array) json_decode($content);
+                    
+              }
         return $contentJSON;
     }
     
@@ -119,7 +137,10 @@ class APIController extends Controller
         $urlAPI="https://api.themoviedb.org/3/movie/".$id. "/videos?api_key=be961f58626a1b5bb01ccf04da21d18f";
         $content = file_get_contents($urlAPI);
         $trailersJSON = (array) json_decode($content);
-        $infocompletaJSON=array_merge($peliculaJSON, $trailersJSON);
+        $urlAPI = "https://api.themoviedb.org/3/movie/" . $id . "/images?api_key=be961f58626a1b5bb01ccf04da21d18f&include_image_language=en,null";
+        $content = file_get_contents($urlAPI);
+        $imagenesJSON = (array) json_decode($content);
+        $infocompletaJSON=array_merge($peliculaJSON, $trailersJSON,$imagenesJSON);
         return $infocompletaJSON;
         
         
