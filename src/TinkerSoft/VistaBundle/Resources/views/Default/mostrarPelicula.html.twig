@@ -6,7 +6,9 @@
 {% block stylesheets %}
 
     {{ parent() }}
-    <style>
+  {%if params.backdrops[3].file_path%}
+  
+  <style>
     
         .fondo {
             background-image: url("https://image.tmdb.org/t/p/original/{{ params.backdrops[3].file_path }}");
@@ -15,8 +17,10 @@
         }
         
     </style>
+    {%endif%}
+    
+
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.8.3.js"></script>
 
   
@@ -34,7 +38,7 @@
  
 
       	         		<div class="video">
-			      			<iframe width="100%" height="" src="https://www.youtube.com/embed/{{params.results[0].key}}" frameborder="0" allowfullscreen=""></iframe>
+			      			<iframe width="100%" height="" src="https://www.youtube.com/embed/{{params.results[0].key}}?rel=0" frameborder="0" allowfullscreen=""></iframe>
 			  			</div>
 
                         <div class="grid images_3_of_2">
@@ -44,7 +48,7 @@
                             </div>
                             <div class="movie_rate">
                                 <span>
-                            <p>	Your Vote :</p>
+                            <p>	Tu voto :</p>
                             <span id="calificacionPersonal" class="rateyo-readonly-widg"></span>
                             </span>
 						  	   <div class="clearfix"> </div>
@@ -53,17 +57,25 @@
                         <div class="desc1 span_3_of_2">
                         	<p class="movie_option"><strong><div class="titulo">{{params.title}}  </strong></p> </div> <br />
                         	{%if params.release_date %}<p class="movie_option"><strong>Fecha de estreno: </strong>{{params.release_date}}</p>{%endif%}
-                        	<p class="movie_option"><strong>Categoría: </strong><a href="#">Adventure</a>, <a href="#">Fantazy</a></p>
-                        	<p class="movie_option"><strong>Director: </strong><a href="#">suffered </a></p>
-                        	<p class="movie_option"><strong>Actores: </strong><a href="#">anything</a>, <a href="#">Lorem Ipsum</a>, <a href="#" discovered<="" a="">, </a><a href="#"> Virginia</a>, <a href="#"> Virginia</a>, <a href="#">variations</a>, <a href="#">variations</a>, <a href="#">variations</a>, <a href="#"> Virginia</a> <a href="#">...</a></p>
-                            <p class="movie_option"><strong>Restricción de edad: </strong>13</p> 
+                        	<p class="movie_option"><strong>Generos: </strong> 
+                        	{%set i=0%}
+                        	{%for genero in params.genres%}
+    
+                        	{{genero.name}}{%if i <params.genres|length -1 %},{%endif%}
+                  
+                        	{%set i = i +1%}
+                        	{%endfor%}
+                        	</p>
+                        	<p class="movie_option"><strong>Estudio Cinematogr&aacute;fico : </strong>{{params.production_companies[0].name}}</p>
+                            <p class="movie_option"><strong>Total votos: </strong>{{params.vote_count}}</p> 
                             <div class="down_btn"><a class="btn1" href="#"><span> </span>Marcar como vista</a></div>
                             <div class="down_btn"><a class="btn1" href="#"><span> </span>Adicionar a una lista</a></div>
                          </div>
 
                         
                         <div class="clearfix"> </div>
-                        <p class="m_4">{{params.overview}}</p>
+                        
+                        <p class="m_4">Sinopsis: {{params.overview}}</p>
 		                
                       </div>
                  
@@ -78,7 +90,7 @@
     <script>
         $(function() {
 
-            var rating = {{params.vote_average}};
+            var rating =0;
 
         $("#calificacionPersonal").rateYo({
                 readOnly: false,
@@ -96,23 +108,7 @@
 
 
 
-            $("#c1").rateYo({
-                readOnly: true,
-                rating: rating,
-                numStars: 10,
-                precision: 10,
-                minValue: 1,
-                maxValue: 10,
-                 multiColor: {
- 
-      "startColor": "#FF0000", //RED
-      "endColor"  : "#00FF00"  //GREEN
-    }
-
-            }).on("rateyo.change", function(e, data) {
-                $("#c1").val(data.rating);
-
-            });
+      
         });
     </script>
     

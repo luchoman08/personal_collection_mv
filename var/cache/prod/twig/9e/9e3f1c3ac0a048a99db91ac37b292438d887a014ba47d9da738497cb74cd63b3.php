@@ -47,45 +47,54 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
         // line 8
         $this->displayParentBlock("stylesheets", $context, $blocks);
         echo "
-    <style>
+  ";
+        // line 9
+        if ($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "backdrops", array()), 3, array(), "array"), "file_path", array())) {
+            // line 10
+            echo "  
+  <style>
     
         .fondo {
             background-image: url(\"https://image.tmdb.org/t/p/original/";
-        // line 12
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "backdrops", array()), 3, array(), "array"), "file_path", array()), "html", null, true);
-        echo "\");
+            // line 14
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "backdrops", array()), 3, array(), "array"), "file_path", array()), "html", null, true);
+            echo "\");
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
         
     </style>
+    ";
+        }
+        // line 21
+        echo "    
+
     <link href=\"";
-        // line 18
+        // line 23
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/css/style.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />
-    <script type=\"text/javascript\" src=\"//code.jquery.com/jquery-1.8.3.js\"></script>
     <script type=\"text/javascript\" src=\"//code.jquery.com/jquery-1.8.3.js\"></script>
 
   
 ";
     }
 
-    // line 24
+    // line 28
     public function block_moviename($context, array $blocks = array())
     {
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "title", array()), "html", null, true);
     }
 
-    // line 25
+    // line 29
     public function block_classcontenido($context, array $blocks = array())
     {
         echo "col-md-12 fondoContenido";
     }
 
-    // line 26
+    // line 30
     public function block_contenido($context, array $blocks = array())
     {
-        // line 27
+        // line 31
         echo "
 
 
@@ -97,19 +106,19 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 
       \t         \t\t<div class=\"video\">
 \t\t\t      \t\t\t<iframe width=\"100%\" height=\"\" src=\"https://www.youtube.com/embed/";
-        // line 37
+        // line 41
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "results", array()), 0, array(), "array"), "key", array()), "html", null, true);
-        echo "\" frameborder=\"0\" allowfullscreen=\"\"></iframe>
+        echo "?rel=0\" frameborder=\"0\" allowfullscreen=\"\"></iframe>
 \t\t\t  \t\t\t</div>
 
                         <div class=\"grid images_3_of_2\">
                         \t<div class=\"movie_image\">
                                 <span class=\"movie_rating\">";
-        // line 42
+        // line 46
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "vote_average", array()), "html", null, true);
         echo "</span>
                                 <img src=\"https://image.tmdb.org/t/p/w300";
-        // line 43
+        // line 47
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "poster_path", array()), "html", null, true);
         echo "\" width=\"100%\" alt=\"";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "title", array()), "html", null, true);
@@ -117,7 +126,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                             </div>
                             <div class=\"movie_rate\">
                                 <span>
-                            <p>\tYour Vote :</p>
+                            <p>\tTu voto :</p>
                             <span id=\"calificacionPersonal\" class=\"rateyo-readonly-widg\"></span>
                             </span>
 \t\t\t\t\t\t  \t   <div class=\"clearfix\"> </div>
@@ -125,29 +134,64 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                         </div>
                         <div class=\"desc1 span_3_of_2\">
                         \t<p class=\"movie_option\"><strong><div class=\"titulo\">";
-        // line 54
+        // line 58
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "title", array()), "html", null, true);
         echo "  </strong></p> </div> <br />
                         \t";
-        // line 55
+        // line 59
         if ($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "release_date", array())) {
             echo "<p class=\"movie_option\"><strong>Fecha de estreno: </strong>";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "release_date", array()), "html", null, true);
             echo "</p>";
         }
-        // line 56
-        echo "                        \t<p class=\"movie_option\"><strong>Categoría: </strong><a href=\"#\">Adventure</a>, <a href=\"#\">Fantazy</a></p>
-                        \t<p class=\"movie_option\"><strong>Director: </strong><a href=\"#\">suffered </a></p>
-                        \t<p class=\"movie_option\"><strong>Actores: </strong><a href=\"#\">anything</a>, <a href=\"#\">Lorem Ipsum</a>, <a href=\"#\" discovered<=\"\" a=\"\">, </a><a href=\"#\"> Virginia</a>, <a href=\"#\"> Virginia</a>, <a href=\"#\">variations</a>, <a href=\"#\">variations</a>, <a href=\"#\">variations</a>, <a href=\"#\"> Virginia</a> <a href=\"#\">...</a></p>
-                            <p class=\"movie_option\"><strong>Restricción de edad: </strong>13</p> 
+        // line 60
+        echo "                        \t<p class=\"movie_option\"><strong>Generos: </strong> 
+                        \t";
+        // line 61
+        $context["i"] = 0;
+        // line 62
+        echo "                        \t";
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "genres", array()));
+        foreach ($context['_seq'] as $context["_key"] => $context["genero"]) {
+            // line 63
+            echo "    
+                        \t";
+            // line 64
+            echo twig_escape_filter($this->env, $this->getAttribute($context["genero"], "name", array()), "html", null, true);
+            if (((isset($context["i"]) ? $context["i"] : null) < (twig_length_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "genres", array())) - 1))) {
+                echo ",";
+            }
+            // line 65
+            echo "                  
+                        \t";
+            // line 66
+            $context["i"] = ((isset($context["i"]) ? $context["i"] : null) + 1);
+            // line 67
+            echo "                        \t";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['genero'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 68
+        echo "                        \t</p>
+                        \t<p class=\"movie_option\"><strong>Estudio Cinematogr&aacute;fico : </strong>";
+        // line 69
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "production_companies", array()), 0, array(), "array"), "name", array()), "html", null, true);
+        echo "</p>
+                            <p class=\"movie_option\"><strong>Total votos: </strong>";
+        // line 70
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "vote_count", array()), "html", null, true);
+        echo "</p> 
                             <div class=\"down_btn\"><a class=\"btn1\" href=\"#\"><span> </span>Marcar como vista</a></div>
                             <div class=\"down_btn\"><a class=\"btn1\" href=\"#\"><span> </span>Adicionar a una lista</a></div>
                          </div>
 
                         
                         <div class=\"clearfix\"> </div>
-                        <p class=\"m_4\">";
-        // line 66
+                        
+                        <p class=\"m_4\">Sinopsis: ";
+        // line 78
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "overview", array()), "html", null, true);
         echo "</p>
 \t\t                
@@ -161,19 +205,16 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 ";
     }
 
-    // line 76
+    // line 88
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 77
+        // line 89
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
     <script>
         \$(function() {
 
-            var rating = ";
-        // line 81
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "vote_average", array()), "html", null, true);
-        echo ";
+            var rating =0;
 
         \$(\"#calificacionPersonal\").rateYo({
                 readOnly: false,
@@ -188,36 +229,20 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
             });
  
       \$('#cabezera').css(\"background\", \"url(https://image.tmdb.org/t/p/w1280/";
-        // line 95
+        // line 107
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "backdrop_path", array()), "html", null, true);
         echo ")\");  
 
 
 
-            \$(\"#c1\").rateYo({
-                readOnly: true,
-                rating: rating,
-                numStars: 10,
-                precision: 10,
-                minValue: 1,
-                maxValue: 10,
-                 multiColor: {
- 
-      \"startColor\": \"#FF0000\", //RED
-      \"endColor\"  : \"#00FF00\"  //GREEN
-    }
-
-            }).on(\"rateyo.change\", function(e, data) {
-                \$(\"#c1\").val(data.rating);
-
-            });
+      
         });
     </script>
     
     ";
     }
 
-    // line 120
+    // line 116
     public function block_barraderecha($context, array $blocks = array())
     {
     }
@@ -234,7 +259,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 
     public function getDebugInfo()
     {
-        return array (  221 => 120,  192 => 95,  175 => 81,  168 => 77,  165 => 76,  151 => 66,  139 => 56,  133 => 55,  129 => 54,  113 => 43,  109 => 42,  101 => 37,  89 => 27,  86 => 26,  80 => 25,  74 => 24,  64 => 18,  55 => 12,  48 => 8,  45 => 7,  42 => 6,  34 => 5,  11 => 1,);
+        return array (  246 => 116,  233 => 107,  212 => 89,  209 => 88,  195 => 78,  184 => 70,  180 => 69,  177 => 68,  171 => 67,  169 => 66,  166 => 65,  161 => 64,  158 => 63,  153 => 62,  151 => 61,  148 => 60,  142 => 59,  138 => 58,  122 => 47,  118 => 46,  110 => 41,  98 => 31,  95 => 30,  89 => 29,  83 => 28,  74 => 23,  70 => 21,  60 => 14,  54 => 10,  52 => 9,  48 => 8,  45 => 7,  42 => 6,  34 => 5,  11 => 1,);
     }
 }
 /* {% extends 'index.html.twig' %}*/
@@ -245,7 +270,9 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /* {% block stylesheets %}*/
 /* */
 /*     {{ parent() }}*/
-/*     <style>*/
+/*   {%if params.backdrops[3].file_path%}*/
+/*   */
+/*   <style>*/
 /*     */
 /*         .fondo {*/
 /*             background-image: url("https://image.tmdb.org/t/p/original/{{ params.backdrops[3].file_path }}");*/
@@ -254,8 +281,10 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*         }*/
 /*         */
 /*     </style>*/
+/*     {%endif%}*/
+/*     */
+/* */
 /*     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />*/
-/*     <script type="text/javascript" src="//code.jquery.com/jquery-1.8.3.js"></script>*/
 /*     <script type="text/javascript" src="//code.jquery.com/jquery-1.8.3.js"></script>*/
 /* */
 /*   */
@@ -273,7 +302,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*  */
 /* */
 /*       	         		<div class="video">*/
-/* 			      			<iframe width="100%" height="" src="https://www.youtube.com/embed/{{params.results[0].key}}" frameborder="0" allowfullscreen=""></iframe>*/
+/* 			      			<iframe width="100%" height="" src="https://www.youtube.com/embed/{{params.results[0].key}}?rel=0" frameborder="0" allowfullscreen=""></iframe>*/
 /* 			  			</div>*/
 /* */
 /*                         <div class="grid images_3_of_2">*/
@@ -283,7 +312,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*                             </div>*/
 /*                             <div class="movie_rate">*/
 /*                                 <span>*/
-/*                             <p>	Your Vote :</p>*/
+/*                             <p>	Tu voto :</p>*/
 /*                             <span id="calificacionPersonal" class="rateyo-readonly-widg"></span>*/
 /*                             </span>*/
 /* 						  	   <div class="clearfix"> </div>*/
@@ -292,17 +321,25 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*                         <div class="desc1 span_3_of_2">*/
 /*                         	<p class="movie_option"><strong><div class="titulo">{{params.title}}  </strong></p> </div> <br />*/
 /*                         	{%if params.release_date %}<p class="movie_option"><strong>Fecha de estreno: </strong>{{params.release_date}}</p>{%endif%}*/
-/*                         	<p class="movie_option"><strong>Categoría: </strong><a href="#">Adventure</a>, <a href="#">Fantazy</a></p>*/
-/*                         	<p class="movie_option"><strong>Director: </strong><a href="#">suffered </a></p>*/
-/*                         	<p class="movie_option"><strong>Actores: </strong><a href="#">anything</a>, <a href="#">Lorem Ipsum</a>, <a href="#" discovered<="" a="">, </a><a href="#"> Virginia</a>, <a href="#"> Virginia</a>, <a href="#">variations</a>, <a href="#">variations</a>, <a href="#">variations</a>, <a href="#"> Virginia</a> <a href="#">...</a></p>*/
-/*                             <p class="movie_option"><strong>Restricción de edad: </strong>13</p> */
+/*                         	<p class="movie_option"><strong>Generos: </strong> */
+/*                         	{%set i=0%}*/
+/*                         	{%for genero in params.genres%}*/
+/*     */
+/*                         	{{genero.name}}{%if i <params.genres|length -1 %},{%endif%}*/
+/*                   */
+/*                         	{%set i = i +1%}*/
+/*                         	{%endfor%}*/
+/*                         	</p>*/
+/*                         	<p class="movie_option"><strong>Estudio Cinematogr&aacute;fico : </strong>{{params.production_companies[0].name}}</p>*/
+/*                             <p class="movie_option"><strong>Total votos: </strong>{{params.vote_count}}</p> */
 /*                             <div class="down_btn"><a class="btn1" href="#"><span> </span>Marcar como vista</a></div>*/
 /*                             <div class="down_btn"><a class="btn1" href="#"><span> </span>Adicionar a una lista</a></div>*/
 /*                          </div>*/
 /* */
 /*                         */
 /*                         <div class="clearfix"> </div>*/
-/*                         <p class="m_4">{{params.overview}}</p>*/
+/*                         */
+/*                         <p class="m_4">Sinopsis: {{params.overview}}</p>*/
 /* 		                */
 /*                       </div>*/
 /*                  */
@@ -317,7 +354,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*     <script>*/
 /*         $(function() {*/
 /* */
-/*             var rating = {{params.vote_average}};*/
+/*             var rating =0;*/
 /* */
 /*         $("#calificacionPersonal").rateYo({*/
 /*                 readOnly: false,*/
@@ -335,23 +372,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /* */
 /* */
 /* */
-/*             $("#c1").rateYo({*/
-/*                 readOnly: true,*/
-/*                 rating: rating,*/
-/*                 numStars: 10,*/
-/*                 precision: 10,*/
-/*                 minValue: 1,*/
-/*                 maxValue: 10,*/
-/*                  multiColor: {*/
-/*  */
-/*       "startColor": "#FF0000", //RED*/
-/*       "endColor"  : "#00FF00"  //GREEN*/
-/*     }*/
-/* */
-/*             }).on("rateyo.change", function(e, data) {*/
-/*                 $("#c1").val(data.rating);*/
-/* */
-/*             });*/
+/*       */
 /*         });*/
 /*     </script>*/
 /*     */
