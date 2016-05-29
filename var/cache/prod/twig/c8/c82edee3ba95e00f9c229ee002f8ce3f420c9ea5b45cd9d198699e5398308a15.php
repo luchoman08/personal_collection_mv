@@ -398,18 +398,60 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
         echo "
 <script>
      \$(function() {
+         
+         \$(\"#a_tendencia\").click(function() {
+      \$('#cabezera').css(\"background\", \"url(https://image.tmdb.org/t/p/w1280/";
+        // line 158
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["backdrops"]) ? $context["backdrops"] : null), 0, array(), "array"), "fondo", array()), "html", null, true);
+        echo ")\");
+      \$('#watermark').html(\"";
+        // line 159
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["backdrops"]) ? $context["backdrops"] : null), 0, array(), "array"), "titulo", array()), "html", null, true);
+        echo "\");
+});
+           \$(\"#a_mejores_valoradas\").click(function() {
+      \$('#cabezera').css(\"background\", \"url(https://image.tmdb.org/t/p/w1280/";
+        // line 162
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["backdrops"]) ? $context["backdrops"] : null), 1, array(), "array"), "fondo", array()), "html", null, true);
+        echo ")\");
+      \$('#watermark').html(\"";
+        // line 163
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["backdrops"]) ? $context["backdrops"] : null), 1, array(), "array"), "titulo", array()), "html", null, true);
+        echo "\");
+});   
+     \$(\"#a_estrenos\").click(function() {
+      \$('#cabezera').css(\"background\", \"url(https://image.tmdb.org/t/p/w1280/";
+        // line 166
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["backdrops"]) ? $context["backdrops"] : null), 2, array(), "array"), "fondo", array()), "html", null, true);
+        echo ")\");
+      \$('#watermark').html(\"";
+        // line 167
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["backdrops"]) ? $context["backdrops"] : null), 2, array(), "array"), "titulo", array()), "html", null, true);
+        echo "\");
+      
+});
+     \$(\"#a_proximamente\").click(function() {
+      \$('#cabezera').css(\"background\", \"url(https://image.tmdb.org/t/p/w1280/";
+        // line 171
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["backdrops"]) ? $context["backdrops"] : null), 3, array(), "array"), "fondo", array()), "html", null, true);
+        echo ")\");
+      \$('#watermark').html(\"";
+        // line 172
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["backdrops"]) ? $context["backdrops"] : null), 3, array(), "array"), "titulo", array()), "html", null, true);
+        echo "\");
+});
         ";
-        // line 156
+        // line 174
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(twig_slice($this->env, $this->getAttribute((isset($context["tendencia"]) ? $context["tendencia"] : null), "results", array()), 0, (isset($context["numPeliculasDivisibleTres"]) ? $context["numPeliculasDivisibleTres"] : null)));
         foreach ($context['_seq'] as $context["_key"] => $context["pelicula"]) {
-            // line 157
+            // line 175
             echo "            var rating = ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "vote_average", array()), "html", null, true);
             echo ";
             \$(\".counter\").text(rating);
             \$(\"#c";
-            // line 159
+            // line 177
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").rateYo({
                 readOnly: true,
@@ -420,31 +462,31 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                 maxValue: 10
             }).on(\"rateyo.change\", function(e, data) {
                 \$(\"#c";
-            // line 167
+            // line 185
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").val(data.rating);
             });
                 ";
-            // line 169
+            // line 187
             $context["i"] = ((isset($context["i"]) ? $context["i"] : null) + 1);
-            // line 170
+            // line 188
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pelicula'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 171
+        // line 189
         echo "      ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(twig_slice($this->env, $this->getAttribute((isset($context["mejoresValoradas"]) ? $context["mejoresValoradas"] : null), "results", array()), 0, (isset($context["numPeliculasDivisibleTres"]) ? $context["numPeliculasDivisibleTres"] : null)));
         foreach ($context['_seq'] as $context["_key"] => $context["pelicula"]) {
-            // line 172
+            // line 190
             echo "            var rating = ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "vote_average", array()), "html", null, true);
             echo ";
             \$(\".counter\").text(rating);
             \$(\"#c";
-            // line 174
+            // line 192
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").rateYo({
                 readOnly: true,
@@ -455,31 +497,31 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                 maxValue: 10
             }).on(\"rateyo.change\", function(e, data) {
                 \$(\"#c";
-            // line 182
+            // line 200
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").val(data.rating);
             });
                 ";
-            // line 184
+            // line 202
             $context["i"] = ((isset($context["i"]) ? $context["i"] : null) + 1);
-            // line 185
+            // line 203
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pelicula'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 186
+        // line 204
         echo "          ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(twig_slice($this->env, $this->getAttribute((isset($context["estrenos"]) ? $context["estrenos"] : null), "results", array()), 0, (isset($context["numPeliculasDivisibleTres"]) ? $context["numPeliculasDivisibleTres"] : null)));
         foreach ($context['_seq'] as $context["_key"] => $context["pelicula"]) {
-            // line 187
+            // line 205
             echo "            var rating = ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "vote_average", array()), "html", null, true);
             echo ";
             \$(\".counter\").text(rating);
             \$(\"#c";
-            // line 189
+            // line 207
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").rateYo({
                 readOnly: true,
@@ -490,31 +532,31 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                 maxValue: 10
             }).on(\"rateyo.change\", function(e, data) {
                 \$(\"#c";
-            // line 197
+            // line 215
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").val(data.rating);
             });
                 ";
-            // line 199
+            // line 217
             $context["i"] = ((isset($context["i"]) ? $context["i"] : null) + 1);
-            // line 200
+            // line 218
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pelicula'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 201
+        // line 219
         echo "          ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(twig_slice($this->env, $this->getAttribute((isset($context["proximamente"]) ? $context["proximamente"] : null), "results", array()), 0, (isset($context["numPeliculasDivisibleTres"]) ? $context["numPeliculasDivisibleTres"] : null)));
         foreach ($context['_seq'] as $context["_key"] => $context["pelicula"]) {
-            // line 202
+            // line 220
             echo "            var rating = ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "vote_average", array()), "html", null, true);
             echo ";
             \$(\".counter\").text(rating);
             \$(\"#c";
-            // line 204
+            // line 222
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").rateYo({
                 readOnly: true,
@@ -525,21 +567,23 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                 maxValue: 10
             }).on(\"rateyo.change\", function(e, data) {
                 \$(\"#c";
-            // line 212
+            // line 230
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").val(data.rating);
             });
                 ";
-            // line 214
+            // line 232
             $context["i"] = ((isset($context["i"]) ? $context["i"] : null) + 1);
-            // line 215
+            // line 233
             echo "        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pelicula'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 216
-        echo "     });
+        // line 234
+        echo "        
+        
+     });
      </script>
 ";
     }
@@ -556,7 +600,7 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 
     public function getDebugInfo()
     {
-        return array (  542 => 216,  536 => 215,  534 => 214,  529 => 212,  518 => 204,  512 => 202,  507 => 201,  501 => 200,  499 => 199,  494 => 197,  483 => 189,  477 => 187,  472 => 186,  466 => 185,  464 => 184,  459 => 182,  448 => 174,  442 => 172,  437 => 171,  431 => 170,  429 => 169,  424 => 167,  413 => 159,  407 => 157,  403 => 156,  396 => 153,  393 => 152,  385 => 144,  383 => 143,  374 => 139,  371 => 138,  365 => 135,  362 => 134,  355 => 131,  353 => 130,  347 => 129,  343 => 127,  338 => 126,  336 => 125,  333 => 124,  330 => 123,  322 => 120,  320 => 119,  311 => 115,  308 => 114,  302 => 111,  299 => 110,  292 => 107,  290 => 106,  284 => 105,  280 => 103,  275 => 102,  273 => 101,  270 => 100,  267 => 99,  259 => 96,  257 => 95,  248 => 91,  245 => 90,  239 => 87,  236 => 86,  229 => 83,  227 => 82,  221 => 81,  217 => 79,  212 => 78,  210 => 77,  207 => 76,  199 => 73,  197 => 72,  188 => 68,  185 => 67,  179 => 64,  176 => 63,  169 => 60,  167 => 59,  161 => 58,  157 => 56,  152 => 55,  150 => 54,  147 => 53,  139 => 50,  137 => 49,  128 => 45,  124 => 43,  118 => 40,  115 => 39,  108 => 36,  106 => 35,  100 => 34,  96 => 32,  92 => 31,  89 => 30,  86 => 29,  76 => 20,  59 => 6,  56 => 5,  53 => 4,  47 => 3,  41 => 2,  37 => 1,  35 => 150,  33 => 26,  11 => 1,);
+        return array (  584 => 234,  578 => 233,  576 => 232,  571 => 230,  560 => 222,  554 => 220,  549 => 219,  543 => 218,  541 => 217,  536 => 215,  525 => 207,  519 => 205,  514 => 204,  508 => 203,  506 => 202,  501 => 200,  490 => 192,  484 => 190,  479 => 189,  473 => 188,  471 => 187,  466 => 185,  455 => 177,  449 => 175,  445 => 174,  440 => 172,  436 => 171,  429 => 167,  425 => 166,  419 => 163,  415 => 162,  409 => 159,  405 => 158,  396 => 153,  393 => 152,  385 => 144,  383 => 143,  374 => 139,  371 => 138,  365 => 135,  362 => 134,  355 => 131,  353 => 130,  347 => 129,  343 => 127,  338 => 126,  336 => 125,  333 => 124,  330 => 123,  322 => 120,  320 => 119,  311 => 115,  308 => 114,  302 => 111,  299 => 110,  292 => 107,  290 => 106,  284 => 105,  280 => 103,  275 => 102,  273 => 101,  270 => 100,  267 => 99,  259 => 96,  257 => 95,  248 => 91,  245 => 90,  239 => 87,  236 => 86,  229 => 83,  227 => 82,  221 => 81,  217 => 79,  212 => 78,  210 => 77,  207 => 76,  199 => 73,  197 => 72,  188 => 68,  185 => 67,  179 => 64,  176 => 63,  169 => 60,  167 => 59,  161 => 58,  157 => 56,  152 => 55,  150 => 54,  147 => 53,  139 => 50,  137 => 49,  128 => 45,  124 => 43,  118 => 40,  115 => 39,  108 => 36,  106 => 35,  100 => 34,  96 => 32,  92 => 31,  89 => 30,  86 => 29,  76 => 20,  59 => 6,  56 => 5,  53 => 4,  47 => 3,  41 => 2,  37 => 1,  35 => 150,  33 => 26,  11 => 1,);
     }
 }
 /* {% extends 'index.html.twig' %}*/
@@ -714,6 +758,24 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 /*  {{ parent() }}*/
 /* <script>*/
 /*      $(function() {*/
+/*          */
+/*          $("#a_tendencia").click(function() {*/
+/*       $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{backdrops[0].fondo}})");*/
+/*       $('#watermark').html("{{backdrops[0].titulo}}");*/
+/* });*/
+/*            $("#a_mejores_valoradas").click(function() {*/
+/*       $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{backdrops[1].fondo}})");*/
+/*       $('#watermark').html("{{backdrops[1].titulo}}");*/
+/* });   */
+/*      $("#a_estrenos").click(function() {*/
+/*       $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{backdrops[2].fondo}})");*/
+/*       $('#watermark').html("{{backdrops[2].titulo}}");*/
+/*       */
+/* });*/
+/*      $("#a_proximamente").click(function() {*/
+/*       $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{backdrops[3].fondo}})");*/
+/*       $('#watermark').html("{{backdrops[3].titulo}}");*/
+/* });*/
 /*         {%for pelicula in tendencia.results|slice(0,numPeliculasDivisibleTres)%}*/
 /*             var rating = {{pelicula.vote_average}};*/
 /*             $(".counter").text(rating);*/
@@ -774,6 +836,8 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 /*             });*/
 /*                 {%set i = i + 1%}*/
 /*         {%endfor%}*/
+/*         */
+/*         */
 /*      });*/
 /*      </script>*/
 /* {%endblock%}*/

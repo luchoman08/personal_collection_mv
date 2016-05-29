@@ -1,0 +1,34 @@
+TinkerSoft\FuncionesSitioBundle\Entity\PeliculaVista:
+    type: entity
+    table: pelicula_vista
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        idUsuario:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: id_usuario
+        idPeliculaTomatoes:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: id_pelicula_tomatoes
+        fecha:
+            type: datetime
+            nullable: false
+        estado:
+            type: boolean
+            nullable: false
+            options:
+                default: false
+    lifecycleCallbacks: {  }

@@ -29,7 +29,7 @@ class DefaultController extends Controller
         
      
         $peliculaTendencia = array('titulo'=>$tendencia['results'][$randomTendencia]->title, 'fondo'=> $tendencia['results'][$randomTendencia]->backdrop_path);
-        $peliculaMejoresValoradas = array('fondo'=> $mejoresValoradas['results'][$randomMejoresValoradas]->backdrop_path, 'title'=>$mejoresValoradas['results'][$randomMejoresValoradas]->title);
+        $peliculaMejoresValoradas = array('fondo'=> $mejoresValoradas['results'][$randomMejoresValoradas]->backdrop_path, 'titulo'=>$mejoresValoradas['results'][$randomMejoresValoradas]->title);
         $peliculaEstrenos = array('fondo'=>$estrenos['results'][$randomEstrenos]->backdrop_path, 'titulo'=>$estrenos['results'][$randomEstrenos]->title);
         $peliculaProximamente =array('fondo'=>$proximamente['results'][$randomProximamente]->backdrop_path, 'titulo'=>$proximamente['results'][$randomProximamente]->title);
         

@@ -1,0 +1,34 @@
+TinkerSoft\FuncionesSitioBundle\Entity\RegistroGustos:
+    type: entity
+    table: registro_gustos
+    indexes:
+        IDX_8B51A46FCF8192D:
+            columns:
+                - id_usuario
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        generoid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    manyToOne:
+        idUsuario:
+            targetEntity: Usuarios
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_usuario:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,63 @@
+TinkerSoft\FuncionesSitioBundle\Entity\Usuarios:
+    type: entity
+    table: usuarios
+    uniqueConstraints:
+        usuarios_correo_electronico_key:
+            columns:
+                - correo_electronico
+        usuarios_nickname_key:
+            columns:
+                - nickname
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nombres:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        apellidos:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        nickname:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        correoElectronico:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+            column: correo_electronico
+        password:
+            type: string
+            nullable: false
+            length: 30
+            options:
+                fixed: false
+        rol:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+                default: '0'
+        estado:
+            type: boolean
+            nullable: true
+            options:
+                default: true
+    lifecycleCallbacks: {  }

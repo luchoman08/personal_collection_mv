@@ -1,0 +1,44 @@
+TinkerSoft\FuncionesSitioBundle\Entity\Coleccion:
+    type: entity
+    table: coleccion
+    indexes:
+        IDX_666B3D48FCF8192D:
+            columns:
+                - id_usuario
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+        tipo:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        fechaCreacion:
+            type: datetime
+            nullable: false
+            column: fecha_creacion
+    manyToOne:
+        idUsuario:
+            targetEntity: Usuarios
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_usuario:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

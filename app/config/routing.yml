@@ -17,7 +17,10 @@ api_the_movie_data_base:
 tinker_soft_usuarios:
     resource: "@TinkerSoftUsuariosBundle/Resources/config/routing.yml"
     prefix:   /
-
+    
+tinker_soft_funciones:
+    resource: "@FuncionesSitioBundle/Resources/config/routing.yml"
+    prefix:   /funciones
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

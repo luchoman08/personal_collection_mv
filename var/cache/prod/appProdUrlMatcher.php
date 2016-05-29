@@ -27,15 +27,6 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         $context = $this->context;
         $request = $this->request;
 
-        // funciones_sitio_homepage
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'funciones_sitio_homepage');
-            }
-
-            return array (  '_controller' => 'FuncionesSitioBundle:Default:index',  '_route' => 'funciones_sitio_homepage',);
-        }
-
         if (0 === strpos($pathinfo, '/login')) {
             // login_homepage
             if (rtrim($pathinfo, '/') === '/login') {
@@ -235,6 +226,23 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             }
 
             return array (  '_controller' => 'TinkerSoft\\UsuariosBundle\\Controller\\DefaultController::indexAction',  '_route' => 'tinker_soft_usuarios_homepage',);
+        }
+
+        if (0 === strpos($pathinfo, '/funciones')) {
+            // funciones_sitio_homepage
+            if (rtrim($pathinfo, '/') === '/funciones') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'funciones_sitio_homepage');
+                }
+
+                return array (  '_controller' => 'FuncionesSitioBundle:Default:index',  '_route' => 'funciones_sitio_homepage',);
+            }
+
+            // calificacion_pelicula
+            if ($pathinfo === '/funciones/reg_calificacion') {
+                return array (  '_controller' => 'TinkerSoft\\FuncionesSitioBundle\\Controller\\FuncionesSitioController::calificarPeliculaAction',  '_route' => 'calificacion_pelicula',);
+            }
+
         }
 
         // homepage

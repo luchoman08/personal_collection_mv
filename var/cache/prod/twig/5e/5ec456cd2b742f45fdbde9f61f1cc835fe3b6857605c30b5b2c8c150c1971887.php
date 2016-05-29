@@ -60,7 +60,7 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
     {
         // line 15
         echo "    <div id =\"cabezera\" class=\"cabezera\"> 
-    <div class=\"watermark\">
+    <div id=\"watermark\" class=\"watermark\">
            ";
         // line 17
         $this->displayBlock('moviename', $context, $blocks);
@@ -152,10 +152,10 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <a data-toggle=\"tab\" href=\"#estrenos\" class=\"buttonBase button5\">Estrenose</a>-->
 
             <ul class=\"nav nav-pills nav-pills-custom\">
-                <li class=\"active active-custom\"><a data-toggle=\"tab\" href=\"#tendencia\">Tendencia</a></li>
-                <li><a data-toggle=\"tab\" href=\"#top\">Mejores valoradas</a></li>
-                <li><a data-toggle=\"tab\" href=\"#estrenos\">Estrenos</a></li>
-                <li><a data-toggle=\"tab\" href=\"#proximamente\">Proximamente</a></li>
+                <li  class=\"active active-custom\"> <a id =\"a_tendencia\" data-toggle=\"tab\" href=\"#tendencia\">Tendencia</a></li>
+                <li><a id =\"a_mejores_valoradas\" data-toggle=\"tab\" href=\"#top\">Mejores valoradas</a></li>
+                <li><a id =\"a_estrenos\" data-toggle=\"tab\" href=\"#estrenos\">Estrenos</a></li>
+                <li><a id =\"a_proximamente\" data-toggle=\"tab\" href=\"#proximamente\">Proximamente</a></li>
                 <!--<li><a data-toggle=\"tab\" href=\"#ultimas\">&Uacute;ltimas adicionadas</a></li>-->
             </ul>
 
@@ -501,7 +501,7 @@ window.location.href =url;
 /* */
 /* {% block body %}*/
 /*     <div id ="cabezera" class="cabezera"> */
-/*     <div class="watermark">*/
+/*     <div id="watermark" class="watermark">*/
 /*            {%block moviename%}The Good Dinosaur{% endblock %}*/
 /*     </div> */
 /*     </div>*/
@@ -546,10 +546,10 @@ window.location.href =url;
 /*             <a data-toggle="tab" href="#estrenos" class="buttonBase button5">Estrenose</a>-->*/
 /* */
 /*             <ul class="nav nav-pills nav-pills-custom">*/
-/*                 <li class="active active-custom"><a data-toggle="tab" href="#tendencia">Tendencia</a></li>*/
-/*                 <li><a data-toggle="tab" href="#top">Mejores valoradas</a></li>*/
-/*                 <li><a data-toggle="tab" href="#estrenos">Estrenos</a></li>*/
-/*                 <li><a data-toggle="tab" href="#proximamente">Proximamente</a></li>*/
+/*                 <li  class="active active-custom"> <a id ="a_tendencia" data-toggle="tab" href="#tendencia">Tendencia</a></li>*/
+/*                 <li><a id ="a_mejores_valoradas" data-toggle="tab" href="#top">Mejores valoradas</a></li>*/
+/*                 <li><a id ="a_estrenos" data-toggle="tab" href="#estrenos">Estrenos</a></li>*/
+/*                 <li><a id ="a_proximamente" data-toggle="tab" href="#proximamente">Proximamente</a></li>*/
 /*                 <!--<li><a data-toggle="tab" href="#ultimas">&Uacute;ltimas adicionadas</a></li>-->*/
 /*             </ul>*/
 /* */

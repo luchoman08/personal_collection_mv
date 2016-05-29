@@ -1,3 +1,7 @@
 funciones_sitio_homepage:
     path:     /
     defaults: { _controller: FuncionesSitioBundle:Default:index }
+
+calificacion_pelicula:
+    path:     /reg_calificacion
+    defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:calificarPelicula }

@@ -1,0 +1,39 @@
+TinkerSoft\FuncionesSitioBundle\Entity\PeliculasColeccion:
+    type: entity
+    table: peliculas_coleccion
+    indexes:
+        IDX_16BC0C49E65E816F:
+            columns:
+                - id_coleccion
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        idPelicula:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: id_pelicula
+        fechaAdicion:
+            type: datetime
+            nullable: false
+            column: fecha_adicion
+    manyToOne:
+        idColeccion:
+            targetEntity: Coleccion
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_coleccion:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

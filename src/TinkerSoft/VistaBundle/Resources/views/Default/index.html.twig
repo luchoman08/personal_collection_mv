@@ -153,6 +153,24 @@
  {{ parent() }}
 <script>
      $(function() {
+         
+         $("#a_tendencia").click(function() {
+      $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{backdrops[0].fondo}})");
+      $('#watermark').html("{{backdrops[0].titulo}}");
+});
+           $("#a_mejores_valoradas").click(function() {
+      $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{backdrops[1].fondo}})");
+      $('#watermark').html("{{backdrops[1].titulo}}");
+});   
+     $("#a_estrenos").click(function() {
+      $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{backdrops[2].fondo}})");
+      $('#watermark').html("{{backdrops[2].titulo}}");
+      
+});
+     $("#a_proximamente").click(function() {
+      $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{backdrops[3].fondo}})");
+      $('#watermark').html("{{backdrops[3].titulo}}");
+});
         {%for pelicula in tendencia.results|slice(0,numPeliculasDivisibleTres)%}
             var rating = {{pelicula.vote_average}};
             $(".counter").text(rating);
@@ -213,6 +231,8 @@
             });
                 {%set i = i + 1%}
         {%endfor%}
+        
+        
      });
      </script>
 {%endblock%}
