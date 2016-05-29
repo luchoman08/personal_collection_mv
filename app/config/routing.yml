@@ -1,3 +1,7 @@
+funciones_sitio:
+    resource: "@FuncionesSitioBundle/Resources/config/routing.yml"
+    prefix:   /
+
 login:
     resource: "@LoginBundle/Resources/config/routing.yml"
     prefix:   /login/

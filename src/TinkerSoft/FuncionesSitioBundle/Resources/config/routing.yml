@@ -1,0 +1,3 @@
+funciones_sitio_homepage:
+    path:     /
+    defaults: { _controller: FuncionesSitioBundle:Default:index }

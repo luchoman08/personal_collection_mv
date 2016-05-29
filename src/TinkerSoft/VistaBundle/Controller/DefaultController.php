@@ -20,8 +20,23 @@ class DefaultController extends Controller
         $proximamente = $this->get('app.api_controller')->obtenerProximamenteAction($request);
         $ultimas = $this->get('app.api_controller')->obtenerUltimasAction($request);
         
+        $randomTendencia = rand ( 0 , count($tendencia));
+        $randomMejoresValoradas = rand (  0 ,  count($mejoresValoradas));
+        $randomEstrenos = rand ( 0 , count($estrenos));
+        $randomProximamente = rand (  0 ,  count($proximamente));
+        $arrayBanners;
+        
+        
+     
+        $peliculaTendencia = array('titulo'=>$tendencia['results'][$randomTendencia]->title, 'fondo'=> $tendencia['results'][$randomTendencia]->backdrop_path);
+        $peliculaMejoresValoradas = array('fondo'=> $mejoresValoradas['results'][$randomMejoresValoradas]->backdrop_path, 'title'=>$mejoresValoradas['results'][$randomMejoresValoradas]->title);
+        $peliculaEstrenos = array('fondo'=>$estrenos['results'][$randomEstrenos]->backdrop_path, 'titulo'=>$estrenos['results'][$randomEstrenos]->title);
+        $peliculaProximamente =array('fondo'=>$proximamente['results'][$randomProximamente]->backdrop_path, 'titulo'=>$proximamente['results'][$randomProximamente]->title);
+        
+        $backdrops=array($peliculaTendencia, $peliculaMejoresValoradas,$peliculaEstrenos,$peliculaProximamente);
+        
         $numPeliculasDivisibleTres= count($tendencia['results']) - (count($tendencia['results']) % 3);
-        return $this->render('VistaBundle:Default:index.html.twig', array('tendencia' => $tendencia,'mejoresValoradas' => $mejoresValoradas,'estrenos' => $estrenos,'proximamente' => $proximamente, 'ultimas' => $ultimas, 'numPeliculasDivisibleTres'=>$numPeliculasDivisibleTres));
+        return $this->render('VistaBundle:Default:index.html.twig', array('tendencia' => $tendencia,'mejoresValoradas' => $mejoresValoradas,'estrenos' => $estrenos,'proximamente' => $proximamente, 'ultimas' => $ultimas, 'numPeliculasDivisibleTres'=>$numPeliculasDivisibleTres, 'backdrops'=>$backdrops));
     }
     
     public function verResultadosBusquedaShowAction(Request $request, $consulta,$numero_pagina){

@@ -15,11 +15,12 @@
     /*https://image.tmdb.org/t/p/w1280/uX7LXnsC7bZJZjn048UCOwkPXWJ.jpg minions*/
     /*https://image.tmdb.org/t/p/w1280/yqri8ahru0YqGXzXNXm9yXPlcKY.jpg KP3*/
     /*https://image.tmdb.org/t/p/w1280/pDuD96Fz0ZZXf9buEvRu1UQsmFT.jpg dino*/
-    background: url("https://image.tmdb.org/t/p/w1280/pDuD96Fz0ZZXf9buEvRu1UQsmFT.jpg") no-repeat center center;
+    background-image: url("https://image.tmdb.org/t/p/w1280/pDuD96Fz0ZZXf9buEvRu1UQsmFT.jpg") no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .watermark {

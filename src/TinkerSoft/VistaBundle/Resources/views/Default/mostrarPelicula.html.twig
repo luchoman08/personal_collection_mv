@@ -6,9 +6,9 @@
 {% block stylesheets %}
 
     {{ parent() }}
-  {%if params.backdrops[3].file_path%}
+    {%if params.backdrops[3].file_path%}
   
-  <style>
+    <style>
     
         .fondo {
             background-image: url("https://image.tmdb.org/t/p/original/{{ params.backdrops[3].file_path }}");

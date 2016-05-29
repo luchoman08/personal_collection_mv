@@ -23,6 +23,7 @@ class appProdUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerat
         $this->logger = $logger;
         if (null === self::$declaredRoutes) {
             self::$declaredRoutes = array(
+        'funciones_sitio_homepage' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'FuncionesSitioBundle:Default:index',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         'login_homepage' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'LoginBundle\\Controller\\LoginController::indexAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/login/',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         'login_action' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'LoginBundle\\Controller\\LoginController::loginAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/login/procesador',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         'vista_homepage' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::iniciarIndexAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/vista/',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),

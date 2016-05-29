@@ -18,6 +18,9 @@ class UsuariosController extends Controller
      * Lists all Usuarios entities.
      *
      */
+     
+  
+     
     public function indexAction()
     {
     $session = new Session();    

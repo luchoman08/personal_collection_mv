@@ -1,0 +1,4 @@
+services:
+#    funciones_sitio.example:
+#        class: TinkerSoft\FuncionesSitioBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

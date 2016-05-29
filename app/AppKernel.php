@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new TinkerSoft\APITheMovieDataBaseBundle\APITheMovieDataBaseBundle(),
             new TinkerSoft\VistaBundle\VistaBundle(),
             new LoginBundle\LoginBundle(),
+            new TinkerSoft\FuncionesSitioBundle\FuncionesSitioBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

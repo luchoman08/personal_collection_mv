@@ -137,8 +137,8 @@ class APIController extends Controller
         $urlAPI="https://api.themoviedb.org/3/movie/".$id. "/videos?api_key=be961f58626a1b5bb01ccf04da21d18f";
         $content = file_get_contents($urlAPI);
         $trailersJSON = (array) json_decode($content);
-        $urlAPI = "https://api.themoviedb.org/3/movie/" . $id . "/images?api_key=be961f58626a1b5bb01ccf04da21d18f&include_image_language=en,null";
-        $content = file_get_contents($urlAPI);
+        $imagenes= "https://api.themoviedb.org/3/movie/" . $id . "/images?api_key=be961f58626a1b5bb01ccf04da21d18f&include_image_language=en,null";
+        $content = file_get_contents($imagenes);
         $imagenesJSON = (array) json_decode($content);
         $infocompletaJSON=array_merge($peliculaJSON, $trailersJSON,$imagenesJSON);
         return $infocompletaJSON;

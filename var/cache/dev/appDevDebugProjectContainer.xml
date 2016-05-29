@@ -19,6 +19,8 @@
       <parameter key="TinkerSoftUsuariosBundle">TinkerSoft\UsuariosBundle\TinkerSoftUsuariosBundle</parameter>
       <parameter key="APITheMovieDataBaseBundle">TinkerSoft\APITheMovieDataBaseBundle\APITheMovieDataBaseBundle</parameter>
       <parameter key="VistaBundle">TinkerSoft\VistaBundle\VistaBundle</parameter>
+      <parameter key="LoginBundle">LoginBundle\LoginBundle</parameter>
+      <parameter key="FuncionesSitioBundle">TinkerSoft\FuncionesSitioBundle\FuncionesSitioBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -34,8 +36,8 @@
     <parameter key="mailer_transport">smtp</parameter>
     <parameter key="mailer_host">127.0.0.1</parameter>
     <parameter key="mailer_user">null</parameter>
-    <parameter key="mailer_password">null</parameter>
     <parameter key="secret">ThisTokenIsNotSoSecretChangeIt</parameter>
+    <parameter key="mailer_password">null</parameter>
     <parameter key="locale">en</parameter>
     <parameter key="fragment.renderer.hinclude.global_template">null</parameter>
     <parameter key="fragment.path">/_fragment</parameter>
@@ -1496,7 +1498,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>573f8a41f20aa9.39815059</argument>
+            <argument>574a296410bfc3.91362283</argument>
           </service>
         </argument>
       </argument>
@@ -1625,7 +1627,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>573f8a41f20aa9.39815059</argument>
+            <argument>574a296410bfc3.91362283</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2438,6 +2440,14 @@
       <call method="addPath">
         <argument>/home/ubuntu/workspace/personal_collection_mv/src/TinkerSoft/VistaBundle/Resources/views</argument>
         <argument>Vista</argument>
+      </call>
+      <call method="addPath">
+        <argument>/home/ubuntu/workspace/personal_collection_mv/src/LoginBundle/Resources/views</argument>
+        <argument>Login</argument>
+      </call>
+      <call method="addPath">
+        <argument>/home/ubuntu/workspace/personal_collection_mv/src/TinkerSoft/FuncionesSitioBundle/Resources/views</argument>
+        <argument>FuncionesSitio</argument>
       </call>
       <call method="addPath">
         <argument>/home/ubuntu/workspace/personal_collection_mv/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>
