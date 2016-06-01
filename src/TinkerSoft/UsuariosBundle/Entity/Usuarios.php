@@ -15,7 +15,7 @@ class Usuarios
     /**
      * @var string
      */
-    private $nombre;
+    private $nombres;
 
     /**
      * @var string
@@ -59,27 +59,27 @@ class Usuarios
     }
 
     /**
-     * Set nombre
+     * Set nombres
      *
-     * @param string $nombre
+     * @param string $nombres
      *
      * @return Usuarios
      */
-    public function setNombre($nombre)
+    public function setNombres($nombres)
     {
-        $this->nombre = $nombre;
+        $this->nombres = $nombres;
 
         return $this;
     }
 
     /**
-     * Get nombre
+     * Get nombres
      *
      * @return string
      */
-    public function getNombre()
+    public function getNombres()
     {
-        return $this->nombre;
+        return $this->nombres;
     }
 
     /**
@@ -226,3 +226,4 @@ class Usuarios
         return $this->estado;
     }
 }
+

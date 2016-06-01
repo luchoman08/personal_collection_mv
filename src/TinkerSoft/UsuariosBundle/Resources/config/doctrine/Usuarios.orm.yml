@@ -18,7 +18,7 @@ TinkerSoft\UsuariosBundle\Entity\Usuarios:
             generator:
                 strategy: SEQUENCE
     fields:
-        nombre:
+        nombres:
             type: string
             nullable: false
             length: 30

@@ -4,7 +4,7 @@ namespace TinkerSoft\UsuariosBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session\Session;
+
 use TinkerSoft\UsuariosBundle\Entity\Usuarios;
 use TinkerSoft\UsuariosBundle\Form\UsuariosType;
 
@@ -18,27 +18,15 @@ class UsuariosController extends Controller
      * Lists all Usuarios entities.
      *
      */
-     
-  
-     
     public function indexAction()
     {
-    $session = new Session();    
-    //$session->start();
-
-    // set and get session attributes
-    $session->set('name', 'Drak');
-    $session->get('name');
-    
         $em = $this->getDoctrine()->getManager();
-        //Poner como servicio ¬_¬
+
         $usuarios = $em->getRepository('TinkerSoftUsuariosBundle:Usuarios')->findAll();
 
         return $this->render('usuarios/index.html.twig', array(
-            'usuarios' => $usuarios, 'usuario'=>$session->get('name'),
+            'usuarios' => $usuarios,
         ));
-        
-
     }
 
     /**

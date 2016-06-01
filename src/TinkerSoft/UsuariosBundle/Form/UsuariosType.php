@@ -5,10 +5,7 @@ namespace TinkerSoft\UsuariosBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+
 class UsuariosType extends AbstractType
 {
     /**
@@ -18,13 +15,13 @@ class UsuariosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre',TextType::class, array('label' => 'Nombres: ', 'attr' => array('class' => 'form-control')))
-            ->add('apellidos',TextType::class, array('label' => 'Apellidos: ', 'attr' => array('class' => 'form-control')))
-            ->add('nickname',TextType::class, array('label' => 'Nombre de usuario: ', 'attr' => array('class' => 'form-control')))
-            ->add('correoElectronico',EmailType::class, array('label' => 'Correo Electronico: ', 'attr' => array('class' => 'form-control', 'placeholder' =>'Ej: alguien@dominio.com')))
-            ->add('password',PasswordType::class, array('label' => 'Contraseña: ', 'attr' => array('class' => 'form-control')))
-            ->add('rol', NumberType::class,  array('label' => 'Rol: ', 'attr' => array('class' => 'form-control')))
-            
+            ->add('nombres')
+            ->add('apellidos')
+            ->add('nickname')
+            ->add('correoElectronico')
+            ->add('password')
+            ->add('rol')
+            ->add('estado')
         ;
     }
     

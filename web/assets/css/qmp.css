@@ -15,7 +15,7 @@
     /*https://image.tmdb.org/t/p/w1280/uX7LXnsC7bZJZjn048UCOwkPXWJ.jpg minions*/
     /*https://image.tmdb.org/t/p/w1280/yqri8ahru0YqGXzXNXm9yXPlcKY.jpg KP3*/
     /*https://image.tmdb.org/t/p/w1280/pDuD96Fz0ZZXf9buEvRu1UQsmFT.jpg dino*/
-    background-image: url("https://image.tmdb.org/t/p/w1280/pDuD96Fz0ZZXf9buEvRu1UQsmFT.jpg") no-repeat center center;
+    background: url("../images/cabecera_cartelera.jpg") no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -385,3 +385,18 @@
     
 }
 
+.calificacion-similares{
+    color:#fbb900;
+    font-weight:bold;
+    padding-top:3px;
+    padding-bottom:3px;
+}
+
+.calificacion-fondo-similares{
+    opacity: 0.9;
+    background-color:#000;
+    margin-right:30px;
+    padding-left:3px;
+    color:#fff;
+    font-weight:bold;
+}

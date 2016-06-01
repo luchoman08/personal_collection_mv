@@ -28,18 +28,14 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         $request = $this->request;
 
         if (0 === strpos($pathinfo, '/login')) {
-            // login_homepage
-            if (rtrim($pathinfo, '/') === '/login') {
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'login_homepage');
-                }
-
-                return array (  '_controller' => 'LoginBundle\\Controller\\LoginController::indexAction',  '_route' => 'login_homepage',);
-            }
-
             // login_action
             if ($pathinfo === '/login/procesador') {
                 return array (  '_controller' => 'LoginBundle\\Controller\\LoginController::loginAction',  '_route' => 'login_action',);
+            }
+
+            // logout_action
+            if ($pathinfo === '/login/logout') {
+                return array (  '_controller' => 'LoginBundle\\Controller\\LoginController::loginOutAction',  '_route' => 'logout_action',);
             }
 
         }
@@ -124,6 +120,23 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             // mostrarPelicula_minuscula
             if (0 === strpos($pathinfo, '/vista/mostrarpelicula') && preg_match('#^/vista/mostrarpelicula/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'mostrarPelicula_minuscula')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verPeliculaAction',));
+            }
+
+            if (0 === strpos($pathinfo, '/vista/login')) {
+                // login
+                if (rtrim($pathinfo, '/') === '/vista/login') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'login');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::mostrarLoginAction',  '_route' => 'login',);
+                }
+
+                // login_sin_barra
+                if ($pathinfo === '/vista/login') {
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::mostrarLoginAction',  '_route' => 'login_sin_barra',);
+                }
+
             }
 
         }

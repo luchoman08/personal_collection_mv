@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Bienvenido {{usuario}} Usuarios list</h1>
+    <h1>Usuarios list</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nombre</th>
+                <th>Nombres</th>
                 <th>Apellidos</th>
                 <th>Nickname</th>
                 <th>Correoelectronico</th>
@@ -21,7 +21,7 @@
         {% for usuario in usuarios %}
             <tr>
                 <td><a href="{{ path('usuarios_show', { 'id': usuario.id }) }}">{{ usuario.id }}</a></td>
-                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.nombres }}</td>
                 <td>{{ usuario.apellidos }}</td>
                 <td>{{ usuario.nickname }}</td>
                 <td>{{ usuario.correoElectronico }}</td>

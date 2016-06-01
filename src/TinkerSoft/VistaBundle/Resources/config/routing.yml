@@ -56,3 +56,10 @@ mostrarPelicula_minuscula:
     path:      /mostrarpelicula/{id}
     defaults:  { _controller: VistaBundle:Default:verPelicula }
 
+login:
+    path:      /login/
+    defaults:  { _controller: VistaBundle:Default:mostrarLogin }
+    
+login_sin_barra:
+    path:      /login
+    defaults:  { _controller: VistaBundle:Default:mostrarLogin }

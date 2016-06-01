@@ -12,9 +12,10 @@
 
 
 {% block body %}
+
     <div id ="cabezera" class="cabezera"> 
     <div id="watermark" class="watermark">
-           {%block moviename%}The Good Dinosaur{% endblock %}
+           {%block moviename%}{% endblock %}
     </div> 
     </div>
 
@@ -267,21 +268,17 @@
         <label>Copyright QMP &copy; 2016 Website by TinkerSoft</label>
     </div>
     
+
+{% endblock %}
     {% block javascripts %}
     
     <script type="text/javascript" src="{{asset('star/jquery.rateyo.min.js')}}"></script>
     <script>
-
-//no funca esa webada LOL pruebelo ahi
-
 $('#valorBuscar').keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == '13'){
        
         var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();
-
-
-//chambonada por ahora prro :v my paila xddd eso solo era un from summit xddd
 
 window.location.href =url;
     }
@@ -289,39 +286,10 @@ window.location.href =url;
 $("#Buscar").click(function () {
      
 
-        var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();
-
-
-//chambonada por ahora prro :v my paila xddd eso solo era un from summit xddd
-
+var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();
 window.location.href =url;
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: $("#valorBuscar").val(),
-            success: function (data)
-            {
-
-                
-
-                                 //$("#mensaje").html(data)
-                           
-                              //   document.getElementById('valorBuscar').innerHTML = data;
-                                 
-
-                             }
-
-                         });
-
-        
 
     });
     </script>
-   
-     
-
-
     {{ parent() }}
     {% endblock %}
-{% endblock %}

@@ -7,21 +7,15 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class LoginController extends Controller
 {
-    public function indexAction(Request $request)
-    {
-        return $this->render('LoginBundle:Default:index.html.twig');
+
+    public function loginOutAction(Request $request){
+        $request->getSession()->invalidate(1);
+        return $this->redirectToRoute('vista_homepage');
     }
     
      public function loginAction(Request $request)
     {
-        
-        $session = new Session();
-        //$session->start();
-
-        $session->set('name', 'Drak');
-        echo $session->get('name');
-
-        
+      
         
         if($request->getMethod()=="POST")
         {
@@ -32,19 +26,16 @@ class LoginController extends Controller
            
             
             if($usuario){
-                
                 $session = $request->getSession();
-                $session->set('name', $usuario->getNombre());
+                $session->set('name', $usuario->getNombres());
                 $session->set('id', $usuario->getId());
-                echo $usuario->getNombre();
             
-            
+            return $this->redirectToRoute('vista_homepage');
             }
             else{
-                echo "nel prro";
-            
+                 return $this->render('VistaBundle:Default:login.html.twig', array('error'=>1));
             }
         }
-        return $this->render('LoginBundle:Default:index.html.twig');
+       
     }
 }

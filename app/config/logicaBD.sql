@@ -78,3 +78,6 @@ REFERENCES coleccion (ID);
 ALTER TABLE coleccion ADD CONSTRAINT 
 coleccion_personalizada_fk FOREIGN KEY (id_usuario)
 REFERENCES usuarios (ID);
+
+ALTER TABLE valoracion_peliculas
+ADD CONSTRAINT valoracion_peliculas_unique UNIQUE (id_pelicula,id_usuario);

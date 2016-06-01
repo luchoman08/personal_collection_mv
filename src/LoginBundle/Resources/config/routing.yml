@@ -1,6 +1,9 @@
-login_homepage:
-    path:     /
-    defaults: { _controller: LoginBundle:Login:index }
+
+
 login_action:
     path:     /procesador
     defaults: { _controller: LoginBundle:Login:login }
+
+logout_action:
+    path:     /logout
+    defaults: { _controller: LoginBundle:Login:loginOut }

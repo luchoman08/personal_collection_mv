@@ -34,14 +34,14 @@ class APIController extends Controller
         
         //&language=" . $this->languaje  ;
         
-        $urlAPI = "https://api.themoviedb.org/3/search/movie?query=" . $consulta . "&page=" . $numero_pagina . "&include_adult=true&api_key=be961f58626a1b5bb01ccf04da21d18f";
+        $urlAPI = "https://api.themoviedb.org/3/search/movie?query=" . $consulta . "&page=" . $numero_pagina . "&api_key=be961f58626a1b5bb01ccf04da21d18f";
         $content = file_get_contents($urlAPI);
         $contentJSON = (array) json_decode($content);
         
         if($numero_pagina > $contentJSON['total_pages']){
             
                     $numero_pagina = $contentJSON['total_pages'];
-                    $urlAPI = "https://api.themoviedb.org/3/search/movie?query=" . $consulta . "&page=" . $numero_pagina . "&include_adult=true&api_key=be961f58626a1b5bb01ccf04da21d18f";
+                    $urlAPI = "https://api.themoviedb.org/3/search/movie?query=" . $consulta . "&page=" . $numero_pagina . "&api_key=be961f58626a1b5bb01ccf04da21d18f";
                     $content = file_get_contents($urlAPI);
                     $contentJSON = (array) json_decode($content);
                     
@@ -69,14 +69,14 @@ class APIController extends Controller
         
         //&language=" . $this->languaje  ;
         
-        $urlAPI = "https://api.themoviedb.org/3/search/tv?query=" . $consulta . "&page=" . $numero_pagina . "&include_adult=true&api_key=be961f58626a1b5bb01ccf04da21d18f";
+        $urlAPI = "https://api.themoviedb.org/3/search/tv?query=" . $consulta . "&page=" . $numero_pagina . "&api_key=be961f58626a1b5bb01ccf04da21d18f";
         $content = file_get_contents($urlAPI);
         $contentJSON = (array) json_decode($content);
         
         if($numero_pagina > $contentJSON['total_pages']){
             
                     $numero_pagina = $contentJSON['total_pages'];
-                    $urlAPI = "https://api.themoviedb.org/3/search/tv?query=" . $consulta . "&page=" . $numero_pagina . "&include_adult=true&api_key=be961f58626a1b5bb01ccf04da21d18f";
+                    $urlAPI = "https://api.themoviedb.org/3/search/tv?query=" . $consulta . "&page=" . $numero_pagina . "&api_key=be961f58626a1b5bb01ccf04da21d18f";
                     $content = file_get_contents($urlAPI);
                     $contentJSON = (array) json_decode($content);
                     
@@ -128,9 +128,17 @@ class APIController extends Controller
         return $contentJSON;
     }
     
+    public function obtenerSimilaresAction($id){
+        
+        $urlAPI = "https://api.themoviedb.org/3/movie/" . $id . "/similar?api_key=be961f58626a1b5bb01ccf04da21d18f";
+        $content = file_get_contents($urlAPI);
+        $contentJSON = (array) json_decode($content);
+        return $contentJSON;
+    }
+    
     public function obtenerPeliculaAction(Request $request, $id){
-         $session = $request->getSession();
-        echo $session->get('name');
+        $session = $request->getSession();
+        //echo $session->get('name');
         $urlAPI = "https://api.themoviedb.org/3/movie/" . $id . "?api_key=be961f58626a1b5bb01ccf04da21d18f";
         $content = file_get_contents($urlAPI);
         $peliculaJSON = (array) json_decode($content);
@@ -142,8 +150,6 @@ class APIController extends Controller
         $imagenesJSON = (array) json_decode($content);
         $infocompletaJSON=array_merge($peliculaJSON, $trailersJSON,$imagenesJSON);
         return $infocompletaJSON;
-        
-        
     }
     
     public function listaGenerosAction($_locale)

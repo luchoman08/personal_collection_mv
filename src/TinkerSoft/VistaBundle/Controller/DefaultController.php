@@ -8,12 +8,13 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
-    {
+    public function indexAction(){
+        
         return $this->render('VistaBundle:Default:da.html.twig');
     }
     
     public function iniciarIndexAction(Request $request){
+        
         $tendencia = $this->get('app.api_controller')->obtenerPeliculasTendenciaAction($request);
         $mejoresValoradas = $this->get('app.api_controller')->obtenerMejoresValoradasAction($request);
         $estrenos = $this->get('app.api_controller')->obtenerEstrenosAction($request);
@@ -26,8 +27,6 @@ class DefaultController extends Controller
         $randomProximamente = rand (  0 ,  count($proximamente));
         $arrayBanners;
         
-        
-     
         $peliculaTendencia = array('titulo'=>$tendencia['results'][$randomTendencia]->title, 'fondo'=> $tendencia['results'][$randomTendencia]->backdrop_path);
         $peliculaMejoresValoradas = array('fondo'=> $mejoresValoradas['results'][$randomMejoresValoradas]->backdrop_path, 'titulo'=>$mejoresValoradas['results'][$randomMejoresValoradas]->title);
         $peliculaEstrenos = array('fondo'=>$estrenos['results'][$randomEstrenos]->backdrop_path, 'titulo'=>$estrenos['results'][$randomEstrenos]->title);
@@ -41,10 +40,6 @@ class DefaultController extends Controller
     
     public function verResultadosBusquedaShowAction(Request $request, $consulta,$numero_pagina){
         
-        //$session = new Session();
-        //$session = $request->getSession();
-        //echo $session->get('name');
-        
         $datos = $this->get('app.api_controller')->buscarShowAction($consulta,$numero_pagina);
         return $this->render('VistaBundle:Default:buscar.html.twig', array('params' => $datos, 'consulta' => $consulta));
         
@@ -52,26 +47,35 @@ class DefaultController extends Controller
     
     public function verResultadosBusquedaAction(Request $request, $consulta,$numero_pagina){
         
-        //$session = new Session();
-        //$session = $request->getSession();
-        //echo $session->get('name');
-        
         $datos = $this->get('app.api_controller')->buscarPeliculaAction($consulta,$numero_pagina);
         return $this->render('VistaBundle:Default:buscar.html.twig', array('params' => $datos, 'consulta' => $consulta));
         
     }
-
-
     
     public function verPeliculaAction(Request $request, $id){
+        
         $datos = $this->get('app.api_controller')->obtenerPeliculaAction($request, $id);
-        return $this->render('VistaBundle:Default:mostrarPelicula.html.twig', array('params' => $datos));
+        $similares = $this->get('app.api_controller')->obtenerSimilaresAction($id);
+        
+        $usuarioLogueado=0;
+        
+        if($request->getSession()->get('id')){
+            $usuarioLogueado=1;
+        }
+        
+        return $this->render('VistaBundle:Default:mostrarPelicula.html.twig', array('usuarioLogueado'=>$usuarioLogueado, 'params' => $datos, 'similares' => $similares));
     }
+    
     
     public function verListaGenerosAction(){
-        //'en' temportalmente por defecto
+        
         $datos = $this->get('app.api_controller')->listaGenerosAction("en");
         return $this->render('VistaBundle:Default:index.html.twig', array('params' => $datos));
+        
     }
-    
+     public function mostrarLoginAction(){
+         
+        return $this->render('VistaBundle:Default:login.html.twig');
+        
+    }
 }

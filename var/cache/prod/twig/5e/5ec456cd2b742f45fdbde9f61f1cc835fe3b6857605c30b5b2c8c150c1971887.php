@@ -59,12 +59,13 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
     public function block_body($context, array $blocks = array())
     {
         // line 15
-        echo "    <div id =\"cabezera\" class=\"cabezera\"> 
+        echo "
+    <div id =\"cabezera\" class=\"cabezera\"> 
     <div id=\"watermark\" class=\"watermark\">
            ";
-        // line 17
-        $this->displayBlock('moviename', $context, $blocks);
         // line 18
+        $this->displayBlock('moviename', $context, $blocks);
+        // line 19
         echo "    </div> 
     </div>
 
@@ -78,7 +79,7 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
                     <span class=\"icon-bar\"></span>
                 </button>
                 <a class=\"navbar-brand\" href=\"";
-        // line 30
+        // line 31
         echo $this->env->getExtension('routing')->getUrl("homepage");
         echo "vista\">QMP</a>
             </div>
@@ -104,21 +105,21 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 
 
     <div class=\"";
-        // line 53
+        // line 54
         $this->displayBlock('classcontenido', $context, $blocks);
         echo "\">
 
     ";
-        // line 55
+        // line 56
         $this->displayBlock('contenido', $context, $blocks);
-        // line 123
+        // line 124
         echo "
     </div>
 
     ";
-        // line 126
+        // line 127
         $this->displayBlock('barraderecha', $context, $blocks);
-        // line 263
+        // line 264
         echo "
     </div>
 
@@ -126,27 +127,25 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
         <label>Copyright QMP &copy; 2016 Website by TinkerSoft</label>
     </div>
     
-    ";
-        // line 270
-        $this->displayBlock('javascripts', $context, $blocks);
+
+";
     }
 
-    // line 17
+    // line 18
     public function block_moviename($context, array $blocks = array())
     {
-        echo "The Good Dinosaur";
     }
 
-    // line 53
+    // line 54
     public function block_classcontenido($context, array $blocks = array())
     {
         echo "col-md-9 fondoContenido";
     }
 
-    // line 55
+    // line 56
     public function block_contenido($context, array $blocks = array())
     {
-        // line 56
+        // line 57
         echo "        <center>
             <!--<a data-toggle=\"tab\" href=\"#tendencia\" class=\"buttonBase button5\">Tendencias</a>
             <a data-toggle=\"tab\" href=\"#estrenos\" class=\"buttonBase button5\">Estrenose</a>-->
@@ -169,9 +168,9 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <br>
             <div id=\"tendencia\" class=\" tab-pane fade in active \">
                ";
-        // line 77
+        // line 78
         $this->displayBlock('tendencia', $context, $blocks);
-        // line 80
+        // line 81
         echo "             
 
              
@@ -181,27 +180,27 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <div id=\"top\" class=\" tab-pane fade\">
 
                 ";
-        // line 88
+        // line 89
         $this->displayBlock('mejorvaloradas', $context, $blocks);
-        // line 91
+        // line 92
         echo "                
             </div>
 
             <div id=\"estrenos\" class=\"tab-pane fade\">
 
                 ";
-        // line 96
+        // line 97
         $this->displayBlock('estrenos', $context, $blocks);
-        // line 99
+        // line 100
         echo "
             </div>
 
             <div id=\"proximamente\" class=\" tab-pane fade\">
 
                 ";
-        // line 104
+        // line 105
         $this->displayBlock('proximamente', $context, $blocks);
-        // line 107
+        // line 108
         echo "
 
             </div>
@@ -209,9 +208,9 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <div id=\"ultimas\" class=\" tab-pane fade\">
 
                 ";
-        // line 113
+        // line 114
         $this->displayBlock('ultimas', $context, $blocks);
-        // line 116
+        // line 117
         echo "
 
             </div>
@@ -221,50 +220,50 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
         ";
     }
 
-    // line 77
+    // line 78
     public function block_tendencia($context, array $blocks = array())
     {
-        // line 78
+        // line 79
         echo "               
                ";
     }
 
-    // line 88
+    // line 89
     public function block_mejorvaloradas($context, array $blocks = array())
     {
-        // line 89
+        // line 90
         echo "               
                 ";
     }
 
-    // line 96
+    // line 97
     public function block_estrenos($context, array $blocks = array())
     {
-        // line 97
+        // line 98
         echo "               
                 ";
     }
 
-    // line 104
+    // line 105
     public function block_proximamente($context, array $blocks = array())
     {
-        // line 105
+        // line 106
         echo "               
                 ";
     }
 
-    // line 113
+    // line 114
     public function block_ultimas($context, array $blocks = array())
     {
-        // line 114
+        // line 115
         echo "               
                 ";
     }
 
-    // line 126
+    // line 127
     public function block_barraderecha($context, array $blocks = array())
     {
-        // line 127
+        // line 128
         echo "    <div class=\"col-md-3 columna-index-boostrap\">
         <div class=\"columna-index\">
 
@@ -403,27 +402,21 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
     ";
     }
 
-    // line 270
+    // line 273
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 271
+        // line 274
         echo "    
     <script type=\"text/javascript\" src=\"";
-        // line 272
+        // line 275
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("star/jquery.rateyo.min.js"), "html", null, true);
         echo "\"></script>
     <script>
-
-//no funca esa webada LOL pruebelo ahi
-
 \$('#valorBuscar').keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == '13'){
        
         var url = \"http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/\"+\$(\"#valorBuscar\").val();
-
-
-//chambonada por ahora prro :v my paila xddd eso solo era un from summit xddd
 
 window.location.href =url;
     }
@@ -431,41 +424,13 @@ window.location.href =url;
 \$(\"#Buscar\").click(function () {
      
 
-        var url = \"http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/\"+\$(\"#valorBuscar\").val();
-
-
-//chambonada por ahora prro :v my paila xddd eso solo era un from summit xddd
-
+var url = \"http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/\"+\$(\"#valorBuscar\").val();
 window.location.href =url;
-
-        \$.ajax({
-            type: \"POST\",
-            url: url,
-            data: \$(\"#valorBuscar\").val(),
-            success: function (data)
-            {
-
-                
-
-                                 //\$(\"#mensaje\").html(data)
-                           
-                              //   document.getElementById('valorBuscar').innerHTML = data;
-                                 
-
-                             }
-
-                         });
-
-        
 
     });
     </script>
-   
-     
-
-
     ";
-        // line 325
+        // line 294
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
     ";
@@ -483,7 +448,7 @@ window.location.href =url;
 
     public function getDebugInfo()
     {
-        return array (  469 => 325,  413 => 272,  410 => 271,  407 => 270,  268 => 127,  265 => 126,  260 => 114,  257 => 113,  252 => 105,  249 => 104,  244 => 97,  241 => 96,  236 => 89,  233 => 88,  228 => 78,  225 => 77,  215 => 116,  213 => 113,  205 => 107,  203 => 104,  196 => 99,  194 => 96,  187 => 91,  185 => 88,  175 => 80,  173 => 77,  150 => 56,  147 => 55,  141 => 53,  135 => 17,  131 => 270,  122 => 263,  120 => 126,  115 => 123,  113 => 55,  108 => 53,  82 => 30,  68 => 18,  66 => 17,  62 => 15,  59 => 14,  51 => 8,  45 => 5,  42 => 4,  39 => 3,  11 => 1,);
+        return array (  434 => 294,  412 => 275,  409 => 274,  406 => 273,  267 => 128,  264 => 127,  259 => 115,  256 => 114,  251 => 106,  248 => 105,  243 => 98,  240 => 97,  235 => 90,  232 => 89,  227 => 79,  224 => 78,  214 => 117,  212 => 114,  204 => 108,  202 => 105,  195 => 100,  193 => 97,  186 => 92,  184 => 89,  174 => 81,  172 => 78,  149 => 57,  146 => 56,  140 => 54,  135 => 18,  123 => 264,  121 => 127,  116 => 124,  114 => 56,  109 => 54,  83 => 31,  69 => 19,  67 => 18,  62 => 15,  59 => 14,  51 => 8,  45 => 5,  42 => 4,  39 => 3,  11 => 1,);
     }
 }
 /* {%extends 'base.html.twig'%}*/
@@ -500,9 +465,10 @@ window.location.href =url;
 /* */
 /* */
 /* {% block body %}*/
+/* */
 /*     <div id ="cabezera" class="cabezera"> */
 /*     <div id="watermark" class="watermark">*/
-/*            {%block moviename%}The Good Dinosaur{% endblock %}*/
+/*            {%block moviename%}{% endblock %}*/
 /*     </div> */
 /*     </div>*/
 /* */
@@ -755,21 +721,17 @@ window.location.href =url;
 /*         <label>Copyright QMP &copy; 2016 Website by TinkerSoft</label>*/
 /*     </div>*/
 /*     */
+/* */
+/* {% endblock %}*/
 /*     {% block javascripts %}*/
 /*     */
 /*     <script type="text/javascript" src="{{asset('star/jquery.rateyo.min.js')}}"></script>*/
 /*     <script>*/
-/* */
-/* //no funca esa webada LOL pruebelo ahi*/
-/* */
 /* $('#valorBuscar').keypress(function(event){*/
 /*     var keycode = (event.keyCode ? event.keyCode : event.which);*/
 /*     if(keycode == '13'){*/
 /*        */
 /*         var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();*/
-/* */
-/* */
-/* //chambonada por ahora prro :v my paila xddd eso solo era un from summit xddd*/
 /* */
 /* window.location.href =url;*/
 /*     }*/
@@ -777,40 +739,10 @@ window.location.href =url;
 /* $("#Buscar").click(function () {*/
 /*      */
 /* */
-/*         var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();*/
-/* */
-/* */
-/* //chambonada por ahora prro :v my paila xddd eso solo era un from summit xddd*/
-/* */
+/* var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();*/
 /* window.location.href =url;*/
-/* */
-/*         $.ajax({*/
-/*             type: "POST",*/
-/*             url: url,*/
-/*             data: $("#valorBuscar").val(),*/
-/*             success: function (data)*/
-/*             {*/
-/* */
-/*                 */
-/* */
-/*                                  //$("#mensaje").html(data)*/
-/*                            */
-/*                               //   document.getElementById('valorBuscar').innerHTML = data;*/
-/*                                  */
-/* */
-/*                              }*/
-/* */
-/*                          });*/
-/* */
-/*         */
 /* */
 /*     });*/
 /*     </script>*/
-/*    */
-/*      */
-/* */
-/* */
 /*     {{ parent() }}*/
 /*     {% endblock %}*/
-/* {% endblock %}*/
-/* */

@@ -1,0 +1,51 @@
+{% extends 'index.html.twig' %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+    	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+    <link href="{{asset('assets/css/greeter.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
+  	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+{% endblock %}
+{% block classcontenido %}col-md-12 fondoContenido{% endblock %}
+
+{%block contenido%}
+
+	      	     <div class="register">
+				   <div class="col-md-6 login-left">
+				  	 <h3> Nuevo Usuario</h3>
+					 <p>Al crear una cuenta en nuestra página, usted podrá tener acceso a las últimas películas de estreno, generar listas de reproducción de películas vistas o por ver y su categoría.</p>
+					 <a class="acount-btn" href="{{url('usuarios_new')}}">Crear una nueva cuenta</a>
+				   </div>
+				   <div class="col-md-6 login-right">
+				  	<h3>Usuarios Registrados</h3>
+					<p>Si usted tiene cuenta con nosotros, porfavor inicie sesión.</p>
+					{%if error == 1%}
+					<div class="alert alert-danger alert-dismissible" role="alert">
+  					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  					<strong>Error!</strong> Los datos ingresados no corresponden a un usuario registrado.
+					</div>
+					{%endif%}
+				<form method = "POST" action="{{url('login_action')}}">
+					  <div>
+						<span>Correo electrónico<label>*</label></span>
+						<input id="email" name="email" type="email"  required> 
+					  </div>
+					  <div>
+						<span>Contraseña<label>*</label></span>
+						<input id="password" name="password" type="password"  required> 
+					  </div>
+					  <a class="forgot" href="#">Olvidó su contraseña?</a>
+					  <input type="submit" value="Iniciar sesión">
+				    </form>
+				   </div>	
+				  
+			     </div>
+	   
+	{% block barraderecha %}{%endblock%}
+{%endblock%}

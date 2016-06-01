@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <title>{% block title %}QMP{% endblock %}</title>
         {% block stylesheets %}
         
@@ -14,18 +15,18 @@
 
         {% endblock %}
         
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        
     </head>
     <body class="container fondo">
         {% block body %}{% endblock %}
         {% block javascripts %}
         
-        <!--    <script>
-                $(document).ready(function(){
+          <script>
+               $(document).ready(function(){
                     $('[data-toggle="popover"]').popover();   
                 });
             </script>
-        --!>
+        
             <!-- jQuery (necessary for Bootstrap's JavaScript plugins)
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

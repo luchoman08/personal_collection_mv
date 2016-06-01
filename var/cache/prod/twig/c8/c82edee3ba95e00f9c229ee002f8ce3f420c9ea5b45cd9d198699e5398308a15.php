@@ -107,7 +107,7 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                 // line 36
                 echo "                             <img src=\"";
                 echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/images/movie.png"), "html", null, true);
-                echo "\" alt=\"...\">
+                echo "\" alt=\"Imagen pelicula\">
                              
                         ";
             } else {
@@ -116,7 +116,9 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                             <img src=\"https://image.tmdb.org/t/p/w185/";
                 // line 40
                 echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "poster_path", array()), "html", null, true);
-                echo "\" alt=\"...\">
+                echo "\" alt=\"";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "title", array()), "html", null, true);
+                echo "\">
                         
                         ";
             }
@@ -168,7 +170,7 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                 // line 60
                 echo "                             <img src=\"";
                 echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/images/movie.png"), "html", null, true);
-                echo "\" alt=\"...\">
+                echo "\" alt=\"Imagen pelicula\">
                              
                         ";
             } else {
@@ -177,7 +179,9 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                             <img src=\"https://image.tmdb.org/t/p/w185/";
                 // line 64
                 echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "poster_path", array()), "html", null, true);
-                echo "\" alt=\"...\">
+                echo "\" alt=\"";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "title", array()), "html", null, true);
+                echo "\">
                         
                         ";
             }
@@ -228,7 +232,7 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                 // line 83
                 echo "                             <img src=\"";
                 echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/images/movie.png"), "html", null, true);
-                echo "\" alt=\"...\">
+                echo "\" alt=\"Imagen pelicula\">
                              
                         ";
             } else {
@@ -237,7 +241,9 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                             <img src=\"https://image.tmdb.org/t/p/w185/";
                 // line 87
                 echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "poster_path", array()), "html", null, true);
-                echo "\" alt=\"...\">
+                echo "\" alt=\"";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "title", array()), "html", null, true);
+                echo "\">
                         
                         ";
             }
@@ -291,7 +297,7 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                 // line 107
                 echo "                             <img src=\"";
                 echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/images/movie.png"), "html", null, true);
-                echo "\" alt=\"...\">
+                echo "\" alt=\"Imagen pelicula\">
                              
                         ";
             } else {
@@ -300,7 +306,9 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                             <img src=\"https://image.tmdb.org/t/p/w185/";
                 // line 111
                 echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "poster_path", array()), "html", null, true);
-                echo "\" alt=\"...\">
+                echo "\" alt=\"";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "title", array()), "html", null, true);
+                echo "\">
                         
                         ";
             }
@@ -354,7 +362,7 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                 // line 131
                 echo "                             <img src=\"";
                 echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/images/movie.png"), "html", null, true);
-                echo "\" alt=\"...\">
+                echo "\" alt=\"Imagen pelicula\">
                              
                         ";
             } else {
@@ -363,7 +371,9 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
                             <img src=\"https://image.tmdb.org/t/p/w185/";
                 // line 135
                 echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "poster_path", array()), "html", null, true);
-                echo "\" alt=\"...\">
+                echo "\" alt=\"";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "title", array()), "html", null, true);
+                echo "\">
                         
                         ";
             }
@@ -600,7 +610,7 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 
     public function getDebugInfo()
     {
-        return array (  584 => 234,  578 => 233,  576 => 232,  571 => 230,  560 => 222,  554 => 220,  549 => 219,  543 => 218,  541 => 217,  536 => 215,  525 => 207,  519 => 205,  514 => 204,  508 => 203,  506 => 202,  501 => 200,  490 => 192,  484 => 190,  479 => 189,  473 => 188,  471 => 187,  466 => 185,  455 => 177,  449 => 175,  445 => 174,  440 => 172,  436 => 171,  429 => 167,  425 => 166,  419 => 163,  415 => 162,  409 => 159,  405 => 158,  396 => 153,  393 => 152,  385 => 144,  383 => 143,  374 => 139,  371 => 138,  365 => 135,  362 => 134,  355 => 131,  353 => 130,  347 => 129,  343 => 127,  338 => 126,  336 => 125,  333 => 124,  330 => 123,  322 => 120,  320 => 119,  311 => 115,  308 => 114,  302 => 111,  299 => 110,  292 => 107,  290 => 106,  284 => 105,  280 => 103,  275 => 102,  273 => 101,  270 => 100,  267 => 99,  259 => 96,  257 => 95,  248 => 91,  245 => 90,  239 => 87,  236 => 86,  229 => 83,  227 => 82,  221 => 81,  217 => 79,  212 => 78,  210 => 77,  207 => 76,  199 => 73,  197 => 72,  188 => 68,  185 => 67,  179 => 64,  176 => 63,  169 => 60,  167 => 59,  161 => 58,  157 => 56,  152 => 55,  150 => 54,  147 => 53,  139 => 50,  137 => 49,  128 => 45,  124 => 43,  118 => 40,  115 => 39,  108 => 36,  106 => 35,  100 => 34,  96 => 32,  92 => 31,  89 => 30,  86 => 29,  76 => 20,  59 => 6,  56 => 5,  53 => 4,  47 => 3,  41 => 2,  37 => 1,  35 => 150,  33 => 26,  11 => 1,);
+        return array (  594 => 234,  588 => 233,  586 => 232,  581 => 230,  570 => 222,  564 => 220,  559 => 219,  553 => 218,  551 => 217,  546 => 215,  535 => 207,  529 => 205,  524 => 204,  518 => 203,  516 => 202,  511 => 200,  500 => 192,  494 => 190,  489 => 189,  483 => 188,  481 => 187,  476 => 185,  465 => 177,  459 => 175,  455 => 174,  450 => 172,  446 => 171,  439 => 167,  435 => 166,  429 => 163,  425 => 162,  419 => 159,  415 => 158,  406 => 153,  403 => 152,  395 => 144,  393 => 143,  384 => 139,  381 => 138,  373 => 135,  370 => 134,  363 => 131,  361 => 130,  355 => 129,  351 => 127,  346 => 126,  344 => 125,  341 => 124,  338 => 123,  330 => 120,  328 => 119,  319 => 115,  316 => 114,  308 => 111,  305 => 110,  298 => 107,  296 => 106,  290 => 105,  286 => 103,  281 => 102,  279 => 101,  276 => 100,  273 => 99,  265 => 96,  263 => 95,  254 => 91,  251 => 90,  243 => 87,  240 => 86,  233 => 83,  231 => 82,  225 => 81,  221 => 79,  216 => 78,  214 => 77,  211 => 76,  203 => 73,  201 => 72,  192 => 68,  189 => 67,  181 => 64,  178 => 63,  171 => 60,  169 => 59,  163 => 58,  159 => 56,  154 => 55,  152 => 54,  149 => 53,  141 => 50,  139 => 49,  130 => 45,  126 => 43,  118 => 40,  115 => 39,  108 => 36,  106 => 35,  100 => 34,  96 => 32,  92 => 31,  89 => 30,  86 => 29,  76 => 20,  59 => 6,  56 => 5,  53 => 4,  47 => 3,  41 => 2,  37 => 1,  35 => 150,  33 => 26,  11 => 1,);
     }
 }
 /* {% extends 'index.html.twig' %}*/
@@ -638,11 +648,11 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 /*                 <div class="col-sm-4 col-md-4">*/
 /*                     <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">*/
 /*                         {% if pelicula.poster_path == "" %}*/
-/*                              <img src="{{asset('assets/images/movie.png')}}" alt="...">*/
+/*                              <img src="{{asset('assets/images/movie.png')}}" alt="Imagen pelicula">*/
 /*                              */
 /*                         {% else %}*/
 /*                         */
-/*                             <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">*/
+/*                             <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="{{ pelicula.title }}">*/
 /*                         */
 /*                         {% endif %}*/
 /*                         */
@@ -662,11 +672,11 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 /*                 <div class="col-sm-4 col-md-4">*/
 /*                     <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">*/
 /*                         {% if pelicula.poster_path == "" %}*/
-/*                              <img src="{{asset('assets/images/movie.png')}}" alt="...">*/
+/*                              <img src="{{asset('assets/images/movie.png')}}" alt="Imagen pelicula">*/
 /*                              */
 /*                         {% else %}*/
 /*                         */
-/*                             <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">*/
+/*                             <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="{{ pelicula.title }}">*/
 /*                         */
 /*                         {% endif %}*/
 /*                         <div class="caption">*/
@@ -685,11 +695,11 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 /*                 <div class="col-sm-4 col-md-4">*/
 /*                     <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">*/
 /*                         {% if pelicula.poster_path == "" %}*/
-/*                              <img src="{{asset('assets/images/movie.png')}}" alt="...">*/
+/*                              <img src="{{asset('assets/images/movie.png')}}" alt="Imagen pelicula">*/
 /*                              */
 /*                         {% else %}*/
 /*                         */
-/*                             <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">*/
+/*                             <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="{{ pelicula.title }}">*/
 /*                         */
 /*                         {% endif %}*/
 /*                         <div class="caption">*/
@@ -709,11 +719,11 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 /*                 <div class="col-sm-4 col-md-4">*/
 /*                     <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">*/
 /*                         {% if pelicula.poster_path == "" %}*/
-/*                              <img src="{{asset('assets/images/movie.png')}}" alt="...">*/
+/*                              <img src="{{asset('assets/images/movie.png')}}" alt="Imagen pelicula">*/
 /*                              */
 /*                         {% else %}*/
 /*                         */
-/*                             <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">*/
+/*                             <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="{{ pelicula.title }}">*/
 /*                         */
 /*                         {% endif %}*/
 /*                         <div class="caption">*/
@@ -733,11 +743,11 @@ class __TwigTemplate_63d0ef7b78a6458b66394bab97937deb0408412a524c9fb6a53f94682f5
 /*                 <div class="col-sm-4 col-md-4">*/
 /*                     <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" class="thumbnail movie">*/
 /*                         {% if pelicula.poster_path == "" %}*/
-/*                              <img src="{{asset('assets/images/movie.png')}}" alt="...">*/
+/*                              <img src="{{asset('assets/images/movie.png')}}" alt="Imagen pelicula">*/
 /*                              */
 /*                         {% else %}*/
 /*                         */
-/*                             <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">*/
+/*                             <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="{{ pelicula.title }}">*/
 /*                         */
 /*                         {% endif %}*/
 /*                         <div class="caption">*/

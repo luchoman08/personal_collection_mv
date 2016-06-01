@@ -19,16 +19,19 @@
     </style>
     {%endif%}
     
-
+    <link href="{{asset('assets/css/greeter.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.8.3.js"></script>
-
+    <script type="text/javascript" src="{{asset('assets/js/greeter.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
   
 {% endblock %}
 {% block moviename%}{{params.title}}{% endblock %}
 {% block classcontenido %}col-md-12 fondoContenido{% endblock %}
 {% block contenido %}
 
+<div  id="divEmergente"style="display:none" class="alert alert-success alert-dismissible" role="alert">
+    <p id="mensajeEmergente"></p>
+</div>
 
 
 
@@ -37,25 +40,27 @@
       	         <div class="col-md-9 movie_box">
  
 
-      	         		<div class="video">
-			      			<iframe width="100%" height="" src="https://www.youtube.com/embed/{{params.results[0].key}}?rel=0" frameborder="0" allowfullscreen=""></iframe>
-			  			</div>
+      	         		
 
                         <div class="grid images_3_of_2">
                         	<div class="movie_image">
                                 <span class="movie_rating">{{params.vote_average}}</span>
                                 <img src="https://image.tmdb.org/t/p/w300{{params.poster_path}}" width="100%" alt="{{params.title}}" class="img-responsive" >
                             </div>
+                            {%if usuarioLogueado%}
                             <div class="movie_rate">
-                                <span>
-                            <p>	Tu voto :</p>
-                            <span id="calificacionPersonal" class="rateyo-readonly-widg"></span>
-                            </span>
+                                <span> <p>	Tu voto :</p> <span id="calificacionPersonal" class="rateyo-readonly-widg"></span></span>
 						  	   <div class="clearfix"> </div>
                             </div>
+                            <div class="movie_rate">
+                                <a class="a_btn1" href="#"><div class="btn1">Marcar como vista</div></a>
+                                <a class="a_btn2" href="#"><div class="btn2">Adicionar a una lista</div></a>
+                            </div>
+                               {%endif%}
                         </div>
+                     
                         <div class="desc1 span_3_of_2">
-                        	<p class="movie_option"><strong><div class="titulo">{{params.title}}  </strong></p> </div> <br />
+                        	<p class="movie_option"><strong><div class="titulo">{{params.title}}  </strong> </div> </p> <br />
                         	{%if params.release_date %}<p class="movie_option"><strong>Fecha de estreno: </strong>{{params.release_date}}</p>{%endif%}
                         	<p class="movie_option"><strong>Generos: </strong> 
                         	{%set i=0%}
@@ -68,19 +73,51 @@
                         	</p>
                         	<p class="movie_option"><strong>Estudio Cinematogr&aacute;fico : </strong>{{params.production_companies[0].name}}</p>
                             <p class="movie_option"><strong>Total votos: </strong>{{params.vote_count}}</p> 
-                            <div class="down_btn"><a class="btn1" href="#"><span> </span>Marcar como vista</a></div>
-                            <div class="down_btn"><a class="btn1" href="#"><span> </span>Adicionar a una lista</a></div>
+                            <p class="m_4"><strong>Sinopsis:</strong> {{params.overview}}</p>
+                            <!--<center>
+                                <br><br><br>
+                            <a class="a_btn1" href="#"><div class="btn1">Marcar como vista</div></a>
+                            <a class="a_btn2" href="#"><div class="btn2">Adicionar a una lista</div></a>
+                            </center>-->
+                            
+                            <div class="video">
+			      			    <iframe width="100%" height="250px" src="https://www.youtube.com/embed/{{params.results[0].key}}?rel=0" frameborder="0" allowfullscreen=""></iframe>
+			  			    </div>
+                            
                          </div>
 
                         
                         <div class="clearfix"> </div>
                         
-                        <p class="m_4">Sinopsis: {{params.overview}}</p>
+                        
 		                
                       </div>
                  
                     
                   </div>
+                  
+                  <div class="col-md-2">
+                      {%for peliculaSimilar in similares.results|slice(0, 3)%}
+                      	<div class="movie_img"><div class="grid_2">
+                      	        
+                      	        {% if peliculaSimilar.poster_path == "" %}
+                                     <a href="{{url('homepage')}}vista/mostrarpelicula/{{peliculaSimilar.id}}"><img src="{{asset('assets/images/movie.png')}}" alt="{{peliculaSimilar.title}}"></a>
+                                {% else %}
+                                    <a href="{{url('homepage')}}vista/mostrarpelicula/{{peliculaSimilar.id}}"><img src="https://image.tmdb.org/t/p/w300{{peliculaSimilar.poster_path}}" width="100%" alt="{{peliculaSimilar.title}}" class="img-responsive" ></a>	
+                                {% endif %}
+                      	        
+                                <div class="caption1">
+									<ul class="list_5 list_7">
+									    <div class="calificacion-fondo-similares">
+							    		    <li><i class="icon5"> <span  class="glyphicon glyphicon-star calificacion-similares" aria-hidden="true"> </span></i><p>{{peliculaSimilar.vote_average}}</p></li>
+							    		</div>
+							    	</ul>
+							    	<i class="icon4 icon6 icon7"> </i>
+							    	<!--  <p class="m_3">{{peliculaSimilar.title}}</p>-->
+							    </div>
+						    </div>
+						</div>
+            {%endfor%}          	
                     
            </div>
 
@@ -91,7 +128,18 @@
         $(function() {
 
             var rating =0;
+            var calificacion_semaphore=0;
+            //enviar calificacion
+            //$("#calificacionPersonal").click(function(e){
 
+            
+            //make the AJAX request, dataType is set to json
+            //meaning we are expecting JSON data in response from the server
+           
+            //});
+            
+//$('#gritter-notice-wrapper').hide();
+	
         $("#calificacionPersonal").rateYo({
                 readOnly: false,
                 rating: rating,
@@ -100,12 +148,49 @@
                 minValue: 1,
                 maxValue: 10
             }).on("rateyo.change", function(e, data) {
+                if(calificacion_semaphore==1){
+                 $.ajax({
+                type: "GET",
+                url: "{{url('calificacion_pelicula')}}",
+                data: { idPelicula:{{params.id}}, calificacion:data.rating},
+                dataType: "json",
+               
+                //if received a response from the server
+                success: function( data, textStatus, jqXHR) {
+                     if(data.success){
+                         $("#mensajeEmergente").html("");
+                     } 
+                     //display error message
+                     else {
+                         $("#mensajeEmergente").html("No se pudo enviar la calificación");
+                     }
+                },
+               
+                //If there was no resonse from the server
+                error: function(jqXHR, textStatus, errorThrown){
+                    
+ 
+                       $("#mensajeEmergente").html(jqXHR.responseText);
+                       $('#divEmergente').show(1000).delay( 4000 );
+                       $('#divEmergente').hide(1000);
+                       
+                },
+               
+
+     
+            }); 
+                 calificacion_semaphore=0;   
+                }       
                 $("#calificacionPersonal").val(data.rating);
 
             });
  
-      $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{params.backdrop_path}})");  
-
+            $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{params.backdrop_path}})");  
+	        $("#calificacionPersonal").click(function(){
+		    calificacion_semaphore=1;
+		   
+			
+		 });
 
 
       
