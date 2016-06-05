@@ -23,9 +23,20 @@
         
     </style>
 {%endblock%}
+
+
+{%block loginoptions%}
+    {% if usuarioLogueado == 1  %}
+
+            {{nickname}} | <a href="{{url('logout_action')}}">Salir</a>
+       
+    {% else %} 
+
+        {{parent()}} 
+    
+    {% endif %}
+{% endblock %}
 {%set i = 0%}
-
-
 {%block tendencia%}
 
     {%for pelicula in tendencia.results|slice(0,numPeliculasDivisibleTres)%}

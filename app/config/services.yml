@@ -6,9 +6,10 @@ parameters:
 services:
     app.default_controller:
         class: AppBundle\Controller\DefaultController
-        
     app.api_controller:
         class: TinkerSoft\APITheMovieDataBaseBundle\Controller\APIController
+    app.funciones_controler:
+        class: TinkerSoft\FuncionesSitioBundle\Controller\FuncionesSitioController
         
 #    service_name:
 #        class: AppBundle\Directory\ClassName

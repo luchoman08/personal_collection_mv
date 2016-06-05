@@ -28,9 +28,10 @@ class LoginController extends Controller
             if($usuario){
                 $session = $request->getSession();
                 $session->set('name', $usuario->getNombres());
+                $session->set('nickname', $usuario->getNickname());
                 $session->set('id', $usuario->getId());
             
-            return $this->redirectToRoute('vista_homepage');
+                return $this->redirectToRoute('vista_homepage');
             }
             else{
                  return $this->render('VistaBundle:Default:login.html.twig', array('error'=>1));

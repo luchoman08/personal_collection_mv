@@ -6,6 +6,14 @@ pelicula:
     path:      /buscar/{consulta}/{numero_pagina}
     defaults: { _controller: VistaBundle:Default:verResultadosBusqueda }
     
+similares:
+    path:      /similares/{consulta}/{numero_pagina}
+    defaults: { _controller: VistaBundle:Default:verResultadosSimilares }
+
+similares_barra:
+    path:      /similares/{consulta}/
+    defaults:  { _controller: VistaBundle:Default:verResultadosSimilares, numero_pagina 1}
+
 
 pelicula_consulta_barra:
     path:      /buscar/{consulta}/
@@ -63,3 +71,10 @@ login:
 login_sin_barra:
     path:      /login
     defaults:  { _controller: VistaBundle:Default:mostrarLogin }
+    
+demo:
+    path:      /demo
+    defaults:  { _controller: VistaBundle:Default:demo }
+demo_slash:
+    path:      /demo/
+    defaults:  { _controller: VistaBundle:Default:demo }

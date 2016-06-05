@@ -81,3 +81,18 @@ REFERENCES usuarios (ID);
 
 ALTER TABLE valoracion_peliculas
 ADD CONSTRAINT valoracion_peliculas_unique UNIQUE (id_pelicula,id_usuario);
+
+ALTER TABLE usuarios
+ADD CONSTRAINT usuarios_nickname_unique UNIQUE (nickname);
+
+ALTER TABLE usuarios
+ADD CONSTRAINT usuarios_correo_unique UNIQUE (correo_electronico);
+
+ALTER TABLE registro_gustos
+ADD CONSTRAINT registros_gustos_unique UNIQUE (id_usuario, generoID);
+
+ALTER TABLE coleccion
+ADD CONSTRAINT coleccion_unique UNIQUE (id_usuario, nombre);
+
+ALTER TABLE peliculas_coleccion
+ADD CONSTRAINT peliculas_coleccion_unique UNIQUE (id_coleccion, id_pelicula);

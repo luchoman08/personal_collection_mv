@@ -11,7 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	padding: 12px 20px;
 	outline: none;
 	font-size: 1.2em;
-	color: #fff;
+	color: #ffffff;
 	text-decoration: none;
 	text-transform: uppercase;
 	background: #337ab7;
@@ -48,6 +48,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	text-decoration: none;
 }
 
+.a_btn1:hover:visited{
+	text-decoration: none;
+}
+
+
+.a_btn1:hover:visited{
+	text-decoration: none;
+}
+
 .btn2:hover {
 	background: #3f444e;
 	color: #fff;
@@ -58,6 +67,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	text-decoration: none;
 }
 
+.a_btn2:hover:visited{
+	text-decoration: none;
+}
+
+.a_btn2:visited{
+	text-decoration: none;
+}
 
 
 /*--movie--*/

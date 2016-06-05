@@ -23,10 +23,22 @@
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
     <script type="text/javascript" src="{{asset('assets/js/greeter.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
-  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
 {% endblock %}
 {% block moviename%}{{params.title}}{% endblock %}
 {% block classcontenido %}col-md-12 fondoContenido{% endblock %}
+{%block loginoptions%}
+    {% if usuarioLogueado == 1  %}
+
+            {{nickname}} | <a href="{{url('logout_action')}}">Salir</a>
+       
+    {% else %} 
+
+        {{parent()}} 
+    
+    {% endif %}
+{% endblock %}
 {% block contenido %}
 
 <div  id="divEmergente"style="display:none" class="alert alert-success alert-dismissible" role="alert">
@@ -35,58 +47,143 @@
 
 
 
-<div class="content">
+<div id = "ctn" class="content">
       	   <div class="movie_top">
       	         <div class="col-md-9 movie_box">
  
-
-      	         		
-
                         <div class="grid images_3_of_2">
                         	<div class="movie_image">
                                 <span class="movie_rating">{{params.vote_average}}</span>
-                                <img src="https://image.tmdb.org/t/p/w300{{params.poster_path}}" width="100%" alt="{{params.title}}" class="img-responsive" >
+                                
+                                {% if params.poster_path == "" %}
+                                     <img src="{{asset('assets/images/movie.png')}}" width="100%" alt="{{params.title}}" class="img-responsive" >
+                                {% else %}
+                                     <img src="https://image.tmdb.org/t/p/w300{{params.poster_path}}" width="100%" alt="{{params.title}}" class="img-responsive" >
+                                {% endif %}
+                                
+                                
                             </div>
                             {%if usuarioLogueado%}
                             <div class="movie_rate">
                                 <span> <p>	Tu voto :</p> <span id="calificacionPersonal" class="rateyo-readonly-widg"></span></span>
 						  	   <div class="clearfix"> </div>
                             </div>
-                            <div class="movie_rate">
-                                <a class="a_btn1" href="#"><div class="btn1">Marcar como vista</div></a>
-                                <a class="a_btn2" href="#"><div class="btn2">Adicionar a una lista</div></a>
-                            </div>
+                           
                                {%endif%}
                         </div>
                      
                         <div class="desc1 span_3_of_2">
-                        	<p class="movie_option"><strong><div class="titulo">{{params.title}}  </strong> </div> </p> <br />
-                        	{%if params.release_date %}<p class="movie_option"><strong>Fecha de estreno: </strong>{{params.release_date}}</p>{%endif%}
-                        	<p class="movie_option"><strong>Generos: </strong> 
-                        	{%set i=0%}
-                        	{%for genero in params.genres%}
-    
-                        	{{genero.name}}{%if i <params.genres|length -1 %},{%endif%}
-                  
-                        	{%set i = i +1%}
-                        	{%endfor%}
-                        	</p>
-                        	<p class="movie_option"><strong>Estudio Cinematogr&aacute;fico : </strong>{{params.production_companies[0].name}}</p>
-                            <p class="movie_option"><strong>Total votos: </strong>{{params.vote_count}}</p> 
-                            <p class="m_4"><strong>Sinopsis:</strong> {{params.overview}}</p>
-                            <!--<center>
-                                <br><br><br>
-                            <a class="a_btn1" href="#"><div class="btn1">Marcar como vista</div></a>
-                            <a class="a_btn2" href="#"><div class="btn2">Adicionar a una lista</div></a>
-                            </center>-->
+                      
+                            <center>
+                            <div id="menupelicula" class="menu-pelicula" >
+                                <ui>
+                                    <li id="marcar_desmarcar_vista_li" class="vista"> <div id="iconoVista" class="glyphicon glyphicon-eye-open"></div> Vista&nbsp;</li>
+                                    <li id="marcar_desmarcar_por_ver_li" class="vista"> <div id="iconoPorVer"  class="glyphicon glyphicon-time"></div> Pendiente&nbsp;</li>
+                                    <li class="lista"> <div class="glyphicon glyphicon-plus"></div> Lista&nbsp;</li>
+                                    
+                                    <li class="dropdown trailers" id="test"> <div class="glyphicon glyphicon-film"></div>  
+                                        <a id="trailers" href="#" data-toggle="dropdown" class="dropdown-toggle">Trailers <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            {% set t = 0 %}
+                                            {% for trailer in params.results %}
+                                            <li><a id="trailer{{t}}" href="#popup{{t}}">{{trailer.name}} | {{trailer.iso_639_1}} | {{trailer.size}}p</a></li>
+                                            
+                                            <div id="popup{{t}}" style="" class="overlay">
+	                                            <div class="popup">
+		                                            <a id="close{{t}}" class="close" href="#">&times;</a>
+		                                            <div class="video">
+			      			                            <iframe width="100%" height="600px" src="https://www.youtube.com/embed/{{trailer.key}}?rel=0" frameborder="0" allowfullscreen=""></iframe>
+			  			                            </div>
+	                                            </div>
+                                            </div>
+                                            {% set t = t + 1 %}
+                                            {% endfor %}
+                                            
+                                        </ul>
+                                    </li>
+                                    
+                                </ui>
+                            </div>
+                            </center>
                             
-                            <div class="video">
-			      			    <iframe width="100%" height="250px" src="https://www.youtube.com/embed/{{params.results[0].key}}?rel=0" frameborder="0" allowfullscreen=""></iframe>
-			  			    </div>
+                            <ul class="menu-pelicula-tab">
+                                <li class="active"><a data-toggle="tab" href="#detalles">Detalles&nbsp;</a></li>
+                                <li><a data-toggle="tab" href="#produccion">Producci&oacute;n</a></li>
+                            </ul>
+                                <div class="tab-content">
+                                    <div id="detalles" class="tab-pane fade in active">
+                                    <div class="movie_option"><strong><div class="titulo">{{params.title}}  </strong> </div> </div> <br/>
+                                	{%if params.release_date %}
+                                	    <div class="movie_option"><strong>Fecha de estreno: </strong>{{params.release_date}}</div>
+                                	{%endif%}
+                                	<div class="movie_option"><strong>Generos: </strong> 
+                                	{%set i=0%}
+                                	{%for genero in params.genres%}
+            
+                                	{{genero.name}}{%if i <params.genres|length -1 %},{%endif%}
+                          
+                                	{%set i = i +1%}
+                                	{%endfor%}
+                                	</div>
+                                	<div class="movie_option"><strong>Estudio Cinematogr&aacute;fico : </strong>{{params.production_companies[0].name}}</div>
+                                    <div class="movie_option"><strong>Total votos: </strong>{{params.vote_count}}</div> <br/>
+                                    <div class="m_4"><strong>Sinopsis:</strong> {{params.overview}}</div><br/>
                             
+                                <h4>Capturas</h4>
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                  <!-- Indicators -->
+                                  <ol class="carousel-indicators">
+                                   {%set k=0%}
+                                    {%for backdrops in params.backdrops%}
+                                        <li data-target="#myCarousel" data-slide-to="{{k}}"{% if k == 0 %}class="active"{%endif%}></li>
+                                          
+                                        {%set k=k + 1%}
+                                        {%endfor%}
+                                      </ol>
+                                    
+                                      <!-- Wrapper for slides -->
+                                      <div class="carousel-inner" role="listbox">
+                                        
+                                        {%set p=0%}
+                                        {%for backdrops in params.backdrops%}
+                                        <div class="{% if p == 0 %}item active{%else%}item {%endif%}">
+                                          <img src="https://image.tmdb.org/t/p/w780/{{backdrops.file_path}}" alt="Captura">
+                                        </div>
+                                        {%set p=-1%}
+                                        {%endfor%}
+                                    
+                                      </div>
+                                    
+                                      <!-- Left and right controls -->
+                                      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Anterior</span>
+                                      </a>
+                                      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Siguiente</span>
+                                      </a>
+                                    </div>
+                                    </div>
+                                    <div id="produccion" class="tab-pane fade">
+                                        <h3> Elenco </h3>
+                                        {% for elenco in params.cast %}
+                                            
+                                            <strong>{{ elenco.name }}</strong>: {{elenco.character}} <br/>
+                                            
+                                        {% endfor %}
+                                        
+                                        <h3> Personal </h3>
+                                        
+                                        {% for personal in params.crew %}
+                                            
+                                            <strong>{{ personal.name }}</strong>: {{personal.department}} ({{personal.job}}) <br/>
+                                            
+                                        {% endfor %}
+                                        
+                                    </div>
+                                </div>
                          </div>
-
-                        
                         <div class="clearfix"> </div>
                         
                         
@@ -98,27 +195,31 @@
                   
                   <div class="col-md-2">
                       {%for peliculaSimilar in similares.results|slice(0, 3)%}
-                      	<div class="movie_img"><div class="grid_2">
-                      	        
-                      	        {% if peliculaSimilar.poster_path == "" %}
-                                     <a href="{{url('homepage')}}vista/mostrarpelicula/{{peliculaSimilar.id}}"><img src="{{asset('assets/images/movie.png')}}" alt="{{peliculaSimilar.title}}"></a>
-                                {% else %}
-                                    <a href="{{url('homepage')}}vista/mostrarpelicula/{{peliculaSimilar.id}}"><img src="https://image.tmdb.org/t/p/w300{{peliculaSimilar.poster_path}}" width="100%" alt="{{peliculaSimilar.title}}" class="img-responsive" ></a>	
-                                {% endif %}
-                      	        
-                                <div class="caption1">
-									<ul class="list_5 list_7">
-									    <div class="calificacion-fondo-similares">
-							    		    <li><i class="icon5"> <span  class="glyphicon glyphicon-star calificacion-similares" aria-hidden="true"> </span></i><p>{{peliculaSimilar.vote_average}}</p></li>
-							    		</div>
-							    	</ul>
-							    	<i class="icon4 icon6 icon7"> </i>
-							    	<!--  <p class="m_3">{{peliculaSimilar.title}}</p>-->
-							    </div>
-						    </div>
-						</div>
-            {%endfor%}          	
-                    
+                          	<div class="movie_img"><div class="grid_2">
+                          	        
+                          	        {% if peliculaSimilar.poster_path == "" %}
+                                         <a href="{{url('homepage')}}vista/mostrarpelicula/{{peliculaSimilar.id}}"><img src="{{asset('assets/images/movie.png')}}" alt="{{peliculaSimilar.title}}"></a>
+                                    {% else %}
+                                        <a href="{{url('homepage')}}vista/mostrarpelicula/{{peliculaSimilar.id}}"><img src="https://image.tmdb.org/t/p/w300{{peliculaSimilar.poster_path}}" width="100%" alt="{{peliculaSimilar.title}}" class="img-responsive" ></a>	
+                                    {% endif %}
+                          	        
+                                    <div class="caption1">
+    									<ul class="list_5 list_7">
+    									    <div class="calificacion-fondo-similares">
+    							    		    <li><i class="icon5"> <span  class="glyphicon glyphicon-star calificacion-similares" aria-hidden="true"> </span></i><p>{{peliculaSimilar.vote_average}}</p></li>
+    							    		</div>
+    							    	</ul>
+    							    	<i class="icon4 icon6 icon7"> </i>
+    							    	<!--  <p class="m_3">{{peliculaSimilar.title}}</p>-->
+    							    </div>
+    						    </div>
+    						</div>
+                      {%endfor%} 
+                      
+                     <center>
+                         <a href="{{url('vista_homepage')}}similares/{{params.id}}" class="btn btn-primary" type="button"> Ver m&aacute;s <span class="badge">{{similares.results|length}}</span> </a>
+                         
+                    </center><br/>
            </div>
 
 {%endblock%}
@@ -126,30 +227,144 @@
 {{parent()}}
     <script>
         $(function() {
-
+            {% if usuarioLogueado ==1%}
+            var vista={{params.vista}};
+            var porVer={{params.porVer}};
+             estiloBotonVistas(vista);
+             estiloBotonPorVer(porVer);
+            {%endif%}
+            var lts=0;
+            
             var rating =0;
             var calificacion_semaphore=0;
-            //enviar calificacion
-            //$("#calificacionPersonal").click(function(e){
-
-            
-            //make the AJAX request, dataType is set to json
-            //meaning we are expecting JSON data in response from the server
            
-            //});
+  //inicializar el color del boton marcar vista segun si se ha visto o no
+  {%set i = 0%}
+ {% for trailer in params.results %}
+  $("#close{{i}}").click(function(){
+       $("#popup{{i}}").attr("style","visibility: invisible; opacity: 0;");
+       var x = document.getElementById("popup{{i}}");
+    var y = x;
+    $("#ctn").append(y);
+  });
+  
+  $('#trailer{{i}}').click(function(){
+    $("#popup{{i}}").attr("style","visibility: visible; opacity: 1;");
+    var x = document.getElementById("popup{{i}}");
+    var y = x;
+    $("#ctn").append(y);
+  });
+  {%set i = i+1%}
+  {%endfor%}
+             
+
+         {%if usuarioLogueado == 1%}   
+         
             
-//$('#gritter-notice-wrapper').hide();
-	
+  function estiloBotonVistas(vista){
+  
+             if(vista == 0){
+                        $('#marcar_desmarcar_vista_li').css("color","#ccc");
+                        $('#iconoVista').attr("class", "glyphicon glyphicon-eye-close");
+                    }
+                    if(vista == 1){
+                        $('#marcar_desmarcar_vista_li').css("color","#3a8cfb");
+                        $('#iconoVista').attr("class", "glyphicon glyphicon-eye-open");
+                    }
+  };
+  
+    function estiloBotonPorVer(porVer){
+  
+             if(porVer == 0){
+                        $('#marcar_desmarcar_por_ver_li').css("color","#ccc");
+                    }
+                    if(porVer == 1){
+                        $('#marcar_desmarcar_por_ver_li').css("color","#3a8cfb");
+                    }
+  };
+   $("#marcar_desmarcar_por_ver_li").click(function(){
+         $.ajax({
+                type: "GET",
+                url: "{{url('marcar_por_ver')}}",
+                data: { idPelicula:{{params.id}}},
+                dataType: "json",
+               
+                //if received a response from the server
+                success: function( data, textStatus, jqXHR) {
+                     if(data.success){
+                         $("#mensajeEmergente").html("");
+                     } 
+                     //display error message
+                     else {
+                         $("#mensajeEmergente").html("Error ¬_¬");
+                     }
+                },
+               
+                //If there was no resonse from the server
+                error: function(jqXHR, textStatus, errorThrown){
+                    porVer = (porVer + 1) %2;
+                    if(porVer == 1){
+                    vista = 0;
+                    estiloBotonVistas(vista);
+                    }
+                    estiloBotonPorVer(porVer);
+                    $("#mensajeEmergente").html(jqXHR.responseText);
+                    $('#divEmergente').show(1000).delay( 4000 );
+                    $('#divEmergente').hide(1000);
+                       
+                },
+               
+
+     
+            });   
+        });
+        $("#marcar_desmarcar_vista_li").click(function(){
+         $.ajax({
+                type: "GET",
+                url: "{{url('marcar_vista')}}",
+                data: { idPelicula:{{params.id}}},
+                dataType: "json",
+               
+                //if received a response from the server
+                success: function( data, textStatus, jqXHR) {
+                     if(data.success){
+                         $("#mensajeEmergente").html("");
+                     } 
+                     //display error message
+                     else {
+                         $("#mensajeEmergente").html("Error ¬_¬");
+                     }
+                },
+               
+                //If there was no resonse from the server
+                error: function(jqXHR, textStatus, errorThrown){
+                    vista = (vista + 1) %2;
+                    if(vista ==1){
+                        porVer=0;
+                        estiloBotonPorVer(porVer);
+                    }
+                       estiloBotonVistas(vista);
+                       $("#mensajeEmergente").html(jqXHR.responseText);
+                       $('#divEmergente').show(1000).delay( 4000 );
+                       $('#divEmergente').hide(1000);
+                       
+                },
+               
+
+     
+            });   
+        });
         $("#calificacionPersonal").rateYo({
+                
                 readOnly: false,
-                rating: rating,
+                rating: {{params.calificacionUsuario}},
                 numStars: 10,
                 precision: 10,
                 minValue: 1,
                 maxValue: 10
             }).on("rateyo.change", function(e, data) {
                 if(calificacion_semaphore==1){
-                 $.ajax({
+                $.ajax({
                 type: "GET",
                 url: "{{url('calificacion_pelicula')}}",
                 data: { idPelicula:{{params.id}}, calificacion:data.rating},
@@ -169,7 +384,7 @@
                 //If there was no resonse from the server
                 error: function(jqXHR, textStatus, errorThrown){
                     
- 
+                      
                        $("#mensajeEmergente").html(jqXHR.responseText);
                        $('#divEmergente').show(1000).delay( 4000 );
                        $('#divEmergente').hide(1000);
@@ -184,16 +399,18 @@
                 $("#calificacionPersonal").val(data.rating);
 
             });
- 
-            $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{params.backdrop_path}})");  
+             
+        
 	        $("#calificacionPersonal").click(function(){
 		    calificacion_semaphore=1;
 		   
 			
 		 });
 
-
-      
+  {%endif%}
+          {%if params.backdrop_path%}
+            $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{params.backdrop_path}})");  
+            {%endif%}
         });
     </script>
     

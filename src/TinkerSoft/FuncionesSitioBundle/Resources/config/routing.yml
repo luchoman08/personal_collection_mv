@@ -5,3 +5,19 @@ funciones_sitio_homepage:
 calificacion_pelicula:
     path:     /reg_calificacion
     defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:calificarPelicula }
+    
+crear_lista:
+    path:     /crearListaVistas
+    defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:crearListaVistas }
+    
+adicionar_pelicula_lista:
+    path:     /adicionarPeliculaLista
+    defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:adicionarPeliculaLista}
+    
+marcar_vista:
+    path:   /marcarVista
+    defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:adicionarPeliculaListaVistas}
+
+marcar_por_ver:
+    path:   /marcarPorVer
+    defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:adicionarPeliculaListaPorVer}

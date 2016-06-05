@@ -1,5 +1,16 @@
 {%extends 'index.html.twig'%}
 {%block title%} QMP - Resultados de busqueda {%endblock%}
+{%block loginoptions%}
+    {% if usuarioLogueado == 1  %}
+
+            {{nickname}} | <a href="{{url('logout_action')}}">Salir</a>
+       
+    {% else %} 
+
+        {{parent()}} 
+    
+    {% endif %}
+{% endblock %}
 {% block contenido %}
     
      <div class="resultados-header">N&uacute;mero de resultados para <b>"{{ consulta }}"</b>: {{params.total_results}}  Pagina:{{ params.page }} de {{ params.total_pages }} </div> <br>
@@ -8,7 +19,7 @@
     {%for pelicula in params.results%}
    
     <div class="resultado">
-         <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" target="_blank">
+         <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" >
             {% if pelicula.poster_path == "" %}
                 
                 <img src="{{asset('assets/images/movie.png')}}" alt="...">
@@ -37,9 +48,11 @@
                     <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> P&aacute;gina anterior</a></li>
                              
                 {% else %}
-                        
-                    <li class="previous"><a href="{{ url('homepage') }}vista/buscar/{{ consulta }}/{{ params.page - 1 }}"><span aria-hidden="true">&larr;</span> P&aacute;gina anterior</a></li>
-                        
+                    {% if flag == "similares" %}   
+                        <li class="previous"><a href="{{ url('homepage') }}vista/similares/{{ consulta }}/{{ params.page - 1 }}"><span aria-hidden="true">&larr;</span> P&aacute;gina anterior</a></li>
+                    {% else %}
+                        <li class="previous"><a href="{{ url('homepage') }}vista/buscar/{{ consulta }}/{{ params.page - 1 }}"><span aria-hidden="true">&larr;</span> P&aacute;gina anterior</a></li>
+                    {% endif %}    
                 {% endif %}
                 
                 {% if params.page == params.total_pages %}
@@ -51,8 +64,13 @@
                      <li class="next disabled"><a href="#"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
                 
                 {% else %}
-                        
-                    <li class="next"><a href="{{ url('homepage') }}vista/buscar/{{ consulta }}/{{ params.page + 1 }}"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
+                    
+                    {% if flag == "similares" %} 
+                        <li class="next"><a href="{{ url('homepage') }}vista/similares/{{ consulta }}/{{ params.page + 1 }}"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
+                    {% else %} 
+                        <li class="next"><a href="{{ url('homepage') }}vista/buscar/{{ consulta }}/{{ params.page + 1 }}"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
+                    {% endif %}
+                      
                     
                 {% endif %}
                 
