@@ -514,6 +514,12 @@
 .listas > a:visited{
     text-decoration: none;
 }
+
+.listas > ui > li > a:visited{
+    text-decoration: none;
+}
+
+
 /**/
 .trailers > div{
     color:red;
