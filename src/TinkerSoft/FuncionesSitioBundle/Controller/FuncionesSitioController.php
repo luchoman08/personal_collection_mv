@@ -217,7 +217,30 @@ class FuncionesSitioController extends Controller
             1 si la pelicula fue adicionada a la lista
             retorno a el index si no es un usuario logueado
     */
-    
+    public function crearListaPersonalizadaAction(Request $request){
+        if($request->getSession()->get('id')) {
+            $resultado = $this->crearListaAction($request->getSession()->get('id'), $request->query->get('nombreColeccion'), 3);
+            if($resultado){
+                $response = new Response();
+                $response->setContent('Lista  creada');
+                $response->setStatusCode(200);
+                $response->headers->set('Content-Type', 'text/html');
+                // prints the HTTP headers followed by the content
+                return $response;  
+            }
+            else{
+                $response = new Response();
+                $response->setContent('La coleccion con nombre "'. $request->query->get('nombreColeccion') . '" ya existe');
+                $response->setStatusCode(405);
+                $response->headers->set('Content-Type', 'text/html');
+                // prints the HTTP headers followed by the content
+                return $response;  
+            }
+        }
+        else{
+            $this->redireccionErrorAction();
+        }
+    }
      public function adicionarPeliculaListaAction($request, $idColeccion, $idPelicula)
     {
       if($request->getSession()->get('id')){   
@@ -298,6 +321,18 @@ class FuncionesSitioController extends Controller
             return false;
         }
     }
+    
+    public function getListasPersonalizadas(Request $request, $em){
+        if($request->getSession()->get('id')){
+            $listasPersonalizadas = $em->getRepository('FuncionesSitioBundle:Coleccion')->
+                                findBy(array('idUsuario'=>$request->getSession()->get('id'), 'tipo'=>3));
+            return $listasPersonalizadas;
+        }
+        else{
+            $this->redireccionErrorAction();
+        }
+    }
+    
     public function crearListaVistasAction(Request $request)
     {
      if($request->getSession()->get('id')){
@@ -316,7 +351,7 @@ class FuncionesSitioController extends Controller
             }
         }
         else{
-                 return $this->render('VistaBundle:Default:login.html.twig');
+                 $this->redireccionErrorAction();
         }
     }
     
@@ -375,70 +410,92 @@ class FuncionesSitioController extends Controller
       public function calificarPeliculaAction(Request $request)
     {
  
+ 
+            if($request->getSession()->get('id')){
             $em = $this->getDoctrine()->getManager();
-           
-            $usuario = $em->getRepository('FuncionesSitioBundle:Usuarios')->
-            findOneBy(array('id'=>$request->getSession()->get('id')));
-           
-            //si ya esta la calificacion por el usuario a dicha pelicula:
-           if($em->getRepository('FuncionesSitioBundle:ValoracionPeliculas')->
-            findOneBy(array('idPelicula'=>$request->query->get('idPelicula'), 
-                            'idUsuario'=>$request->getSession()->get('id'))))
-            {
-                $qb = $em->createQueryBuilder();
-                $q = $qb->update('FuncionesSitioBundle:ValoracionPeliculas', 'v')
-                ->set('v.valoracion', '?1')
-                ->set('v.fechaValoracion', '?2')
-               ->where(
-                $qb->expr()->andX(
-                    $qb->expr()->eq('v.idUsuario', '?3'),
-                    $qb->expr()->eq('v.idPelicula', '?4')
-                ))
-                ->setParameter(1,$request->query->get('calificacion'))
-                ->setParameter(2,new \DateTime())
-                ->setParameter(3, $request->getSession()->get('id'))
-                ->setParameter(4, $request->query->get('idPelicula'))
-                ->getQuery();
-                $p = $q->execute();
-                $response = new Response();
-                $response->setContent('Calificacion Registrada');
-                $response->setStatusCode(Response::HTTP_OK);
-                $response->headers->set('Content-Type', 'text/html');
-                
-                // prints the HTTP headers followed by the content
-                return $response;       
+                    if($this->preguntarPorPeliculaVistaAction($request, $request->query->get('idPelicula'), $em)){
+
+                    $usuario = $em->getRepository('FuncionesSitioBundle:Usuarios')->
+                    findOneBy(array('id'=>$request->getSession()->get('id')));
+                    $em = $this->getDoctrine()->getManager();
+                    //si ya esta la calificacion por el usuario a dicha pelicula:
+                           if($em->getRepository('FuncionesSitioBundle:ValoracionPeliculas')->
+                            findOneBy(array('idPelicula'=>$request->query->get('idPelicula'), 
+                                            'idUsuario'=>$request->getSession()->get('id'))))
+                            {
+                                $qb = $em->createQueryBuilder();
+                                $q = $qb->update('FuncionesSitioBundle:ValoracionPeliculas', 'v')
+                                ->set('v.valoracion', '?1')
+                                ->set('v.fechaValoracion', '?2')
+                               ->where(
+                                $qb->expr()->andX(
+                                    $qb->expr()->eq('v.idUsuario', '?3'),
+                                    $qb->expr()->eq('v.idPelicula', '?4')
+                                ))
+                                ->setParameter(1,$request->query->get('calificacion'))
+                                ->setParameter(2,new \DateTime())
+                                ->setParameter(3, $request->getSession()->get('id'))
+                                ->setParameter(4, $request->query->get('idPelicula'))
+                                ->getQuery();
+                                $p = $q->execute();
+                                $response = new Response();
+                                $response->setContent('Calificacion Registrada');
+                                $response->setStatusCode(Response::HTTP_OK);
+                                $response->headers->set('Content-Type', 'text/html');
+                                
+                                // prints the HTTP headers followed by the content
+                                return $response;       
+                            }
+                            else{
+                            
+                                    //si el usuario es valido y la calificacion es a una nueva pelicula
+                                    if($usuario){
+                                    $valoracion = new ValoracionPeliculas();
+                                    $valoracion->setIdUsuario($usuario);
+                                    $valoracion->setIdPelicula($request->query->get('idPelicula'));
+                                    $valoracion->setValoracion($request->query->get('calificacion'));
+                                    $fechaValoracion = new \DateTime();
+                                    $valoracion->setFechaValoracion($fechaValoracion);
+                                    $em = $this->getDoctrine()->getManager();
+                                    $em->persist($valoracion);
+                                    $em->flush();
+                                    $response = new Response();
+                        
+                                    $response->setContent('Calificaci&oacute;n Registrada');
+                                    $response->setStatusCode(Response::HTTP_OK);
+                                    $response->headers->set('Content-Type', 'text/html');
+                        
+                                    // prints the HTTP headers followed by the content
+                                    return $response;
+                                }
+                                     else{
+                                   $response = new Response();
+                                    $response->setContent('No se pudo registrar la calificaci&oacute;n');
+                                    $response->setStatusCode(200);
+                                    $response->headers->set('Content-Type', 'text/html');
+                                    
+                                    // prints the HTTP headers followed by the content
+                                    return $response;
+                                }
+                        }
+    
+    
             }
             else{
-            
-            //si el usuario es valido y la calificacion es a una nueva pelicula
-            if($usuario){
-            $valoracion = new ValoracionPeliculas();
-            $valoracion->setIdUsuario($usuario);
-            $valoracion->setIdPelicula($request->query->get('idPelicula'));
-            $valoracion->setValoracion($request->query->get('calificacion'));
-            $fechaValoracion = new \DateTime();
-            $valoracion->setFechaValoracion($fechaValoracion);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($valoracion);
-            $em->flush();
-            $response = new Response();
-
-            $response->setContent('Calificaci&oacute;n Registrada');
-            $response->setStatusCode(Response::HTTP_OK);
-            $response->headers->set('Content-Type', 'text/html');
-
-            // prints the HTTP headers followed by the content
-            return $response;
-        }
-             else{
-           $response = new Response();
-            $response->setContent('No se pudo registrar la calificaci&oacute;n');
-            $response->setStatusCode(Response::HTTP_OK);
-            $response->headers->set('Content-Type', 'text/html');
-            
-            // prints the HTTP headers followed by the content
-            return $response;
-        }
+                 $response = new Response();
+                                    $response->setContent('Debe haber visto la pelicula para poder calificarla, Calificaci&oacute;n no registrada');
+                                    $response->setStatusCode(405);
+                                    $response->headers->set('Content-Type', 'text/html');
+                                    
+                                    // prints the HTTP headers followed by the content
+                                    return $response;
+                
             }
+}
+
+    else{
+        $this->redireccionErrorAction();
     }
+
+}
 }

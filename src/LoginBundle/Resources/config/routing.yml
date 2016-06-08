@@ -7,3 +7,7 @@ login_action:
 logout_action:
     path:     /logout
     defaults: { _controller: LoginBundle:Login:loginOut }
+    
+registro_generos_action:
+    path:     /procesadorg
+    defaults: { _controller: LoginBundle:Login:registrarGustos }

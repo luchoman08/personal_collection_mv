@@ -78,10 +78,13 @@ class DefaultController extends Controller
         
     }
     
-    public function verPeliculaAction(Request $request, $id){
+    public function verPeliculaAction(Request $request, $id, $optional){
         
         $datos = $this->get('app.api_controller')->obtenerPeliculaAction($request, $id);
         $similares = $this->get('app.api_controller')->obtenerSimilaresAction($id);
+        
+        $votos = $this->get('app.api_controller')->obtenerDatosOMDbIDAction($datos['imdb_id']);
+        
         $em = $this->getDoctrine()->getManager();
         
         $usuarioLogueado=0;
@@ -89,29 +92,55 @@ class DefaultController extends Controller
         if($request->getSession()->get('id')){
             $usuarioLogueado=1;
             $nickname = $request->getSession()->get('nickname');
+            $listaColecciones = array('listaColecciones'=>$this->get('app.funciones_controler')->getListasPersonalizadas($request, $em));
             $calificacionPelicula = array('calificacionUsuario'=>$this->get('app.funciones_controler')->retornarCalificacionAction($request->getSession()->get('id'), $id, $em));
             $boolVista=array('vista'=>$this->get('app.funciones_controler')->preguntarPorPeliculaVistaAction($request, $id, $em));
             $boolPorVer = array('porVer'=>$this->get('app.funciones_controler')->preguntarPorPeliculaPorVerAction($request, $id, $em));
+            $datos = $datos + $listaColecciones;
             $datos = $datos + $calificacionPelicula;
             $datos = $datos + $boolVista;
             $datos = $datos + $boolPorVer;
         }
         
         $fondos = $datos->backdrops;
+        $funcionesOcultas = 0;
+        if ($optional == 1){
+            $funcionesOcultas = 1;
+        }
         
-        return $this->render('VistaBundle:Default:mostrarPelicula.html.twig', array('usuarioLogueado'=>$usuarioLogueado, 'params' => $datos, 'similares' => $similares, 'nickname' => $nickname, 'fondos' => $fondos));
+        return $this->render('VistaBundle:Default:mostrarPelicula.html.twig', array('usuarioLogueado'=>$usuarioLogueado, 'params' => $datos, 'similares' => $similares, 'nickname' => $nickname, 'fondos' => $fondos, 'votos_imdb' => $votos['imdbVotes'],'funcionesOcultas' => $funcionesOcultas));
     }
     
     
-    public function verListaGenerosAction(){
+    public function verListaGenerosAction(Request $request){
         
-        $datos = $this->get('app.api_controller')->listaGenerosAction("en");
-        return $this->render('VistaBundle:Default:index.html.twig', array('params' => $datos));
+        $usuarioLogueado=0;
+        if($request->getSession()->get('id')){
+            $usuarioLogueado=1;
+                $em = $this->getDoctrine()->getManager();
+                $gustos = $em->getRepository('FuncionesSitioBundle:RegistroGustos')->
+                findOneBy(array('idUsuario'=>$request->getSession()->get('id')));
+                
+                if($gustos){
+                    return $this->redirectToRoute('vista_homepage');
+                }
+            
+            
+            $datos = $this->get('app.api_controller')->listaGenerosAction("en");
+            return $this->render('VistaBundle:Default:elegirGenero.html.twig', array('params' => $datos));
+        }else{
+            return $this->render('VistaBundle:Default:login.html.twig', array('error'=>2));
+        }
         
     }
-    public function mostrarLoginAction(){
-         
+    public function mostrarLoginAction(Request $request){
+         if($request->getSession()->get('id'))
+         {
+             return $this->redirectToRoute('vista_homepage');
+         }
+         else{
         return $this->render('VistaBundle:Default:login.html.twig');
+         }
         
     }
     public function demoAction(){

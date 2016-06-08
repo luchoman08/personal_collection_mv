@@ -38,6 +38,11 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return array (  '_controller' => 'LoginBundle\\Controller\\LoginController::loginOutAction',  '_route' => 'logout_action',);
             }
 
+            // registro_generos_action
+            if ($pathinfo === '/login/procesadorg') {
+                return array (  '_controller' => 'LoginBundle\\Controller\\LoginController::registrarGustosAction',  '_route' => 'registro_generos_action',);
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/vista')) {
@@ -134,9 +139,17 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::indexAction',  '_route' => 'pelicula_barra',);
             }
 
-            // mostrarPelicula_minuscula
-            if (0 === strpos($pathinfo, '/vista/mostrarpelicula') && preg_match('#^/vista/mostrarpelicula/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'mostrarPelicula_minuscula')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verPeliculaAction',));
+            if (0 === strpos($pathinfo, '/vista/mostrarpelicula')) {
+                // mostrarPelicula_minuscula
+                if (preg_match('#^/vista/mostrarpelicula/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'mostrarPelicula_minuscula')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verPeliculaAction',  'optional' => 0,));
+                }
+
+                // mostrarPelicula_minuscula_secret
+                if (preg_match('#^/vista/mostrarpelicula/(?P<id>[^/]++)/secret$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'mostrarPelicula_minuscula_secret')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verPeliculaAction',  'optional' => 1,));
+                }
+
             }
 
             if (0 === strpos($pathinfo, '/vista/login')) {
@@ -311,6 +324,11 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                     return array (  '_controller' => 'TinkerSoft\\FuncionesSitioBundle\\Controller\\FuncionesSitioController::adicionarPeliculaListaPorVerAction',  '_route' => 'marcar_por_ver',);
                 }
 
+            }
+
+            // adicionar_lista
+            if ($pathinfo === '/funciones/adicionarLista') {
+                return array (  '_controller' => 'TinkerSoft\\FuncionesSitioBundle\\Controller\\FuncionesSitioController::crearListaPersonalizadaAction',  '_route' => 'adicionar_lista',);
             }
 
         }

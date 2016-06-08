@@ -62,27 +62,28 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
             echo "\");
             background-repeat: no-repeat;
             background-attachment: fixed;
+            background-position: center; 
         }
         
     </style>
     ";
         }
-        // line 21
+        // line 22
         echo "    
     <link href=\"";
-        // line 22
+        // line 23
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/css/greeter.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />
     <link href=\"";
-        // line 23
+        // line 24
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/css/style.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />
     <script type=\"text/javascript\" src=\"";
-        // line 24
+        // line 25
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/js/greeter.js"), "html", null, true);
         echo "\"></script>
     <script type=\"text/javascript\" src=\"";
-        // line 25
+        // line 26
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/bootstrap/js/bootstrap.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\"></script>
@@ -90,28 +91,28 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 ";
     }
 
-    // line 29
+    // line 30
     public function block_moviename($context, array $blocks = array())
     {
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "title", array()), "html", null, true);
     }
 
-    // line 30
+    // line 31
     public function block_classcontenido($context, array $blocks = array())
     {
         echo "col-md-12 fondoContenido";
     }
 
-    // line 31
+    // line 32
     public function block_loginoptions($context, array $blocks = array())
     {
-        // line 32
+        // line 33
         echo "    ";
         if (((isset($context["usuarioLogueado"]) ? $context["usuarioLogueado"] : null) == 1)) {
-            // line 33
+            // line 34
             echo "
             ";
-            // line 34
+            // line 35
             echo twig_escape_filter($this->env, (isset($context["nickname"]) ? $context["nickname"] : null), "html", null, true);
             echo " | <a href=\"";
             echo $this->env->getExtension('routing')->getUrl("logout_action");
@@ -119,11 +120,11 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
        
     ";
         } else {
-            // line 36
+            // line 37
             echo " 
 
         ";
-            // line 38
+            // line 39
             $this->displayParentBlock("loginoptions", $context, $blocks);
             echo " 
     
@@ -131,32 +132,32 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
         }
     }
 
-    // line 42
+    // line 43
     public function block_contenido($context, array $blocks = array())
     {
-        // line 43
+        // line 44
         echo "
 <div  id=\"divEmergente\"style=\"display:none\" class=\"alert alert-success alert-dismissible\" role=\"alert\">
     <p id=\"mensajeEmergente\"></p>
 </div>
 
 
-
 <div id = \"ctn\" class=\"content\">
+
       \t   <div class=\"movie_top\">
       \t         <div class=\"col-md-9 movie_box\">
  
                         <div class=\"grid images_3_of_2\">
                         \t<div class=\"movie_image\">
                                 <span class=\"movie_rating\">";
-        // line 56
+        // line 57
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "vote_average", array()), "html", null, true);
         echo "</span>
                                 
                                 ";
-        // line 58
+        // line 59
         if (($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "poster_path", array()) == "")) {
-            // line 59
+            // line 60
             echo "                                     <img src=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/images/movie.png"), "html", null, true);
             echo "\" width=\"100%\" alt=\"";
@@ -164,7 +165,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
             echo "\" class=\"img-responsive\" >
                                 ";
         } else {
-            // line 61
+            // line 62
             echo "                                     <img src=\"https://image.tmdb.org/t/p/w300";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "poster_path", array()), "html", null, true);
             echo "\" width=\"100%\" alt=\"";
@@ -172,14 +173,15 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
             echo "\" class=\"img-responsive\" >
                                 ";
         }
-        // line 63
+        // line 64
         echo "                                
+                               
                                 
                             </div>
                             ";
-        // line 66
+        // line 68
         if ((isset($context["usuarioLogueado"]) ? $context["usuarioLogueado"] : null)) {
-            // line 67
+            // line 69
             echo "                            <div class=\"movie_rate\">
                                 <span> <p>\tTu voto :</p> <span id=\"calificacionPersonal\" class=\"rateyo-readonly-widg\"></span></span>
 \t\t\t\t\t\t  \t   <div class=\"clearfix\"> </div>
@@ -187,7 +189,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                            
                                ";
         }
-        // line 73
+        // line 75
         echo "                        </div>
                      
                         <div class=\"desc1 span_3_of_2\">
@@ -195,22 +197,53 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                             <center>
                             <div id=\"menupelicula\" class=\"menu-pelicula\" >
                                 <ui>
-                                    <li id=\"marcar_desmarcar_vista_li\" class=\"vista\"> <div id=\"iconoVista\" class=\"glyphicon glyphicon-eye-open\"></div> Vista&nbsp;</li>
+                                    ";
+        // line 82
+        if (((isset($context["usuarioLogueado"]) ? $context["usuarioLogueado"] : null) == 1)) {
+            // line 83
+            echo "                                    <li id=\"marcar_desmarcar_vista_li\" class=\"vista\"> <div id=\"iconoVista\" class=\"glyphicon glyphicon-eye-open\"></div> Vista&nbsp;</li>
                                     <li id=\"marcar_desmarcar_por_ver_li\" class=\"vista\"> <div id=\"iconoPorVer\"  class=\"glyphicon glyphicon-time\"></div> Pendiente&nbsp;</li>
-                                    <li class=\"lista\"> <div class=\"glyphicon glyphicon-plus\"></div> Lista&nbsp;</li>
                                     
-                                    <li class=\"dropdown trailers\" id=\"test\"> <div class=\"glyphicon glyphicon-film\"></div>  
+                                    <li class=\"listas dropdown\" id =\"listas\"> <div class=\"glyphicon glyphicon-plus\"></div> 
+                                        <a id=\"listas\" href=\"#\" data-toggle=\"dropdown\" class=\"dropdown-toggle\">Listas<b class=\"caret\"></b>&nbsp;</a>
+                                            <ul id = \"ulListaColecciones\" class=\"dropdown-menu\">
+                                                 <li><a id=\"crearListas\" href=\"#lista\"><span class=\"glyphicon glyphicon-plus\"></span>&nbsp;Crear</a> </li>
+                                                 <li class=\"divider\"></li>
+                                                ";
+            // line 91
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "listaColecciones", array()));
+            foreach ($context['_seq'] as $context["_key"] => $context["lista"]) {
+                // line 92
+                echo "                                                <li><a id=\"crearListas\" href=\"#lista\">";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["lista"], "nombre", array()), "html", null, true);
+                echo "</a> </li>
+                                                ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['lista'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 94
+            echo "                                               
+                                               
+                                           
+                                            </ul>
+                                    </li>
+                                    ";
+        }
+        // line 100
+        echo "                                    <li class=\"dropdown trailers\" id=\"test\"> <div class=\"glyphicon glyphicon-film\"></div>  
                                         <a id=\"trailers\" href=\"#\" data-toggle=\"dropdown\" class=\"dropdown-toggle\">Trailers <b class=\"caret\"></b></a>
                                         <ul class=\"dropdown-menu\">
                                             ";
-        // line 87
+        // line 103
         $context["t"] = 0;
-        // line 88
+        // line 104
         echo "                                            ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "results", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["trailer"]) {
-            // line 89
+            // line 105
             echo "                                            <li><a id=\"trailer";
             echo twig_escape_filter($this->env, (isset($context["t"]) ? $context["t"] : null), "html", null, true);
             echo "\" href=\"#popup";
@@ -224,32 +257,32 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
             echo "p</a></li>
                                             
                                             <div id=\"popup";
-            // line 91
+            // line 107
             echo twig_escape_filter($this->env, (isset($context["t"]) ? $context["t"] : null), "html", null, true);
             echo "\" style=\"\" class=\"overlay\">
 \t                                            <div class=\"popup\">
 \t\t                                            <a id=\"close";
-            // line 93
+            // line 109
             echo twig_escape_filter($this->env, (isset($context["t"]) ? $context["t"] : null), "html", null, true);
             echo "\" class=\"close\" href=\"#\">&times;</a>
 \t\t                                            <div class=\"video\">
 \t\t\t      \t\t\t                            <iframe width=\"100%\" height=\"600px\" src=\"https://www.youtube.com/embed/";
-            // line 95
+            // line 111
             echo twig_escape_filter($this->env, $this->getAttribute($context["trailer"], "key", array()), "html", null, true);
             echo "?rel=0\" frameborder=\"0\" allowfullscreen=\"\"></iframe>
 \t\t\t  \t\t\t                            </div>
 \t                                            </div>
                                             </div>
                                             ";
-            // line 99
+            // line 115
             $context["t"] = ((isset($context["t"]) ? $context["t"] : null) + 1);
-            // line 100
+            // line 116
             echo "                                            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['trailer'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 101
+        // line 117
         echo "                                            
                                         </ul>
                                     </li>
@@ -265,59 +298,123 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                                 <div class=\"tab-content\">
                                     <div id=\"detalles\" class=\"tab-pane fade in active\">
                                     <div class=\"movie_option\"><strong><div class=\"titulo\">";
-        // line 115
+        // line 131
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "title", array()), "html", null, true);
         echo "  </strong> </div> </div> <br/>
                                 \t";
-        // line 116
+        // line 132
         if ($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "release_date", array())) {
-            // line 117
+            // line 133
             echo "                                \t    <div class=\"movie_option\"><strong>Fecha de estreno: </strong>";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "release_date", array()), "html", null, true);
             echo "</div>
                                 \t";
         }
-        // line 119
+        // line 135
         echo "                                \t<div class=\"movie_option\"><strong>Generos: </strong> 
                                 \t";
-        // line 120
+        // line 136
         $context["i"] = 0;
-        // line 121
+        // line 137
         echo "                                \t";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "genres", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["genero"]) {
-            // line 122
+            // line 138
             echo "            
                                 \t";
-            // line 123
+            // line 139
             echo twig_escape_filter($this->env, $this->getAttribute($context["genero"], "name", array()), "html", null, true);
             if (((isset($context["i"]) ? $context["i"] : null) < (twig_length_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "genres", array())) - 1))) {
                 echo ",";
             }
-            // line 124
+            // line 140
             echo "                          
                                 \t";
-            // line 125
+            // line 141
             $context["i"] = ((isset($context["i"]) ? $context["i"] : null) + 1);
-            // line 126
+            // line 142
             echo "                                \t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['genero'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 127
+        // line 143
         echo "                                \t</div>
-                                \t<div class=\"movie_option\"><strong>Estudio Cinematogr&aacute;fico : </strong>";
-        // line 128
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "production_companies", array()), 0, array(), "array"), "name", array()), "html", null, true);
-        echo "</div>
-                                    <div class=\"movie_option\"><strong>Total votos: </strong>";
-        // line 129
+                                \t<div class=\"movie_option\"><strong>Duraci&oacute;n : </strong>";
+        // line 144
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "runtime", array()), "html", null, true);
+        echo "m</div>
+                                \t
+                                \t<div class=\"movie_option\"><strong>Total votos: </strong>";
+        // line 146
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "vote_count", array()), "html", null, true);
-        echo "</div> <br/>
+        echo "</div>
+                                    
+                                    <span class=\"imdbRatingPlugin\" style=\"padding-right:5px;\" data-user=\"ur52717514\" data-title=\"";
+        // line 148
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "imdb_id", array()), "html", null, true);
+        echo "\" data-style=\"p2\"><strong>&nbsp;IMDb: </strong> <a href=\"http://www.imdb.com/title/tt2948356/?ref_=plg_rt_1\"><img src=\"http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_37x18.png\" alt=\"";
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "title", array()), "html", null, true);
+        echo " en IMDb\" />&nbsp;</a></span>
+                                    <script>(function(d,s,id){var js,stags=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return;}js=d.createElement(s);js.id=id;js.src=\"http://g-ec2.images-amazon.com/images/G/01/imdb/plugins/rating/js/rating.min.js\";stags.parentNode.insertBefore(js,stags);})(document,'script','imdb-rating-api');</script>
+                                    
+                                    <div class=\"movie_option\"><strong>Total votos IMDb: </strong>";
+        // line 151
+        echo twig_escape_filter($this->env, (isset($context["votos_imdb"]) ? $context["votos_imdb"] : null), "html", null, true);
+        echo "</div><br/>
+                                \t
+                                \t<div class=\"movie_option\"><strong>Estudio(s) Cinematogr&aacute;fico(s) : </strong>
+                                \t";
+        // line 154
+        $context["contador_companias"] = 0;
+        echo " 
+                                \t";
+        // line 155
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "production_companies", array()));
+        foreach ($context['_seq'] as $context["_key"] => $context["production_companies"]) {
+            // line 156
+            echo "                                \t
+                                    \t";
+            // line 157
+            $context["contador_companias"] = ((isset($context["contador_companias"]) ? $context["contador_companias"] : null) + 1);
+            // line 158
+            echo "                                    \t
+                                    \t";
+            // line 159
+            if (((isset($context["contador_companias"]) ? $context["contador_companias"] : null) < twig_length_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "production_companies", array())))) {
+                echo twig_escape_filter($this->env, $this->getAttribute($context["production_companies"], "name", array()), "html", null, true);
+                echo ",&nbsp;
+                                    \t";
+            } else {
+                // line 160
+                echo twig_escape_filter($this->env, $this->getAttribute($context["production_companies"], "name", array()), "html", null, true);
+                echo ".
+                                    \t";
+            }
+            // line 162
+            echo "                                \t";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['production_companies'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 163
+        echo "                                \t</div><br/>
+                                    
+                                    ";
+        // line 165
+        if (((isset($context["funcionesOcultas"]) ? $context["funcionesOcultas"] : null) == 1)) {
+            // line 166
+            echo "                                        <center> <div class=\"movie_option\"><a target=\"_blank\" style=\"text-decoration:none; border-radius:5px; color:#fff;\" class=\"btn1\" href=\"https://thepiratebay.org/search/";
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "title", array()), "html", null, true);
+            echo "\" ><strong>Descargar</strong></a></div><br/></center>
+                                    ";
+        }
+        // line 168
+        echo "                                    
                                     <div class=\"m_4\"><strong>Sinopsis:</strong> ";
-        // line 130
+        // line 169
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "overview", array()), "html", null, true);
         echo "</div><br/>
                             
@@ -326,14 +423,14 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                                   <!-- Indicators -->
                                   <ol class=\"carousel-indicators\">
                                    ";
-        // line 136
+        // line 175
         $context["k"] = 0;
-        // line 137
+        // line 176
         echo "                                    ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "backdrops", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["backdrops"]) {
-            // line 138
+            // line 177
             echo "                                        <li data-target=\"#myCarousel\" data-slide-to=\"";
             echo twig_escape_filter($this->env, (isset($context["k"]) ? $context["k"] : null), "html", null, true);
             echo "\"";
@@ -343,29 +440,29 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
             echo "></li>
                                           
                                         ";
-            // line 140
+            // line 179
             $context["k"] = ((isset($context["k"]) ? $context["k"] : null) + 1);
-            // line 141
+            // line 180
             echo "                                        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['backdrops'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 142
+        // line 181
         echo "                                      </ol>
                                     
                                       <!-- Wrapper for slides -->
                                       <div class=\"carousel-inner\" role=\"listbox\">
                                         
                                         ";
-        // line 147
+        // line 186
         $context["p"] = 0;
-        // line 148
+        // line 187
         echo "                                        ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "backdrops", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["backdrops"]) {
-            // line 149
+            // line 188
             echo "                                        <div class=\"";
             if (((isset($context["p"]) ? $context["p"] : null) == 0)) {
                 echo "item active";
@@ -374,20 +471,20 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
             }
             echo "\">
                                           <img src=\"https://image.tmdb.org/t/p/w780/";
-            // line 150
+            // line 189
             echo twig_escape_filter($this->env, $this->getAttribute($context["backdrops"], "file_path", array()), "html", null, true);
             echo "\" alt=\"Captura\">
                                         </div>
                                         ";
-            // line 152
+            // line 191
             $context["p"] =  -1;
-            // line 153
+            // line 192
             echo "                                        ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['backdrops'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 154
+        // line 193
         echo "                                    
                                       </div>
                                     
@@ -405,14 +502,14 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                                     <div id=\"produccion\" class=\"tab-pane fade\">
                                         <h3> Elenco </h3>
                                         ";
-        // line 170
+        // line 209
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "cast", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["elenco"]) {
-            // line 171
+            // line 210
             echo "                                            
                                             <strong>";
-            // line 172
+            // line 211
             echo twig_escape_filter($this->env, $this->getAttribute($context["elenco"], "name", array()), "html", null, true);
             echo "</strong>: ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["elenco"], "character", array()), "html", null, true);
@@ -423,19 +520,19 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['elenco'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 175
+        // line 214
         echo "                                        
                                         <h3> Personal </h3>
                                         
                                         ";
-        // line 178
+        // line 217
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "crew", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["personal"]) {
-            // line 179
+            // line 218
             echo "                                            
                                             <strong>";
-            // line 180
+            // line 219
             echo twig_escape_filter($this->env, $this->getAttribute($context["personal"], "name", array()), "html", null, true);
             echo "</strong>: ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["personal"], "department", array()), "html", null, true);
@@ -448,7 +545,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['personal'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 183
+        // line 222
         echo "                                        
                                     </div>
                                 </div>
@@ -464,17 +561,17 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                   
                   <div class=\"col-md-2\">
                       ";
-        // line 197
+        // line 236
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(twig_slice($this->env, $this->getAttribute((isset($context["similares"]) ? $context["similares"] : null), "results", array()), 0, 3));
         foreach ($context['_seq'] as $context["_key"] => $context["peliculaSimilar"]) {
-            // line 198
+            // line 237
             echo "                          \t<div class=\"movie_img\"><div class=\"grid_2\">
                           \t        
                           \t        ";
-            // line 200
+            // line 239
             if (($this->getAttribute($context["peliculaSimilar"], "poster_path", array()) == "")) {
-                // line 201
+                // line 240
                 echo "                                         <a href=\"";
                 echo $this->env->getExtension('routing')->getUrl("homepage");
                 echo "vista/mostrarpelicula/";
@@ -486,7 +583,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                 echo "\"></a>
                                     ";
             } else {
-                // line 203
+                // line 242
                 echo "                                        <a href=\"";
                 echo $this->env->getExtension('routing')->getUrl("homepage");
                 echo "vista/mostrarpelicula/";
@@ -498,20 +595,20 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                 echo "\" class=\"img-responsive\" ></a>\t
                                     ";
             }
-            // line 205
+            // line 244
             echo "                          \t        
                                     <div class=\"caption1\">
     \t\t\t\t\t\t\t\t\t<ul class=\"list_5 list_7\">
     \t\t\t\t\t\t\t\t\t    <div class=\"calificacion-fondo-similares\">
     \t\t\t\t\t\t\t    \t\t    <li><i class=\"icon5\"> <span  class=\"glyphicon glyphicon-star calificacion-similares\" aria-hidden=\"true\"> </span></i><p>";
-            // line 209
+            // line 248
             echo twig_escape_filter($this->env, $this->getAttribute($context["peliculaSimilar"], "vote_average", array()), "html", null, true);
             echo "</p></li>
     \t\t\t\t\t\t\t    \t\t</div>
     \t\t\t\t\t\t\t    \t</ul>
     \t\t\t\t\t\t\t    \t<i class=\"icon4 icon6 icon7\"> </i>
     \t\t\t\t\t\t\t    \t<!--  <p class=\"m_3\">";
-            // line 213
+            // line 252
             echo twig_escape_filter($this->env, $this->getAttribute($context["peliculaSimilar"], "title", array()), "html", null, true);
             echo "</p>-->
     \t\t\t\t\t\t\t    </div>
@@ -522,12 +619,12 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['peliculaSimilar'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 217
+        // line 256
         echo " 
                       
                      <center>
                          <a href=\"";
-        // line 220
+        // line 259
         echo $this->env->getExtension('routing')->getUrl("vista_homepage");
         echo "similares/";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "id", array()), "html", null, true);
@@ -537,58 +634,161 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                          
                     </center><br/>
            </div>
+           <div id=\"popup_nueva_coleccion_personalizada\" style=\"visibility: invisible; opacity: 1;\" class=\"overlay\">
+               <div id=\"divEmergentePopup\" style=\"display:none\" class=\"alert alert-success alert-dismissible\" role=\"alert\">
+                   <p id=\"mensajeEmergente\"></p>
+               </div>
+               
+               <div class=\"popup\">
+                    <a id=\"close_nueva_coleccion_p\" class=\"close\" href=\"#\">×</a>
+                   <div class=\"panel panel-warning\" sytle =\"width= 90%;\">
+                        <div class=\"panel-heading\">
+                            Creacion de nuevas colecciones
+                        </div>
+                        <div class=\"panel-body\">
+                            <div class=\"form-group col-md-7\">
+                                <div id=\"divEmergenteCrearListas\" style=\"display:none; margin-top: 0.5cm;\" class=\"alert alert-success alert-dismissible\" role=\"alert\">
+                                   <p id=\"mensajeEmergenteCrearListas\"></p>
+                               </div>
+                      
+                                <label style=\"margin-top = 5%;\">Ingrese el nombre de la nueva lista </label>
+                                <input id=\"nombreNuevaColeccion\" style=\"width : 90%;\" type=\"text\" style=\"form-control\" required>
+                                <br><br>
+                                <center>
+                                <button id=\"crearColeccion\" type=\"submit\" class=\"btn btn-warning\">Crear</button>
+                                </center>
+                             </div>
+                             <img src=\"";
+        // line 287
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/images/listImage.png"), "html", null, true);
+        echo "\" class=\"img-responsive col-md-4\" alt=\"Cinque Terre\">
+                        </div>
+           
+                        </div>
+                   
+                    </div>
+                    
+                    
+                  
+                
+                   
+               </div>
+           
+           </div>
 
 ";
     }
 
-    // line 226
+    // line 303
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 227
+        // line 304
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
     <script>
         \$(function() {
             ";
-        // line 230
+        // line 307
         if (((isset($context["usuarioLogueado"]) ? $context["usuarioLogueado"] : null) == 1)) {
-            // line 231
+            // line 308
             echo "            var vista=";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "vista", array()), "html", null, true);
             echo ";
             var porVer=";
-            // line 232
+            // line 309
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "porVer", array()), "html", null, true);
             echo ";
              estiloBotonVistas(vista);
              estiloBotonPorVer(porVer);
             ";
         }
-        // line 236
+        // line 313
         echo "            var lts=0;
             
             var rating =0;
+            
             var calificacion_semaphore=0;
-           
-  //inicializar el color del boton marcar vista segun si se ha visto o no
+            
+    // funciones para nuevas colecciones            
+     \$(\"#close_nueva_coleccion_p\").click(function(){
+       \$(\"#popup_nueva_coleccion_personalizada\").attr(\"style\",\"visibility: invisible; opacity: 0;\");
+       var x = document.getElementById(\"popup_nueva_coleccion_personalizada\");
+    var y = x;
+    \$(\"#ctn\").append(y);
+  });        
+  \$('#crearListas').click(function(){
+    \$(\"#popup_nueva_coleccion_personalizada\").attr(\"style\",\"visibility: visible; opacity: 1;\");
+    var x = document.getElementById(\"popup_nueva_coleccion_personalizada\");
+    var y = x;
+    \$(\"#ctn\").append(y);
+  });
+   \$('#crearColeccion').click(function(){
+     \$.ajax({
+                type: \"GET\",
+                url: \"";
+        // line 335
+        echo $this->env->getExtension('routing')->getUrl("adicionar_lista");
+        echo "\",
+                data: { nombreColeccion:\$('#nombreNuevaColeccion').val()},
+                dataType: \"json\",
+               
+                //if received a response from the server
+                success: function( data, textStatus, jqXHR) {
+                     if(data.success){
+                         \$(\"#mensajeEmergente\").html(\"\");
+                     } 
+                     //display error message
+                     else {
+                         \$(\"#mensajeEmergente\").html(\"Error ¬_¬\");
+                     }
+                },
+               
+                //If there was no resonse from the server
+                error: function(jqXHR, textStatus, errorThrown){
+                    
+                       if(jqXHR.status == 405)
+                       {
+                        \$(\"#mensajeEmergenteCrearListas\").html(jqXHR.responseText);
+                        \$('#divEmergenteCrearListas').attr(\"class\",\"alert alert-danger alert-dismissible\" );
+                        \$('#divEmergenteCrearListas').show(1000).delay(3000);
+                        \$('#divEmergenteCrearListas').hide(1000);
+                       }
+                       if(jqXHR.status == 200)
+                       {
+                        \$(\"#mensajeEmergente\").html(jqXHR.responseText);   
+                        \$('#divEmergente').attr(\"class\",\"alert alert-success alert-dismissible\" );
+                        \$('#divEmergente').show(1000).delay(3000);
+                        \$('#divEmergente').hide(1000);    
+                        \$('#ulListaColecciones').append('<li><a id=\"crearListas\" href=\"#lista\">'+\$('#nombreNuevaColeccion').val()+'</a> </li>');
+                         \$(\"#popup_nueva_coleccion_personalizada\").attr(\"style\",\"visibility: invisible; opacity: 0;\");
+                       }
+                 
+                       
+                },
+               
+
+     
+            });  
+  });
+  //close y enlaces a trailers
   ";
-        // line 242
+        // line 378
         $context["i"] = 0;
-        // line 243
+        // line 379
         echo " ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "results", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["trailer"]) {
-            // line 244
+            // line 380
             echo "  \$(\"#close";
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").click(function(){
        \$(\"#popup";
-            // line 245
+            // line 381
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").attr(\"style\",\"visibility: invisible; opacity: 0;\");
        var x = document.getElementById(\"popup";
-            // line 246
+            // line 382
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\");
     var y = x;
@@ -596,34 +796,34 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
   });
   
   \$('#trailer";
-            // line 251
+            // line 387
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "').click(function(){
     \$(\"#popup";
-            // line 252
+            // line 388
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").attr(\"style\",\"visibility: visible; opacity: 1;\");
     var x = document.getElementById(\"popup";
-            // line 253
+            // line 389
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\");
     var y = x;
     \$(\"#ctn\").append(y);
   });
   ";
-            // line 257
+            // line 393
             $context["i"] = ((isset($context["i"]) ? $context["i"] : null) + 1);
-            // line 258
+            // line 394
             echo "  ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['trailer'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 259
+        // line 395
         echo "             
 
          ";
-        // line 261
+        // line 397
         if (((isset($context["usuarioLogueado"]) ? $context["usuarioLogueado"] : null) == 1)) {
             echo "   
          
@@ -653,11 +853,11 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
          \$.ajax({
                 type: \"GET\",
                 url: \"";
-            // line 288
+            // line 424
             echo $this->env->getExtension('routing')->getUrl("marcar_por_ver");
             echo "\",
                 data: { idPelicula:";
-            // line 289
+            // line 425
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "id", array()), "html", null, true);
             echo "},
                 dataType: \"json\",
@@ -681,8 +881,9 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                     estiloBotonVistas(vista);
                     }
                     estiloBotonPorVer(porVer);
+                    \$('#divEmergente').attr(\"class\",\"alert alert-success alert-dismissible\" );
                     \$(\"#mensajeEmergente\").html(jqXHR.responseText);
-                    \$('#divEmergente').show(1000).delay( 4000 );
+                    \$('#divEmergente').show(1000).delay( 3000 );
                     \$('#divEmergente').hide(1000);
                        
                 },
@@ -695,11 +896,11 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
          \$.ajax({
                 type: \"GET\",
                 url: \"";
-            // line 324
+            // line 461
             echo $this->env->getExtension('routing')->getUrl("marcar_vista");
             echo "\",
                 data: { idPelicula:";
-            // line 325
+            // line 462
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "id", array()), "html", null, true);
             echo "},
                 dataType: \"json\",
@@ -724,7 +925,8 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                     }
                        estiloBotonVistas(vista);
                        \$(\"#mensajeEmergente\").html(jqXHR.responseText);
-                       \$('#divEmergente').show(1000).delay( 4000 );
+                       \$('#divEmergente').attr(\"class\",\"alert alert-success alert-dismissible\" );
+                       \$('#divEmergente').show(1000).delay( 3000 );
                        \$('#divEmergente').hide(1000);
                        
                 },
@@ -737,7 +939,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                 
                 readOnly: false,
                 rating: ";
-            // line 360
+            // line 498
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "calificacionUsuario", array()), "html", null, true);
             echo ",
                 numStars: 10,
@@ -749,11 +951,11 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                 \$.ajax({
                 type: \"GET\",
                 url: \"";
-            // line 369
+            // line 507
             echo $this->env->getExtension('routing')->getUrl("calificacion_pelicula");
             echo "\",
                 data: { idPelicula:";
-            // line 370
+            // line 508
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "id", array()), "html", null, true);
             echo ", calificacion:data.rating},
                 dataType: \"json\",
@@ -769,12 +971,20 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                      }
                 },
                
-                //If there was no resonse from the server
+                //al intentar calificar:
                 error: function(jqXHR, textStatus, errorThrown){
                     
                       
                        \$(\"#mensajeEmergente\").html(jqXHR.responseText);
-                       \$('#divEmergente').show(1000).delay( 4000 );
+                       if(jqXHR.status == 405)
+                       {
+                        \$('#divEmergente').attr(\"class\",\"alert alert-danger alert-dismissible\" );
+                       }
+                       if(jqXHR.status == 200)
+                       {
+                        \$('#divEmergente').attr(\"class\",\"alert alert-success alert-dismissible\" );
+                       }
+                       \$('#divEmergente').show(1000).delay( 3000 );
                        \$('#divEmergente').hide(1000);
                        
                 },
@@ -797,23 +1007,23 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 
   ";
         }
-        // line 411
+        // line 557
         echo "          ";
         if ($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "backdrop_path", array())) {
-            // line 412
+            // line 558
             echo "            \$('#cabezera').css(\"background\", \"url(https://image.tmdb.org/t/p/w1280/";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "backdrop_path", array()), "html", null, true);
             echo ")\");  
             ";
         }
-        // line 414
+        // line 560
         echo "        });
     </script>
     
     ";
     }
 
-    // line 418
+    // line 564
     public function block_barraderecha($context, array $blocks = array())
     {
     }
@@ -830,7 +1040,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 
     public function getDebugInfo()
     {
-        return array (  817 => 418,  810 => 414,  804 => 412,  801 => 411,  757 => 370,  753 => 369,  741 => 360,  703 => 325,  699 => 324,  661 => 289,  657 => 288,  627 => 261,  623 => 259,  617 => 258,  615 => 257,  608 => 253,  604 => 252,  600 => 251,  592 => 246,  588 => 245,  583 => 244,  578 => 243,  576 => 242,  568 => 236,  561 => 232,  556 => 231,  554 => 230,  548 => 227,  545 => 226,  531 => 220,  526 => 217,  515 => 213,  508 => 209,  502 => 205,  490 => 203,  478 => 201,  476 => 200,  472 => 198,  468 => 197,  452 => 183,  439 => 180,  436 => 179,  432 => 178,  427 => 175,  416 => 172,  413 => 171,  409 => 170,  391 => 154,  385 => 153,  383 => 152,  378 => 150,  369 => 149,  364 => 148,  362 => 147,  355 => 142,  349 => 141,  347 => 140,  337 => 138,  332 => 137,  330 => 136,  321 => 130,  317 => 129,  313 => 128,  310 => 127,  304 => 126,  302 => 125,  299 => 124,  294 => 123,  291 => 122,  286 => 121,  284 => 120,  281 => 119,  275 => 117,  273 => 116,  269 => 115,  253 => 101,  247 => 100,  245 => 99,  238 => 95,  233 => 93,  228 => 91,  214 => 89,  209 => 88,  207 => 87,  191 => 73,  183 => 67,  181 => 66,  176 => 63,  168 => 61,  160 => 59,  158 => 58,  153 => 56,  138 => 43,  135 => 42,  127 => 38,  123 => 36,  115 => 34,  112 => 33,  109 => 32,  106 => 31,  100 => 30,  94 => 29,  86 => 25,  82 => 24,  78 => 23,  74 => 22,  71 => 21,  61 => 14,  55 => 10,  53 => 9,  49 => 8,  46 => 7,  43 => 6,  35 => 5,  11 => 1,);
+        return array (  1027 => 564,  1020 => 560,  1014 => 558,  1011 => 557,  959 => 508,  955 => 507,  943 => 498,  904 => 462,  900 => 461,  861 => 425,  857 => 424,  827 => 397,  823 => 395,  817 => 394,  815 => 393,  808 => 389,  804 => 388,  800 => 387,  792 => 382,  788 => 381,  783 => 380,  778 => 379,  776 => 378,  730 => 335,  706 => 313,  699 => 309,  694 => 308,  692 => 307,  686 => 304,  683 => 303,  663 => 287,  628 => 259,  623 => 256,  612 => 252,  605 => 248,  599 => 244,  587 => 242,  575 => 240,  573 => 239,  569 => 237,  565 => 236,  549 => 222,  536 => 219,  533 => 218,  529 => 217,  524 => 214,  513 => 211,  510 => 210,  506 => 209,  488 => 193,  482 => 192,  480 => 191,  475 => 189,  466 => 188,  461 => 187,  459 => 186,  452 => 181,  446 => 180,  444 => 179,  434 => 177,  429 => 176,  427 => 175,  418 => 169,  415 => 168,  409 => 166,  407 => 165,  403 => 163,  397 => 162,  392 => 160,  386 => 159,  383 => 158,  381 => 157,  378 => 156,  374 => 155,  370 => 154,  364 => 151,  356 => 148,  351 => 146,  346 => 144,  343 => 143,  337 => 142,  335 => 141,  332 => 140,  327 => 139,  324 => 138,  319 => 137,  317 => 136,  314 => 135,  308 => 133,  306 => 132,  302 => 131,  286 => 117,  280 => 116,  278 => 115,  271 => 111,  266 => 109,  261 => 107,  247 => 105,  242 => 104,  240 => 103,  235 => 100,  227 => 94,  218 => 92,  214 => 91,  204 => 83,  202 => 82,  193 => 75,  185 => 69,  183 => 68,  177 => 64,  169 => 62,  161 => 60,  159 => 59,  154 => 57,  139 => 44,  136 => 43,  128 => 39,  124 => 37,  116 => 35,  113 => 34,  110 => 33,  107 => 32,  101 => 31,  95 => 30,  87 => 26,  83 => 25,  79 => 24,  75 => 23,  72 => 22,  61 => 14,  55 => 10,  53 => 9,  49 => 8,  46 => 7,  43 => 6,  35 => 5,  11 => 1,);
     }
 }
 /* {% extends 'index.html.twig' %}*/
@@ -849,6 +1059,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*             background-image: url("https://image.tmdb.org/t/p/original/{{ params.backdrops[3].file_path }}");*/
 /*             background-repeat: no-repeat;*/
 /*             background-attachment: fixed;*/
+/*             background-position: center; */
 /*         }*/
 /*         */
 /*     </style>*/
@@ -881,8 +1092,8 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /* </div>*/
 /* */
 /* */
-/* */
 /* <div id = "ctn" class="content">*/
+/* */
 /*       	   <div class="movie_top">*/
 /*       	         <div class="col-md-9 movie_box">*/
 /*  */
@@ -896,6 +1107,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*                                      <img src="https://image.tmdb.org/t/p/w300{{params.poster_path}}" width="100%" alt="{{params.title}}" class="img-responsive" >*/
 /*                                 {% endif %}*/
 /*                                 */
+/*                                */
 /*                                 */
 /*                             </div>*/
 /*                             {%if usuarioLogueado%}*/
@@ -912,10 +1124,24 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*                             <center>*/
 /*                             <div id="menupelicula" class="menu-pelicula" >*/
 /*                                 <ui>*/
+/*                                     {%if usuarioLogueado == 1%}*/
 /*                                     <li id="marcar_desmarcar_vista_li" class="vista"> <div id="iconoVista" class="glyphicon glyphicon-eye-open"></div> Vista&nbsp;</li>*/
 /*                                     <li id="marcar_desmarcar_por_ver_li" class="vista"> <div id="iconoPorVer"  class="glyphicon glyphicon-time"></div> Pendiente&nbsp;</li>*/
-/*                                     <li class="lista"> <div class="glyphicon glyphicon-plus"></div> Lista&nbsp;</li>*/
 /*                                     */
+/*                                     <li class="listas dropdown" id ="listas"> <div class="glyphicon glyphicon-plus"></div> */
+/*                                         <a id="listas" href="#" data-toggle="dropdown" class="dropdown-toggle">Listas<b class="caret"></b>&nbsp;</a>*/
+/*                                             <ul id = "ulListaColecciones" class="dropdown-menu">*/
+/*                                                  <li><a id="crearListas" href="#lista"><span class="glyphicon glyphicon-plus"></span>&nbsp;Crear</a> </li>*/
+/*                                                  <li class="divider"></li>*/
+/*                                                 {%for lista in params.listaColecciones%}*/
+/*                                                 <li><a id="crearListas" href="#lista">{{lista.nombre}}</a> </li>*/
+/*                                                 {%endfor%}*/
+/*                                                */
+/*                                                */
+/*                                            */
+/*                                             </ul>*/
+/*                                     </li>*/
+/*                                     {%endif%}*/
 /*                                     <li class="dropdown trailers" id="test"> <div class="glyphicon glyphicon-film"></div>  */
 /*                                         <a id="trailers" href="#" data-toggle="dropdown" class="dropdown-toggle">Trailers <b class="caret"></b></a>*/
 /*                                         <ul class="dropdown-menu">*/
@@ -960,8 +1186,31 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*                                 	{%set i = i +1%}*/
 /*                                 	{%endfor%}*/
 /*                                 	</div>*/
-/*                                 	<div class="movie_option"><strong>Estudio Cinematogr&aacute;fico : </strong>{{params.production_companies[0].name}}</div>*/
-/*                                     <div class="movie_option"><strong>Total votos: </strong>{{params.vote_count}}</div> <br/>*/
+/*                                 	<div class="movie_option"><strong>Duraci&oacute;n : </strong>{{params.runtime}}m</div>*/
+/*                                 	*/
+/*                                 	<div class="movie_option"><strong>Total votos: </strong>{{params.vote_count}}</div>*/
+/*                                     */
+/*                                     <span class="imdbRatingPlugin" style="padding-right:5px;" data-user="ur52717514" data-title="{{params.imdb_id}}" data-style="p2"><strong>&nbsp;IMDb: </strong> <a href="http://www.imdb.com/title/tt2948356/?ref_=plg_rt_1"><img src="http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_37x18.png" alt="{{params.title}} en IMDb" />&nbsp;</a></span>*/
+/*                                     <script>(function(d,s,id){var js,stags=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return;}js=d.createElement(s);js.id=id;js.src="http://g-ec2.images-amazon.com/images/G/01/imdb/plugins/rating/js/rating.min.js";stags.parentNode.insertBefore(js,stags);})(document,'script','imdb-rating-api');</script>*/
+/*                                     */
+/*                                     <div class="movie_option"><strong>Total votos IMDb: </strong>{{votos_imdb}}</div><br/>*/
+/*                                 	*/
+/*                                 	<div class="movie_option"><strong>Estudio(s) Cinematogr&aacute;fico(s) : </strong>*/
+/*                                 	{% set contador_companias = 0 %} */
+/*                                 	{% for production_companies in params.production_companies  %}*/
+/*                                 	*/
+/*                                     	{% set contador_companias = contador_companias + 1 %}*/
+/*                                     	*/
+/*                                     	{%if contador_companias < params.production_companies|length %}{{production_companies.name}},&nbsp;*/
+/*                                     	{%else%}{{production_companies.name}}.*/
+/*                                     	{%endif%}*/
+/*                                 	{% endfor %}*/
+/*                                 	</div><br/>*/
+/*                                     */
+/*                                     {% if funcionesOcultas == 1 %}*/
+/*                                         <center> <div class="movie_option"><a target="_blank" style="text-decoration:none; border-radius:5px; color:#fff;" class="btn1" href="https://thepiratebay.org/search/{{params.title}}" ><strong>Descargar</strong></a></div><br/></center>*/
+/*                                     {% endif %}*/
+/*                                     */
 /*                                     <div class="m_4"><strong>Sinopsis:</strong> {{params.overview}}</div><br/>*/
 /*                             */
 /*                                 <h4>Capturas</h4>*/
@@ -1056,6 +1305,44 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*                          */
 /*                     </center><br/>*/
 /*            </div>*/
+/*            <div id="popup_nueva_coleccion_personalizada" style="visibility: invisible; opacity: 1;" class="overlay">*/
+/*                <div id="divEmergentePopup" style="display:none" class="alert alert-success alert-dismissible" role="alert">*/
+/*                    <p id="mensajeEmergente"></p>*/
+/*                </div>*/
+/*                */
+/*                <div class="popup">*/
+/*                     <a id="close_nueva_coleccion_p" class="close" href="#">×</a>*/
+/*                    <div class="panel panel-warning" sytle ="width= 90%;">*/
+/*                         <div class="panel-heading">*/
+/*                             Creacion de nuevas colecciones*/
+/*                         </div>*/
+/*                         <div class="panel-body">*/
+/*                             <div class="form-group col-md-7">*/
+/*                                 <div id="divEmergenteCrearListas" style="display:none; margin-top: 0.5cm;" class="alert alert-success alert-dismissible" role="alert">*/
+/*                                    <p id="mensajeEmergenteCrearListas"></p>*/
+/*                                </div>*/
+/*                       */
+/*                                 <label style="margin-top = 5%;">Ingrese el nombre de la nueva lista </label>*/
+/*                                 <input id="nombreNuevaColeccion" style="width : 90%;" type="text" style="form-control" required>*/
+/*                                 <br><br>*/
+/*                                 <center>*/
+/*                                 <button id="crearColeccion" type="submit" class="btn btn-warning">Crear</button>*/
+/*                                 </center>*/
+/*                              </div>*/
+/*                              <img src="{{asset('assets/images/listImage.png')}}" class="img-responsive col-md-4" alt="Cinque Terre">*/
+/*                         </div>*/
+/*            */
+/*                         </div>*/
+/*                    */
+/*                     </div>*/
+/*                     */
+/*                     */
+/*                   */
+/*                 */
+/*                    */
+/*                </div>*/
+/*            */
+/*            </div>*/
 /* */
 /* {%endblock%}*/
 /* {%block javascripts%}*/
@@ -1071,9 +1358,68 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*             var lts=0;*/
 /*             */
 /*             var rating =0;*/
+/*             */
 /*             var calificacion_semaphore=0;*/
-/*            */
-/*   //inicializar el color del boton marcar vista segun si se ha visto o no*/
+/*             */
+/*     // funciones para nuevas colecciones            */
+/*      $("#close_nueva_coleccion_p").click(function(){*/
+/*        $("#popup_nueva_coleccion_personalizada").attr("style","visibility: invisible; opacity: 0;");*/
+/*        var x = document.getElementById("popup_nueva_coleccion_personalizada");*/
+/*     var y = x;*/
+/*     $("#ctn").append(y);*/
+/*   });        */
+/*   $('#crearListas').click(function(){*/
+/*     $("#popup_nueva_coleccion_personalizada").attr("style","visibility: visible; opacity: 1;");*/
+/*     var x = document.getElementById("popup_nueva_coleccion_personalizada");*/
+/*     var y = x;*/
+/*     $("#ctn").append(y);*/
+/*   });*/
+/*    $('#crearColeccion').click(function(){*/
+/*      $.ajax({*/
+/*                 type: "GET",*/
+/*                 url: "{{url('adicionar_lista')}}",*/
+/*                 data: { nombreColeccion:$('#nombreNuevaColeccion').val()},*/
+/*                 dataType: "json",*/
+/*                */
+/*                 //if received a response from the server*/
+/*                 success: function( data, textStatus, jqXHR) {*/
+/*                      if(data.success){*/
+/*                          $("#mensajeEmergente").html("");*/
+/*                      } */
+/*                      //display error message*/
+/*                      else {*/
+/*                          $("#mensajeEmergente").html("Error ¬_¬");*/
+/*                      }*/
+/*                 },*/
+/*                */
+/*                 //If there was no resonse from the server*/
+/*                 error: function(jqXHR, textStatus, errorThrown){*/
+/*                     */
+/*                        if(jqXHR.status == 405)*/
+/*                        {*/
+/*                         $("#mensajeEmergenteCrearListas").html(jqXHR.responseText);*/
+/*                         $('#divEmergenteCrearListas').attr("class","alert alert-danger alert-dismissible" );*/
+/*                         $('#divEmergenteCrearListas').show(1000).delay(3000);*/
+/*                         $('#divEmergenteCrearListas').hide(1000);*/
+/*                        }*/
+/*                        if(jqXHR.status == 200)*/
+/*                        {*/
+/*                         $("#mensajeEmergente").html(jqXHR.responseText);   */
+/*                         $('#divEmergente').attr("class","alert alert-success alert-dismissible" );*/
+/*                         $('#divEmergente').show(1000).delay(3000);*/
+/*                         $('#divEmergente').hide(1000);    */
+/*                         $('#ulListaColecciones').append('<li><a id="crearListas" href="#lista">'+$('#nombreNuevaColeccion').val()+'</a> </li>');*/
+/*                          $("#popup_nueva_coleccion_personalizada").attr("style","visibility: invisible; opacity: 0;");*/
+/*                        }*/
+/*                  */
+/*                        */
+/*                 },*/
+/*                */
+/* */
+/*      */
+/*             });  */
+/*   });*/
+/*   //close y enlaces a trailers*/
 /*   {%set i = 0%}*/
 /*  {% for trailer in params.results %}*/
 /*   $("#close{{i}}").click(function(){*/
@@ -1143,8 +1489,9 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*                     estiloBotonVistas(vista);*/
 /*                     }*/
 /*                     estiloBotonPorVer(porVer);*/
+/*                     $('#divEmergente').attr("class","alert alert-success alert-dismissible" );*/
 /*                     $("#mensajeEmergente").html(jqXHR.responseText);*/
-/*                     $('#divEmergente').show(1000).delay( 4000 );*/
+/*                     $('#divEmergente').show(1000).delay( 3000 );*/
 /*                     $('#divEmergente').hide(1000);*/
 /*                        */
 /*                 },*/
@@ -1180,7 +1527,8 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*                     }*/
 /*                        estiloBotonVistas(vista);*/
 /*                        $("#mensajeEmergente").html(jqXHR.responseText);*/
-/*                        $('#divEmergente').show(1000).delay( 4000 );*/
+/*                        $('#divEmergente').attr("class","alert alert-success alert-dismissible" );*/
+/*                        $('#divEmergente').show(1000).delay( 3000 );*/
 /*                        $('#divEmergente').hide(1000);*/
 /*                        */
 /*                 },*/
@@ -1216,12 +1564,20 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*                      }*/
 /*                 },*/
 /*                */
-/*                 //If there was no resonse from the server*/
+/*                 //al intentar calificar:*/
 /*                 error: function(jqXHR, textStatus, errorThrown){*/
 /*                     */
 /*                       */
 /*                        $("#mensajeEmergente").html(jqXHR.responseText);*/
-/*                        $('#divEmergente').show(1000).delay( 4000 );*/
+/*                        if(jqXHR.status == 405)*/
+/*                        {*/
+/*                         $('#divEmergente').attr("class","alert alert-danger alert-dismissible" );*/
+/*                        }*/
+/*                        if(jqXHR.status == 200)*/
+/*                        {*/
+/*                         $('#divEmergente').attr("class","alert alert-success alert-dismissible" );*/
+/*                        }*/
+/*                        $('#divEmergente').show(1000).delay( 3000 );*/
 /*                        $('#divEmergente').hide(1000);*/
 /*                        */
 /*                 },*/

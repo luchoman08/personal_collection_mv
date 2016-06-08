@@ -21,3 +21,7 @@ marcar_vista:
 marcar_por_ver:
     path:   /marcarPorVer
     defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:adicionarPeliculaListaPorVer}
+
+adicionar_lista:
+    path: /adicionarLista
+    defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:crearListaPersonalizada}

@@ -31,6 +31,20 @@
   					<strong>Error!</strong> Los datos ingresados no corresponden a un usuario registrado.
 					</div>
 					{%endif%}
+					
+					{%if error == 2%}
+					<div class="alert alert-danger alert-dismissible" role="alert">
+  					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  					<strong>Error!</strong> Debe ingresar primero.
+					</div>
+					{%endif%}
+					{%if error == 3%}
+					<div class="alert alert-danger alert-dismissible" role="alert">
+  					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  					<strong>Error!</strong> Hola hacker :) 
+					</div>
+					{%endif%}
+					
 				<form method = "POST" action="{{url('login_action')}}">
 					  <div>
 						<span>Correo electrónico<label>*</label></span>

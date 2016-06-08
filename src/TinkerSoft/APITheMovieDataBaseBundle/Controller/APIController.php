@@ -344,10 +344,36 @@ class APIController extends Controller
     
     public function listaGenerosAction($_locale)
     {
-        $urlAPI = "https://api.themoviedb.org/3/genre/tv/list?api_key=be961f58626a1b5bb01ccf04da21d18f&language=".$codigoLenguaje;
+        //&language=".$codigoLenguaje
+        $urlAPI = "https://api.themoviedb.org/3/genre/movie/list?api_key=be961f58626a1b5bb01ccf04da21d18f";
         $content = file_get_contents($urlAPI);
         $contentJSON = (array) json_decode($content);
         return $contentJSON;
     }
+    
+    // Funcion BETA!!!!!!!! Nombre
+    public function obtenerDatosOMDbAction($consulta){
+        
+        $urlAPI = "http://www.omdbapi.com/?t=" . $consulta . "&y=&plot=full&r=json";
+        $content = file_get_contents($urlAPI);
+        $contentJSON = (array) json_decode($content);
+        return $contentJSON;
+        
+    } 
+    
+    // Funcion BETA!!!!!!!! ID
+    public function obtenerDatosOMDbIDAction($id){
+        
+        $urlAPI = "http://www.omdbapi.com/?i=" . $id . "&plot=full&r=json";
+        $content = file_get_contents($urlAPI);
+        $contentJSON = (array) json_decode($content);
+        return $contentJSON;
+        
+    } 
+    
+    
+    
+    
+    
 }
 

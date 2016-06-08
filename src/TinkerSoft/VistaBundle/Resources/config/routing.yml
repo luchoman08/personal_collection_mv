@@ -62,7 +62,11 @@ mostrarPelicula:
 
 mostrarPelicula_minuscula:
     path:      /mostrarpelicula/{id}
-    defaults:  { _controller: VistaBundle:Default:verPelicula }
+    defaults:  { _controller: VistaBundle:Default:verPelicula, optional 0 }
+    
+mostrarPelicula_minuscula_secret:
+    path:      /mostrarpelicula/{id}/secret
+    defaults:  { _controller: VistaBundle:Default:verPelicula, optional 1 }
 
 login:
     path:      /login/

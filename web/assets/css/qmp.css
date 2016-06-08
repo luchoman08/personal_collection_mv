@@ -498,15 +498,23 @@
 .pendiente:hover{
     color:#000;
 }
-
-.lista{
+/**/
+.listas > div{
     color:green;
 }
 
-.lista:hover{
+.listas > a {
     color:green;
 }
 
+.listas > a:hover{
+    text-decoration: none;
+}
+
+.listas > a:visited{
+    text-decoration: none;
+}
+/**/
 .trailers > div{
     color:red;
 }
@@ -556,7 +564,7 @@
   top: 20px;
   right: 30px;
   transition: all 200ms;
-  font-size: 30px;
+  font-size: 75px;
   font-weight: bold;
   text-decoration: none;
   color: #ccc;
@@ -629,3 +637,41 @@
     text-decoration: none;
 }
 
+/* Inicio elegirGenero */
+
+.elegirGenero-contenedor {
+    background-color: #fff;
+    margin-top:20px;
+    
+    border-radius:5px;
+    padding-top: 15px;
+    padding-left: 40px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+}
+
+.elegirGenero-contenedor h2 {
+    
+   font-family: "Arial", Georgia, Serif;
+   font-weight: normal;
+   color:gray;
+   
+    
+}
+
+.imagen-generos {
+    margin-top:20px;
+    padding-top: 15px;
+    display:block;
+    margin:auto;
+}
+
+.imagen-generos img{
+    
+    position: relative;
+    margin-top: 50px;
+    left: 25%;
+    
+}
+
+/* Fin elegirGenero */

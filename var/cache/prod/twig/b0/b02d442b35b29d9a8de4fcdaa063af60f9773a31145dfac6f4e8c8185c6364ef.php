@@ -93,7 +93,31 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 \t\t\t\t\t";
         }
         // line 34
-        echo "\t\t\t\t<form method = \"POST\" action=\"";
+        echo "\t\t\t\t\t
+\t\t\t\t\t";
+        // line 35
+        if (((isset($context["error"]) ? $context["error"] : null) == 2)) {
+            // line 36
+            echo "\t\t\t\t\t<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">
+  \t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+  \t\t\t\t\t<strong>Error!</strong> Debe ingresar primero.
+\t\t\t\t\t</div>
+\t\t\t\t\t";
+        }
+        // line 41
+        echo "\t\t\t\t\t";
+        if (((isset($context["error"]) ? $context["error"] : null) == 3)) {
+            // line 42
+            echo "\t\t\t\t\t<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">
+  \t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+  \t\t\t\t\t<strong>Error!</strong> Hola hacker :) 
+\t\t\t\t\t</div>
+\t\t\t\t\t";
+        }
+        // line 47
+        echo "\t\t\t\t\t
+\t\t\t\t<form method = \"POST\" action=\"";
+        // line 48
         echo $this->env->getExtension('routing')->getUrl("login_action");
         echo "\">
 \t\t\t\t\t  <div>
@@ -112,7 +136,7 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 \t\t\t     </div>
 \t   
 \t";
-        // line 50
+        // line 64
         $this->displayBlock('barraderecha', $context, $blocks);
     }
 
@@ -132,7 +156,7 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 
     public function getDebugInfo()
     {
-        return array (  116 => 50,  96 => 34,  89 => 29,  87 => 28,  79 => 23,  72 => 18,  69 => 17,  64 => 16,  58 => 15,  51 => 12,  47 => 11,  38 => 5,  35 => 4,  32 => 3,  11 => 1,);
+        return array (  140 => 64,  121 => 48,  118 => 47,  111 => 42,  108 => 41,  101 => 36,  99 => 35,  96 => 34,  89 => 29,  87 => 28,  79 => 23,  72 => 18,  69 => 17,  64 => 16,  58 => 15,  51 => 12,  47 => 11,  38 => 5,  35 => 4,  32 => 3,  11 => 1,);
     }
 }
 /* {% extends 'index.html.twig' %}*/
@@ -168,6 +192,20 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 /*   					<strong>Error!</strong> Los datos ingresados no corresponden a un usuario registrado.*/
 /* 					</div>*/
 /* 					{%endif%}*/
+/* 					*/
+/* 					{%if error == 2%}*/
+/* 					<div class="alert alert-danger alert-dismissible" role="alert">*/
+/*   					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>*/
+/*   					<strong>Error!</strong> Debe ingresar primero.*/
+/* 					</div>*/
+/* 					{%endif%}*/
+/* 					{%if error == 3%}*/
+/* 					<div class="alert alert-danger alert-dismissible" role="alert">*/
+/*   					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>*/
+/*   					<strong>Error!</strong> Hola hacker :) */
+/* 					</div>*/
+/* 					{%endif%}*/
+/* 					*/
 /* 				<form method = "POST" action="{{url('login_action')}}">*/
 /* 					  <div>*/
 /* 						<span>Correo electrónico<label>*</label></span>*/

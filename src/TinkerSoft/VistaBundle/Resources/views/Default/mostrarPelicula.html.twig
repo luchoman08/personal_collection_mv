@@ -14,6 +14,7 @@
             background-image: url("https://image.tmdb.org/t/p/original/{{ params.backdrops[3].file_path }}");
             background-repeat: no-repeat;
             background-attachment: fixed;
+            background-position: center; 
         }
         
     </style>
@@ -46,8 +47,8 @@
 </div>
 
 
-
 <div id = "ctn" class="content">
+
       	   <div class="movie_top">
       	         <div class="col-md-9 movie_box">
  
@@ -61,6 +62,7 @@
                                      <img src="https://image.tmdb.org/t/p/w300{{params.poster_path}}" width="100%" alt="{{params.title}}" class="img-responsive" >
                                 {% endif %}
                                 
+                               
                                 
                             </div>
                             {%if usuarioLogueado%}
@@ -77,10 +79,24 @@
                             <center>
                             <div id="menupelicula" class="menu-pelicula" >
                                 <ui>
+                                    {%if usuarioLogueado == 1%}
                                     <li id="marcar_desmarcar_vista_li" class="vista"> <div id="iconoVista" class="glyphicon glyphicon-eye-open"></div> Vista&nbsp;</li>
                                     <li id="marcar_desmarcar_por_ver_li" class="vista"> <div id="iconoPorVer"  class="glyphicon glyphicon-time"></div> Pendiente&nbsp;</li>
-                                    <li class="lista"> <div class="glyphicon glyphicon-plus"></div> Lista&nbsp;</li>
                                     
+                                    <li class="listas dropdown" id ="listas"> <div class="glyphicon glyphicon-plus"></div> 
+                                        <a id="listas" href="#" data-toggle="dropdown" class="dropdown-toggle">Listas<b class="caret"></b>&nbsp;</a>
+                                            <ul id = "ulListaColecciones" class="dropdown-menu">
+                                                 <li><a id="crearListas" href="#lista"><span class="glyphicon glyphicon-plus"></span>&nbsp;Crear</a> </li>
+                                                 <li class="divider"></li>
+                                                {%for lista in params.listaColecciones%}
+                                                <li><a id="crearListas" href="#lista">{{lista.nombre}}</a> </li>
+                                                {%endfor%}
+                                               
+                                               
+                                           
+                                            </ul>
+                                    </li>
+                                    {%endif%}
                                     <li class="dropdown trailers" id="test"> <div class="glyphicon glyphicon-film"></div>  
                                         <a id="trailers" href="#" data-toggle="dropdown" class="dropdown-toggle">Trailers <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
@@ -125,8 +141,31 @@
                                 	{%set i = i +1%}
                                 	{%endfor%}
                                 	</div>
-                                	<div class="movie_option"><strong>Estudio Cinematogr&aacute;fico : </strong>{{params.production_companies[0].name}}</div>
-                                    <div class="movie_option"><strong>Total votos: </strong>{{params.vote_count}}</div> <br/>
+                                	<div class="movie_option"><strong>Duraci&oacute;n : </strong>{{params.runtime}}m</div>
+                                	
+                                	<div class="movie_option"><strong>Total votos: </strong>{{params.vote_count}}</div>
+                                    
+                                    <span class="imdbRatingPlugin" style="padding-right:5px;" data-user="ur52717514" data-title="{{params.imdb_id}}" data-style="p2"><strong>&nbsp;IMDb: </strong> <a href="http://www.imdb.com/title/tt2948356/?ref_=plg_rt_1"><img src="http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_37x18.png" alt="{{params.title}} en IMDb" />&nbsp;</a></span>
+                                    <script>(function(d,s,id){var js,stags=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return;}js=d.createElement(s);js.id=id;js.src="http://g-ec2.images-amazon.com/images/G/01/imdb/plugins/rating/js/rating.min.js";stags.parentNode.insertBefore(js,stags);})(document,'script','imdb-rating-api');</script>
+                                    
+                                    <div class="movie_option"><strong>Total votos IMDb: </strong>{{votos_imdb}}</div><br/>
+                                	
+                                	<div class="movie_option"><strong>Estudio(s) Cinematogr&aacute;fico(s) : </strong>
+                                	{% set contador_companias = 0 %} 
+                                	{% for production_companies in params.production_companies  %}
+                                	
+                                    	{% set contador_companias = contador_companias + 1 %}
+                                    	
+                                    	{%if contador_companias < params.production_companies|length %}{{production_companies.name}},&nbsp;
+                                    	{%else%}{{production_companies.name}}.
+                                    	{%endif%}
+                                	{% endfor %}
+                                	</div><br/>
+                                    
+                                    {% if funcionesOcultas == 1 %}
+                                        <center> <div class="movie_option"><a target="_blank" style="text-decoration:none; border-radius:5px; color:#fff;" class="btn1" href="https://thepiratebay.org/search/{{params.title}}" ><strong>Descargar</strong></a></div><br/></center>
+                                    {% endif %}
+                                    
                                     <div class="m_4"><strong>Sinopsis:</strong> {{params.overview}}</div><br/>
                             
                                 <h4>Capturas</h4>
@@ -221,6 +260,44 @@
                          
                     </center><br/>
            </div>
+           <div id="popup_nueva_coleccion_personalizada" style="visibility: invisible; opacity: 1;" class="overlay">
+               <div id="divEmergentePopup" style="display:none" class="alert alert-success alert-dismissible" role="alert">
+                   <p id="mensajeEmergente"></p>
+               </div>
+               
+               <div class="popup">
+                    <a id="close_nueva_coleccion_p" class="close" href="#">×</a>
+                   <div class="panel panel-warning" sytle ="width= 90%;">
+                        <div class="panel-heading">
+                            Creacion de nuevas colecciones
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group col-md-7">
+                                <div id="divEmergenteCrearListas" style="display:none; margin-top: 0.5cm;" class="alert alert-success alert-dismissible" role="alert">
+                                   <p id="mensajeEmergenteCrearListas"></p>
+                               </div>
+                      
+                                <label style="margin-top = 5%;">Ingrese el nombre de la nueva lista </label>
+                                <input id="nombreNuevaColeccion" style="width : 90%;" type="text" style="form-control" required>
+                                <br><br>
+                                <center>
+                                <button id="crearColeccion" type="submit" class="btn btn-warning">Crear</button>
+                                </center>
+                             </div>
+                             <img src="{{asset('assets/images/listImage.png')}}" class="img-responsive col-md-4" alt="Cinque Terre">
+                        </div>
+           
+                        </div>
+                   
+                    </div>
+                    
+                    
+                  
+                
+                   
+               </div>
+           
+           </div>
 
 {%endblock%}
 {%block javascripts%}
@@ -236,9 +313,68 @@
             var lts=0;
             
             var rating =0;
+            
             var calificacion_semaphore=0;
-           
-  //inicializar el color del boton marcar vista segun si se ha visto o no
+            
+    // funciones para nuevas colecciones            
+     $("#close_nueva_coleccion_p").click(function(){
+       $("#popup_nueva_coleccion_personalizada").attr("style","visibility: invisible; opacity: 0;");
+       var x = document.getElementById("popup_nueva_coleccion_personalizada");
+    var y = x;
+    $("#ctn").append(y);
+  });        
+  $('#crearListas').click(function(){
+    $("#popup_nueva_coleccion_personalizada").attr("style","visibility: visible; opacity: 1;");
+    var x = document.getElementById("popup_nueva_coleccion_personalizada");
+    var y = x;
+    $("#ctn").append(y);
+  });
+   $('#crearColeccion').click(function(){
+     $.ajax({
+                type: "GET",
+                url: "{{url('adicionar_lista')}}",
+                data: { nombreColeccion:$('#nombreNuevaColeccion').val()},
+                dataType: "json",
+               
+                //if received a response from the server
+                success: function( data, textStatus, jqXHR) {
+                     if(data.success){
+                         $("#mensajeEmergente").html("");
+                     } 
+                     //display error message
+                     else {
+                         $("#mensajeEmergente").html("Error ¬_¬");
+                     }
+                },
+               
+                //If there was no resonse from the server
+                error: function(jqXHR, textStatus, errorThrown){
+                    
+                       if(jqXHR.status == 405)
+                       {
+                        $("#mensajeEmergenteCrearListas").html(jqXHR.responseText);
+                        $('#divEmergenteCrearListas').attr("class","alert alert-danger alert-dismissible" );
+                        $('#divEmergenteCrearListas').show(1000).delay(3000);
+                        $('#divEmergenteCrearListas').hide(1000);
+                       }
+                       if(jqXHR.status == 200)
+                       {
+                        $("#mensajeEmergente").html(jqXHR.responseText);   
+                        $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
+                        $('#divEmergente').show(1000).delay(3000);
+                        $('#divEmergente').hide(1000);    
+                        $('#ulListaColecciones').append('<li><a id="crearListas" href="#lista">'+$('#nombreNuevaColeccion').val()+'</a> </li>');
+                         $("#popup_nueva_coleccion_personalizada").attr("style","visibility: invisible; opacity: 0;");
+                       }
+                 
+                       
+                },
+               
+
+     
+            });  
+  });
+  //close y enlaces a trailers
   {%set i = 0%}
  {% for trailer in params.results %}
   $("#close{{i}}").click(function(){
@@ -308,8 +444,9 @@
                     estiloBotonVistas(vista);
                     }
                     estiloBotonPorVer(porVer);
+                    $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
                     $("#mensajeEmergente").html(jqXHR.responseText);
-                    $('#divEmergente').show(1000).delay( 4000 );
+                    $('#divEmergente').show(1000).delay( 3000 );
                     $('#divEmergente').hide(1000);
                        
                 },
@@ -345,7 +482,8 @@
                     }
                        estiloBotonVistas(vista);
                        $("#mensajeEmergente").html(jqXHR.responseText);
-                       $('#divEmergente').show(1000).delay( 4000 );
+                       $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
+                       $('#divEmergente').show(1000).delay( 3000 );
                        $('#divEmergente').hide(1000);
                        
                 },
@@ -381,12 +519,20 @@
                      }
                 },
                
-                //If there was no resonse from the server
+                //al intentar calificar:
                 error: function(jqXHR, textStatus, errorThrown){
                     
                       
                        $("#mensajeEmergente").html(jqXHR.responseText);
-                       $('#divEmergente').show(1000).delay( 4000 );
+                       if(jqXHR.status == 405)
+                       {
+                        $('#divEmergente').attr("class","alert alert-danger alert-dismissible" );
+                       }
+                       if(jqXHR.status == 200)
+                       {
+                        $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
+                       }
+                       $('#divEmergente').show(1000).delay( 3000 );
                        $('#divEmergente').hide(1000);
                        
                 },
