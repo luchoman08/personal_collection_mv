@@ -152,6 +152,17 @@ class FuncionesSitioController extends Controller
     public function redireccionErrorAction(){
         return $this->render('VistaBundle:Default:login.html.twig');   
     }
+    
+    public function getColeccion(Request $request, $idColeccion, $em )
+    {
+        if($request->getSession()->get('id')){
+        $coleccion = $em->getRepository('FuncionesSitioBundle:Coleccion')->findOneBy(array('id'=>$idColeccion));
+        return $coleccion;
+        }
+        else{
+            $this->redireccionErrorAction();
+        }
+    }
      public function adicionarPeliculaListaPorVerAction(Request $request)
     {
         if($request->getSession()->get('id')){
@@ -189,9 +200,9 @@ class FuncionesSitioController extends Controller
           $listaVistas=$this->crearListaVistasAction($request);
           $resultado = $this->adicionarPeliculaListaAction($request, $listaVistas, $request->query->get('idPelicula'));
           $response = new Response();
+          $em = $this->getDoctrine()->getManager();
           if($resultado==1)
           {
-             $em = $this->getDoctrine()->getManager();
           if($this->preguntarPorPeliculaPorVerAction($request, $request->query->get('idPelicula'), $em)){
               $idListaVistas=$this->getIdColeccionPorVer($request, $em);
               $this->eliminarPeliculaColeccion($request, $request->query->get('idPelicula'), $idListaVistas, $em);
@@ -200,6 +211,7 @@ class FuncionesSitioController extends Controller
           }
           if($resultado==0)
           {
+          $this->eliminarPeliculaColeccion($request, $request->query->get('idPelicula'), $listaVistas->getId(), $em);
           $response->setContent('Eliminada de la lista de peliculas vistas');
           }
           $response->setStatusCode(Response::HTTP_OK);
@@ -219,10 +231,17 @@ class FuncionesSitioController extends Controller
     */
     public function crearListaPersonalizadaAction(Request $request){
         if($request->getSession()->get('id')) {
+            //retorna le nombre de la coleccion
             $resultado = $this->crearListaAction($request->getSession()->get('id'), $request->query->get('nombreColeccion'), 3);
+            
+
+            
             if($resultado){
                 $response = new Response();
-                $response->setContent('Lista  creada');
+                $idNuevaColeccionCreada= $this->getIdColeccion($request, $resultado,  3, $this->getDoctrine()->getManager());
+               $response->setContent(json_encode(array(
+               'mensaje' => 'Lista Creada', 'idColeccion'=> $idNuevaColeccionCreada)));
+              // $response->setContent('Lista Creada');
                 $response->setStatusCode(200);
                 $response->headers->set('Content-Type', 'text/html');
                 // prints the HTTP headers followed by the content
@@ -230,7 +249,11 @@ class FuncionesSitioController extends Controller
             }
             else{
                 $response = new Response();
-                $response->setContent('La coleccion con nombre "'. $request->query->get('nombreColeccion') . '" ya existe');
+                
+                $mensaje='La coleccion con nombre "'. $request->query->get('nombreColeccion') . '" ya existe';
+              $response->setContent(json_encode(array(
+    'mensaje' => $mensaje)));
+               // $response->setContent('La Colecci&oacute;n con nombre "'. $request->query->get('nombreColeccion') . '" ya existe');
                 $response->setStatusCode(405);
                 $response->headers->set('Content-Type', 'text/html');
                 // prints the HTTP headers followed by the content
@@ -241,6 +264,43 @@ class FuncionesSitioController extends Controller
             $this->redireccionErrorAction();
         }
     }
+    
+    /*
+    
+    si la pelicula ya estaba en la coleccion retorna 1
+    , si no existia y se adiciono correctamente retorna 0
+    query{idColeccion, idPelicula}
+    */
+    public function adicionarPeliculaListaPersonalizadaAction(Request $request){
+        if($request->getSession()->get('id')){
+            $em = $this->getDoctrine()->getManager();
+            $coleccion = $this->getColeccion($request, $request->query->get('idColeccion'), $em);
+            if(!$this->preguntarPorPeliculaEnColeccionAction($request,  $request->query->get('idPelicula'), $coleccion,$em)){
+            $this->adicionarPeliculaListaAction($request, $coleccion, $request->query->get('idPelicula'));    
+            $response = new Response();
+            $response->setContent('La pelicula fue adicionada a la lista');
+            $response->setStatusCode(200);
+            $response->headers->set('Content-Type', 'text/html');
+             // prints the HTTP headers followed by the content
+            return $response;   
+            }
+            else{
+            
+                $response = new Response();
+                $response->setContent('La pelicula ya pertenece a la coleccion seleccionada');
+                $response->setStatusCode(405);
+                $response->headers->set('Content-Type', 'text/html');
+                // prints the HTTP headers followed by the content
+                return $response;
+            }
+        }
+        else{
+            $this->redireccionErrorAction();
+        }
+    }
+    
+    
+    
      public function adicionarPeliculaListaAction($request, $idColeccion, $idPelicula)
     {
       if($request->getSession()->get('id')){   
@@ -249,8 +309,6 @@ class FuncionesSitioController extends Controller
             findOneBy(array('idColeccion'=>$idColeccion->getId(), 'idPelicula'=>$idPelicula));
             if($objeto)
             {
-               $em->remove($objeto);
-               $em->flush();
                return 0;
             }
             else{
@@ -265,6 +323,7 @@ class FuncionesSitioController extends Controller
             }
     
     else{
+        
                  return $this->render('VistaBundle:Default:login.html.twig');
         }
     }
@@ -378,7 +437,7 @@ class FuncionesSitioController extends Controller
                 $coleccion->setFechaCreacion(new \DateTime());
                 $em->persist($coleccion);
                 $em->flush();
-                return 1;
+                return $nombreLista;
             }
         }
         else{

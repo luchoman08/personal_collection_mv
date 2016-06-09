@@ -25,3 +25,7 @@ marcar_por_ver:
 adicionar_lista:
     path: /adicionarLista
     defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:crearListaPersonalizada}
+    
+adicionar_pelicula_lista_personalizada:
+    path: /adicionarPeliculaListaPersonalizada
+    defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:adicionarPeliculaListaPersonalizada}

@@ -473,6 +473,11 @@
     border-right: 1px solid #ccc;
 }
 
+.menu-pelicula > ui > li:click {
+     
+    text-decoration: none;
+}
+
 .menu-pelicula > ui > li:last-child {
     border-right: none ;
 }

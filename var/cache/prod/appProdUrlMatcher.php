@@ -326,9 +326,17 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
 
             }
 
-            // adicionar_lista
-            if ($pathinfo === '/funciones/adicionarLista') {
-                return array (  '_controller' => 'TinkerSoft\\FuncionesSitioBundle\\Controller\\FuncionesSitioController::crearListaPersonalizadaAction',  '_route' => 'adicionar_lista',);
+            if (0 === strpos($pathinfo, '/funciones/adicionar')) {
+                // adicionar_lista
+                if ($pathinfo === '/funciones/adicionarLista') {
+                    return array (  '_controller' => 'TinkerSoft\\FuncionesSitioBundle\\Controller\\FuncionesSitioController::crearListaPersonalizadaAction',  '_route' => 'adicionar_lista',);
+                }
+
+                // adicionar_pelicula_lista_personalizada
+                if ($pathinfo === '/funciones/adicionarPeliculaListaPersonalizada') {
+                    return array (  '_controller' => 'TinkerSoft\\FuncionesSitioBundle\\Controller\\FuncionesSitioController::adicionarPeliculaListaPersonalizadaAction',  '_route' => 'adicionar_pelicula_lista_personalizada',);
+                }
+
             }
 
         }

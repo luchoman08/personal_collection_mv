@@ -205,7 +205,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                                     <li id=\"marcar_desmarcar_por_ver_li\" class=\"vista\"> <div id=\"iconoPorVer\"  class=\"glyphicon glyphicon-time\"></div> Pendiente&nbsp;</li>
                                     
                                     <li class=\"listas dropdown\" id =\"listas\"> <div class=\"glyphicon glyphicon-plus\"></div> 
-                                        <a id=\"listas\" href=\"#\" data-toggle=\"dropdown\" class=\"dropdown-toggle\">Listas<b class=\"caret\"></b>&nbsp;</a>
+                                        <a id=\"listas\" href=\"#\" data-toggle=\"dropdown\" class=\"dropdown-toggle\">Listas&nbsp;<b class=\"caret\"></b></a>&nbsp;
                                             <ul id = \"ulListaColecciones\" class=\"dropdown-menu\">
                                                  <li><a id=\"crearListas\" href=\"#lista\"><span class=\"glyphicon glyphicon-plus\"></span>&nbsp;Crear</a> </li>
                                                  <li class=\"divider\"></li>
@@ -215,7 +215,9 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
             $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "listaColecciones", array()));
             foreach ($context['_seq'] as $context["_key"] => $context["lista"]) {
                 // line 92
-                echo "                                                <li><a id=\"crearListas\" href=\"#lista\">";
+                echo "                                                <li><a idColeccion=\"";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["lista"], "id", array()), "html", null, true);
+                echo "\" class=\"a_lista\" id=\"crearListas\" >";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["lista"], "nombre", array()), "html", null, true);
                 echo "</a> </li>
                                                 ";
@@ -233,7 +235,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
         }
         // line 100
         echo "                                    <li class=\"dropdown trailers\" id=\"test\"> <div class=\"glyphicon glyphicon-film\"></div>  
-                                        <a id=\"trailers\" href=\"#\" data-toggle=\"dropdown\" class=\"dropdown-toggle\">Trailers <b class=\"caret\"></b></a>
+                                        <a id=\"trailers\" href=\"#\" data-toggle=\"dropdown\" class=\"dropdown-toggle\">Trailers&nbsp;<b class=\"caret\"></b></a>
                                         <ul class=\"dropdown-menu\">
                                             ";
         // line 103
@@ -708,6 +710,11 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
             var rating =0;
             
             var calificacion_semaphore=0;
+       
+  
+       
+           
+       
             
     // funciones para nuevas colecciones            
      \$(\"#close_nueva_coleccion_p\").click(function(){
@@ -726,7 +733,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
      \$.ajax({
                 type: \"GET\",
                 url: \"";
-        // line 335
+        // line 340
         echo $this->env->getExtension('routing')->getUrl("adicionar_lista");
         echo "\",
                 data: { nombreColeccion:\$('#nombreNuevaColeccion').val()},
@@ -746,22 +753,30 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                 //If there was no resonse from the server
                 error: function(jqXHR, textStatus, errorThrown){
                     
+                    
+                      
                        if(jqXHR.status == 405)
                        {
-                        \$(\"#mensajeEmergenteCrearListas\").html(jqXHR.responseText);
+                        
+                      
+                        \$(\"#mensajeEmergenteCrearListas\").html(jQuery.parseJSON(jqXHR.responseText).mensaje);
                         \$('#divEmergenteCrearListas').attr(\"class\",\"alert alert-danger alert-dismissible\" );
                         \$('#divEmergenteCrearListas').show(1000).delay(3000);
                         \$('#divEmergenteCrearListas').hide(1000);
                        }
-                       if(jqXHR.status == 200)
+                         if(jqXHR.status == 200)
                        {
-                        \$(\"#mensajeEmergente\").html(jqXHR.responseText);   
+                           
+                       // var respuesta = jQuery.parseJSON(  );
+                      alert(\"que mira prro >:v\");
+                        \$(\"#mensajeEmergente\").html(jQuery.parseJSON(jqXHR.responseText).mensaje);   
                         \$('#divEmergente').attr(\"class\",\"alert alert-success alert-dismissible\" );
-                        \$('#divEmergente').show(1000).delay(3000);
+                       \$('#divEmergente').show(1000).delay(3000);
                         \$('#divEmergente').hide(1000);    
-                        \$('#ulListaColecciones').append('<li><a id=\"crearListas\" href=\"#lista\">'+\$('#nombreNuevaColeccion').val()+'</a> </li>');
-                         \$(\"#popup_nueva_coleccion_personalizada\").attr(\"style\",\"visibility: invisible; opacity: 0;\");
+                       \$('#ulListaColecciones').append('<li><a idColeccion=\"'+ jQuery.parseJSON(jqXHR.responseText).idColeccion +'\"id=\"crearListas\" href=\"#lista\">'+\$('#nombreNuevaColeccion').val()+'</a> </li>');
+                        \$(\"#popup_nueva_coleccion_personalizada\").attr(\"style\",\"visibility: invisible; opacity: 0;\");
                        }
+                    
                  
                        
                 },
@@ -772,23 +787,23 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
   });
   //close y enlaces a trailers
   ";
-        // line 378
+        // line 391
         $context["i"] = 0;
-        // line 379
+        // line 392
         echo " ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "results", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["trailer"]) {
-            // line 380
+            // line 393
             echo "  \$(\"#close";
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").click(function(){
        \$(\"#popup";
-            // line 381
+            // line 394
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").attr(\"style\",\"visibility: invisible; opacity: 0;\");
        var x = document.getElementById(\"popup";
-            // line 382
+            // line 395
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\");
     var y = x;
@@ -796,34 +811,34 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
   });
   
   \$('#trailer";
-            // line 387
+            // line 400
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "').click(function(){
     \$(\"#popup";
-            // line 388
+            // line 401
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\").attr(\"style\",\"visibility: visible; opacity: 1;\");
     var x = document.getElementById(\"popup";
-            // line 389
+            // line 402
             echo twig_escape_filter($this->env, (isset($context["i"]) ? $context["i"] : null), "html", null, true);
             echo "\");
     var y = x;
     \$(\"#ctn\").append(y);
   });
   ";
-            // line 393
+            // line 406
             $context["i"] = ((isset($context["i"]) ? $context["i"] : null) + 1);
-            // line 394
+            // line 407
             echo "  ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['trailer'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 395
+        // line 408
         echo "             
 
          ";
-        // line 397
+        // line 410
         if (((isset($context["usuarioLogueado"]) ? $context["usuarioLogueado"] : null) == 1)) {
             echo "   
          
@@ -853,11 +868,11 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
          \$.ajax({
                 type: \"GET\",
                 url: \"";
-            // line 424
+            // line 437
             echo $this->env->getExtension('routing')->getUrl("marcar_por_ver");
             echo "\",
                 data: { idPelicula:";
-            // line 425
+            // line 438
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "id", array()), "html", null, true);
             echo "},
                 dataType: \"json\",
@@ -896,11 +911,11 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
          \$.ajax({
                 type: \"GET\",
                 url: \"";
-            // line 461
+            // line 474
             echo $this->env->getExtension('routing')->getUrl("marcar_vista");
             echo "\",
                 data: { idPelicula:";
-            // line 462
+            // line 475
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "id", array()), "html", null, true);
             echo "},
                 dataType: \"json\",
@@ -939,7 +954,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                 
                 readOnly: false,
                 rating: ";
-            // line 498
+            // line 511
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "calificacionUsuario", array()), "html", null, true);
             echo ",
                 numStars: 10,
@@ -951,11 +966,11 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                 \$.ajax({
                 type: \"GET\",
                 url: \"";
-            // line 507
+            // line 520
             echo $this->env->getExtension('routing')->getUrl("calificacion_pelicula");
             echo "\",
                 data: { idPelicula:";
-            // line 508
+            // line 521
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "id", array()), "html", null, true);
             echo ", calificacion:data.rating},
                 dataType: \"json\",
@@ -997,7 +1012,54 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
                 \$(\"#calificacionPersonal\").val(data.rating);
 
             });
-             
+             \$(\".a_lista\").click(function(){
+          \$.ajax({
+                type: \"GET\",
+                url: \"";
+            // line 564
+            echo $this->env->getExtension('routing')->getUrl("adicionar_pelicula_lista_personalizada");
+            echo "\",
+                data: { idColeccion:\$(this).attr(\"idColeccion\"), idPelicula:";
+            // line 565
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "id", array()), "html", null, true);
+            echo "},
+                dataType: \"json\",
+               
+                //if received a response from the server
+                success: function( data, textStatus, jqXHR) {
+                     if(data.success){
+                         \$(\"#mensajeEmergente\").html(\"\");
+                     } 
+                     //display error message
+                     else {
+                         \$(\"#mensajeEmergente\").html(\"Error ¬_¬\");
+                     }
+                },
+               
+                //If there was no resonse from the server
+                error: function(jqXHR, textStatus, errorThrown){
+                    
+                       if(jqXHR.status == 405)
+                       {
+                        \$(\"#mensajeEmergente\").html(jqXHR.responseText);
+                        \$('#divEmergente').attr(\"class\",\"alert alert-danger alert-dismissible\" );
+                        \$('#divEmergente').show(1000).delay(3000);
+                        \$('#divEmergente').hide(1000);
+                       }
+                       if(jqXHR.status == 200)
+                       {
+                        \$(\"#mensajeEmergente\").html(jqXHR.responseText);   
+                        \$('#divEmergente').attr(\"class\",\"alert alert-success alert-dismissible\" );
+                        \$('#divEmergente').show(1000).delay(3000);
+                        \$('#divEmergente').hide(1000);
+                 
+                       }  
+                },
+               
+
+     
+            });   
+       });
         
 \t        \$(\"#calificacionPersonal\").click(function(){
 \t\t    calificacion_semaphore=1;
@@ -1007,23 +1069,23 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 
   ";
         }
-        // line 557
+        // line 611
         echo "          ";
         if ($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "backdrop_path", array())) {
-            // line 558
+            // line 612
             echo "            \$('#cabezera').css(\"background\", \"url(https://image.tmdb.org/t/p/w1280/";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["params"]) ? $context["params"] : null), "backdrop_path", array()), "html", null, true);
             echo ")\");  
             ";
         }
-        // line 560
+        // line 614
         echo "        });
     </script>
     
     ";
     }
 
-    // line 564
+    // line 618
     public function block_barraderecha($context, array $blocks = array())
     {
     }
@@ -1040,7 +1102,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 
     public function getDebugInfo()
     {
-        return array (  1027 => 564,  1020 => 560,  1014 => 558,  1011 => 557,  959 => 508,  955 => 507,  943 => 498,  904 => 462,  900 => 461,  861 => 425,  857 => 424,  827 => 397,  823 => 395,  817 => 394,  815 => 393,  808 => 389,  804 => 388,  800 => 387,  792 => 382,  788 => 381,  783 => 380,  778 => 379,  776 => 378,  730 => 335,  706 => 313,  699 => 309,  694 => 308,  692 => 307,  686 => 304,  683 => 303,  663 => 287,  628 => 259,  623 => 256,  612 => 252,  605 => 248,  599 => 244,  587 => 242,  575 => 240,  573 => 239,  569 => 237,  565 => 236,  549 => 222,  536 => 219,  533 => 218,  529 => 217,  524 => 214,  513 => 211,  510 => 210,  506 => 209,  488 => 193,  482 => 192,  480 => 191,  475 => 189,  466 => 188,  461 => 187,  459 => 186,  452 => 181,  446 => 180,  444 => 179,  434 => 177,  429 => 176,  427 => 175,  418 => 169,  415 => 168,  409 => 166,  407 => 165,  403 => 163,  397 => 162,  392 => 160,  386 => 159,  383 => 158,  381 => 157,  378 => 156,  374 => 155,  370 => 154,  364 => 151,  356 => 148,  351 => 146,  346 => 144,  343 => 143,  337 => 142,  335 => 141,  332 => 140,  327 => 139,  324 => 138,  319 => 137,  317 => 136,  314 => 135,  308 => 133,  306 => 132,  302 => 131,  286 => 117,  280 => 116,  278 => 115,  271 => 111,  266 => 109,  261 => 107,  247 => 105,  242 => 104,  240 => 103,  235 => 100,  227 => 94,  218 => 92,  214 => 91,  204 => 83,  202 => 82,  193 => 75,  185 => 69,  183 => 68,  177 => 64,  169 => 62,  161 => 60,  159 => 59,  154 => 57,  139 => 44,  136 => 43,  128 => 39,  124 => 37,  116 => 35,  113 => 34,  110 => 33,  107 => 32,  101 => 31,  95 => 30,  87 => 26,  83 => 25,  79 => 24,  75 => 23,  72 => 22,  61 => 14,  55 => 10,  53 => 9,  49 => 8,  46 => 7,  43 => 6,  35 => 5,  11 => 1,);
+        return array (  1089 => 618,  1082 => 614,  1076 => 612,  1073 => 611,  1024 => 565,  1020 => 564,  974 => 521,  970 => 520,  958 => 511,  919 => 475,  915 => 474,  876 => 438,  872 => 437,  842 => 410,  838 => 408,  832 => 407,  830 => 406,  823 => 402,  819 => 401,  815 => 400,  807 => 395,  803 => 394,  798 => 393,  793 => 392,  791 => 391,  737 => 340,  708 => 313,  701 => 309,  696 => 308,  694 => 307,  688 => 304,  685 => 303,  665 => 287,  630 => 259,  625 => 256,  614 => 252,  607 => 248,  601 => 244,  589 => 242,  577 => 240,  575 => 239,  571 => 237,  567 => 236,  551 => 222,  538 => 219,  535 => 218,  531 => 217,  526 => 214,  515 => 211,  512 => 210,  508 => 209,  490 => 193,  484 => 192,  482 => 191,  477 => 189,  468 => 188,  463 => 187,  461 => 186,  454 => 181,  448 => 180,  446 => 179,  436 => 177,  431 => 176,  429 => 175,  420 => 169,  417 => 168,  411 => 166,  409 => 165,  405 => 163,  399 => 162,  394 => 160,  388 => 159,  385 => 158,  383 => 157,  380 => 156,  376 => 155,  372 => 154,  366 => 151,  358 => 148,  353 => 146,  348 => 144,  345 => 143,  339 => 142,  337 => 141,  334 => 140,  329 => 139,  326 => 138,  321 => 137,  319 => 136,  316 => 135,  310 => 133,  308 => 132,  304 => 131,  288 => 117,  282 => 116,  280 => 115,  273 => 111,  268 => 109,  263 => 107,  249 => 105,  244 => 104,  242 => 103,  237 => 100,  229 => 94,  218 => 92,  214 => 91,  204 => 83,  202 => 82,  193 => 75,  185 => 69,  183 => 68,  177 => 64,  169 => 62,  161 => 60,  159 => 59,  154 => 57,  139 => 44,  136 => 43,  128 => 39,  124 => 37,  116 => 35,  113 => 34,  110 => 33,  107 => 32,  101 => 31,  95 => 30,  87 => 26,  83 => 25,  79 => 24,  75 => 23,  72 => 22,  61 => 14,  55 => 10,  53 => 9,  49 => 8,  46 => 7,  43 => 6,  35 => 5,  11 => 1,);
     }
 }
 /* {% extends 'index.html.twig' %}*/
@@ -1129,12 +1191,12 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*                                     <li id="marcar_desmarcar_por_ver_li" class="vista"> <div id="iconoPorVer"  class="glyphicon glyphicon-time"></div> Pendiente&nbsp;</li>*/
 /*                                     */
 /*                                     <li class="listas dropdown" id ="listas"> <div class="glyphicon glyphicon-plus"></div> */
-/*                                         <a id="listas" href="#" data-toggle="dropdown" class="dropdown-toggle">Listas<b class="caret"></b>&nbsp;</a>*/
+/*                                         <a id="listas" href="#" data-toggle="dropdown" class="dropdown-toggle">Listas&nbsp;<b class="caret"></b></a>&nbsp;*/
 /*                                             <ul id = "ulListaColecciones" class="dropdown-menu">*/
 /*                                                  <li><a id="crearListas" href="#lista"><span class="glyphicon glyphicon-plus"></span>&nbsp;Crear</a> </li>*/
 /*                                                  <li class="divider"></li>*/
 /*                                                 {%for lista in params.listaColecciones%}*/
-/*                                                 <li><a id="crearListas" href="#lista">{{lista.nombre}}</a> </li>*/
+/*                                                 <li><a idColeccion="{{lista.id}}" class="a_lista" id="crearListas" >{{lista.nombre}}</a> </li>*/
 /*                                                 {%endfor%}*/
 /*                                                */
 /*                                                */
@@ -1143,7 +1205,7 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*                                     </li>*/
 /*                                     {%endif%}*/
 /*                                     <li class="dropdown trailers" id="test"> <div class="glyphicon glyphicon-film"></div>  */
-/*                                         <a id="trailers" href="#" data-toggle="dropdown" class="dropdown-toggle">Trailers <b class="caret"></b></a>*/
+/*                                         <a id="trailers" href="#" data-toggle="dropdown" class="dropdown-toggle">Trailers&nbsp;<b class="caret"></b></a>*/
 /*                                         <ul class="dropdown-menu">*/
 /*                                             {% set t = 0 %}*/
 /*                                             {% for trailer in params.results %}*/
@@ -1360,6 +1422,11 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*             var rating =0;*/
 /*             */
 /*             var calificacion_semaphore=0;*/
+/*        */
+/*   */
+/*        */
+/*            */
+/*        */
 /*             */
 /*     // funciones para nuevas colecciones            */
 /*      $("#close_nueva_coleccion_p").click(function(){*/
@@ -1395,22 +1462,30 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*                 //If there was no resonse from the server*/
 /*                 error: function(jqXHR, textStatus, errorThrown){*/
 /*                     */
+/*                     */
+/*                       */
 /*                        if(jqXHR.status == 405)*/
 /*                        {*/
-/*                         $("#mensajeEmergenteCrearListas").html(jqXHR.responseText);*/
+/*                         */
+/*                       */
+/*                         $("#mensajeEmergenteCrearListas").html(jQuery.parseJSON(jqXHR.responseText).mensaje);*/
 /*                         $('#divEmergenteCrearListas').attr("class","alert alert-danger alert-dismissible" );*/
 /*                         $('#divEmergenteCrearListas').show(1000).delay(3000);*/
 /*                         $('#divEmergenteCrearListas').hide(1000);*/
 /*                        }*/
-/*                        if(jqXHR.status == 200)*/
+/*                          if(jqXHR.status == 200)*/
 /*                        {*/
-/*                         $("#mensajeEmergente").html(jqXHR.responseText);   */
+/*                            */
+/*                        // var respuesta = jQuery.parseJSON(  );*/
+/*                       alert("que mira prro >:v");*/
+/*                         $("#mensajeEmergente").html(jQuery.parseJSON(jqXHR.responseText).mensaje);   */
 /*                         $('#divEmergente').attr("class","alert alert-success alert-dismissible" );*/
-/*                         $('#divEmergente').show(1000).delay(3000);*/
+/*                        $('#divEmergente').show(1000).delay(3000);*/
 /*                         $('#divEmergente').hide(1000);    */
-/*                         $('#ulListaColecciones').append('<li><a id="crearListas" href="#lista">'+$('#nombreNuevaColeccion').val()+'</a> </li>');*/
-/*                          $("#popup_nueva_coleccion_personalizada").attr("style","visibility: invisible; opacity: 0;");*/
+/*                        $('#ulListaColecciones').append('<li><a idColeccion="'+ jQuery.parseJSON(jqXHR.responseText).idColeccion +'"id="crearListas" href="#lista">'+$('#nombreNuevaColeccion').val()+'</a> </li>');*/
+/*                         $("#popup_nueva_coleccion_personalizada").attr("style","visibility: invisible; opacity: 0;");*/
 /*                        }*/
+/*                     */
 /*                  */
 /*                        */
 /*                 },*/
@@ -1590,7 +1665,48 @@ class __TwigTemplate_d85d464632fcc98a5d73590bbadaef50098a61787ae286f1cadd01b571f
 /*                 $("#calificacionPersonal").val(data.rating);*/
 /* */
 /*             });*/
-/*              */
+/*              $(".a_lista").click(function(){*/
+/*           $.ajax({*/
+/*                 type: "GET",*/
+/*                 url: "{{url('adicionar_pelicula_lista_personalizada')}}",*/
+/*                 data: { idColeccion:$(this).attr("idColeccion"), idPelicula:{{params.id}}},*/
+/*                 dataType: "json",*/
+/*                */
+/*                 //if received a response from the server*/
+/*                 success: function( data, textStatus, jqXHR) {*/
+/*                      if(data.success){*/
+/*                          $("#mensajeEmergente").html("");*/
+/*                      } */
+/*                      //display error message*/
+/*                      else {*/
+/*                          $("#mensajeEmergente").html("Error ¬_¬");*/
+/*                      }*/
+/*                 },*/
+/*                */
+/*                 //If there was no resonse from the server*/
+/*                 error: function(jqXHR, textStatus, errorThrown){*/
+/*                     */
+/*                        if(jqXHR.status == 405)*/
+/*                        {*/
+/*                         $("#mensajeEmergente").html(jqXHR.responseText);*/
+/*                         $('#divEmergente').attr("class","alert alert-danger alert-dismissible" );*/
+/*                         $('#divEmergente').show(1000).delay(3000);*/
+/*                         $('#divEmergente').hide(1000);*/
+/*                        }*/
+/*                        if(jqXHR.status == 200)*/
+/*                        {*/
+/*                         $("#mensajeEmergente").html(jqXHR.responseText);   */
+/*                         $('#divEmergente').attr("class","alert alert-success alert-dismissible" );*/
+/*                         $('#divEmergente').show(1000).delay(3000);*/
+/*                         $('#divEmergente').hide(1000);*/
+/*                  */
+/*                        }  */
+/*                 },*/
+/*                */
+/* */
+/*      */
+/*             });   */
+/*        });*/
 /*         */
 /* 	        $("#calificacionPersonal").click(function(){*/
 /* 		    calificacion_semaphore=1;*/
