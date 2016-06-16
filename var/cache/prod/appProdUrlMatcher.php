@@ -77,19 +77,39 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
 
             }
 
-            if (0 === strpos($pathinfo, '/vista/buscar')) {
-                // pelicula_consulta_barra
-                if (preg_match('#^/vista/buscar/(?P<consulta>[^/]++)/?$#s', $pathinfo, $matches)) {
-                    if (substr($pathinfo, -1) !== '/') {
-                        return $this->redirect($pathinfo.'/', 'pelicula_consulta_barra');
+            if (0 === strpos($pathinfo, '/vista/b')) {
+                if (0 === strpos($pathinfo, '/vista/buscar')) {
+                    // pelicula_consulta_barra
+                    if (preg_match('#^/vista/buscar/(?P<consulta>[^/]++)/?$#s', $pathinfo, $matches)) {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'pelicula_consulta_barra');
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaAction',  'numero_pagina' => 1,));
                     }
 
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaAction',  'numero_pagina' => 1,));
+                    // pelicula_consulta_sin_barra
+                    if (preg_match('#^/vista/buscar/(?P<consulta>[^/]++)$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_sin_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaAction',  'numero_pagina' => 1,));
+                    }
+
                 }
 
-                // pelicula_consulta_sin_barra
-                if (preg_match('#^/vista/buscar/(?P<consulta>[^/]++)$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_sin_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaAction',  'numero_pagina' => 1,));
+                if (0 === strpos($pathinfo, '/vista/bgeneros')) {
+                    // pelicula_consulta_generos_barra
+                    if (preg_match('#^/vista/bgeneros/(?P<generos>[^/]++)/?$#s', $pathinfo, $matches)) {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'pelicula_consulta_generos_barra');
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_generos_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosGenerosAction',  'numero_pagina' => 1,));
+                    }
+
+                    // pelicula_consulta_generos_sin_barra
+                    if (preg_match('#^/vista/bgeneros/(?P<generos>[^/]++)/(?P<numero_pagina>[^/]++)$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_generos_sin_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosGenerosAction',));
+                    }
+
                 }
 
                 // pelicula_consulta_con_barra
@@ -182,6 +202,57 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                     }
 
                     return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::demoAction',  '_route' => 'demo_slash',);
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/vista/listas')) {
+                // listas
+                if ($pathinfo === '/vista/listas') {
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::mostrarListasAction',  '_route' => 'listas',);
+                }
+
+                // listas_barra
+                if (rtrim($pathinfo, '/') === '/vista/listas') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'listas_barra');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::mostrarListasAction',  '_route' => 'listas_barra',);
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/vista/usuario')) {
+                // usuario
+                if ($pathinfo === '/vista/usuario') {
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::panelUsuarioAction',  '_route' => 'usuario',);
+                }
+
+                // usuario_barra
+                if (rtrim($pathinfo, '/') === '/vista/usuario') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'usuario_barra');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::panelUsuarioAction',  '_route' => 'usuario_barra',);
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/vista/auditor')) {
+                // auditor
+                if ($pathinfo === '/vista/auditor') {
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::panelAuditorAction',  '_route' => 'auditor',);
+                }
+
+                // auditor_barra
+                if (rtrim($pathinfo, '/') === '/vista/auditor') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'auditor_barra');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::panelAuditorAction',  '_route' => 'auditor_barra',);
                 }
 
             }

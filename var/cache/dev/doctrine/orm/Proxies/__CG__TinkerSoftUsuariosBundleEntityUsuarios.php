@@ -64,10 +64,10 @@ class Usuarios extends \TinkerSoft\UsuariosBundle\Entity\Usuarios implements \Do
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'id', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'nombre', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'apellidos', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'nickname', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'correoElectronico', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'password', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'rol', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'estado'];
+            return ['__isInitialized__', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'id', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'nombres', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'apellidos', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'nickname', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'correoElectronico', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'password', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'rol', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'estado'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'id', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'nombre', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'apellidos', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'nickname', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'correoElectronico', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'password', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'rol', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'estado'];
+        return ['__isInitialized__', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'id', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'nombres', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'apellidos', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'nickname', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'correoElectronico', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'password', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'rol', '' . "\0" . 'TinkerSoft\\UsuariosBundle\\Entity\\Usuarios' . "\0" . 'estado'];
     }
 
     /**
@@ -191,23 +191,23 @@ class Usuarios extends \TinkerSoft\UsuariosBundle\Entity\Usuarios implements \Do
     /**
      * {@inheritDoc}
      */
-    public function setNombre($nombre)
+    public function setNombres($nombres)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNombre', [$nombre]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNombres', [$nombres]);
 
-        return parent::setNombre($nombre);
+        return parent::setNombres($nombres);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getNombre()
+    public function getNombres()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getNombre', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getNombres', []);
 
-        return parent::getNombre();
+        return parent::getNombres();
     }
 
     /**

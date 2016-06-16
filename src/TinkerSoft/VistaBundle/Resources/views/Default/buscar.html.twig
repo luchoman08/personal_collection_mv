@@ -3,7 +3,7 @@
 {%block loginoptions%}
     {% if usuarioLogueado == 1  %}
 
-            {{nickname}} | <a href="{{url('logout_action')}}">Salir</a>
+            <a href="{{url('usuario')}}">{{nickname}}</a> | <a href="{{url('logout_action')}}">Salir</a>
        
     {% else %} 
 
@@ -17,8 +17,8 @@
 
     {%set i=0%}
     {%for pelicula in params.results%}
-   
-    <div class="resultado">
+    
+    <div class="resultado" onclick="location.href='{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}'">
          <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" >
             {% if pelicula.poster_path == "" %}
                 
@@ -29,14 +29,14 @@
                 <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">
                         
             {% endif %}
-             </a>  
+            </a>
             <div class="resultado-articulo">
                 <label> {{pelicula.title}} <div id="c{{i}}" value="0" class="rateyo-readonly-widg"> </div> Fecha de estreno: {{pelicula.release_date}}</label><br>
                 {{pelicula.overview}} 
             </div>
             
         </div>
-       
+      
         {%set i= i + 1%}
     {%endfor%} 
         
@@ -50,6 +50,8 @@
                 {% else %}
                     {% if flag == "similares" %}   
                         <li class="previous"><a href="{{ url('homepage') }}vista/similares/{{ consulta }}/{{ params.page - 1 }}"><span aria-hidden="true">&larr;</span> P&aacute;gina anterior</a></li>
+                    {% elseif flag == "generos" %} 
+                        <li class="previous"><a href="{{ url('homepage') }}vista/bgeneros/{{ consulta }}/{{ params.page - 1 }}"><span aria-hidden="true">&larr;</span> P&aacute;gina anterior</a></li>
                     {% else %}
                         <li class="previous"><a href="{{ url('homepage') }}vista/buscar/{{ consulta }}/{{ params.page - 1 }}"><span aria-hidden="true">&larr;</span> P&aacute;gina anterior</a></li>
                     {% endif %}    
@@ -67,6 +69,8 @@
                     
                     {% if flag == "similares" %} 
                         <li class="next"><a href="{{ url('homepage') }}vista/similares/{{ consulta }}/{{ params.page + 1 }}"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
+                    {% elseif flag == "generos" %} 
+                        <li class="next"><a href="{{ url('homepage') }}vista/bgeneros/{{ consulta }}/{{ params.page + 1 }}"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
                     {% else %} 
                         <li class="next"><a href="{{ url('homepage') }}vista/buscar/{{ consulta }}/{{ params.page + 1 }}"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
                     {% endif %}

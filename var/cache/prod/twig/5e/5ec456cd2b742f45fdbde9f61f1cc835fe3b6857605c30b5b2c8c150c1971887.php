@@ -47,33 +47,34 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
         $this->displayParentBlock("stylesheets", $context, $blocks);
         echo "
    
-    <!-- Custom styles for this template -->
-        <link rel=\"stylesheet\" href=\"";
-        // line 8
+    <link rel=\"stylesheet\" href=\"";
+        // line 7
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("star/jquery.rateyo.min.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" />
     <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js\"></script>
     
+    <meta http-equiv=\"Cache-control\" content=\"private\">
+    
 ";
     }
 
-    // line 14
+    // line 15
     public function block_body($context, array $blocks = array())
     {
-        // line 15
+        // line 16
         echo "
     <div id =\"cabezera\" class=\"cabezera\"> 
     
         ";
-        // line 18
-        $this->displayBlock('login', $context, $blocks);
         // line 19
+        $this->displayBlock('login', $context, $blocks);
+        // line 20
         echo "    
         <div id=\"watermark\" class=\"watermark\">
            ";
-        // line 21
-        $this->displayBlock('moviename', $context, $blocks);
         // line 22
+        $this->displayBlock('moviename', $context, $blocks);
+        // line 23
         echo "        </div> 
     </div>
 
@@ -87,7 +88,7 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
                     <span class=\"icon-bar\"></span>
                 </button>
                 <a class=\"navbar-brand\" href=\"";
-        // line 34
+        // line 35
         echo $this->env->getExtension('routing')->getUrl("homepage");
         echo "vista\">QMP</a>
             </div>
@@ -119,21 +120,21 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 
 
     <div class=\"";
-        // line 63
+        // line 64
         $this->displayBlock('classcontenido', $context, $blocks);
         echo "\">
 
     ";
-        // line 65
+        // line 66
         $this->displayBlock('contenido', $context, $blocks);
-        // line 133
+        // line 134
         echo "
     </div>
 
     ";
-        // line 136
+        // line 137
         $this->displayBlock('barraderecha', $context, $blocks);
-        // line 273
+        // line 274
         echo "
     </div>
 
@@ -145,7 +146,7 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 ";
     }
 
-    // line 18
+    // line 19
     public function block_login($context, array $blocks = array())
     {
         echo "<div class=\"usuario-login-index\" > ";
@@ -160,21 +161,21 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
         echo "\">Ingresar</a> ";
     }
 
-    // line 21
+    // line 22
     public function block_moviename($context, array $blocks = array())
     {
     }
 
-    // line 63
+    // line 64
     public function block_classcontenido($context, array $blocks = array())
     {
         echo "col-md-9 fondoContenido";
     }
 
-    // line 65
+    // line 66
     public function block_contenido($context, array $blocks = array())
     {
-        // line 66
+        // line 67
         echo "        <center>
             <!--<a data-toggle=\"tab\" href=\"#tendencia\" class=\"buttonBase button5\">Tendencias</a>
             <a data-toggle=\"tab\" href=\"#estrenos\" class=\"buttonBase button5\">Estrenose</a>-->
@@ -197,9 +198,9 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <br>
             <div id=\"tendencia\" class=\" tab-pane fade in active \">
                ";
-        // line 87
+        // line 88
         $this->displayBlock('tendencia', $context, $blocks);
-        // line 90
+        // line 91
         echo "             
 
              
@@ -209,27 +210,27 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <div id=\"top\" class=\" tab-pane fade\">
 
                 ";
-        // line 98
+        // line 99
         $this->displayBlock('mejorvaloradas', $context, $blocks);
-        // line 101
+        // line 102
         echo "                
             </div>
 
             <div id=\"estrenos\" class=\"tab-pane fade\">
 
                 ";
-        // line 106
+        // line 107
         $this->displayBlock('estrenos', $context, $blocks);
-        // line 109
+        // line 110
         echo "
             </div>
 
             <div id=\"proximamente\" class=\" tab-pane fade\">
 
                 ";
-        // line 114
+        // line 115
         $this->displayBlock('proximamente', $context, $blocks);
-        // line 117
+        // line 118
         echo "
 
             </div>
@@ -237,9 +238,9 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <div id=\"ultimas\" class=\" tab-pane fade\">
 
                 ";
-        // line 123
+        // line 124
         $this->displayBlock('ultimas', $context, $blocks);
-        // line 126
+        // line 127
         echo "
 
             </div>
@@ -249,50 +250,50 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
         ";
     }
 
-    // line 87
+    // line 88
     public function block_tendencia($context, array $blocks = array())
     {
-        // line 88
+        // line 89
         echo "               
                ";
     }
 
-    // line 98
+    // line 99
     public function block_mejorvaloradas($context, array $blocks = array())
     {
-        // line 99
+        // line 100
         echo "               
                 ";
     }
 
-    // line 106
+    // line 107
     public function block_estrenos($context, array $blocks = array())
     {
-        // line 107
+        // line 108
         echo "               
                 ";
     }
 
-    // line 114
+    // line 115
     public function block_proximamente($context, array $blocks = array())
     {
-        // line 115
+        // line 116
         echo "               
                 ";
     }
 
-    // line 123
+    // line 124
     public function block_ultimas($context, array $blocks = array())
     {
-        // line 124
+        // line 125
         echo "               
                 ";
     }
 
-    // line 136
+    // line 137
     public function block_barraderecha($context, array $blocks = array())
     {
-        // line 137
+        // line 138
         echo "    <div class=\"col-md-3 columna-index-boostrap\">
         <div class=\"columna-index\">
 
@@ -431,13 +432,13 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
     ";
     }
 
-    // line 282
+    // line 283
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 283
+        // line 284
         echo "    
     <script type=\"text/javascript\" src=\"";
-        // line 284
+        // line 285
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("star/jquery.rateyo.min.js"), "html", null, true);
         echo "\"></script>
     <script>
@@ -459,7 +460,7 @@ window.location.href =url;
     });
     </script>
     ";
-        // line 303
+        // line 304
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
     ";
@@ -477,7 +478,7 @@ window.location.href =url;
 
     public function getDebugInfo()
     {
-        return array (  463 => 303,  441 => 284,  438 => 283,  435 => 282,  296 => 137,  293 => 136,  288 => 124,  285 => 123,  280 => 115,  277 => 114,  272 => 107,  269 => 106,  264 => 99,  261 => 98,  256 => 88,  253 => 87,  243 => 126,  241 => 123,  233 => 117,  231 => 114,  224 => 109,  222 => 106,  215 => 101,  213 => 98,  203 => 90,  201 => 87,  178 => 66,  175 => 65,  169 => 63,  164 => 21,  149 => 18,  137 => 273,  135 => 136,  130 => 133,  128 => 65,  123 => 63,  91 => 34,  77 => 22,  75 => 21,  71 => 19,  69 => 18,  64 => 15,  61 => 14,  53 => 8,  47 => 5,  44 => 4,  41 => 3,  11 => 1,);
+        return array (  464 => 304,  442 => 285,  439 => 284,  436 => 283,  297 => 138,  294 => 137,  289 => 125,  286 => 124,  281 => 116,  278 => 115,  273 => 108,  270 => 107,  265 => 100,  262 => 99,  257 => 89,  254 => 88,  244 => 127,  242 => 124,  234 => 118,  232 => 115,  225 => 110,  223 => 107,  216 => 102,  214 => 99,  204 => 91,  202 => 88,  179 => 67,  176 => 66,  170 => 64,  165 => 22,  150 => 19,  138 => 274,  136 => 137,  131 => 134,  129 => 66,  124 => 64,  92 => 35,  78 => 23,  76 => 22,  72 => 20,  70 => 19,  65 => 16,  62 => 15,  52 => 7,  47 => 5,  44 => 4,  41 => 3,  11 => 1,);
     }
 }
 /* {%extends 'base.html.twig'%}*/
@@ -486,9 +487,10 @@ window.location.href =url;
 /*   */
 /*     {{ parent() }}*/
 /*    */
-/*     <!-- Custom styles for this template -->*/
-/*         <link rel="stylesheet" href="{{asset('star/jquery.rateyo.min.css')}}" rel="stylesheet" />*/
+/*     <link rel="stylesheet" href="{{asset('star/jquery.rateyo.min.css')}}" rel="stylesheet" />*/
 /*     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>*/
+/*     */
+/*     <meta http-equiv="Cache-control" content="private">*/
 /*     */
 /* {%endblock%}*/
 /* */

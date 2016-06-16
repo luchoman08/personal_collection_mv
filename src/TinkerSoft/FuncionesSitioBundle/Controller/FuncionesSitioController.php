@@ -21,12 +21,69 @@ class FuncionesSitioController extends Controller
         
     }
     
+    
+    public function getPeliculasCalificadasUsuario(Request $request,$em)
+    {
+        if($request->getSession()->get('id')){ 
+            $usuario = $this->getusuario($request,$em,$request->getSession()->get('id'));
+            return $em->getRepository('FuncionesSitioBundle:ValoracionPeliculas')->
+                findBy(array('idUsuario'=>$usuario));
+        }
+        return null;
+    }
+    
+    /*
+        $request no puede ser reemplazado por $idUsuario ya que getUsuario necesita
+        un Request.
+    */
+    private function getPeliculasColeccion(Request $request,$em,$tipoColeccion){
+        if($request->getSession()->get('id')){ 
+            $usuario = $this->getusuario($request,$em,$request->getSession()->get('id'));
+            $coleccion = $em->getRepository('FuncionesSitioBundle:Coleccion')->
+                findOneBy(array('idUsuario'=>$usuario,'tipo' => $tipoColeccion));
+            return $em->getRepository('FuncionesSitioBundle:PeliculasColeccion')->
+                findBy(array('idColeccion'=>$coleccion));
+            
+        }
+            
+        return null;
+    }
+    
+    public function getPeliculasVistasUsuario(Request $request,$em){
+        return $this->getPeliculasColeccion($request,$em,0);
+    }
+    
+    public function getPeliculasPorVerUsuario(Request $request,$em){
+        return $this->getPeliculasColeccion($request,$em,1);
+    }
+    
+    public function getPeliculasVistasAuditor($em){
+      
+      
+            $coleccion = $em->getRepository('FuncionesSitioBundle:Coleccion')->
+                findBy(array('tipo' => 0));
+                
+            
+             $qb = $em->createQueryBuilder('c');
+        
+                $query = $em->createQuery(
+                    'select c.id as id_coleccion, pc.idPelicula as idPelicula, pc.fechaAdicion as fechaAdicionPelicula, IDENTITY(c.idUsuario) as idUsuario
+                     FROM FuncionesSitioBundle:Coleccion c
+                     INNER JOIN FuncionesSitioBundle:PeliculasColeccion pc
+                     WITH c.id = pc.idColeccion
+                     WHERE c.tipo = 0'
+                );
+                
+                return $query->getResult();
+                   
+    }
+    
     /*
     verifica si la pelicula con id dado 
     ya fue marcada como vista por el usuario
     logueado 
     */
-       public function preguntarPorPeliculaEnColeccionAction(Request $request, $idPelicula, $idColeccion, $em)
+    public function preguntarPorPeliculaEnColeccionAction(Request $request, $idPelicula, $idColeccion, $em)
     {
         if($request->getSession()->get('id')){ 
         $objeto = $em->getRepository('FuncionesSitioBundle:PeliculasColeccion')->
@@ -465,6 +522,14 @@ class FuncionesSitioController extends Controller
             return 0;
         }
     }
+    
+    public function getusuario(Request $request,$em, $idUsuario){
+        
+        return $em->getRepository('FuncionesSitioBundle:Usuarios')->
+                    findOneBy(array('id'=>$idUsuario));
+        
+    }
+    
     
       public function calificarPeliculaAction(Request $request)
     {

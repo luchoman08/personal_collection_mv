@@ -1,0 +1,227 @@
+{%extends 'index.html.twig'%}
+{%block title%} QMP - {{usuario.nombres}} {{usuario.apellidos}} {%endblock%}
+{%block loginoptions%}
+    {% if usuarioLogueado == 1  %}
+
+            <a href="{{url('usuario')}}">{{nickname}}</a> | <a href="{{url('logout_action')}}">Salir</a>
+       
+    {% else %} 
+
+        {{parent()}} 
+    
+    {% endif %}
+{% endblock %}
+
+{% block contenido %}
+
+
+<div class="menu-pelicula-border-black">
+    <ul class="menu-pelicula-tab">
+        <li class="active"><a data-toggle="tab" href="#descubrir">Descubrir&nbsp;</a></li>
+        <li><a data-toggle="tab" href="#listas">Mis listas&nbsp;</a></li>
+        <li><a data-toggle="tab" href="#vistas">Vistas&nbsp;</a></li>
+        <li><a data-toggle="tab" href="#pendientes">Pendientes&nbsp;</a></li>
+        <li><a data-toggle="tab" href="#calificadas">Calificadas&nbsp;</a></li>
+        <li><a data-toggle="tab" href="#perfil">Mi perfil</a></li>
+    </ul>
+</div>
+
+<div class="tab-content">
+    <div id="listas" class="tab-pane fade">
+
+        <div class="listasPersonalizadas">
+            <h3> Listas personalizadas </h3> {% for coleccion in listacolecciones.listaColecciones %}
+            <div class="elementoLista">{{coleccion.nombre}}</div>
+            {% endfor %}
+        </div>
+        <br/>
+    </div>
+    <div id="descubrir" class="tab-pane fade in active">
+        {% for gusto in gustos%}
+        <div class="gustos"> {{gusto}}</div>
+        {% endfor %}
+        <br/> <br/> 
+        {% if descubiertas == null %}
+            <center>
+                <h3>No tiene gustos registrados, puede adicionarlos en Mi perfil.</h3>
+            </center>
+            <br/> 
+        {% endif %} 
+        
+        {%set i=0%} 
+        {% for pelicula in descubiertas.results %}
+
+        <div class="resultado" onclick="location.href='{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}'">
+            <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}">
+            {% if pelicula.poster_path == "" %}
+                
+                <img src="{{asset('assets/images/movie.png')}}" alt="...">
+                           
+                {% else %}
+                        
+                <img src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" alt="...">
+                        
+            {% endif %}
+            </a>
+            <div class="resultado-articulo">
+                <label> {{pelicula.title}} <div id="c{{i}}" value="0" class="rateyo-readonly-widg"> </div> Fecha de estreno: {{pelicula.release_date}}</label><br> {{pelicula.overview}}
+            </div>
+
+        </div>
+
+        {%set i= i + 1%} 
+        {% endfor %}
+
+        <center>
+            <a href="{{url('vista_homepage')}}bgeneros/{{generos}}" class="btn btn-primary" type="button"> Ver m&aacute;s <span class="badge">{{descubiertas.total_results}}</span> </a>
+        </center>
+
+        <br/>
+    </div>
+    <div id="perfil" class="tab-pane fade">
+        Perfil
+        <br/>
+    </div>
+    <div id="vistas" class="tab-pane fade">
+        <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API</div>
+          
+              <div class="menu-pelicula-border-black">
+                <ul class="menu-pelicula-tab">
+                    <li class="active"><a data-toggle="tab" href="#totalvistas">Total de peliculas vistas&nbsp;</a></li>
+                    <li><a data-toggle="tab" href="#ultimomes">Vistas en el último mes&nbsp;</a></li>
+                    <li><a data-toggle="tab" href="#generosvistos">Generos vistos&nbsp;</a></li>
+                </ul>
+            </div>
+            
+            <div class="tab-content">
+                <div id="totalvistas" class="tab-pane fade in active">
+                    {% set i = 0 %}
+                        {% for pelicula in vistas %}
+                        <div class="vistas-pendientes">
+                             <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" >
+                            {% if pelicula.poster_path == "" %}
+                                <img {%if i == ((vistas|length)-1) %}
+                                class="espacio-bot";
+                                {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="..."> 
+                                {% else %}
+                                <img {%if i == ((vistas|length)-1) %}
+                                class="espacio-bot";
+                                {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="...">  
+                            {% endif %}
+                            </a>
+                        </div>
+                        {% set i = i + 1 %}
+                        {% endfor %}
+                </div>
+                <div id="ultimomes" class="tab-pane fade">
+                    {% set i = 0 %}
+                        {% for pelicula in ultimomes %}
+                        <div class="vistas-pendientes">
+                             <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" >
+                            {% if pelicula.poster_path == "" %}
+                                <img {%if i == ((ultimomes|length)-1) %}
+                                class="espacio-bot";
+                                {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="..."> 
+                                {% else %}
+                                <img {%if i == ((ultimomes|length)-1) %}
+                                class="espacio-bot";
+                                {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="...">  
+                            {% endif %}
+                            </a>
+                        </div>
+                        {% set i = i + 1 %}
+                        {% endfor %}
+                </div>
+                
+                <div id="generosvistos" class="tab-pane fade">
+                    <ul>
+                    {% for generovisto in generosvistos %}
+                        <li>{{generovisto}}</li>
+                    {% endfor %}
+                    </ul>
+                    
+                </div>
+                <br/>
+                
+            </div>
+          
+    </div>
+    <div id="pendientes" class="tab-pane fade">
+        <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API</div>
+            
+            {% set i = 0 %}
+            {% for pelicula in pendientes %}
+            <div class="vistas-pendientes">
+                 <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" >
+                {% if pelicula.poster_path == "" %}
+                <img {%if i == ((pendientes|length)-1) %}
+                    class="espacio-bot";
+                    {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="..."> {% else %}
+                <img {%if i == ((pendientes|length)-1) %}
+                    class="espacio-bot";
+                    {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="...">   {% endif %}
+                    </a>
+            </div>
+            {% set i = i + 1 %}
+            {% endfor %}
+        
+    </div>
+    
+    <div id="calificadas" class="tab-pane fade">
+        <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API</div>
+            
+           {% set i = 0 %}
+            {% for pelicula in calificadas %}
+            <div class="vistas-pendientes">
+                 <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" >
+                {% if pelicula.poster_path == "" %}
+                <img {%if i == ((calificadas|length)-1) %}
+                    class="espacio-bot";
+                    {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="..."> {% else %}
+                <img {%if i == ((calificadas|length)-1) %}
+                    class="espacio-bot";
+                    {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="...">   {% endif %}
+                    </a>
+            </div>
+            {% set i = i + 1 %}
+            {% endfor %}
+        
+    </div>
+    
+</div>
+{% endblock %}
+
+{% block barraderecha %}
+
+    <div class="col-md-3 columna-index-boostrap">
+        <div class="columna-index">
+            
+            <label>{{ usuario.nombres }} {{ usuario.apellidos }}</label>
+            
+        </div>
+    </div>
+
+{% endblock %}
+
+{%block javascripts%}
+ {{ parent() }}
+<script>
+     $(function() {
+        {% for pelicula in descubiertas.results%}
+            var rating = {{pelicula.vote_average}};
+            $(".counter").text(rating);
+            $("#c{{i}}").rateYo({
+                readOnly: true,
+                rating: rating,
+                numStars: 10,
+                precision: 10,
+                minValue: 1,
+                maxValue: 10
+            }).on("rateyo.change", function(e, data) {
+                $("#c{{i}}").val(data.rating);
+            });
+                {%set i = i + 1%}
+        {%endfor%}
+     });
+    </script>   
+{%endblock%}

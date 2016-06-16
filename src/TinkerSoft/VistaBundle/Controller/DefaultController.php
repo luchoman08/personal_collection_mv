@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+use TinkerSoft\FuncionesSitioBundle\Entity\Coleccion;
+
 class DefaultController extends Controller
 {
     public function indexAction(){
@@ -78,6 +80,18 @@ class DefaultController extends Controller
         
     }
     
+    public function verResultadosGenerosAction(Request $request, $generos,$numero_pagina){
+        $usuarioLogueado=0;
+        $nickname = "";
+        if($request->getSession()->get('id')){
+            $usuarioLogueado=1;
+            $nickname = $request->getSession()->get('nickname');
+        }
+        $datos = $this->get('app.api_controller')->descubrirGenerosPaginadasAction($generos,$numero_pagina);
+        return $this->render('VistaBundle:Default:buscar.html.twig', array('params' => $datos, 'consulta' => $generos,'usuarioLogueado' => $usuarioLogueado, 'nickname' => $nickname,'flag' => 'generos'));
+        
+    }
+    
     public function verPeliculaAction(Request $request, $id, $optional){
         
         $datos = $this->get('app.api_controller')->obtenerPeliculaAction($request, $id);
@@ -107,6 +121,7 @@ class DefaultController extends Controller
         if ($optional == 1){
             $funcionesOcultas = 1;
         }
+        
         
         return $this->render('VistaBundle:Default:mostrarPelicula.html.twig', array('usuarioLogueado'=>$usuarioLogueado, 'params' => $datos, 'similares' => $similares, 'nickname' => $nickname, 'fondos' => $fondos, 'votos_imdb' => $votos['imdbVotes'],'funcionesOcultas' => $funcionesOcultas));
     }
@@ -146,5 +161,161 @@ class DefaultController extends Controller
     public function demoAction(){
         return $this->render('VistaBundle:Default:demo.html.twig');
     
+    }
+    
+    public function mostrarListasAction(Request $request){
+        
+        $usuarioLogueado=0;
+        $nickname = "";
+        if($request->getSession()->get('id')){
+            $usuarioLogueado=1;
+            $nickname = $request->getSession()->get('nickname');   
+            $em = $this->getDoctrine()->getManager();
+            $listaColecciones = array('listaColecciones'=>$this->get('app.funciones_controler')->getListasPersonalizadas($request, $em));
+            //echo $listaColecciones['listaColecciones'][0]->getNombre();
+            
+            return $this->render('VistaBundle:Default:listas.html.twig',array('usuarioLogueado'=>$usuarioLogueado,'nickname' => $nickname, 'listacolecciones' => $listaColecciones));
+        }else{
+            return $this->render('VistaBundle:Default:login.html.twig', array('error'=>2));
+        }
+    }
+    
+    public function panelUsuarioAction(Request $request){
+        $usuarioLogueado=0;
+        $nickname = "";
+        if($request->getSession()->get('id')){
+           $usuarioLogueado=1;
+           $nickname = $request->getSession()->get('nickname');   
+           
+           $em = $this->getDoctrine()->getManager();
+           $usuario = $this->get('app.funciones_controler')->getusuario($request,$em,$request->getSession()->get('id'));
+           $listaColecciones = array('listaColecciones'=>$this->get('app.funciones_controler')->getListasPersonalizadas($request, $em));
+           $gustos = $em->getRepository('FuncionesSitioBundle:RegistroGustos')->findBy(array('idUsuario'=>$request->getSession()->get('id')));
+           
+           $generos = $this->get('app.api_controller')->listaGenerosAction("en");
+           
+           $gustosNombres = array();
+           $gustosID  = array();
+           for($i = 0 ; $i < count($gustos) ; $i++){
+               for($j = 0 ; $j < count($generos['genres']) ; $j++){
+                   if($gustos[$i]->getGeneroid() == $generos['genres'][$j]->id ){
+                       array_push($gustosNombres,$generos['genres'][$j]->name );
+                       array_push($gustosID,$generos['genres'][$j]->id );
+                   }
+               }
+            }
+            
+            $argumentoGeneros = "";
+            for($i=0; $i<count($gustosID); $i++){
+                $argumentoGeneros = $argumentoGeneros . $gustosID[$i];
+                if($i < (count($gustosID)-1) ){
+                  $argumentoGeneros = $argumentoGeneros . "|";
+                }
+            }
+            
+           if ($gustos){
+               $peliculasDescubiertas = $this->get('app.api_controller')->descubrirGenerosAction($gustosID);
+           }
+           
+            $vistas = $this->get('app.funciones_controler')->getPeliculasVistasUsuario($request, $em);
+            $pendientes = $this->get('app.funciones_controler')->getPeliculasPorVerUsuario($request, $em);
+            $califcadas = $this->get('app.funciones_controler')->getPeliculasCalificadasUsuario($request, $em);
+            
+            $peliculasVistas = array();
+            $peliculasPendientes = array();
+            $peliculasCalificadas = array();
+            $peliculasVistasUltimoMes = array();
+            
+            for ($i = 0; $i < count($vistas); $i++){
+                $movie = $this->get('app.api_controller')->obtenerPeliculaRipeadaAction($request, $vistas[$i]->getIdPelicula());
+                array_push($peliculasVistas,$movie);
+            }
+            
+            for ($i = 0; $i < count($pendientes); $i++){
+                $movie = $this->get('app.api_controller')->obtenerPeliculaRipeadaAction($request, $pendientes[$i]->getIdPelicula());
+                array_push($peliculasPendientes,$movie);
+            }
+            
+            /* Se asume que una pelicula debe estar en vista para poder estar en calificada */
+            for ($i = 0; $i < count($califcadas); $i++){
+                for($j = 0; $j<count($peliculasVistas); $j++ ){
+                    if ($califcadas[$i]->getIdPelicula() == $peliculasVistas[$j]['id']){
+                        array_push($peliculasCalificadas,$peliculasVistas[$j]);
+                    }
+                }
+            }
+            
+            /* Vistas último mes */
+            for($i = 0; $i < count($vistas); $i++){
+                
+                $diff = time() - strtotime($vistas[$i]->getFechaAdicion()->format("Y-m-d")) ;  
+                
+                if  ($diff/(60) < 43200){
+                    
+                    for($j = 0; $j < count($peliculasVistas); $j++){
+                        if ($vistas[$i]->getIdPelicula() == $peliculasVistas[$j]['id']){
+                            array_push($peliculasVistasUltimoMes,$peliculasVistas[$j]);
+                        }
+                    }
+                    
+                } 
+            }
+            
+            $generosVistos = array();
+           
+            for($k = 0; $k < count($peliculasVistas); $k++){
+                
+                for($j = 0 ; $j < count($generos['genres']) ; $j++){
+                    
+                    for($m = 0; $m < count($peliculasVistas[$k]['genres']); $m++)
+                        if($peliculasVistas[$k]['genres'][$m]->id == $generos['genres'][$j]->id ){
+                            if (!(in_array($generos['genres'][$j]->name, $generosVistos))) {
+                                array_push($generosVistos,$generos['genres'][$j]->name ); 
+                            }
+                        }
+                }
+            }
+          
+            
+           return $this->render('VistaBundle:Default:panelUsuario.html.twig',array('usuarioLogueado'=>$usuarioLogueado,'nickname' => $nickname, 'usuario' => $usuario, 'listacolecciones' => $listaColecciones, 'gustos' => $gustosNombres, 'descubiertas' => $peliculasDescubiertas, 'generos' => $argumentoGeneros, 'vistas' => $peliculasVistas, 'pendientes' => $peliculasPendientes, 'calificadas' => $peliculasCalificadas, 'ultimomes' => $peliculasVistasUltimoMes, 'generosvistos' => $generosVistos));
+        }else{
+            return $this->render('VistaBundle:Default:login.html.twig', array('error'=>2));
+        }
+        
+    }
+    
+    public function panelAuditorAction(Request $request){
+        
+        $usuarioLogueado=0;
+        $nickname = "";
+        if($request->getSession()->get('id')){
+           $usuarioLogueado=1;
+           $nickname = $request->getSession()->get('nickname');   
+           if (!($request->getSession()->get('rol') == 1) ){
+               return $this->render('VistaBundle:Default:login.html.twig', array('error'=>3));
+           }
+           $em = $this->getDoctrine()->getManager();
+           $usuario = $this->get('app.funciones_controler')->getusuario($request,$em,$request->getSession()->get('id'));
+           
+           $peliculasVistas = $this->get('app.funciones_controler')->getPeliculasVistasAuditor($em);
+           
+            /* Vistas último mes */
+            $peliculasVistasUltimoMes = array();
+            for($i = 0; $i < count($peliculasVistas); $i++){
+                
+                $diff = time() - strtotime($peliculasVistas[$i]['fechaAdicionPelicula']->format("Y-m-d")) ; 
+               
+                if  ($diff/(60) < 43200){
+                    
+                    array_push($peliculasVistasUltimoMes,$peliculasVistas[$i]);
+                    
+                } 
+            }
+           
+           
+            return $this->render('VistaBundle:Default:auditor.html.twig',array('usuarioLogueado'=>$usuarioLogueado,'nickname' => $nickname, 'usuario' => $usuario, 'peliculasvistas' => $peliculasVistas, 'peliculasultimomes' => $peliculasVistasUltimoMes ));
+        }else{
+            return $this->render('VistaBundle:Default:login.html.twig', array('error'=>2));
+        }
     }
 }

@@ -1,0 +1,27 @@
+{%extends 'index.html.twig'%}
+{%block title%} QMP - Resultados de busqueda {%endblock%}
+{%block loginoptions%}
+    {% if usuarioLogueado == 1  %}
+
+            <a href="{{url('usuario')}}">{{nickname}}</a> | <a href="{{url('logout_action')}}">Salir</a>
+       
+    {% else %} 
+
+        {{parent()}} 
+    
+    {% endif %}
+{% endblock %}
+{% block contenido %}
+    
+    <h3> Listas personalizadas </h3>
+    {% for coleccion in listacolecciones.listaColecciones %}
+        <div class="elementoLista">{{coleccion.nombre}}</div>
+    {% endfor %}
+    
+    <br/>
+
+{% endblock %}
+
+{%block javascripts%}
+ {{ parent() }}
+{%endblock%}

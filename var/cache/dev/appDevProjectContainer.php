@@ -34,6 +34,7 @@ class appDevProjectContainer extends Container
             'annotation_reader' => 'getAnnotationReaderService',
             'app.api_controller' => 'getApp_ApiControllerService',
             'app.default_controller' => 'getApp_DefaultControllerService',
+            'app.funciones_controler' => 'getApp_FuncionesControlerService',
             'assets.context' => 'getAssets_ContextService',
             'assets.packages' => 'getAssets_PackagesService',
             'cache_clearer' => 'getCacheClearerService',
@@ -299,6 +300,19 @@ class appDevProjectContainer extends Container
     }
 
     /*
+     * Gets the 'app.funciones_controler' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \TinkerSoft\FuncionesSitioBundle\Controller\FuncionesSitioController A TinkerSoft\FuncionesSitioBundle\Controller\FuncionesSitioController instance.
+     */
+    protected function getApp_FuncionesControlerService()
+    {
+        return $this->services['app.funciones_controler'] = new \TinkerSoft\FuncionesSitioBundle\Controller\FuncionesSitioController();
+    }
+
+    /*
      * Gets the 'assets.context' service.
      *
      * This service is shared.
@@ -537,14 +551,15 @@ class appDevProjectContainer extends Container
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService()
     {
-        $a = new \Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver(array(($this->targetDirs[3].'/src/TinkerSoft/UsuariosBundle/Resources/config/doctrine') => 'TinkerSoft\\UsuariosBundle\\Entity'));
+        $a = new \Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver(array(($this->targetDirs[3].'/src/TinkerSoft/UsuariosBundle/Resources/config/doctrine') => 'TinkerSoft\\UsuariosBundle\\Entity', ($this->targetDirs[3].'/src/TinkerSoft/FuncionesSitioBundle/Resources/config/doctrine') => 'TinkerSoft\\FuncionesSitioBundle\\Entity'));
         $a->setGlobalBasename('mapping');
 
         $b = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
         $b->addDriver($a, 'TinkerSoft\\UsuariosBundle\\Entity');
+        $b->addDriver($a, 'TinkerSoft\\FuncionesSitioBundle\\Entity');
 
         $c = new \Doctrine\ORM\Configuration();
-        $c->setEntityNamespaces(array('TinkerSoftUsuariosBundle' => 'TinkerSoft\\UsuariosBundle\\Entity'));
+        $c->setEntityNamespaces(array('TinkerSoftUsuariosBundle' => 'TinkerSoft\\UsuariosBundle\\Entity', 'FuncionesSitioBundle' => 'TinkerSoft\\FuncionesSitioBundle\\Entity'));
         $c->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_metadata_cache'));
         $c->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_query_cache'));
         $c->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_result_cache'));
@@ -1873,7 +1888,7 @@ class appDevProjectContainer extends Container
 
         $e = new \Symfony\Component\Security\Http\AccessMap();
 
-        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($e, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'main', $a, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '573e035cc07168.54546793', $a, $c), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $e, $c)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($d, $d), 'main', NULL, NULL, NULL, $a, false));
+        return $this->services['security.firewall.map.context.main'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => new \Symfony\Component\Security\Http\Firewall\ChannelListener($e, new \Symfony\Component\Security\Http\EntryPoint\RetryAuthenticationEntryPoint(80, 443), $a), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($b, array(0 => new \Symfony\Component\Security\Core\User\InMemoryUserProvider()), 'main', $a, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($b, '576317d5708120.23304777', $a, $c), 3 => new \Symfony\Component\Security\Http\Firewall\AccessListener($b, $this->get('security.access.decision_manager'), $e, $c)), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($b, $this->get('security.authentication.trust_resolver'), new \Symfony\Component\Security\Http\HttpUtils($d, $d), 'main', NULL, NULL, NULL, $a, false));
     }
 
     /*
@@ -2869,6 +2884,7 @@ class appDevProjectContainer extends Container
         $instance->addPath(($this->targetDirs[3].'/src/TinkerSoft/UsuariosBundle/Resources/views'), 'TinkerSoftUsuarios');
         $instance->addPath(($this->targetDirs[3].'/src/TinkerSoft/APITheMovieDataBaseBundle/Resources/views'), 'APITheMovieDataBase');
         $instance->addPath(($this->targetDirs[3].'/src/TinkerSoft/VistaBundle/Resources/views'), 'Vista');
+        $instance->addPath(($this->targetDirs[3].'/src/TinkerSoft/FuncionesSitioBundle/Resources/views'), 'FuncionesSitio');
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views'), 'Debug');
         $instance->addPath(($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views'), 'WebProfiler');
         $instance->addPath(($this->targetDirs[3].'/app/Resources/views'));
@@ -3132,7 +3148,7 @@ class appDevProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('573e035cc07168.54546793')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('576317d5708120.23304777')), true);
 
         $instance->setEventDispatcher($this->get('event_dispatcher'));
 
@@ -3328,6 +3344,8 @@ class appDevProjectContainer extends Container
                 'TinkerSoftUsuariosBundle' => 'TinkerSoft\\UsuariosBundle\\TinkerSoftUsuariosBundle',
                 'APITheMovieDataBaseBundle' => 'TinkerSoft\\APITheMovieDataBaseBundle\\APITheMovieDataBaseBundle',
                 'VistaBundle' => 'TinkerSoft\\VistaBundle\\VistaBundle',
+                'LoginBundle' => 'LoginBundle\\LoginBundle',
+                'FuncionesSitioBundle' => 'TinkerSoft\\FuncionesSitioBundle\\FuncionesSitioBundle',
                 'DebugBundle' => 'Symfony\\Bundle\\DebugBundle\\DebugBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
@@ -3343,8 +3361,8 @@ class appDevProjectContainer extends Container
             'mailer_transport' => 'smtp',
             'mailer_host' => '127.0.0.1',
             'mailer_user' => NULL,
-            'mailer_password' => NULL,
             'secret' => 'ThisTokenIsNotSoSecretChangeIt',
+            'mailer_password' => NULL,
             'locale' => 'en',
             'fragment.renderer.hinclude.global_template' => NULL,
             'fragment.path' => '/_fragment',

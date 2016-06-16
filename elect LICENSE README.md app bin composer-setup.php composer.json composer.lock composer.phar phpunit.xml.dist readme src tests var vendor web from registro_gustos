@@ -1,0 +1,15 @@
+                    List of relations
+ Schema |            Name             |   Type   | Owner 
+--------+-----------------------------+----------+-------
+ public | coleccion                   | table    | root
+ public | coleccion_id_seq            | sequence | root
+ public | peliculas_coleccion         | table    | root
+ public | peliculas_coleccion_id_seq  | sequence | root
+ public | registro_gustos             | table    | root
+ public | registro_gustos_id_seq      | sequence | root
+ public | usuarios                    | table    | root
+ public | usuarios_id_seq             | sequence | root
+ public | valoracion_peliculas        | table    | root
+ public | valoracion_peliculas_id_seq | sequence | root
+(10 rows)
+

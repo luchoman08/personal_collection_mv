@@ -34,7 +34,7 @@ class __TwigTemplate_6506c86f8bdf41a129b891ead2d9e6a48103e2d668f06c05ec5c04557df
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nombre</th>
+                <th>Nombres</th>
                 <th>Apellidos</th>
                 <th>Nickname</th>
                 <th>Correoelectronico</th>
@@ -60,7 +60,7 @@ class __TwigTemplate_6506c86f8bdf41a129b891ead2d9e6a48103e2d668f06c05ec5c04557df
             echo "</a></td>
                 <td>";
             // line 24
-            echo twig_escape_filter($this->env, $this->getAttribute($context["usuario"], "nombre", array()), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($context["usuario"], "nombres", array()), "html", null, true);
             echo "</td>
                 <td>";
             // line 25
@@ -151,7 +151,7 @@ class __TwigTemplate_6506c86f8bdf41a129b891ead2d9e6a48103e2d668f06c05ec5c04557df
 /*         <thead>*/
 /*             <tr>*/
 /*                 <th>Id</th>*/
-/*                 <th>Nombre</th>*/
+/*                 <th>Nombres</th>*/
 /*                 <th>Apellidos</th>*/
 /*                 <th>Nickname</th>*/
 /*                 <th>Correoelectronico</th>*/
@@ -165,7 +165,7 @@ class __TwigTemplate_6506c86f8bdf41a129b891ead2d9e6a48103e2d668f06c05ec5c04557df
 /*         {% for usuario in usuarios %}*/
 /*             <tr>*/
 /*                 <td><a href="{{ path('usuarios_show', { 'id': usuario.id }) }}">{{ usuario.id }}</a></td>*/
-/*                 <td>{{ usuario.nombre }}</td>*/
+/*                 <td>{{ usuario.nombres }}</td>*/
 /*                 <td>{{ usuario.apellidos }}</td>*/
 /*                 <td>{{ usuario.nickname }}</td>*/
 /*                 <td>{{ usuario.correoElectronico }}</td>*/

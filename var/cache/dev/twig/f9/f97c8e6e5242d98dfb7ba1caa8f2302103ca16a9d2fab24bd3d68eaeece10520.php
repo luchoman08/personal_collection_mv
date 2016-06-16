@@ -8,15 +8,17 @@ class __TwigTemplate_a3933e34e1b47b1f48ae7dcbf247ea9feaab91b67f6e62a4461c23bc648
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("base.html.twig", ":usuarios:new.html.twig", 1);
+        $this->parent = $this->loadTemplate("index.html.twig", ":usuarios:new.html.twig", 1);
         $this->blocks = array(
-            'body' => array($this, 'block_body'),
+            'classcontenido' => array($this, 'block_classcontenido'),
+            'contenido' => array($this, 'block_contenido'),
+            'barraderecha' => array($this, 'block_barraderecha'),
         );
     }
 
     protected function doGetParent(array $context)
     {
-        return "base.html.twig";
+        return "index.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
@@ -24,41 +26,47 @@ class __TwigTemplate_a3933e34e1b47b1f48ae7dcbf247ea9feaab91b67f6e62a4461c23bc648
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
+    // line 2
+    public function block_classcontenido($context, array $blocks = array())
+    {
+        echo "col-md-12 fondoContenido";
+    }
+
     // line 3
-    public function block_body($context, array $blocks = array())
+    public function block_contenido($context, array $blocks = array())
     {
         // line 4
-        echo "    <h1>Usuarios creation</h1>
+        echo "    <h1>Usuarios creation (UI bajo construcción xdd)</h1>
 
     ";
         // line 6
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : null), 'form_start');
         echo "
-    ";
-        // line 7
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "nombre", array()), 'label', array("label_attr" => array("class" => "foo"), "label" => "Your Name"));
-        echo "
         ";
-        // line 8
+        // line 7
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : null), 'widget');
         echo "
-
-
         <input type=\"submit\" value=\"Create\" />
     ";
-        // line 12
+        // line 9
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : null), 'form_end');
         echo "
 
     <ul>
         <li>
             <a href=\"";
-        // line 16
+        // line 13
         echo $this->env->getExtension('routing')->getPath("usuarios_index");
         echo "\">Back to the list</a>
         </li>
     </ul>
-";
+    ";
+        // line 16
+        $this->displayBlock('barraderecha', $context, $blocks);
+    }
+
+    public function block_barraderecha($context, array $blocks = array())
+    {
     }
 
     public function getTemplateName()
@@ -73,19 +81,16 @@ class __TwigTemplate_a3933e34e1b47b1f48ae7dcbf247ea9feaab91b67f6e62a4461c23bc648
 
     public function getDebugInfo()
     {
-        return array (  57 => 16,  50 => 12,  43 => 8,  39 => 7,  35 => 6,  31 => 4,  28 => 3,  11 => 1,);
+        return array (  65 => 16,  59 => 13,  52 => 9,  47 => 7,  43 => 6,  39 => 4,  36 => 3,  30 => 2,  11 => 1,);
     }
 }
-/* {% extends 'base.html.twig' %}*/
-/* */
-/* {% block body %}*/
-/*     <h1>Usuarios creation</h1>*/
+/* {% extends 'index.html.twig' %}*/
+/* {% block classcontenido %}col-md-12 fondoContenido{% endblock %}*/
+/* {% block contenido %}*/
+/*     <h1>Usuarios creation (UI bajo construcción xdd)</h1>*/
 /* */
 /*     {{ form_start(form) }}*/
-/*     {{ form_label(form.nombre, 'Your Name', {'label_attr': {'class': 'foo'}}) }}*/
 /*         {{ form_widget(form) }}*/
-/* */
-/* */
 /*         <input type="submit" value="Create" />*/
 /*     {{ form_end(form) }}*/
 /* */
@@ -94,5 +99,6 @@ class __TwigTemplate_a3933e34e1b47b1f48ae7dcbf247ea9feaab91b67f6e62a4461c23bc648
 /*             <a href="{{ path('usuarios_index') }}">Back to the list</a>*/
 /*         </li>*/
 /*     </ul>*/
+/*     {% block barraderecha %}{%endblock%}*/
 /* {% endblock %}*/
 /* */

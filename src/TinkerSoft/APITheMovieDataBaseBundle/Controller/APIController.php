@@ -173,6 +173,43 @@ class APIController extends Controller
     }
     
     
+    public function descubrirGenerosPaginadasAction($generos,$numero_pagina){
+        
+        $generos = str_replace(" ", "-", $generos);
+        
+        if(is_numeric($numero_pagina)){
+            
+            if($numero_pagina <= 0){
+                    $numero_pagina = 1;
+              }
+            
+            if($numero_pagina > 1000){
+                    $numero_pagina = 1000;
+              }
+            
+        }else{
+            
+            $numero_pagina = 1;
+                
+        }
+        
+        $urlAPI = "https://api.themoviedb.org/3/discover/movie?with_genres=" . $generos . "&page=" . $numero_pagina . "&api_key=be961f58626a1b5bb01ccf04da21d18f";
+        $content = file_get_contents($urlAPI);
+        $contentJSON = (array) json_decode($content);
+        
+        if($numero_pagina > $contentJSON['total_pages']){
+            
+                    $numero_pagina = $contentJSON['total_pages'];
+                    $urlAPI = "https://api.themoviedb.org/3/discover/movie?with_genres=" . $generos . "page=" . $numero_pagina . "&&api_key=be961f58626a1b5bb01ccf04da21d18f";
+                    $content = file_get_contents($urlAPI);
+                    $contentJSON = (array) json_decode($content);
+                    
+              }
+        return $contentJSON;
+        
+    }
+    
+    
     
     private function codigosLenguaje($codigo){
         $language_codes = array(
@@ -329,6 +366,15 @@ class APIController extends Controller
             
             $trailersJSON['results'][$i]->iso_639_1 = $this->codigosLenguaje($trailersJSON['results'][$i]->iso_639_1);
         }
+        //&language=
+        /*$urlAPI="https://api.themoviedb.org/3/movie/".$id. "/videos?api_key=be961f58626a1b5bb01ccf04da21d18f&language=es";
+        $content = file_get_contents($urlAPI);
+        $trailersJSON = array_combine ($trailersJSON,(array) json_decode($content));
+        for($i = 0; $i < count($trailersJSON['results']); $i++){
+            
+            $trailersJSON['results'][$i]->iso_639_1 = $this->codigosLenguaje($trailersJSON['results'][$i]->iso_639_1);
+        }*/
+        
         $imagenes= "https://api.themoviedb.org/3/movie/" . $id . "/images?api_key=be961f58626a1b5bb01ccf04da21d18f&include_image_language=en,null";
         $content = file_get_contents($imagenes);
         $imagenesJSON = (array) json_decode($content);
@@ -340,6 +386,15 @@ class APIController extends Controller
         
         $infocompletaJSON=array_merge($peliculaJSON, $trailersJSON,$imagenesJSON,$creditosJSON);
         return $infocompletaJSON;
+    }
+    
+    public function obtenerPeliculaRipeadaAction(Request $request, $id){
+      
+        $urlAPI = "https://api.themoviedb.org/3/movie/" . $id . "?api_key=be961f58626a1b5bb01ccf04da21d18f";
+        $content = file_get_contents($urlAPI);
+        $peliculaJSON = (array) json_decode($content);
+       
+        return $peliculaJSON;
     }
     
     public function listaGenerosAction($_locale)
@@ -371,9 +426,22 @@ class APIController extends Controller
         
     } 
     
-    
-    
-    
+    public function descubrirGenerosAction($generos){
+        
+        $argumentoGeneros = "";
+        for($i=0; $i<count($generos); $i++){
+            $argumentoGeneros = $argumentoGeneros . $generos[$i];
+            if($i < (count($generos)-1) ){
+                $argumentoGeneros = $argumentoGeneros . "|";
+            }
+        }
+        
+        $urlAPI = "https://api.themoviedb.org/3/discover/movie?with_genres=" . $argumentoGeneros . "&api_key=be961f58626a1b5bb01ccf04da21d18f";
+        $content = file_get_contents($urlAPI);
+        $contentJSON = (array) json_decode($content);
+        return $contentJSON;
+        
+    }
     
 }
 

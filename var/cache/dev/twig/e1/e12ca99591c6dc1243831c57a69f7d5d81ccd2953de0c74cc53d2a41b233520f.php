@@ -24,76 +24,89 @@ class __TwigTemplate_c8c9bbca9910a9451e03f21488fc044ec131de1ff9edda2a61e92c88033
 <html>
     <head>
         <meta charset=\"UTF-8\" />
-        <title>";
+        <link rel=\"icon\" type=\"image/x-icon\" href=\"";
         // line 5
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("favicon.ico"), "html", null, true);
+        echo "\" />
+        <title>";
+        // line 6
         $this->displayBlock('title', $context, $blocks);
         echo "</title>
         ";
-        // line 6
+        // line 7
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 16
-        echo "        
-        <link rel=\"icon\" type=\"image/x-icon\" href=\"";
         // line 17
-        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("favicon.ico"), "html", null, true);
-        echo "\" />
+        echo "        
+        
     </head>
-    <body class=\"container\">
+    <body class=\"container fondo\">
         ";
-        // line 20
-        $this->displayBlock('body', $context, $blocks);
         // line 21
+        $this->displayBlock('body', $context, $blocks);
+        // line 22
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 36
+        // line 37
         echo "    </body>
 </html>
 ";
     }
 
-    // line 5
+    // line 6
     public function block_title($context, array $blocks = array())
     {
-        echo "Welcome!";
+        echo "QMP";
     }
 
-    // line 6
+    // line 7
     public function block_stylesheets($context, array $blocks = array())
     {
-        // line 7
+        // line 8
         echo "        
             <!-- Latest compiled and minified CSS -->
-            <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\">
+            <link rel=\"stylesheet\" href=\"";
+        // line 10
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/bootstrap/css/bootstrap.min.css"), "html", null, true);
+        echo "\" crossorigin=\"anonymous\">
+            <link rel=\"stylesheet\" href=\"";
+        // line 11
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("star/jquery.rateyo.min.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" />
             <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js\"></script>
             <!-- Optional theme -->
-            <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">
+            <link href=\"";
+        // line 14
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/css/qmp.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" />
 
-           
         ";
     }
 
-    // line 20
+    // line 21
     public function block_body($context, array $blocks = array())
     {
     }
 
-    // line 21
+    // line 22
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 22
+        // line 23
         echo "        
-            <script>
-                \$(document).ready(function(){
+          <script>
+               \$(document).ready(function(){
                     \$('[data-toggle=\"popover\"]').popover();   
                 });
             </script>
-
-            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins)
             <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js\"></script>
-        
-             <!-- Latest compiled and minified JavaScript -->
             <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\"></script>
-        
+            <!-- Latest compiled and minified JavaScript -->
+            <script src=\"";
+        // line 34
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/bootstrap/js/bootstrap.min.js"), "html", null, true);
+        echo "\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\"></script>
+    
         ";
     }
 
@@ -109,43 +122,44 @@ class __TwigTemplate_c8c9bbca9910a9451e03f21488fc044ec131de1ff9edda2a61e92c88033
 
     public function getDebugInfo()
     {
-        return array (  84 => 22,  81 => 21,  76 => 20,  64 => 7,  61 => 6,  55 => 5,  49 => 36,  46 => 21,  44 => 20,  38 => 17,  35 => 16,  33 => 6,  29 => 5,  23 => 1,);
+        return array (  107 => 34,  94 => 23,  91 => 22,  86 => 21,  79 => 14,  73 => 11,  69 => 10,  65 => 8,  62 => 7,  56 => 6,  50 => 37,  47 => 22,  45 => 21,  39 => 17,  37 => 7,  33 => 6,  29 => 5,  23 => 1,);
     }
 }
 /* <!DOCTYPE html>*/
 /* <html>*/
 /*     <head>*/
 /*         <meta charset="UTF-8" />*/
-/*         <title>{% block title %}Welcome!{% endblock %}</title>*/
+/*         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />*/
+/*         <title>{% block title %}QMP{% endblock %}</title>*/
 /*         {% block stylesheets %}*/
 /*         */
 /*             <!-- Latest compiled and minified CSS -->*/
-/*             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">*/
+/*             <link rel="stylesheet" href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}" crossorigin="anonymous">*/
+/*             <link rel="stylesheet" href="{{asset('star/jquery.rateyo.min.css')}}" rel="stylesheet" />*/
 /*             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>*/
 /*             <!-- Optional theme -->*/
-/*             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">*/
+/*             <link href="{{asset('assets/css/qmp.css')}}" rel="stylesheet" />*/
 /* */
-/*            */
 /*         {% endblock %}*/
 /*         */
-/*         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />*/
+/*         */
 /*     </head>*/
-/*     <body class="container">*/
+/*     <body class="container fondo">*/
 /*         {% block body %}{% endblock %}*/
 /*         {% block javascripts %}*/
 /*         */
-/*             <script>*/
-/*                 $(document).ready(function(){*/
+/*           <script>*/
+/*                $(document).ready(function(){*/
 /*                     $('[data-toggle="popover"]').popover();   */
 /*                 });*/
 /*             </script>*/
-/* */
-/*             <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->*/
+/*         */
+/*             <!-- jQuery (necessary for Bootstrap's JavaScript plugins)*/
 /*             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>*/
-/*         */
-/*              <!-- Latest compiled and minified JavaScript -->*/
 /*             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>*/
-/*         */
+/*             <!-- Latest compiled and minified JavaScript -->*/
+/*             <script src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>*/
+/*     */
 /*         {% endblock %}*/
 /*     </body>*/
 /* </html>*/

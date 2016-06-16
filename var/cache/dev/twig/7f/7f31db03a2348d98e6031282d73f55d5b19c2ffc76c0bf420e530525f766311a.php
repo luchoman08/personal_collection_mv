@@ -40,10 +40,10 @@ class __TwigTemplate_ee80398f18011a2b79587dc390fc959ffc1213ffc89ee8d393f09b1251d
         echo "</td>
             </tr>
             <tr>
-                <th>Nombre</th>
+                <th>Nombres</th>
                 <td>";
         // line 14
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "nombre", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "nombres", array()), "html", null, true);
         echo "</td>
             </tr>
             <tr>
@@ -150,8 +150,8 @@ class __TwigTemplate_ee80398f18011a2b79587dc390fc959ffc1213ffc89ee8d393f09b1251d
 /*                 <td>{{ usuario.id }}</td>*/
 /*             </tr>*/
 /*             <tr>*/
-/*                 <th>Nombre</th>*/
-/*                 <td>{{ usuario.nombre }}</td>*/
+/*                 <th>Nombres</th>*/
+/*                 <td>{{ usuario.nombres }}</td>*/
 /*             </tr>*/
 /*             <tr>*/
 /*                 <th>Apellidos</th>*/

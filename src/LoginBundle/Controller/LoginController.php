@@ -31,7 +31,11 @@ class LoginController extends Controller
                 $session->set('name', $usuario->getNombres());
                 $session->set('nickname', $usuario->getNickname());
                 $session->set('id', $usuario->getId());
-                
+                $session->set('rol', $usuario->getRol());
+               /*Rol 1 = auditor*/
+               if ($usuario->getRol() == 1){
+                   return $this->redirectToRoute('auditor');
+               }
                 $gustos = $em->getRepository('FuncionesSitioBundle:RegistroGustos')->
                 findOneBy(array('idUsuario'=>$usuario->getId()));
                 

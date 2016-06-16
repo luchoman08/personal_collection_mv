@@ -23,6 +23,14 @@ pelicula_consulta_sin_barra:
     path:      /buscar/{consulta}
     defaults:  { _controller: VistaBundle:Default:verResultadosBusqueda, numero_pagina 1}
     
+pelicula_consulta_generos_barra:
+    path:      /bgeneros/{generos}/
+    defaults:  { _controller: VistaBundle:Default:verResultadosGeneros, numero_pagina 1}
+
+pelicula_consulta_generos_sin_barra:
+    path:      /bgeneros/{generos}/{numero_pagina}
+    defaults:  { _controller: VistaBundle:Default:verResultadosGeneros }
+    
 pelicula_consulta_con_barra:
     path:      /buscar/
     defaults:  { _controller: VistaBundle:Default:iniciarIndex}
@@ -82,3 +90,28 @@ demo:
 demo_slash:
     path:      /demo/
     defaults:  { _controller: VistaBundle:Default:demo }
+    
+listas:
+    path:      /listas
+    defaults:  { _controller: VistaBundle:Default:mostrarListas }
+    
+listas_barra:
+    path:      /listas/
+    defaults:  { _controller: VistaBundle:Default:mostrarListas }
+    
+usuario:
+    path:      /usuario
+    defaults:  { _controller: VistaBundle:Default:panelUsuario }
+
+usuario_barra:
+    path:      /usuario/
+    defaults:  { _controller: VistaBundle:Default:panelUsuario }
+ 
+auditor:
+    path:      /auditor
+    defaults:  { _controller: VistaBundle:Default:panelAuditor }
+
+auditor_barra:
+    path:      /auditor/
+    defaults:  { _controller: VistaBundle:Default:panelAuditor }
+ 

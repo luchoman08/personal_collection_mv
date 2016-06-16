@@ -100,6 +100,24 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        if (0 === strpos($pathinfo, '/login')) {
+            // login_action
+            if ($pathinfo === '/login/procesador') {
+                return array (  '_controller' => 'LoginBundle\\Controller\\LoginController::loginAction',  '_route' => 'login_action',);
+            }
+
+            // logout_action
+            if ($pathinfo === '/login/logout') {
+                return array (  '_controller' => 'LoginBundle\\Controller\\LoginController::loginOutAction',  '_route' => 'logout_action',);
+            }
+
+            // registro_generos_action
+            if ($pathinfo === '/login/procesadorg') {
+                return array (  '_controller' => 'LoginBundle\\Controller\\LoginController::registrarGustosAction',  '_route' => 'registro_generos_action',);
+            }
+
+        }
+
         if (0 === strpos($pathinfo, '/vista')) {
             // vista_homepage
             if (rtrim($pathinfo, '/') === '/vista') {
@@ -107,19 +125,240 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return $this->redirect($pathinfo.'/', 'vista_homepage');
                 }
 
-                return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::indexAction',  '_route' => 'vista_homepage',);
+                return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::iniciarIndexAction',  '_route' => 'vista_homepage',);
             }
 
             // pelicula
-            if (0 === strpos($pathinfo, '/vista/buscar') && preg_match('#^/vista/buscar/(?P<consulta>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadoBusquedaAction',));
+            if (0 === strpos($pathinfo, '/vista/buscar') && preg_match('#^/vista/buscar/(?P<consulta>[^/]++)/(?P<numero_pagina>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaAction',));
+            }
+
+            if (0 === strpos($pathinfo, '/vista/similares')) {
+                // similares
+                if (preg_match('#^/vista/similares/(?P<consulta>[^/]++)/(?P<numero_pagina>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'similares')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosSimilaresAction',));
+                }
+
+                // similares_barra
+                if (preg_match('#^/vista/similares/(?P<consulta>[^/]++)/?$#s', $pathinfo, $matches)) {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'similares_barra');
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'similares_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosSimilaresAction',  'numero_pagina' => 1,));
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/vista/b')) {
+                if (0 === strpos($pathinfo, '/vista/buscar')) {
+                    // pelicula_consulta_barra
+                    if (preg_match('#^/vista/buscar/(?P<consulta>[^/]++)/?$#s', $pathinfo, $matches)) {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'pelicula_consulta_barra');
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaAction',  'numero_pagina' => 1,));
+                    }
+
+                    // pelicula_consulta_sin_barra
+                    if (preg_match('#^/vista/buscar/(?P<consulta>[^/]++)$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_sin_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaAction',  'numero_pagina' => 1,));
+                    }
+
+                }
+
+                if (0 === strpos($pathinfo, '/vista/bgeneros')) {
+                    // pelicula_consulta_generos_barra
+                    if (preg_match('#^/vista/bgeneros/(?P<generos>[^/]++)/?$#s', $pathinfo, $matches)) {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'pelicula_consulta_generos_barra');
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_generos_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosGenerosAction',  'numero_pagina' => 1,));
+                    }
+
+                    // pelicula_consulta_generos_sin_barra
+                    if (preg_match('#^/vista/bgeneros/(?P<generos>[^/]++)/(?P<numero_pagina>[^/]++)$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_generos_sin_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosGenerosAction',));
+                    }
+
+                }
+
+                // pelicula_consulta_con_barra
+                if (rtrim($pathinfo, '/') === '/vista/buscar') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'pelicula_consulta_con_barra');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::iniciarIndexAction',  '_route' => 'pelicula_consulta_con_barra',);
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/vista/secret/buscar/show')) {
+                // show
+                if (preg_match('#^/vista/secret/buscar/show/(?P<consulta>[^/]++)/(?P<numero_pagina>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'show')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaShowAction',));
+                }
+
+                // show_consulta_barra
+                if (preg_match('#^/vista/secret/buscar/show/(?P<consulta>[^/]++)/?$#s', $pathinfo, $matches)) {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'show_consulta_barra');
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'show_consulta_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaShowAction',  'numero_pagina' => 1,));
+                }
+
+                // show_consulta_sin_barra
+                if (preg_match('#^/vista/secret/buscar/show/(?P<consulta>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'show_consulta_sin_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadosBusquedaShowAction',  'numero_pagina' => 1,));
+                }
+
+            }
+
+            // generos_barra
+            if ($pathinfo === '/vista/generos') {
+                return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verListaGenerosAction',  '_route' => 'generos_barra',);
+            }
+
+            // pelicula_barra
+            if (rtrim($pathinfo, '/') === '/vista/buscar') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'pelicula_barra');
+                }
+
+                return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::indexAction',  '_route' => 'pelicula_barra',);
+            }
+
+            if (0 === strpos($pathinfo, '/vista/mostrarpelicula')) {
+                // mostrarPelicula_minuscula
+                if (preg_match('#^/vista/mostrarpelicula/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'mostrarPelicula_minuscula')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verPeliculaAction',  'optional' => 0,));
+                }
+
+                // mostrarPelicula_minuscula_secret
+                if (preg_match('#^/vista/mostrarpelicula/(?P<id>[^/]++)/secret$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'mostrarPelicula_minuscula_secret')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verPeliculaAction',  'optional' => 1,));
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/vista/login')) {
+                // login
+                if (rtrim($pathinfo, '/') === '/vista/login') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'login');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::mostrarLoginAction',  '_route' => 'login',);
+                }
+
+                // login_sin_barra
+                if ($pathinfo === '/vista/login') {
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::mostrarLoginAction',  '_route' => 'login_sin_barra',);
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/vista/demo')) {
+                // demo
+                if ($pathinfo === '/vista/demo') {
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::demoAction',  '_route' => 'demo',);
+                }
+
+                // demo_slash
+                if (rtrim($pathinfo, '/') === '/vista/demo') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'demo_slash');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::demoAction',  '_route' => 'demo_slash',);
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/vista/listas')) {
+                // listas
+                if ($pathinfo === '/vista/listas') {
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::mostrarListasAction',  '_route' => 'listas',);
+                }
+
+                // listas_barra
+                if (rtrim($pathinfo, '/') === '/vista/listas') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'listas_barra');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::mostrarListasAction',  '_route' => 'listas_barra',);
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/vista/usuario')) {
+                // usuario
+                if ($pathinfo === '/vista/usuario') {
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::panelUsuarioAction',  '_route' => 'usuario',);
+                }
+
+                // usuario_barra
+                if (rtrim($pathinfo, '/') === '/vista/usuario') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'usuario_barra');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::panelUsuarioAction',  '_route' => 'usuario_barra',);
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/vista/auditor')) {
+                // auditor
+                if ($pathinfo === '/vista/auditor') {
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::panelAuditorAction',  '_route' => 'auditor',);
+                }
+
+                // auditor_barra
+                if (rtrim($pathinfo, '/') === '/vista/auditor') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'auditor_barra');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::panelAuditorAction',  '_route' => 'auditor_barra',);
+                }
+
             }
 
         }
 
-        // api_the_movie_data_base_homepage
-        if ($pathinfo === '/movie_database/R1') {
-            return array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\DefaultController::indexAction',  '_route' => 'api_the_movie_data_base_homepage',);
+        if (0 === strpos($pathinfo, '/movie_database')) {
+            // api_the_movie_data_base_homepage
+            if (rtrim($pathinfo, '/') === '/movie_database') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'api_the_movie_data_base_homepage');
+                }
+
+                return array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\DefaultController::indexAction',  '_route' => 'api_the_movie_data_base_homepage',);
+            }
+
+            if (0 === strpos($pathinfo, '/movie_database/mostrar')) {
+                // mostrarPelicula
+                if (0 === strpos($pathinfo, '/movie_database/mostrarPelicula') && preg_match('#^/movie_database/mostrarPelicula/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'mostrarPelicula')), array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\APIController::obtenerPeliculaAction',));
+                }
+
+                // mostrarTendencias
+                if (rtrim($pathinfo, '/') === '/movie_database/mostrarTendencias') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'mostrarTendencias');
+                    }
+
+                    return array (  '_controller' => 'TinkerSoft\\APITheMovieDataBaseBundle\\Controller\\APIController::obtenerPeliculasTendenciaAction',  '_route' => 'mostrarTendencias',);
+                }
+
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/usuarios')) {
@@ -191,6 +430,59 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
 
             return array (  '_controller' => 'TinkerSoft\\UsuariosBundle\\Controller\\DefaultController::indexAction',  '_route' => 'tinker_soft_usuarios_homepage',);
+        }
+
+        if (0 === strpos($pathinfo, '/funciones')) {
+            // funciones_sitio_homepage
+            if (rtrim($pathinfo, '/') === '/funciones') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'funciones_sitio_homepage');
+                }
+
+                return array (  '_controller' => 'FuncionesSitioBundle:Default:index',  '_route' => 'funciones_sitio_homepage',);
+            }
+
+            // calificacion_pelicula
+            if ($pathinfo === '/funciones/reg_calificacion') {
+                return array (  '_controller' => 'TinkerSoft\\FuncionesSitioBundle\\Controller\\FuncionesSitioController::calificarPeliculaAction',  '_route' => 'calificacion_pelicula',);
+            }
+
+            // crear_lista
+            if ($pathinfo === '/funciones/crearListaVistas') {
+                return array (  '_controller' => 'TinkerSoft\\FuncionesSitioBundle\\Controller\\FuncionesSitioController::crearListaVistasAction',  '_route' => 'crear_lista',);
+            }
+
+            // adicionar_pelicula_lista
+            if ($pathinfo === '/funciones/adicionarPeliculaLista') {
+                return array (  '_controller' => 'TinkerSoft\\FuncionesSitioBundle\\Controller\\FuncionesSitioController::adicionarPeliculaListaAction',  '_route' => 'adicionar_pelicula_lista',);
+            }
+
+            if (0 === strpos($pathinfo, '/funciones/marcar')) {
+                // marcar_vista
+                if ($pathinfo === '/funciones/marcarVista') {
+                    return array (  '_controller' => 'TinkerSoft\\FuncionesSitioBundle\\Controller\\FuncionesSitioController::adicionarPeliculaListaVistasAction',  '_route' => 'marcar_vista',);
+                }
+
+                // marcar_por_ver
+                if ($pathinfo === '/funciones/marcarPorVer') {
+                    return array (  '_controller' => 'TinkerSoft\\FuncionesSitioBundle\\Controller\\FuncionesSitioController::adicionarPeliculaListaPorVerAction',  '_route' => 'marcar_por_ver',);
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/funciones/adicionar')) {
+                // adicionar_lista
+                if ($pathinfo === '/funciones/adicionarLista') {
+                    return array (  '_controller' => 'TinkerSoft\\FuncionesSitioBundle\\Controller\\FuncionesSitioController::crearListaPersonalizadaAction',  '_route' => 'adicionar_lista',);
+                }
+
+                // adicionar_pelicula_lista_personalizada
+                if ($pathinfo === '/funciones/adicionarPeliculaListaPersonalizada') {
+                    return array (  '_controller' => 'TinkerSoft\\FuncionesSitioBundle\\Controller\\FuncionesSitioController::adicionarPeliculaListaPersonalizadaAction',  '_route' => 'adicionar_pelicula_lista_personalizada',);
+                }
+
+            }
+
         }
 
         // homepage

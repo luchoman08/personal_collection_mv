@@ -20,11 +20,25 @@
     </style>
     {%endif%}
     
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href="{{asset('assets/css/greeter.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
     <script type="text/javascript" src="{{asset('assets/js/greeter.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+    <!--<meta http-equiv="expires" content="Sat, 11 Jun 2016 23:00:00 GMT"/>-->
+    
+    <meta id="meta_url" property="og:url"                content="{{url('vista_homepage')}}mostrarpelicula/{{params.id}}" />
+    <meta id="meta_type" property="og:type"               content="video.movie" />
+    <meta id="meta_title" property="og:title"              content="{{params.title}}" />
+    <meta id="meta_description" property="og:description"        content="{{params.overview}}" />
+    
+    {% if params.poster_path == "" %}
+    <meta id="meta_image" property="og:image"              content="{{asset('assets/images/movie.png')}}" />
+    {% else %}
+    <meta id="meta_image" property="og:image"              content="https://image.tmdb.org/t/p/w300{{params.poster_path}}" />
+    {% endif %}
     
 {% endblock %}
 {% block moviename%}{{params.title}}{% endblock %}
@@ -32,7 +46,7 @@
 {%block loginoptions%}
     {% if usuarioLogueado == 1  %}
 
-            {{nickname}} | <a href="{{url('logout_action')}}">Salir</a>
+            <a href="{{url('usuario')}}">{{nickname}}</a> | <a href="{{url('logout_action')}}">Salir</a>
        
     {% else %} 
 
@@ -91,14 +105,14 @@
                                                 {%for lista in params.listaColecciones%}
                                                 <li><a idColeccion="{{lista.id}}" class="a_lista" id="crearListas" >{{lista.nombre}}</a> </li>
                                                 {%endfor%}
-                                               
-                                               
-                                           
+                                            
                                             </ul>
                                     </li>
                                     {%endif%}
-                                    <li class="dropdown trailers" id="test"> <div class="glyphicon glyphicon-film"></div>  
-                                        <a id="trailers" href="#" data-toggle="dropdown" class="dropdown-toggle">Trailers&nbsp;<b class="caret"></b></a>
+                                    <li class="dropdown trailers" id="test"> 
+                                        <a id="trailers" href="#" data-toggle="dropdown" class="dropdown-toggle"> 
+                                            <div class="glyphicon glyphicon-film"></div> Trailers&nbsp;<b class="caret"></b>
+                                        </a>&nbsp;
                                         <ul class="dropdown-menu">
                                             {% set t = 0 %}
                                             {% for trailer in params.results %}
@@ -118,6 +132,15 @@
                                         </ul>
                                     </li>
                                     
+                                    <li class="compartir dropdown"> <a id="listas" href="#" data-toggle="dropdown" class="dropdown-toggle"> <div class="glyphicon glyphicon-share"></div> Compartir&nbsp;<b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a id="compartirFacebook" href="#"> <i class="fa fa-facebook-square" style="color:#3b5998"></i> &nbsp;Facebook</a> </li>
+                                                
+                                                <li><a id="compartirTwitter" target="_blank" href="https://twitter.com/intent/tweet?via=QMP1523cd <p></p>&text={{params.title}}&url={{url('vista_homepage')}}mostrarpelicula/{{params.id}}"> <i class="fa fa fa-tumblr-square" style="color:#4099FF"></i> &nbsp;Twitter</a> </li>
+                                            </ul>
+                                    </li>
+                                    
+                                   
                                 </ui>
                             </div>
                             </center>
@@ -291,10 +314,6 @@
                    
                     </div>
                     
-                    
-                  
-                
-                   
                </div>
            
            </div>
@@ -302,317 +321,354 @@
 {%endblock%}
 {%block javascripts%}
 {{parent()}}
+
     <script>
-        $(function() {
-            {% if usuarioLogueado ==1%}
-            var vista={{params.vista}};
-            var porVer={{params.porVer}};
-             estiloBotonVistas(vista);
-             estiloBotonPorVer(porVer);
-            {%endif%}
-            var lts=0;
-            
-            var rating =0;
-            
-            var calificacion_semaphore=0;
-       
-  
-       
-           
-       
-            
-    // funciones para nuevas colecciones            
-     $("#close_nueva_coleccion_p").click(function(){
-       $("#popup_nueva_coleccion_personalizada").attr("style","visibility: invisible; opacity: 0;");
-       var x = document.getElementById("popup_nueva_coleccion_personalizada");
-    var y = x;
-    $("#ctn").append(y);
-  });        
-  $('#crearListas').click(function(){
-    $("#popup_nueva_coleccion_personalizada").attr("style","visibility: visible; opacity: 1;");
-    var x = document.getElementById("popup_nueva_coleccion_personalizada");
-    var y = x;
-    $("#ctn").append(y);
-  });
-   $('#crearColeccion').click(function(){
-     $.ajax({
-                type: "GET",
-                url: "{{url('adicionar_lista')}}",
-                data: { nombreColeccion:$('#nombreNuevaColeccion').val()},
-                dataType: "json",
-               
-                //if received a response from the server
-                success: function( data, textStatus, jqXHR) {
-                     if(data.success){
-                         $("#mensajeEmergente").html("");
-                     } 
-                     //display error message
-                     else {
-                         $("#mensajeEmergente").html("Error ¬_¬");
-                     }
-                },
-               
-                //If there was no resonse from the server
-                error: function(jqXHR, textStatus, errorThrown){
-                    
-                    
-                      
-                       if(jqXHR.status == 405)
-                       {
-                        
-                      
-                        $("#mensajeEmergenteCrearListas").html(jQuery.parseJSON(jqXHR.responseText).mensaje);
-                        $('#divEmergenteCrearListas').attr("class","alert alert-danger alert-dismissible" );
-                        $('#divEmergenteCrearListas').show(1000).delay(3000);
-                        $('#divEmergenteCrearListas').hide(1000);
-                       }
-                         if(jqXHR.status == 200)
-                       {
-                           
-                       // var respuesta = jQuery.parseJSON(  );
-                      alert("que mira prro >:v");
-                        $("#mensajeEmergente").html(jQuery.parseJSON(jqXHR.responseText).mensaje);   
-                        $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
-                       $('#divEmergente').show(1000).delay(3000);
-                        $('#divEmergente').hide(1000);    
-                       $('#ulListaColecciones').append('<li><a idColeccion="'+ jQuery.parseJSON(jqXHR.responseText).idColeccion +'"id="crearListas" href="#lista">'+$('#nombreNuevaColeccion').val()+'</a> </li>');
-                        $("#popup_nueva_coleccion_personalizada").attr("style","visibility: invisible; opacity: 0;");
-                       }
-                    
-                 
-                       
-                },
-               
-
-     
-            });  
-  });
-  //close y enlaces a trailers
-  {%set i = 0%}
- {% for trailer in params.results %}
-  $("#close{{i}}").click(function(){
-       $("#popup{{i}}").attr("style","visibility: invisible; opacity: 0;");
-       var x = document.getElementById("popup{{i}}");
-    var y = x;
-    $("#ctn").append(y);
-  });
-  
-  $('#trailer{{i}}').click(function(){
-    $("#popup{{i}}").attr("style","visibility: visible; opacity: 1;");
-    var x = document.getElementById("popup{{i}}");
-    var y = x;
-    $("#ctn").append(y);
-  });
-  {%set i = i+1%}
-  {%endfor%}
-             
-
-         {%if usuarioLogueado == 1%}   
-         
-            
-  function estiloBotonVistas(vista){
-  
-             if(vista == 0){
-                        $('#marcar_desmarcar_vista_li').css("color","#ccc");
-                        $('#iconoVista').attr("class", "glyphicon glyphicon-eye-close");
-                    }
-                    if(vista == 1){
-                        $('#marcar_desmarcar_vista_li').css("color","#3a8cfb");
-                        $('#iconoVista').attr("class", "glyphicon glyphicon-eye-open");
-                    }
-  };
-  
-    function estiloBotonPorVer(porVer){
-  
-             if(porVer == 0){
-                        $('#marcar_desmarcar_por_ver_li').css("color","#ccc");
-                    }
-                    if(porVer == 1){
-                        $('#marcar_desmarcar_por_ver_li').css("color","#3a8cfb");
-                    }
-  };
-   $("#marcar_desmarcar_por_ver_li").click(function(){
-         $.ajax({
-                type: "GET",
-                url: "{{url('marcar_por_ver')}}",
-                data: { idPelicula:{{params.id}}},
-                dataType: "json",
-               
-                //if received a response from the server
-                success: function( data, textStatus, jqXHR) {
-                     if(data.success){
-                         $("#mensajeEmergente").html("");
-                     } 
-                     //display error message
-                     else {
-                         $("#mensajeEmergente").html("Error ¬_¬");
-                     }
-                },
-               
-                //If there was no resonse from the server
-                error: function(jqXHR, textStatus, errorThrown){
-                    porVer = (porVer + 1) %2;
-                    if(porVer == 1){
-                    vista = 0;
-                    estiloBotonVistas(vista);
-                    }
-                    estiloBotonPorVer(porVer);
-                    $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
-                    $("#mensajeEmergente").html(jqXHR.responseText);
-                    $('#divEmergente').show(1000).delay( 3000 );
-                    $('#divEmergente').hide(1000);
-                       
-                },
-               
-
-     
-            });   
-        });
-        $("#marcar_desmarcar_vista_li").click(function(){
-         $.ajax({
-                type: "GET",
-                url: "{{url('marcar_vista')}}",
-                data: { idPelicula:{{params.id}}},
-                dataType: "json",
-               
-                //if received a response from the server
-                success: function( data, textStatus, jqXHR) {
-                     if(data.success){
-                         $("#mensajeEmergente").html("");
-                     } 
-                     //display error message
-                     else {
-                         $("#mensajeEmergente").html("Error ¬_¬");
-                     }
-                },
-               
-                //If there was no resonse from the server
-                error: function(jqXHR, textStatus, errorThrown){
-                    vista = (vista + 1) %2;
-                    if(vista ==1){
-                        porVer=0;
-                        estiloBotonPorVer(porVer);
-                    }
-                       estiloBotonVistas(vista);
-                       $("#mensajeEmergente").html(jqXHR.responseText);
-                       $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
-                       $('#divEmergente').show(1000).delay( 3000 );
-                       $('#divEmergente').hide(1000);
-                       
-                },
-               
-
-     
-            });   
-        });
-        $("#calificacionPersonal").rateYo({
-                
-                readOnly: false,
-                rating: {{params.calificacionUsuario}},
-                numStars: 10,
-                precision: 10,
-                minValue: 1,
-                maxValue: 10
-            }).on("rateyo.change", function(e, data) {
-                if(calificacion_semaphore==1){
-                $.ajax({
-                type: "GET",
-                url: "{{url('calificacion_pelicula')}}",
-                data: { idPelicula:{{params.id}}, calificacion:data.rating},
-                dataType: "json",
-               
-                //if received a response from the server
-                success: function( data, textStatus, jqXHR) {
-                     if(data.success){
-                         $("#mensajeEmergente").html("");
-                     } 
-                     //display error message
-                     else {
-                         $("#mensajeEmergente").html("No se pudo enviar la calificación");
-                     }
-                },
-               
-                //al intentar calificar:
-                error: function(jqXHR, textStatus, errorThrown){
-                    
-                      
-                       $("#mensajeEmergente").html(jqXHR.responseText);
-                       if(jqXHR.status == 405)
-                       {
-                        $('#divEmergente').attr("class","alert alert-danger alert-dismissible" );
-                       }
-                       if(jqXHR.status == 200)
-                       {
-                        $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
-                       }
-                       $('#divEmergente').show(1000).delay( 3000 );
-                       $('#divEmergente').hide(1000);
-                       
-                },
-               
-
-     
-            }); 
-                 calificacion_semaphore=0;   
-                }       
-                $("#calificacionPersonal").val(data.rating);
-
+    <!-- SDK -->
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '1569365780029223',
+                xfbml: true,
+                version: 'v2.6'
             });
-             $(".a_lista").click(function(){
-          $.ajax({
-                type: "GET",
-                url: "{{url('adicionar_pelicula_lista_personalizada')}}",
-                data: { idColeccion:$(this).attr("idColeccion"), idPelicula:{{params.id}}},
-                dataType: "json",
-               
-                //if received a response from the server
-                success: function( data, textStatus, jqXHR) {
-                     if(data.success){
-                         $("#mensajeEmergente").html("");
-                     } 
-                     //display error message
-                     else {
-                         $("#mensajeEmergente").html("Error ¬_¬");
-                     }
-                },
-               
-                //If there was no resonse from the server
-                error: function(jqXHR, textStatus, errorThrown){
-                    
-                       if(jqXHR.status == 405)
-                       {
-                        $("#mensajeEmergente").html(jqXHR.responseText);
-                        $('#divEmergente').attr("class","alert alert-danger alert-dismissible" );
-                        $('#divEmergente').show(1000).delay(3000);
-                        $('#divEmergente').hide(1000);
-                       }
-                       if(jqXHR.status == 200)
-                       {
-                        $("#mensajeEmergente").html(jqXHR.responseText);   
-                        $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
-                        $('#divEmergente').show(1000).delay(3000);
-                        $('#divEmergente').hide(1000);
-                 
-                       }  
-                },
-               
-
-     
-            });   
-       });
-        
-	        $("#calificacionPersonal").click(function(){
-		    calificacion_semaphore=1;
-		   
-			
-		 });
-
-  {%endif%}
-          {%if params.backdrop_path%}
-            $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{params.backdrop_path}})");  
-            {%endif%}
-        });
+        };
+    
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     </script>
+
+
+    <script>
+    
+        document.getElementById('compartirFacebook').onclick = function() {
+          FB.ui({
+            method: 'share',
+            display: 'popup',
+            href: $('#meta_url').attr('content'),
+          }, function(response){});
+        }
+   
+    </script>
+
+
+    <script>
+            $(function() {
+                {% if usuarioLogueado ==1%}
+                var vista={{params.vista}};
+                var porVer={{params.porVer}};
+                 estiloBotonVistas(vista);
+                 estiloBotonPorVer(porVer);
+                {%endif%}
+                var lts=0;
+                
+                var rating =0;
+                
+                var calificacion_semaphore=0;
+           
+      
+           
+               
+           
+                
+        // funciones para nuevas colecciones            
+         $("#close_nueva_coleccion_p").click(function(){
+           $("#popup_nueva_coleccion_personalizada").attr("style","visibility: invisible; opacity: 0;");
+           var x = document.getElementById("popup_nueva_coleccion_personalizada");
+        var y = x;
+        $("#ctn").append(y);
+      });        
+      $('#crearListas').click(function(){
+        $("#popup_nueva_coleccion_personalizada").attr("style","visibility: visible; opacity: 1;");
+        var x = document.getElementById("popup_nueva_coleccion_personalizada");
+        var y = x;
+        $("#ctn").append(y);
+      });
+       $('#crearColeccion').click(function(){
+         $.ajax({
+                    type: "GET",
+                    url: "{{url('adicionar_lista')}}",
+                    data: { nombreColeccion:$('#nombreNuevaColeccion').val()},
+                    dataType: "json",
+                   
+                    //if received a response from the server
+                    success: function( data, textStatus, jqXHR) {
+                         if(data.success){
+                             $("#mensajeEmergente").html("");
+                         } 
+                         //display error message
+                         else {
+                             $("#mensajeEmergente").html("Error ¬_¬");
+                         }
+                    },
+                   
+                    //If there was no resonse from the server
+                    error: function(jqXHR, textStatus, errorThrown){
+                        
+                        
+                          
+                           if(jqXHR.status == 405)
+                           {
+                            
+                          
+                            $("#mensajeEmergenteCrearListas").html(jQuery.parseJSON(jqXHR.responseText).mensaje);
+                            $('#divEmergenteCrearListas').attr("class","alert alert-danger alert-dismissible" );
+                            $('#divEmergenteCrearListas').show(1000).delay(3000);
+                            $('#divEmergenteCrearListas').hide(1000);
+                           }
+                             if(jqXHR.status == 200)
+                           {
+                               
+                           // var respuesta = jQuery.parseJSON(  );
+                            alert("que mira prro >:v");
+                            $("#mensajeEmergente").html(jQuery.parseJSON(jqXHR.responseText).mensaje);   
+                            $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
+                            $('#divEmergente').show(1000).delay(3000);
+                            $('#divEmergente').hide(1000);    
+                            $('#ulListaColecciones').append('<li><a idColeccion="'+ jQuery.parseJSON(jqXHR.responseText).idColeccion +'"id="crearListas" href="#lista">'+$('#nombreNuevaColeccion').val()+'</a> </li>');
+                            $("#popup_nueva_coleccion_personalizada").attr("style","visibility: invisible; opacity: 0;");
+                           }
+                        
+                     
+                           
+                    },
+                   
+    
+         
+                });  
+      });
+      //close y enlaces a trailers
+      {%set i = 0%}
+     {% for trailer in params.results %}
+      $("#close{{i}}").click(function(){
+           $("#popup{{i}}").attr("style","visibility: invisible; opacity: 0;");
+           var x = document.getElementById("popup{{i}}");
+        var y = x;
+        $("#ctn").append(y);
+      });
+      
+      $('#trailer{{i}}').click(function(){
+        $("#popup{{i}}").attr("style","visibility: visible; opacity: 1;");
+        var x = document.getElementById("popup{{i}}");
+        var y = x;
+        $("#ctn").append(y);
+      });
+      {%set i = i+1%}
+      {%endfor%}
+                 
+    
+             {%if usuarioLogueado == 1%}   
+             
+                
+      function estiloBotonVistas(vista){
+      
+                 if(vista == 0){
+                            $('#marcar_desmarcar_vista_li').css("color","#ccc");
+                            $('#iconoVista').attr("class", "glyphicon glyphicon-eye-close");
+                        }
+                        if(vista == 1){
+                            $('#marcar_desmarcar_vista_li').css("color","#3a8cfb");
+                            $('#iconoVista').attr("class", "glyphicon glyphicon-eye-open");
+                        }
+      };
+      
+        function estiloBotonPorVer(porVer){
+      
+                 if(porVer == 0){
+                            $('#marcar_desmarcar_por_ver_li').css("color","#ccc");
+                        }
+                        if(porVer == 1){
+                            $('#marcar_desmarcar_por_ver_li').css("color","#3a8cfb");
+                        }
+      };
+       $("#marcar_desmarcar_por_ver_li").click(function(){
+             $.ajax({
+                    type: "GET",
+                    url: "{{url('marcar_por_ver')}}",
+                    data: { idPelicula:{{params.id}}},
+                    dataType: "json",
+                   
+                    //if received a response from the server
+                    success: function( data, textStatus, jqXHR) {
+                         if(data.success){
+                             $("#mensajeEmergente").html("");
+                         } 
+                         //display error message
+                         else {
+                             $("#mensajeEmergente").html("Error ¬_¬");
+                         }
+                    },
+                   
+                    //If there was no resonse from the server
+                    error: function(jqXHR, textStatus, errorThrown){
+                        porVer = (porVer + 1) %2;
+                        if(porVer == 1){
+                        vista = 0;
+                        estiloBotonVistas(vista);
+                        }
+                        estiloBotonPorVer(porVer);
+                        $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
+                        $("#mensajeEmergente").html(jqXHR.responseText);
+                        $('#divEmergente').show(1000).delay( 3000 );
+                        $('#divEmergente').hide(1000);
+                           
+                    },
+                   
+    
+         
+                });   
+            });
+            $("#marcar_desmarcar_vista_li").click(function(){
+             $.ajax({
+                    type: "GET",
+                    url: "{{url('marcar_vista')}}",
+                    data: { idPelicula:{{params.id}}},
+                    dataType: "json",
+                   
+                    //if received a response from the server
+                    success: function( data, textStatus, jqXHR) {
+                         if(data.success){
+                             $("#mensajeEmergente").html("");
+                         } 
+                         //display error message
+                         else {
+                             $("#mensajeEmergente").html("Error ¬_¬");
+                         }
+                    },
+                   
+                    //If there was no resonse from the server
+                    error: function(jqXHR, textStatus, errorThrown){
+                        vista = (vista + 1) %2;
+                        if(vista ==1){
+                            porVer=0;
+                            estiloBotonPorVer(porVer);
+                        }
+                           estiloBotonVistas(vista);
+                           $("#mensajeEmergente").html(jqXHR.responseText);
+                           $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
+                           $('#divEmergente').show(1000).delay( 3000 );
+                           $('#divEmergente').hide(1000);
+                           
+                    },
+                   
+    
+         
+                });   
+            });
+            $("#calificacionPersonal").rateYo({
+                    
+                    readOnly: false,
+                    rating: {{params.calificacionUsuario}},
+                    numStars: 10,
+                    precision: 10,
+                    minValue: 1,
+                    maxValue: 10
+                }).on("rateyo.change", function(e, data) {
+                    if(calificacion_semaphore==1){
+                    $.ajax({
+                    type: "GET",
+                    url: "{{url('calificacion_pelicula')}}",
+                    data: { idPelicula:{{params.id}}, calificacion:data.rating},
+                    dataType: "json",
+                   
+                    //if received a response from the server
+                    success: function( data, textStatus, jqXHR) {
+                         if(data.success){
+                             $("#mensajeEmergente").html("");
+                         } 
+                         //display error message
+                         else {
+                             $("#mensajeEmergente").html("No se pudo enviar la calificación");
+                         }
+                    },
+                   
+                    //al intentar calificar:
+                    error: function(jqXHR, textStatus, errorThrown){
+                        
+                          
+                           $("#mensajeEmergente").html(jqXHR.responseText);
+                           if(jqXHR.status == 405)
+                           {
+                            $('#divEmergente').attr("class","alert alert-danger alert-dismissible" );
+                           }
+                           if(jqXHR.status == 200)
+                           {
+                            $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
+                           }
+                           $('#divEmergente').show(1000).delay( 3000 );
+                           $('#divEmergente').hide(1000);
+                           
+                    },
+                   
+    
+         
+                }); 
+                     calificacion_semaphore=0;   
+                    }       
+                    $("#calificacionPersonal").val(data.rating);
+    
+                });
+                 $(".a_lista").click(function(){
+              $.ajax({
+                    type: "GET",
+                    url: "{{url('adicionar_pelicula_lista_personalizada')}}",
+                    data: { idColeccion:$(this).attr("idColeccion"), idPelicula:{{params.id}}},
+                    dataType: "json",
+                   
+                    //if received a response from the server
+                    success: function( data, textStatus, jqXHR) {
+                         if(data.success){
+                             $("#mensajeEmergente").html("");
+                         } 
+                         //display error message
+                         else {
+                             $("#mensajeEmergente").html("Error ¬_¬");
+                         }
+                    },
+                   
+                    //If there was no resonse from the server
+                    error: function(jqXHR, textStatus, errorThrown){
+                        
+                           if(jqXHR.status == 405)
+                           {
+                            $("#mensajeEmergente").html(jqXHR.responseText);
+                            $('#divEmergente').attr("class","alert alert-danger alert-dismissible" );
+                            $('#divEmergente').show(1000).delay(3000);
+                            $('#divEmergente').hide(1000);
+                           }
+                           if(jqXHR.status == 200)
+                           {
+                            $("#mensajeEmergente").html(jqXHR.responseText);   
+                            $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
+                            $('#divEmergente').show(1000).delay(3000);
+                            $('#divEmergente').hide(1000);
+                     
+                           }  
+                    },
+                   
+    
+         
+                });   
+           });
+            
+    	        $("#calificacionPersonal").click(function(){
+    		    calificacion_semaphore=1;
+    		   
+    			
+    		 });
+    
+      {%endif%}
+              {%if params.backdrop_path%}
+                $('#cabezera').css("background", "url(https://image.tmdb.org/t/p/w1280/{{params.backdrop_path}})");  
+                {%endif%}
+            });
+        </script>
     
     {%endblock%}
     {% block barraderecha %}{% endblock %}
