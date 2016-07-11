@@ -82,7 +82,7 @@ class __TwigTemplate_2b2dc3f2945243a5692e072eec784ff149b1ba8d73267959075ead1c010
         <li><a data-toggle=\"tab\" href=\"#vistas\">Vistas&nbsp;</a></li>
         <li><a data-toggle=\"tab\" href=\"#pendientes\">Pendientes&nbsp;</a></li>
         <li><a data-toggle=\"tab\" href=\"#calificadas\">Calificadas&nbsp;</a></li>
-        <li><a data-toggle=\"tab\" href=\"#perfil\">Mis Datos Personales</a></li>
+        <li><a data-toggle=\"tab\" href=\"#perfil\">Mis Datos Personales&nbsp;</a></li>
         <li><a data-toggle=\"tab\" href=\"#misGeneros\">Mis G&eacute;neros</a></li>
     </ul>
 </div>
@@ -1140,7 +1140,7 @@ class __TwigTemplate_2b2dc3f2945243a5692e072eec784ff149b1ba8d73267959075ead1c010
 /*         <li><a data-toggle="tab" href="#vistas">Vistas&nbsp;</a></li>*/
 /*         <li><a data-toggle="tab" href="#pendientes">Pendientes&nbsp;</a></li>*/
 /*         <li><a data-toggle="tab" href="#calificadas">Calificadas&nbsp;</a></li>*/
-/*         <li><a data-toggle="tab" href="#perfil">Mis Datos Personales</a></li>*/
+/*         <li><a data-toggle="tab" href="#perfil">Mis Datos Personales&nbsp;</a></li>*/
 /*         <li><a data-toggle="tab" href="#misGeneros">Mis G&eacute;neros</a></li>*/
 /*     </ul>*/
 /* </div>*/

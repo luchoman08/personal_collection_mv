@@ -14,7 +14,9 @@
 {% block classcontenido %}col-md-12 fondoContenido{% endblock %}
 {% block contenido %}
     
-     <div class="resultados-header">N&uacute;mero de resultados para <b>"{{ consulta }}"</b>: {{params.total_results}}  Pagina:{{ params.page }} de {{ params.total_pages }} </div> <br>
+    <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API, solo se cargarán máximo los primeros 10 resultados.</div>
+    
+    <div class="resultados-header">N&uacute;mero de resultados para <b>"{{ perfil.name }}"</b>: {{params|length}} </div> <br>
    
     <div id="perfil-actor" class = "actorbox">
         <div class="header-actorbox">
@@ -23,7 +25,7 @@
             {% else %}
             https://image.tmdb.org/t/p/w132_and_h132_bestv2/{{perfil.profile_path}}
             {% endif %}" alt="{{perfil.name}}" >
-            <div class="name-actorbox"><label>{{perfil.name}}</label> <sup class="glyphicon glyphicon-new-window"> </sup> </div>
+            <div class="name-actorbox"><label>{{perfil.name}}</label> </div>
         </div>
         <div class="body-actorbox">
         {%set i=0%}
@@ -53,47 +55,6 @@
         </div>
     </div> 
     
-    <nav>
-            <ul class="pager">
-                
-                {% if params.page == 1 %}
-                
-                    <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> P&aacute;gina anterior</a></li>
-                             
-                {% else %}
-                    {% if flag == "similares" %}   
-                        <li class="previous"><a href="{{ url('homepage') }}vista/similares/{{ consulta }}/{{ params.page - 1 }}"><span aria-hidden="true">&larr;</span> P&aacute;gina anterior</a></li>
-                    {% elseif flag == "generos" %} 
-                        <li class="previous"><a href="{{ url('homepage') }}vista/bgeneros/{{ consulta }}/{{ params.page - 1 }}"><span aria-hidden="true">&larr;</span> P&aacute;gina anterior</a></li>
-                    {% else %}
-                        <li class="previous"><a href="{{ url('homepage') }}vista/bactor/{{ consulta }}/{{ params.page - 1 }}"><span aria-hidden="true">&larr;</span> P&aacute;gina anterior</a></li>
-                    {% endif %}    
-                {% endif %}
-                
-                {% if params.page == params.total_pages %}
-                
-                    <li class="next disabled"><a href="#"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
-                    
-                {% elseif params.page >= 1000 %}
-                
-                     <li class="next disabled"><a href="#"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
-                
-                {% else %}
-                    
-                    {% if flag == "similares" %} 
-                        <li class="next"><a href="{{ url('homepage') }}vista/similares/{{ consulta }}/{{ params.page + 1 }}"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
-                    {% elseif flag == "generos" %} 
-                        <li class="next"><a href="{{ url('homepage') }}vista/bgeneros/{{ consulta }}/{{ params.page + 1 }}"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
-                    {% else %} 
-                        <li class="next"><a href="{{ url('homepage') }}vista/bactor/{{ consulta }}/{{ params.page + 1 }}"> P&aacute;gina siguiente <span aria-hidden="true">&rarr;</span></a></li>
-                    {% endif %}
-                      
-                    
-                {% endif %}
-                
-                
-            </ul>
-    </nav>
        
 
 {% endblock %}
@@ -106,7 +67,7 @@
  {{ parent() }}
 <script>
      $(function() {
-        {% for pelicula in params.results%}
+        {% for pelicula in params%}
             var rating = {{pelicula.vote_average}};
             $(".counter").text(rating);
             $("#c{{i}}").rateYo({

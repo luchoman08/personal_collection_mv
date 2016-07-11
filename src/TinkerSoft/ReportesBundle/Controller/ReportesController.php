@@ -95,6 +95,7 @@ class ReportesController extends Controller
     
     public function generarReportePeliculasVistasAction(Request $request){
         $columnas = array('IDPelicula','Nombre película','Veces vista');
+        $tamaño_columna = array(25,130,25);
         $em = $this->getDoctrine()->getManager();
         $vistas = $this->get('app.funciones_controler')->getPeliculasVistasContadasAuditor($em);
         
@@ -105,7 +106,7 @@ class ReportesController extends Controller
             array_push($data,$fila);
         }
         
-        $this->generarReporteAction("Películas vistas",$columnas,$data, array());
+        $this->generarReporteAction("Películas vistas",$columnas,$data, $tamaño_columna);
         return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
     }
     

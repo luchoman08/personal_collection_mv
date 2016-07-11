@@ -576,7 +576,10 @@ class APIController extends Controller
         $peliculas = array();
          array_push($peliculas,$contentJSONProfile);
          //Cambiado de $tamano_contentJSON a 5 para pruebas
-        for($i = 0; $i < 5; $i++){
+         if($tamano_contentJSON > 10){
+             $tamano_contentJSON = 10;
+         }
+        for($i = 0; $i < $tamano_contentJSON; $i++){
             array_push($peliculas,$this->obtenerPeliculaRipeadaAction($request, $contentJSON['cast'][$i]->id));
         }
         

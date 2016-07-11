@@ -436,13 +436,13 @@ class DefaultController extends Controller
         }
         $datos = $this->get('app.api_controller')->buscarPeliculaActorEspecificoAction($request,$actorid);
         
-        $profile = $datos[0];
         $datos_sin_profile = array();
-        for($i = 1; $i < count($datos_sin_profile) ; $i++){
+        for($i = 1; $i < count($datos) ; $i++){
             array_push($datos_sin_profile,$datos[$i]);
         }
         
-        return $this->render('VistaBundle:Default:buscarUnActor.html.twig', array('params' => $datos_sin_profile,'perfil' => $profile, 'consulta' => $actorid,'usuarioLogueado' => $usuarioLogueado, 'nickname' => $nickname));
+        
+        return $this->render('VistaBundle:Default:buscarUnActor.html.twig', array('params' => $datos_sin_profile,'perfil' => $datos[0], 'consulta' => $actorid,'usuarioLogueado' => $usuarioLogueado, 'nickname' => $nickname));
         
     }
     

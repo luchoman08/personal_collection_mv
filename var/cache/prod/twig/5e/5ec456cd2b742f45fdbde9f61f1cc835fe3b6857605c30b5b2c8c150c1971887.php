@@ -110,7 +110,7 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
                         <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Buscar <span class=\"caret\"></span></button>
                         <ul class=\"dropdown-menu dropdown-menu-right\">
                           <li><a id = \"Buscar_palabras\" href=\"#\">Palabras</a></li>
-                          <li><a id = \"Buscar_genero\" href=\"#\">Genero</a></li>
+                          <li><a id = \"Buscar_genero\" href=\"#\">G&eacute;nero</a></li>
                           <li><a id = \"Buscar_actor\" href=\"#\">Actor</a></li>
                         </ul>
                       </div><!-- /btn-group -->
@@ -604,7 +604,7 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 /*                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></button>*/
 /*                         <ul class="dropdown-menu dropdown-menu-right">*/
 /*                           <li><a id = "Buscar_palabras" href="#">Palabras</a></li>*/
-/*                           <li><a id = "Buscar_genero" href="#">Genero</a></li>*/
+/*                           <li><a id = "Buscar_genero" href="#">G&eacute;nero</a></li>*/
 /*                           <li><a id = "Buscar_actor" href="#">Actor</a></li>*/
 /*                         </ul>*/
 /*                       </div><!-- /btn-group -->*/
