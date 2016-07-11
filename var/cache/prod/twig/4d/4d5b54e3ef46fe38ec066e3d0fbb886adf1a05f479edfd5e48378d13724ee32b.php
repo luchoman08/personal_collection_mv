@@ -31,10 +31,7 @@ class __TwigTemplate_a69e79a7f0f5383ba1de18ff64275b17b98333928d03c4d24649df59c7a
         echo "                    <div class=\"panel panel-default\">
                         <div class=\"panel-heading\">
                                  <div style=\"float:right;  margin-top:20px;\">
-                                  <a   class=\"btn btn-sm btn-default\"  href=\"";
-        // line 8
-        echo $this->env->getExtension('routing')->getPath("usuarios_index");
-        echo "\">Atras</a>
+                                  <a   class=\"btn btn-sm btn-default\"  onclick=\"window.history.back();\">Atras</a>
                                   </div>
                                  <h1>Editar usuario</h1>
 
@@ -85,7 +82,7 @@ class __TwigTemplate_a69e79a7f0f5383ba1de18ff64275b17b98333928d03c4d24649df59c7a
 
     public function getDebugInfo()
     {
-        return array (  66 => 26,  59 => 22,  52 => 18,  48 => 17,  36 => 8,  31 => 5,  28 => 4,  11 => 1,);
+        return array (  63 => 26,  56 => 22,  49 => 18,  45 => 17,  31 => 5,  28 => 4,  11 => 1,);
     }
 }
 /* {% extends 'baseSinFondo.html.twig' %}*/
@@ -95,7 +92,7 @@ class __TwigTemplate_a69e79a7f0f5383ba1de18ff64275b17b98333928d03c4d24649df59c7a
 /*                     <div class="panel panel-default">*/
 /*                         <div class="panel-heading">*/
 /*                                  <div style="float:right;  margin-top:20px;">*/
-/*                                   <a   class="btn btn-sm btn-default"  href="{{ path('usuarios_index') }}">Atras</a>*/
+/*                                   <a   class="btn btn-sm btn-default"  onclick="window.history.back();">Atras</a>*/
 /*                                   </div>*/
 /*                                  <h1>Editar usuario</h1>*/
 /* */

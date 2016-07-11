@@ -39,9 +39,27 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                     return array (  '_controller' => 'TinkerSoft\\ReportesBundle\\Controller\\ReportesController::generarReportePeliculasVistasUsuariosAction',  '_route' => 'tinker_soft_reportes_vistas_usuarios_homepage',);
                 }
 
-                // tinker_soft_reportes_vistas_usuarios_genero_homepage
-                if ($pathinfo === '/rvug') {
-                    return array (  '_controller' => 'TinkerSoft\\ReportesBundle\\Controller\\ReportesController::generarReportePeliculasVistasUsuariosGenerosAction',  '_route' => 'tinker_soft_reportes_vistas_usuarios_genero_homepage',);
+                if (0 === strpos($pathinfo, '/rvug')) {
+                    // tinker_soft_reportes_vistas_usuarios_genero_ultimo_mes_homepage
+                    if ($pathinfo === '/rvugum') {
+                        return array (  '_controller' => 'TinkerSoft\\ReportesBundle\\Controller\\ReportesController::generarReportePeliculasVistasUsuariosGenerosUltimoMesAction',  '_route' => 'tinker_soft_reportes_vistas_usuarios_genero_ultimo_mes_homepage',);
+                    }
+
+                    // tinker_soft_reportes_vistas_usuarios_genero_homepage
+                    if ($pathinfo === '/rvug') {
+                        return array (  '_controller' => 'TinkerSoft\\ReportesBundle\\Controller\\ReportesController::generarReportePeliculasVistasUsuariosGenerosAction',  '_route' => 'tinker_soft_reportes_vistas_usuarios_genero_homepage',);
+                    }
+
+                }
+
+                // tinker_soft_reportes_vistas_usuarios_ultimo_mes_homepage
+                if ($pathinfo === '/rvuum') {
+                    return array (  '_controller' => 'TinkerSoft\\ReportesBundle\\Controller\\ReportesController::generarReportePeliculasVistasUsuariosUltimoMesAction',  '_route' => 'tinker_soft_reportes_vistas_usuarios_ultimo_mes_homepage',);
+                }
+
+                // tinker_soft_reportes_vistas_usuario_homepage
+                if ($pathinfo === '/rvu') {
+                    return array (  '_controller' => 'TinkerSoft\\ReportesBundle\\Controller\\ReportesController::generarReportePeliculasVistasUsuariosAction',  '_route' => 'tinker_soft_reportes_vistas_usuario_homepage',);
                 }
 
             }
@@ -133,6 +151,37 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
 
                 }
 
+                if (0 === strpos($pathinfo, '/vista/bavgeneros')) {
+                    // pelicula_consulta_generos_string_url
+                    if (rtrim($pathinfo, '/') === '/vista/bavgeneros') {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'pelicula_consulta_generos_string_url');
+                        }
+
+                        return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadoPorGeneroAction',  'numero_pagina' => 1,  '_route' => 'pelicula_consulta_generos_string_url',);
+                    }
+
+                    // pelicula_consulta_generos_string_sin_barra
+                    if (preg_match('#^/vista/bavgeneros/(?P<genero>[^/]++)$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_generos_string_sin_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadoPorGeneroAction',  'numero_pagina' => 1,));
+                    }
+
+                    // pelicula_consulta_generos_string_barra
+                    if (preg_match('#^/vista/bavgeneros/(?P<genero>[^/]++)/?$#s', $pathinfo, $matches)) {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'pelicula_consulta_generos_string_barra');
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_generos_string_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadoPorGeneroAction',  'numero_pagina' => 1,));
+                    }
+
+                    // pelicula_consulta_generos_string_paginado
+                    if (preg_match('#^/vista/bavgeneros/(?P<genero>[^/]++)/(?P<numero_pagina>[^/]++)$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_generos_string_paginado')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadoPorGeneroAction',));
+                    }
+
+                }
+
                 // pelicula_consulta_con_barra
                 if (rtrim($pathinfo, '/') === '/vista/buscar') {
                     if (substr($pathinfo, -1) !== '/') {
@@ -140,6 +189,37 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                     }
 
                     return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::iniciarIndexAction',  '_route' => 'pelicula_consulta_con_barra',);
+                }
+
+                if (0 === strpos($pathinfo, '/vista/bactor')) {
+                    // pelicula_consulta_actor_string_url
+                    if (rtrim($pathinfo, '/') === '/vista/bactor') {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'pelicula_consulta_actor_string_url');
+                        }
+
+                        return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadoActorAction',  'numero_pagina' => 1,  '_route' => 'pelicula_consulta_actor_string_url',);
+                    }
+
+                    // pelicula_consulta_actor
+                    if (preg_match('#^/vista/bactor/(?P<actor>[^/]++)$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_actor')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadoActorAction',  'numero_pagina' => 1,));
+                    }
+
+                    // pelicula_consulta_actor_barra
+                    if (preg_match('#^/vista/bactor/(?P<actor>[^/]++)/?$#s', $pathinfo, $matches)) {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'pelicula_consulta_actor_barra');
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_actor_barra')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadoActorAction',  'numero_pagina' => 1,));
+                    }
+
+                    // pelicula_consulta_actor_paginado
+                    if (preg_match('#^/vista/bactor/(?P<actor>[^/]++)/(?P<numero_pagina>[^/]++)$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_actor_paginado')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadoActorAction',));
+                    }
+
                 }
 
             }
@@ -298,6 +378,31 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
 
             }
 
+            if (0 === strpos($pathinfo, '/vista/b')) {
+                if (0 === strpos($pathinfo, '/vista/bavanzada')) {
+                    // busqueda_avanzada
+                    if ($pathinfo === '/vista/bavanzada') {
+                        return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::busquedaAvanzadaAction',  '_route' => 'busqueda_avanzada',);
+                    }
+
+                    // busqueda_avanzada_barra
+                    if (rtrim($pathinfo, '/') === '/vista/bavanzada') {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'busqueda_avanzada_barra');
+                        }
+
+                        return array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::busquedaAvanzadaAction',  '_route' => 'busqueda_avanzada_barra',);
+                    }
+
+                }
+
+                // pelicula_consulta_un_actor
+                if (0 === strpos($pathinfo, '/vista/bunactor') && preg_match('#^/vista/bunactor/(?P<actorid>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'pelicula_consulta_un_actor')), array (  '_controller' => 'TinkerSoft\\VistaBundle\\Controller\\DefaultController::verResultadoUnActorAction',));
+                }
+
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/movie_database')) {
@@ -356,6 +461,17 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             }
             not_usuarios_show:
 
+            // usuarios_show_estandar
+            if (preg_match('#^/usuarios/(?P<id>[^/]++)/showEstandar$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_usuarios_show_estandar;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'usuarios_show_estandar')), array (  '_controller' => 'TinkerSoft\\UsuariosBundle\\Controller\\UsuariosController::showEstandarAction',));
+            }
+            not_usuarios_show_estandar:
+
             // usuarios_new
             if ($pathinfo === '/usuarios/new') {
                 if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
@@ -367,6 +483,17 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
             }
             not_usuarios_new:
 
+            // usuarios_registro
+            if ($pathinfo === '/usuarios/registro') {
+                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                    goto not_usuarios_registro;
+                }
+
+                return array (  '_controller' => 'TinkerSoft\\UsuariosBundle\\Controller\\UsuariosController::registroAction',  '_route' => 'usuarios_registro',);
+            }
+            not_usuarios_registro:
+
             // usuarios_edit
             if (preg_match('#^/usuarios/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
                 if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
@@ -377,6 +504,17 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'usuarios_edit')), array (  '_controller' => 'TinkerSoft\\UsuariosBundle\\Controller\\UsuariosController::editAction',));
             }
             not_usuarios_edit:
+
+            // usuarios_edit_estandar
+            if (preg_match('#^/usuarios/(?P<id>[^/]++)/editEstandar$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('GET', 'POST', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'POST', 'HEAD'));
+                    goto not_usuarios_edit_estandar;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'usuarios_edit_estandar')), array (  '_controller' => 'TinkerSoft\\UsuariosBundle\\Controller\\UsuariosController::editEstandarAction',));
+            }
+            not_usuarios_edit_estandar:
 
             // usuarios_delete
             if (preg_match('#^/usuarios/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {

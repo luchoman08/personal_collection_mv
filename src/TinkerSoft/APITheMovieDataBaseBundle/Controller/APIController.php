@@ -402,14 +402,6 @@ class APIController extends Controller
             
             $trailersJSON['results'][$i]->iso_639_1 = $this->codigosLenguaje($trailersJSON['results'][$i]->iso_639_1);
         }
-        //&language=
-        /*$urlAPI="https://api.themoviedb.org/3/movie/".$id. "/videos?api_key=be961f58626a1b5bb01ccf04da21d18f&language=es";
-        $content = file_get_contents($urlAPI);
-        $trailersJSON = array_combine ($trailersJSON,(array) json_decode($content));
-        for($i = 0; $i < count($trailersJSON['results']); $i++){
-            
-            $trailersJSON['results'][$i]->iso_639_1 = $this->codigosLenguaje($trailersJSON['results'][$i]->iso_639_1);
-        }*/
         
         $imagenes= "https://api.themoviedb.org/3/movie/" . $id . "/images?api_key=be961f58626a1b5bb01ccf04da21d18f&include_image_language=en,null";
         $content = file_get_contents($imagenes);
@@ -477,6 +469,120 @@ class APIController extends Controller
         $contentJSON = (array) json_decode($content);
         return $contentJSON;
         
+    }
+    
+    public function descubrirGeneroPaginadasAction($genero,$numero_pagina){
+        
+        if(is_numeric($numero_pagina)){
+            
+            if($numero_pagina <= 0){
+                    $numero_pagina = 1;
+              }
+            
+            if($numero_pagina > 1000){
+                    $numero_pagina = 1000;
+              }
+            
+        }else{
+            
+            $numero_pagina = 1;
+                
+        }
+        
+        $generos = $this->listaGenerosAction("");
+        $generoid = -1;
+        for($i = 0; $i < count($generos['genres']); $i++){
+            if ($generos['genres'][$i]->name == $genero ){
+                $generoid = $generos['genres'][$i]->id;
+            }
+        }
+        $urlAPI = "https://api.themoviedb.org/3/discover/movie?with_genres=" . $generoid . "&page=" . $numero_pagina . "&api_key=be961f58626a1b5bb01ccf04da21d18f";
+        $content = file_get_contents($urlAPI);
+        $contentJSON = (array) json_decode($content);
+        
+        if($numero_pagina > $contentJSON['total_pages']){
+            
+                    $numero_pagina = $contentJSON['total_pages'];
+                    $urlAPI = "https://api.themoviedb.org/3/discover/movie?with_genres=" . $generoid . "&page=" . $numero_pagina . "&api_key=be961f58626a1b5bb01ccf04da21d18f";
+                    $content = file_get_contents($urlAPI);
+                    $contentJSON = (array) json_decode($content);
+                    
+              }
+        array_push($contentJSON,$generoid);
+        return $contentJSON;
+        
+    }
+    
+    public function buscarPeliculaActorAction($consulta,$numero_pagina){
+        
+        $consulta = str_replace(" ", "-", $consulta);
+        
+        if(is_numeric($numero_pagina)){
+            
+            if($numero_pagina <= 0){
+                    $numero_pagina = 1;
+              }
+            
+            if($numero_pagina > 1000){
+                    $numero_pagina = 1000;
+              }
+            
+        }else{
+            
+            $numero_pagina = 1;
+                
+        }
+        
+        //&language=" . $this->languaje  ;
+        
+        $urlAPI = "https://api.themoviedb.org/3/search/person?api_key=be961f58626a1b5bb01ccf04da21d18f&page=" . $numero_pagina . "&query=" . $consulta;
+        
+        $content = file_get_contents($urlAPI);
+        $contentJSON = (array) json_decode($content);
+        
+        if($numero_pagina > $contentJSON['total_pages']){
+            
+                    $numero_pagina = $contentJSON['total_pages'];
+                    $urlAPI = "https://api.themoviedb.org/3/search/person?api_key=be961f58626a1b5bb01ccf04da21d18f&page=" . $numero_pagina . "&query=" . $consulta;
+                    $content = file_get_contents($urlAPI);
+                    $contentJSON = (array) json_decode($content);
+                    
+              }
+        return $contentJSON;
+    }
+    
+    
+    public function buscarPeliculaActorEspecificoAction(Request $request, $consulta){
+        
+        $consulta = str_replace(" ", "-", $consulta);
+        
+        if(!is_numeric($consulta)){
+            return array();    
+        }
+        
+        $urlAPI = "http://api.themoviedb.org/3/person/" . $consulta . "?&api_key=be961f58626a1b5bb01ccf04da21d18f";
+        
+        $content = file_get_contents($urlAPI);
+        $contentJSONProfile = (array) json_decode($content);
+        
+       
+        
+        $urlAPI = "http://api.themoviedb.org/3/person/" . $consulta . "/movie_credits?&api_key=be961f58626a1b5bb01ccf04da21d18f";
+        
+        $content = file_get_contents($urlAPI);
+        $contentJSON = (array) json_decode($content);
+        
+        $tamano_contentJSON = count($contentJSON['cast']);
+        $peliculas = array();
+         array_push($peliculas,$contentJSONProfile);
+         //Cambiado de $tamano_contentJSON a 5 para pruebas
+        for($i = 0; $i < 5; $i++){
+            array_push($peliculas,$this->obtenerPeliculaRipeadaAction($request, $contentJSON['cast'][$i]->id));
+        }
+        
+        
+        
+        return $peliculas;
     }
     
 }

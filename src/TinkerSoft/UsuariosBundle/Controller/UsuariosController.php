@@ -18,8 +18,11 @@ class UsuariosController extends Controller
      * Lists all Usuarios entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        if($request->getSession()->get('rol')==2 ){
+            
+            
         $em = $this->getDoctrine()->getManager();
 
         $usuarios = $em->getRepository('TinkerSoftUsuariosBundle:Usuarios')->findAll();
@@ -27,6 +30,10 @@ class UsuariosController extends Controller
         return $this->render('usuarios/index.html.twig', array(
             'usuarios' => $usuarios,
         ));
+        }
+        else{
+             return $this->render('VistaBundle:Default:login.html.twig');
+        }
     }
 
     /**
@@ -35,6 +42,7 @@ class UsuariosController extends Controller
      */
     public function newAction(Request $request)
     {
+        if($request->getSession()->get('rol')==2 ){
         $usuario = new Usuarios();
         $form = $this->createForm('TinkerSoft\UsuariosBundle\Form\UsuariosType', $usuario);
         $form->handleRequest($request);
@@ -52,27 +60,78 @@ class UsuariosController extends Controller
             'form' => $form->createView(),
         ));
     }
+    else{
+             return $this->render('VistaBundle:Default:login.html.twig');
+        }
+    }
+    
+/*registro por parte de los usuarios estandard*/
+    public function registroAction(Request $request)
+    {
+        $usuario = new Usuarios();
+        $form = $this->createForm('TinkerSoft\UsuariosBundle\Form\UsuariosEstandarType', $usuario);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($usuario);
+            $em->flush();
+
+               return $this->redirect($this->generateUrl('login'));    
+        }
+
+               return $this->render('usuarios/newEstandar.html.twig', array(
+            'usuario' => $usuario,
+            'form' => $form->createView(),
+        ));
+    }
+
 
     /**
      * Finds and displays a Usuarios entity.
      *
      */
-    public function showAction(Usuarios $usuario)
+    public function showAction(Request $request, Usuarios $usuario)
     {
+           if($request->getSession()->get('rol')==2){
+            
+       
         $deleteForm = $this->createDeleteForm($usuario);
 
         return $this->render('usuarios/show.html.twig', array(
             'usuario' => $usuario,
             'delete_form' => $deleteForm->createView(),
         ));
+           }
+        else{
+             return $this->render('VistaBundle:Default:login.html.twig');
+        }
     }
+    
+    public function showEstandarAction(Request $request, Usuarios $usuario)
+    {
+           if($request->getSession()->get('rol')==2 or $request->getSession()->get('id') == $usuario->getId()){
+            
+       
+        $deleteForm = $this->createDeleteForm($usuario);
 
+        return $this->render('usuarios/showEstandar.html.twig', array(
+            'usuario' => $usuario,
+            'delete_form' => $deleteForm->createView(),
+        ));
+           }
+        else{
+             return $this->render('VistaBundle:Default:login.html.twig');
+        }
+    }
     /**
      * Displays a form to edit an existing Usuarios entity.
      *
      */
     public function editAction(Request $request, Usuarios $usuario)
     {
+         if($request->getSession()->get('rol')==2 ){
+       
         $deleteForm = $this->createDeleteForm($usuario);
         $editForm = $this->createForm('TinkerSoft\UsuariosBundle\Form\UsuariosType', $usuario);
         $editForm->handleRequest($request);
@@ -90,14 +149,45 @@ class UsuariosController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+          }
+        else{
+             return $this->render('VistaBundle:Default:login.html.twig');
+        }
     }
+   public function editEstandarAction(Request $request, Usuarios $usuario)
+    {
+         if($request->getSession()->get('rol')==2 or $request->getSession()->get('id') == $usuario->getId()){
+       
+        $deleteForm = $this->createDeleteForm($usuario);
+        $editForm = $this->createForm('TinkerSoft\UsuariosBundle\Form\UsuariosEstandarType', $usuario);
+        $editForm->handleRequest($request);
 
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($usuario);
+            $em->flush();
+
+            return $this->redirectToRoute('usuarios_edit_estandar', array('id' => $usuario->getId()));
+        }
+
+        return $this->render('usuarios/editEstandar.html.twig', array(
+            'usuario' => $usuario,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+          }
+        else{
+             return $this->render('VistaBundle:Default:login.html.twig');
+        }
+    }
     /**
      * Deletes a Usuarios entity.
      *
      */
     public function deleteAction(Request $request, Usuarios $usuario)
     {
+          if($request->getSession()->get('rol')==2 ){
+        
         $form = $this->createDeleteForm($usuario);
         $form->handleRequest($request);
 
@@ -108,6 +198,11 @@ class UsuariosController extends Controller
         }
 
         return $this->redirectToRoute('usuarios_index');
+        
+          }
+        else{
+             return $this->render('VistaBundle:Default:login.html.twig');
+        }
     }
 
     /**

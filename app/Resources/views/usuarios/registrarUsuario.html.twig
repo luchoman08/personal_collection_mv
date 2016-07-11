@@ -1,0 +1,14 @@
+{%extends 'index.html.twig'%}
+{%block title%} Registro de usuario {%endblock%}
+{%block loginoptions%}
+{% endblock %}
+
+{% block classcontenido %}col-md-12 fondoContenido{% endblock %}
+{% block contenido %}
+
+   <iframe ="100%" height="650"  src="{{path('usuarios_new_estandar')}}">
+   </iframe>
+
+{%endblock%}
+{%block barraderecha%}
+{%endblock%}

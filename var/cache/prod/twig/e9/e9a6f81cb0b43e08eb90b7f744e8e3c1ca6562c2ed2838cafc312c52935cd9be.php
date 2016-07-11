@@ -38,10 +38,7 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
         // line 10
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["delete_form"]) ? $context["delete_form"] : null), 'form_start');
         echo "
-                             <a class=\"btn btn-primary btn-sm\"  href=\"";
-        // line 11
-        echo $this->env->getExtension('routing')->getPath("usuarios_index");
-        echo "\">Atras</a>
+                             <a class=\"btn btn-primary btn-sm\" onclick=\"window.history.back();\">Atras</a>
                              <a class=\"btn  btn-success btn-sm\"  href=\"";
         // line 12
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("usuarios_edit", array("id" => $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "id", array()))), "html", null, true);
@@ -155,7 +152,7 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
 
     public function getDebugInfo()
     {
-        return array (  119 => 57,  112 => 53,  105 => 49,  98 => 45,  91 => 41,  84 => 37,  77 => 33,  70 => 29,  54 => 16,  47 => 12,  43 => 11,  39 => 10,  31 => 4,  28 => 3,  11 => 1,);
+        return array (  116 => 57,  109 => 53,  102 => 49,  95 => 45,  88 => 41,  81 => 37,  74 => 33,  67 => 29,  51 => 16,  44 => 12,  39 => 10,  31 => 4,  28 => 3,  11 => 1,);
     }
 }
 /* {% extends 'baseSinFondo.html.twig' %}*/
@@ -168,7 +165,7 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
 /*                           */
 /*                            <div style="float:right; margin-top:20px;">*/
 /*                             {{ form_start(delete_form) }}*/
-/*                              <a class="btn btn-primary btn-sm"  href="{{ path('usuarios_index') }}">Atras</a>*/
+/*                              <a class="btn btn-primary btn-sm" onclick="window.history.back();">Atras</a>*/
 /*                              <a class="btn  btn-success btn-sm"  href="{{ path('usuarios_edit', { 'id': usuario.id }) }}">Editar</a>&nbsp;*/
 /*                              <input class="btn  btn-danger btn-sm"  type="submit" value="Borrar">*/
 /* */

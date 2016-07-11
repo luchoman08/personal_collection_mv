@@ -30,12 +30,46 @@ pelicula_consulta_generos_barra:
 pelicula_consulta_generos_sin_barra:
     path:      /bgeneros/{generos}/{numero_pagina}
     defaults:  { _controller: VistaBundle:Default:verResultadosGeneros }
-    
+
+pelicula_consulta_generos_string_url:
+    path:      /bavgeneros/
+    defaults:  { _controller: VistaBundle:Default:verResultadoPorGenero, numero_pagina 1}
+
+
+pelicula_consulta_generos_string_sin_barra:
+    path:      /bavgeneros/{genero}
+    defaults:  { _controller: VistaBundle:Default:verResultadoPorGenero, numero_pagina 1}
+
+pelicula_consulta_generos_string_barra:
+    path:      /bavgeneros/{genero}/
+    defaults:  { _controller: VistaBundle:Default:verResultadoPorGenero, numero_pagina 1}
+
+
+pelicula_consulta_generos_string_paginado:
+    path:      /bavgeneros/{genero}/{numero_pagina}
+    defaults:  { _controller: VistaBundle:Default:verResultadoPorGenero }
+  
 pelicula_consulta_con_barra:
     path:      /buscar/
     defaults:  { _controller: VistaBundle:Default:iniciarIndex}
     
+pelicula_consulta_actor_string_url:
+    path:      /bactor/
+    defaults:  { _controller: VistaBundle:Default:verResultadoActor, numero_pagina 1}
     
+pelicula_consulta_actor:
+    path:      /bactor/{actor}
+    defaults:  { _controller: VistaBundle:Default:verResultadoActor, numero_pagina 1 }
+    
+pelicula_consulta_actor_barra:
+    path:      /bactor/{actor}/
+    defaults:  { _controller: VistaBundle:Default:verResultadoActor, numero_pagina 1 }
+     
+pelicula_consulta_actor_paginado:
+    path:      /bactor/{actor}/{numero_pagina}
+    defaults:  { _controller: VistaBundle:Default:verResultadoActor }
+
+   
     
 show:
     path:      /secret/buscar/show/{consulta}/{numero_pagina}
@@ -122,3 +156,15 @@ administrador:
 administrador_barra:
     path:      /administrador/
     defaults:  { _controller: VistaBundle:Default:panelAdministrador }
+    
+busqueda_avanzada:
+    path:      /bavanzada
+    defaults:  { _controller: VistaBundle:Default:busquedaAvanzada }
+    
+busqueda_avanzada_barra:
+    path:      /bavanzada/
+    defaults:  { _controller: VistaBundle:Default:busquedaAvanzada }
+    
+pelicula_consulta_un_actor:
+    path:      /bunactor/{actorid}
+    defaults:  { _controller: VistaBundle:Default:verResultadoUnActor }

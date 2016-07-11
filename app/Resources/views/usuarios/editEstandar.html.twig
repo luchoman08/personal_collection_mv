@@ -1,0 +1,32 @@
+{% extends 'baseSinFondo.html.twig' %}
+
+
+{% block body %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                                 <div style="float:right;  margin-top:20px;">
+                                  <a   class="btn btn-sm btn-default"  href="{{url('usuarios_index')}} {{usuario.id}}/showEstandar">Atras</a>
+                                  </div>
+                                 <h1>Modificar mis datos</h1>
+
+                        </div>
+                        <div class="panel-body">
+
+
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <br>
+        <center>
+        <input type="submit" id="btnGuardar" class="btn btn-primary" value="Guardar" />
+    {{ form_end(edit_form) }}
+
+
+   
+            {{ form_start(delete_form) }}
+ 
+    </center>
+    
+    </div>
+    </div>
+{% endblock %}

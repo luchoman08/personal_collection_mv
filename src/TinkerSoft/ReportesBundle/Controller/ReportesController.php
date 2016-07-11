@@ -122,21 +122,59 @@ class ReportesController extends Controller
             array_push($data,$fila);
         }
         
-        $this->generarReporteAction("Películas vistas por usuario",$columnas,$data,$tamaño_columna);
+        $this->generarReporteAction("Películas vistas por usuarios",$columnas,$data,$tamaño_columna);
+        return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
+    }
+    
+    public function generarReportePeliculasVistasUsuariosGenerosUltimoMesAction(Request $request){
+         
+        $columnas = array('@nickname','Género visto');
+        $em = $this->getDoctrine()->getManager();
+        $vistas = $this->get('app.funciones_controler')->getPeliculasVistaUsuariossAuditor($em);
+        
+        /* Vistas último mes */
+            $peliculasVistasUltimoMes = array();
+            for($i = 0; $i < count($vistas); $i++){
+                
+                $diff = time() - strtotime($vistas[$i]['fechaAdicionPelicula']->format("Y-m-d")) ; 
+               
+                if  ($diff/(60) < 43200){
+                    
+                    array_push($peliculasVistasUltimoMes,$vistas[$i]);
+                    
+                } 
+            }
+        
+        $generos = array();
+        for($i = 0; $i < count($peliculasVistasUltimoMes) ; $i++){
+            $movie = $this->get('app.api_controller')->obtenerPeliculaRipeadaAction($request, $peliculasVistasUltimoMes[$i]['idPelicula']);
+            
+            
+            
+            for($j = 0; $j < count($movie['genres']); $j++){
+                if(!in_array(array($vistas[$i]['nickname'], $movie['genres'][$j]->name), $generos)){
+                    array_push($generos, array($peliculasVistasUltimoMes[$i]['nickname'], $movie['genres'][$j]->name));
+                }
+            }
+        }
+        
+        $this->generarReporteAction("Géneros vistos por los usuarios en el último mes",$columnas,$generos,array());
+        
         return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
     }
     
     public function generarReportePeliculasVistasUsuariosGenerosAction(Request $request){
          
-        $columnas = array('@nickname','Genero visto');
+        $columnas = array('@nickname','Género visto');
         $em = $this->getDoctrine()->getManager();
         $vistas = $this->get('app.funciones_controler')->getPeliculasVistaUsuariossAuditor($em);
         
         $generos = array();
         for($i = 0; $i < count($vistas) ; $i++){
             $movie = $this->get('app.api_controller')->obtenerPeliculaRipeadaAction($request, $vistas[$i]['idPelicula']);
+            
             for($j = 0; $j < count($movie['genres']); $j++){
-                if(!in_array($movie['genres'][$j]->name, $generos)){
+                if(!in_array(array($vistas[$i]['nickname'], $movie['genres'][$j]->name), $generos)){
                     array_push($generos, array($vistas[$i]['nickname'], $movie['genres'][$j]->name));
                 }
             }
@@ -147,5 +185,34 @@ class ReportesController extends Controller
         return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
     }
     
-    
+    public function generarReportePeliculasVistasUsuariosUltimoMesAction(Request $request){
+        $columnas = array('IDPelicula','Nombre película','Fecha vista','@nickname');
+        $tamaño_columna = array(20,90,40,30);
+        $em = $this->getDoctrine()->getManager();
+        $vistas = $this->get('app.funciones_controler')->getPeliculasVistaUsuariossAuditor($em);
+        
+        /* Vistas último mes */
+            $peliculasVistasUltimoMes = array();
+            for($i = 0; $i < count($vistas); $i++){
+                
+                $diff = time() - strtotime($vistas[$i]['fechaAdicionPelicula']->format("Y-m-d")) ; 
+               
+                if  ($diff/(60) < 43200){
+                    
+                    array_push($peliculasVistasUltimoMes,$vistas[$i]);
+                    
+                } 
+            }
+        
+        $data = array();
+        for($i = 0; $i < count($peliculasVistasUltimoMes) ; $i++){
+            $movie = $this->get('app.api_controller')->obtenerPeliculaRipeadaAction($request, $peliculasVistasUltimoMes[$i]['idPelicula']);
+            $fila = array($peliculasVistasUltimoMes[$i]['idPelicula'],$movie['title'],$peliculasVistasUltimoMes[$i]['fechaAdicionPelicula']->format("Y-m-d G:i:s"),$peliculasVistasUltimoMes[$i]['nickname']);
+            array_push($data,$fila);
+        }
+        
+        $this->generarReporteAction("Películas vistas por usuario en el último mes",$columnas,$data,$tamaño_columna);
+        return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
+    }
+ 
 }

@@ -42,11 +42,21 @@
 
                 </ul>-->
                <div class="navbar-form navbar-right buscar" role="search">
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <input type="text" id ="valorBuscar" class="form-control" placeholder="Buscar peliculas ... :)" size="40%">
                     </div>
-                    <button id = "Buscar" type="submit" class="btn btn-default">Buscar</button>
-                    
+                    <button id = "Buscar" type="submit" class="btn btn-default">Buscar</button>-->
+                    <div id = "buscar_input" class="input-group" style="">
+                      <input type="text" id ="valorBuscar" class="form-control autocomplete" placeholder="Buscar peliculas ... :)" aria-label="..." size="40%">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li><a id = "Buscar_palabras" href="#">Palabras</a></li>
+                          <li><a id = "Buscar_genero" href="#">Genero</a></li>
+                          <li><a id = "Buscar_actor" href="#">Actor</a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
                </div>
                
                
@@ -281,25 +291,72 @@
 
 {% endblock %}
     {% block javascripts %}
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+
     <script type="text/javascript" src="{{asset('star/jquery.rateyo.min.js')}}"></script>
     <script>
-$('#valorBuscar').keypress(function(event){
-    var keycode = (event.keyCode ? event.keyCode : event.which);
-    if(keycode == '13'){
-       
-        var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();
-
-window.location.href =url;
-    }
-});
-$("#Buscar").click(function () {
-     
-
-var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();
-window.location.href =url;
-
-    });
+            $('#valorBuscar').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                   
+                    var url = "{{url('pelicula_barra')}}"+$("#valorBuscar").val();
+            
+            window.location.href =url;
+                }
+            });
+            $("#Buscar_palabras").click(function () {
+                 
+            
+                    var url = "{{url('pelicula_barra')}}"+$("#valorBuscar").val();
+                    window.location.href =url;
+        
+            });
+            $("#Buscar_genero").click(function () {
+                 
+            
+                    var url = "{{url('pelicula_consulta_generos_string_url')}}"+$("#valorBuscar").val();
+                    window.location.href =url;
+        
+            });
+            $("#Buscar_actor").click(function () {
+                 
+            
+                    var url = "{{url('pelicula_consulta_actor_string_url')}}"+$("#valorBuscar").val();
+                    window.location.href =url;
+        
+            });
+            
+    
+            $(function() {
+                var availableTags = [
+                  "Action",
+                  "Adventure",
+                  "Animation",
+                  "Comedy",
+                  "Crime",
+                  "Documentary",
+                  "Drama",
+                  "Family",
+                  "Fantasy",
+                  "Foreign",
+                  "History",
+                  "Horror",
+                  "Music",
+                  "Mystery",
+                  "Romance",
+                  "Science Fiction",
+                  "TV Movie",
+                  "Thriller",
+                  "War",
+                  "Western"
+                ];
+                $( "#valorBuscar" ).autocomplete({
+                  source: availableTags
+                });
+              });
     </script>
     {{ parent() }}
+    
+    
     {% endblock %}

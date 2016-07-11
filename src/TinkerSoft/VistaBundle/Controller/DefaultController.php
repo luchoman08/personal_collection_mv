@@ -137,7 +137,8 @@ class DefaultController extends Controller
                 findOneBy(array('idUsuario'=>$request->getSession()->get('id')));
                 
                 if($gustos){
-                    return $this->redirectToRoute('vista_homepage');
+                $q = $em->createQuery('delete from FuncionesSitioBundle:RegistroGustos r where r.idUsuario = '.$request->getSession()->get('id'));
+                $numDeleted = $q->execute();
                 }
             
             
@@ -393,4 +394,58 @@ class DefaultController extends Controller
             return $this->render('VistaBundle:Default:login.html.twig', array('error'=>2));
         }
     }
+    
+    public function busquedaAvanzadaAction(Request $request){
+        return $this->render('VistaBundle:Default:busquedaAvanzada.html.twig');
+    }
+    
+    public function verResultadoPorGeneroAction(Request $request, $genero,$numero_pagina){
+        
+        $usuarioLogueado=0;
+        $nickname = "";
+        if($request->getSession()->get('id')){
+            $usuarioLogueado=1;
+            $nickname = $request->getSession()->get('nickname');
+        }
+        $datos = $this->get('app.api_controller')->descubrirGeneroPaginadasAction($genero,$numero_pagina);
+        return $this->render('VistaBundle:Default:buscar.html.twig', array('params' => $datos, 'consulta' => $datos[0],'usuarioLogueado' => $usuarioLogueado, 'nickname' => $nickname,'flag' => 'generos'));
+        
+    }
+    
+    public function verResultadoActorAction(Request $request, $actor,$numero_pagina){
+        
+        $usuarioLogueado=0;
+        $nickname = "";
+        if($request->getSession()->get('id')){
+            $usuarioLogueado=1;
+            $nickname = $request->getSession()->get('nickname');
+        }
+        $datos = $this->get('app.api_controller')->buscarPeliculaActorAction($actor,$numero_pagina);
+        //print_r($datos);
+        return $this->render('VistaBundle:Default:buscarActor.html.twig', array('params' => $datos, 'consulta' => $actor,'usuarioLogueado' => $usuarioLogueado, 'nickname' => $nickname));
+        
+    }
+    
+    public function verResultadoUnActorAction(Request $request, $actorid){
+        
+        $usuarioLogueado=0;
+        $nickname = "";
+        if($request->getSession()->get('id')){
+            $usuarioLogueado=1;
+            $nickname = $request->getSession()->get('nickname');
+        }
+        $datos = $this->get('app.api_controller')->buscarPeliculaActorEspecificoAction($request,$actorid);
+        
+        $profile = $datos[0];
+        $datos_sin_profile = array();
+        for($i = 1; $i < count($datos_sin_profile) ; $i++){
+            array_push($datos_sin_profile,$datos[$i]);
+        }
+        
+        return $this->render('VistaBundle:Default:buscarUnActor.html.twig', array('params' => $datos_sin_profile,'perfil' => $profile, 'consulta' => $actorid,'usuarioLogueado' => $usuarioLogueado, 'nickname' => $nickname));
+        
+    }
+    
+    
+    
 }

@@ -76,7 +76,7 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 \t\t\t\t\t <p>Al crear una cuenta en nuestra página, usted podrá tener acceso a las últimas películas de estreno, generar listas de reproducción de películas vistas o por ver y su categoría.</p>
 \t\t\t\t\t <a class=\"acount-btn\" href=\"";
         // line 23
-        echo $this->env->getExtension('routing')->getUrl("usuarios_new");
+        echo $this->env->getExtension('routing')->getUrl("usuarios_registro");
         echo "\">Crear una nueva cuenta</a>
 \t\t\t\t   </div>
 \t\t\t\t   <div class=\"col-md-6 login-right\">
@@ -115,9 +115,17 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 \t\t\t\t\t";
         }
         // line 47
-        echo "\t\t\t\t\t
-\t\t\t\t<form method = \"POST\" action=\"";
-        // line 48
+        echo "\t\t\t\t\t\t";
+        if (((isset($context["error"]) ? $context["error"] : null) == 4)) {
+            // line 48
+            echo "\t\t\t\t\t<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">
+  \t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+  \t\t\t\t\t<strong>Error!</strong> Su cuenta fue desactivada por un administrador 
+\t\t\t\t\t</div>
+\t\t\t\t\t";
+        }
+        // line 53
+        echo "\t\t\t\t<form method = \"POST\" action=\"";
         echo $this->env->getExtension('routing')->getUrl("login_action");
         echo "\">
 \t\t\t\t\t  <div>
@@ -136,7 +144,7 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 \t\t\t     </div>
 \t   
 \t";
-        // line 64
+        // line 69
         $this->displayBlock('barraderecha', $context, $blocks);
     }
 
@@ -156,7 +164,7 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 
     public function getDebugInfo()
     {
-        return array (  140 => 64,  121 => 48,  118 => 47,  111 => 42,  108 => 41,  101 => 36,  99 => 35,  96 => 34,  89 => 29,  87 => 28,  79 => 23,  72 => 18,  69 => 17,  64 => 16,  58 => 15,  51 => 12,  47 => 11,  38 => 5,  35 => 4,  32 => 3,  11 => 1,);
+        return array (  148 => 69,  128 => 53,  121 => 48,  118 => 47,  111 => 42,  108 => 41,  101 => 36,  99 => 35,  96 => 34,  89 => 29,  87 => 28,  79 => 23,  72 => 18,  69 => 17,  64 => 16,  58 => 15,  51 => 12,  47 => 11,  38 => 5,  35 => 4,  32 => 3,  11 => 1,);
     }
 }
 /* {% extends 'index.html.twig' %}*/
@@ -181,7 +189,7 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 /* 				   <div class="col-md-6 login-left">*/
 /* 				  	 <h3> Nuevo Usuario</h3>*/
 /* 					 <p>Al crear una cuenta en nuestra página, usted podrá tener acceso a las últimas películas de estreno, generar listas de reproducción de películas vistas o por ver y su categoría.</p>*/
-/* 					 <a class="acount-btn" href="{{url('usuarios_new')}}">Crear una nueva cuenta</a>*/
+/* 					 <a class="acount-btn" href="{{url('usuarios_registro')}}">Crear una nueva cuenta</a>*/
 /* 				   </div>*/
 /* 				   <div class="col-md-6 login-right">*/
 /* 				  	<h3>Usuarios Registrados</h3>*/
@@ -205,7 +213,12 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 /*   					<strong>Error!</strong> Hola hacker :) */
 /* 					</div>*/
 /* 					{%endif%}*/
-/* 					*/
+/* 						{%if error == 4%}*/
+/* 					<div class="alert alert-danger alert-dismissible" role="alert">*/
+/*   					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>*/
+/*   					<strong>Error!</strong> Su cuenta fue desactivada por un administrador */
+/* 					</div>*/
+/* 					{%endif%}*/
 /* 				<form method = "POST" action="{{url('login_action')}}">*/
 /* 					  <div>*/
 /* 						<span>Correo electrónico<label>*</label></span>*/

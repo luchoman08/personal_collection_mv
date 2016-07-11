@@ -8,7 +8,7 @@
                           
                            <div style="float:right; margin-top:20px;">
                             {{ form_start(delete_form) }}
-                             <a class="btn btn-primary btn-sm"  href="{{ path('usuarios_index') }}">Atras</a>
+                             <a class="btn btn-primary btn-sm" onclick="window.history.back();">Atras</a>
                              <a class="btn  btn-success btn-sm"  href="{{ path('usuarios_edit', { 'id': usuario.id }) }}">Editar</a>&nbsp;
                              <input class="btn  btn-danger btn-sm"  type="submit" value="Borrar">
 

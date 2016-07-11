@@ -1,0 +1,39 @@
+{%extends 'index.html.twig'%}
+{% block classcontenido %}col-md-12 fondoContenido{% endblock %}
+{% block contenido %}
+
+
+                       <div class="panel panel-default">
+                        <div class="panel-heading">
+                                 <div style="float:right;  margin-top:20px;">
+                                  <input   type="submit" value="Atras" class="btn btn-sm btn-default"  onclick="window.history.back();">
+                                  </div>
+                                 <h1>Registro de nuevos usuarios</h1>
+
+                        </div>
+                        <div class="panel-body">
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <br>
+        <center>
+        <input type="submit" value="Crear" id="btnCrear" class="btn btn-primary btn-sm" />
+        </center>
+    {{ form_end(form) }}
+
+</div>
+</div>
+{% endblock %}
+{%block javascripts%}
+
+{{parent()}}
+<script>
+$('#btnCrear').click(function(){
+   
+
+    window.location.href = "{{path('login')}}";
+});
+</script>
+{%endblock%}
+{%block barraderecha%}
+{%endblock%}

@@ -100,11 +100,21 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 
                 </ul>-->
                <div class=\"navbar-form navbar-right buscar\" role=\"search\">
-                    <div class=\"form-group\">
+                    <!--<div class=\"form-group\">
                         <input type=\"text\" id =\"valorBuscar\" class=\"form-control\" placeholder=\"Buscar peliculas ... :)\" size=\"40%\">
                     </div>
-                    <button id = \"Buscar\" type=\"submit\" class=\"btn btn-default\">Buscar</button>
-                    
+                    <button id = \"Buscar\" type=\"submit\" class=\"btn btn-default\">Buscar</button>-->
+                    <div id = \"buscar_input\" class=\"input-group\" style=\"\">
+                      <input type=\"text\" id =\"valorBuscar\" class=\"form-control autocomplete\" placeholder=\"Buscar peliculas ... :)\" aria-label=\"...\" size=\"40%\">
+                      <div class=\"input-group-btn\">
+                        <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Buscar <span class=\"caret\"></span></button>
+                        <ul class=\"dropdown-menu dropdown-menu-right\">
+                          <li><a id = \"Buscar_palabras\" href=\"#\">Palabras</a></li>
+                          <li><a id = \"Buscar_genero\" href=\"#\">Genero</a></li>
+                          <li><a id = \"Buscar_actor\" href=\"#\">Actor</a></li>
+                        </ul>
+                      </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
                </div>
                
                
@@ -120,21 +130,21 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 
 
     <div class=\"";
-        // line 64
+        // line 74
         $this->displayBlock('classcontenido', $context, $blocks);
         echo "\">
 
     ";
-        // line 66
+        // line 76
         $this->displayBlock('contenido', $context, $blocks);
-        // line 134
+        // line 144
         echo "
     </div>
 
     ";
-        // line 137
+        // line 147
         $this->displayBlock('barraderecha', $context, $blocks);
-        // line 274
+        // line 284
         echo "
     </div>
 
@@ -166,16 +176,16 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
     {
     }
 
-    // line 64
+    // line 74
     public function block_classcontenido($context, array $blocks = array())
     {
         echo "col-md-9 fondoContenido";
     }
 
-    // line 66
+    // line 76
     public function block_contenido($context, array $blocks = array())
     {
-        // line 67
+        // line 77
         echo "        <center>
             <!--<a data-toggle=\"tab\" href=\"#tendencia\" class=\"buttonBase button5\">Tendencias</a>
             <a data-toggle=\"tab\" href=\"#estrenos\" class=\"buttonBase button5\">Estrenose</a>-->
@@ -198,9 +208,9 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <br>
             <div id=\"tendencia\" class=\" tab-pane fade in active \">
                ";
-        // line 88
+        // line 98
         $this->displayBlock('tendencia', $context, $blocks);
-        // line 91
+        // line 101
         echo "             
 
              
@@ -210,27 +220,27 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <div id=\"top\" class=\" tab-pane fade\">
 
                 ";
-        // line 99
+        // line 109
         $this->displayBlock('mejorvaloradas', $context, $blocks);
-        // line 102
+        // line 112
         echo "                
             </div>
 
             <div id=\"estrenos\" class=\"tab-pane fade\">
 
                 ";
-        // line 107
+        // line 117
         $this->displayBlock('estrenos', $context, $blocks);
-        // line 110
+        // line 120
         echo "
             </div>
 
             <div id=\"proximamente\" class=\" tab-pane fade\">
 
                 ";
-        // line 115
+        // line 125
         $this->displayBlock('proximamente', $context, $blocks);
-        // line 118
+        // line 128
         echo "
 
             </div>
@@ -238,9 +248,9 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
             <div id=\"ultimas\" class=\" tab-pane fade\">
 
                 ";
-        // line 124
+        // line 134
         $this->displayBlock('ultimas', $context, $blocks);
-        // line 127
+        // line 137
         echo "
 
             </div>
@@ -250,50 +260,50 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
         ";
     }
 
-    // line 88
+    // line 98
     public function block_tendencia($context, array $blocks = array())
     {
-        // line 89
+        // line 99
         echo "               
                ";
     }
 
-    // line 99
+    // line 109
     public function block_mejorvaloradas($context, array $blocks = array())
     {
-        // line 100
+        // line 110
         echo "               
                 ";
     }
 
-    // line 107
+    // line 117
     public function block_estrenos($context, array $blocks = array())
     {
-        // line 108
+        // line 118
         echo "               
                 ";
     }
 
-    // line 115
+    // line 125
     public function block_proximamente($context, array $blocks = array())
     {
-        // line 116
+        // line 126
         echo "               
                 ";
     }
 
-    // line 124
+    // line 134
     public function block_ultimas($context, array $blocks = array())
     {
-        // line 125
+        // line 135
         echo "               
                 ";
     }
 
-    // line 137
+    // line 147
     public function block_barraderecha($context, array $blocks = array())
     {
-        // line 138
+        // line 148
         echo "    <div class=\"col-md-3 columna-index-boostrap\">
         <div class=\"columna-index\">
 
@@ -432,37 +442,96 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
     ";
     }
 
-    // line 283
+    // line 293
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 284
-        echo "    
+        // line 294
+        echo "    <script src=\"//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js\"></script>
+    <script src=\"//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js\"></script>
+
     <script type=\"text/javascript\" src=\"";
-        // line 285
+        // line 297
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("star/jquery.rateyo.min.js"), "html", null, true);
         echo "\"></script>
     <script>
-\$('#valorBuscar').keypress(function(event){
-    var keycode = (event.keyCode ? event.keyCode : event.which);
-    if(keycode == '13'){
-       
-        var url = \"http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/\"+\$(\"#valorBuscar\").val();
-
-window.location.href =url;
-    }
-});
-\$(\"#Buscar\").click(function () {
-     
-
-var url = \"http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/\"+\$(\"#valorBuscar\").val();
-window.location.href =url;
-
-    });
+            \$('#valorBuscar').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                   
+                    var url = \"";
+        // line 303
+        echo $this->env->getExtension('routing')->getUrl("pelicula_barra");
+        echo "\"+\$(\"#valorBuscar\").val();
+            
+            window.location.href =url;
+                }
+            });
+            \$(\"#Buscar_palabras\").click(function () {
+                 
+            
+                    var url = \"";
+        // line 311
+        echo $this->env->getExtension('routing')->getUrl("pelicula_barra");
+        echo "\"+\$(\"#valorBuscar\").val();
+                    window.location.href =url;
+        
+            });
+            \$(\"#Buscar_genero\").click(function () {
+                 
+            
+                    var url = \"";
+        // line 318
+        echo $this->env->getExtension('routing')->getUrl("pelicula_consulta_generos_string_url");
+        echo "\"+\$(\"#valorBuscar\").val();
+                    window.location.href =url;
+        
+            });
+            \$(\"#Buscar_actor\").click(function () {
+                 
+            
+                    var url = \"";
+        // line 325
+        echo $this->env->getExtension('routing')->getUrl("pelicula_consulta_actor_string_url");
+        echo "\"+\$(\"#valorBuscar\").val();
+                    window.location.href =url;
+        
+            });
+            
+    
+            \$(function() {
+                var availableTags = [
+                  \"Action\",
+                  \"Adventure\",
+                  \"Animation\",
+                  \"Comedy\",
+                  \"Crime\",
+                  \"Documentary\",
+                  \"Drama\",
+                  \"Family\",
+                  \"Fantasy\",
+                  \"Foreign\",
+                  \"History\",
+                  \"Horror\",
+                  \"Music\",
+                  \"Mystery\",
+                  \"Romance\",
+                  \"Science Fiction\",
+                  \"TV Movie\",
+                  \"Thriller\",
+                  \"War\",
+                  \"Western\"
+                ];
+                \$( \"#valorBuscar\" ).autocomplete({
+                  source: availableTags
+                });
+              });
     </script>
     ";
-        // line 304
+        // line 359
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
+    
+    
     ";
     }
 
@@ -478,7 +547,7 @@ window.location.href =url;
 
     public function getDebugInfo()
     {
-        return array (  464 => 304,  442 => 285,  439 => 284,  436 => 283,  297 => 138,  294 => 137,  289 => 125,  286 => 124,  281 => 116,  278 => 115,  273 => 108,  270 => 107,  265 => 100,  262 => 99,  257 => 89,  254 => 88,  244 => 127,  242 => 124,  234 => 118,  232 => 115,  225 => 110,  223 => 107,  216 => 102,  214 => 99,  204 => 91,  202 => 88,  179 => 67,  176 => 66,  170 => 64,  165 => 22,  150 => 19,  138 => 274,  136 => 137,  131 => 134,  129 => 66,  124 => 64,  92 => 35,  78 => 23,  76 => 22,  72 => 20,  70 => 19,  65 => 16,  62 => 15,  52 => 7,  47 => 5,  44 => 4,  41 => 3,  11 => 1,);
+        return array (  531 => 359,  494 => 325,  484 => 318,  474 => 311,  463 => 303,  454 => 297,  449 => 294,  446 => 293,  307 => 148,  304 => 147,  299 => 135,  296 => 134,  291 => 126,  288 => 125,  283 => 118,  280 => 117,  275 => 110,  272 => 109,  267 => 99,  264 => 98,  254 => 137,  252 => 134,  244 => 128,  242 => 125,  235 => 120,  233 => 117,  226 => 112,  224 => 109,  214 => 101,  212 => 98,  189 => 77,  186 => 76,  180 => 74,  175 => 22,  160 => 19,  148 => 284,  146 => 147,  141 => 144,  139 => 76,  134 => 74,  92 => 35,  78 => 23,  76 => 22,  72 => 20,  70 => 19,  65 => 16,  62 => 15,  52 => 7,  47 => 5,  44 => 4,  41 => 3,  11 => 1,);
     }
 }
 /* {%extends 'base.html.twig'%}*/
@@ -525,11 +594,21 @@ window.location.href =url;
 /* */
 /*                 </ul>-->*/
 /*                <div class="navbar-form navbar-right buscar" role="search">*/
-/*                     <div class="form-group">*/
+/*                     <!--<div class="form-group">*/
 /*                         <input type="text" id ="valorBuscar" class="form-control" placeholder="Buscar peliculas ... :)" size="40%">*/
 /*                     </div>*/
-/*                     <button id = "Buscar" type="submit" class="btn btn-default">Buscar</button>*/
-/*                     */
+/*                     <button id = "Buscar" type="submit" class="btn btn-default">Buscar</button>-->*/
+/*                     <div id = "buscar_input" class="input-group" style="">*/
+/*                       <input type="text" id ="valorBuscar" class="form-control autocomplete" placeholder="Buscar peliculas ... :)" aria-label="..." size="40%">*/
+/*                       <div class="input-group-btn">*/
+/*                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></button>*/
+/*                         <ul class="dropdown-menu dropdown-menu-right">*/
+/*                           <li><a id = "Buscar_palabras" href="#">Palabras</a></li>*/
+/*                           <li><a id = "Buscar_genero" href="#">Genero</a></li>*/
+/*                           <li><a id = "Buscar_actor" href="#">Actor</a></li>*/
+/*                         </ul>*/
+/*                       </div><!-- /btn-group -->*/
+/*                     </div><!-- /input-group -->*/
 /*                </div>*/
 /*                */
 /*                */
@@ -764,25 +843,72 @@ window.location.href =url;
 /* */
 /* {% endblock %}*/
 /*     {% block javascripts %}*/
-/*     */
+/*     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>*/
+/*     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>*/
+/* */
 /*     <script type="text/javascript" src="{{asset('star/jquery.rateyo.min.js')}}"></script>*/
 /*     <script>*/
-/* $('#valorBuscar').keypress(function(event){*/
-/*     var keycode = (event.keyCode ? event.keyCode : event.which);*/
-/*     if(keycode == '13'){*/
-/*        */
-/*         var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();*/
-/* */
-/* window.location.href =url;*/
-/*     }*/
-/* });*/
-/* $("#Buscar").click(function () {*/
-/*      */
-/* */
-/* var url = "http://p-c-m-luchoman.c9users.io/personal_collection_mv/web/vista/buscar/"+$("#valorBuscar").val();*/
-/* window.location.href =url;*/
-/* */
-/*     });*/
+/*             $('#valorBuscar').keypress(function(event){*/
+/*                 var keycode = (event.keyCode ? event.keyCode : event.which);*/
+/*                 if(keycode == '13'){*/
+/*                    */
+/*                     var url = "{{url('pelicula_barra')}}"+$("#valorBuscar").val();*/
+/*             */
+/*             window.location.href =url;*/
+/*                 }*/
+/*             });*/
+/*             $("#Buscar_palabras").click(function () {*/
+/*                  */
+/*             */
+/*                     var url = "{{url('pelicula_barra')}}"+$("#valorBuscar").val();*/
+/*                     window.location.href =url;*/
+/*         */
+/*             });*/
+/*             $("#Buscar_genero").click(function () {*/
+/*                  */
+/*             */
+/*                     var url = "{{url('pelicula_consulta_generos_string_url')}}"+$("#valorBuscar").val();*/
+/*                     window.location.href =url;*/
+/*         */
+/*             });*/
+/*             $("#Buscar_actor").click(function () {*/
+/*                  */
+/*             */
+/*                     var url = "{{url('pelicula_consulta_actor_string_url')}}"+$("#valorBuscar").val();*/
+/*                     window.location.href =url;*/
+/*         */
+/*             });*/
+/*             */
+/*     */
+/*             $(function() {*/
+/*                 var availableTags = [*/
+/*                   "Action",*/
+/*                   "Adventure",*/
+/*                   "Animation",*/
+/*                   "Comedy",*/
+/*                   "Crime",*/
+/*                   "Documentary",*/
+/*                   "Drama",*/
+/*                   "Family",*/
+/*                   "Fantasy",*/
+/*                   "Foreign",*/
+/*                   "History",*/
+/*                   "Horror",*/
+/*                   "Music",*/
+/*                   "Mystery",*/
+/*                   "Romance",*/
+/*                   "Science Fiction",*/
+/*                   "TV Movie",*/
+/*                   "Thriller",*/
+/*                   "War",*/
+/*                   "Western"*/
+/*                 ];*/
+/*                 $( "#valorBuscar" ).autocomplete({*/
+/*                   source: availableTags*/
+/*                 });*/
+/*               });*/
 /*     </script>*/
 /*     {{ parent() }}*/
+/*     */
+/*     */
 /*     {% endblock %}*/

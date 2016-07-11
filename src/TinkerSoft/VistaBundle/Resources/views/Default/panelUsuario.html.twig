@@ -22,7 +22,8 @@
         <li><a data-toggle="tab" href="#vistas">Vistas&nbsp;</a></li>
         <li><a data-toggle="tab" href="#pendientes">Pendientes&nbsp;</a></li>
         <li><a data-toggle="tab" href="#calificadas">Calificadas&nbsp;</a></li>
-        <li><a data-toggle="tab" href="#perfil">Mi perfil</a></li>
+        <li><a data-toggle="tab" href="#perfil">Mis Datos Personales</a></li>
+        <li><a data-toggle="tab" href="#misGeneros">Mis G&eacute;neros</a></li>
     </ul>
 </div>
   <div id="divEmergente" style="display:none" class="alert alert-success alert-dismissible" role="alert">
@@ -110,30 +111,63 @@
     </div>
     <div id="perfil" class="tab-pane fade">
         <div class="datos">
-            <strong>Nombre:</strong> {{usuario.nombres}} {{usuario.apellidos}}<br/>
-            <strong>Nickname:</strong> {{usuario.nickname}}<br/>
-            <strong>E-Mail:</strong> {{usuario.correoElectronico}}</br>
-            <strong>Géneros que me gustan:</strong></br>
-            <ul>
-                {% for gusto in gustos %}
-                    <li>{{gusto}}</li>
-                {% endfor %}
-            </ul>
+             <object width="100%" height="500"  data="{{url('usuarios_index')}} {{usuario.id}}/showEstandar"></object> 
+
         </div>
         <br/>
+    </div>
+    <div id="misGeneros" class="tab-pane fade">
+
+            
+            <div class="panel panel-default">
+                        <div class="panel-heading">
+                                 <div style="float:right;  margin-top:20px;">
+                                  <a   class="btn btn-sm btn-default"  href="{{url('generos_barra')}}">Editar</a>
+                                  </div>
+                                 <h1>Generos que me gustan</h1>
+                        </div>
+                         <div class="panel-body">
+                                <ul>
+                                    {% for gusto in gustos %}
+                                        <li>{{gusto}}</li>
+                                    {% endfor %}
+                                </ul>
+                            
+                            <br/>
+                          </div>
+            </div>
     </div>
     <div id="vistas" class="tab-pane fade">
         <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API</div>
           
-              <div class="menu-pelicula-border-black">
+          {% set i = 0 %}
+                        {% for pelicula in vistas %}
+                        
+                        <div class="vistas-pendientes">
+                             <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" >
+                            {% if pelicula.poster_path == "" %}
+                                <img {%if i == ((vistas|length)-1) %}
+                                class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
+                                {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}"> 
+                                {% else %}
+                                <img {%if i == ((vistas|length)-1) %}
+                                class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
+                                {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}">  
+                            {% endif %}
+                            </a>
+                        </div>
+                        {% set i = i + 1 %}
+                        {% endfor %}
+          
+              <!--<div class="menu-pelicula-border-black">
                 <ul class="menu-pelicula-tab">
                     <li class="active"><a data-toggle="tab" href="#totalvistas">Total de peliculas vistas&nbsp;</a></li>
                     <li><a data-toggle="tab" href="#ultimomes">Vistas en el último mes&nbsp;</a></li>
                     <li><a data-toggle="tab" href="#generosvistos">Generos vistos&nbsp;</a></li>
                 </ul>
-            </div>
+              </div>-->
             
-            <div class="tab-content">
+            <!--<div class="tab-content">
                 <div id="totalvistas" class="tab-pane fade in active">
                     {% set i = 0 %}
                         {% for pelicula in vistas %}
@@ -184,7 +218,7 @@
                 </div>
                 <br/>
                 
-            </div>
+            </div>-->
           
     </div>
     <div id="pendientes" class="tab-pane fade">

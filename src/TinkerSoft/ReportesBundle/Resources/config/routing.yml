@@ -6,8 +6,18 @@ tinker_soft_reportes_vistas_usuarios_homepage:
     path:     /rvu
     defaults: { _controller: TinkerSoftReportesBundle:Reportes:generarReportePeliculasVistasUsuarios }
 
+tinker_soft_reportes_vistas_usuarios_genero_ultimo_mes_homepage:
+    path:     /rvugum
+    defaults: { _controller: TinkerSoftReportesBundle:Reportes:generarReportePeliculasVistasUsuariosGenerosUltimoMes }
+    
 tinker_soft_reportes_vistas_usuarios_genero_homepage:
     path:     /rvug
     defaults: { _controller: TinkerSoftReportesBundle:Reportes:generarReportePeliculasVistasUsuariosGeneros }
 
+tinker_soft_reportes_vistas_usuarios_ultimo_mes_homepage:
+    path:     /rvuum
+    defaults: { _controller: TinkerSoftReportesBundle:Reportes:generarReportePeliculasVistasUsuariosUltimoMes }
 
+tinker_soft_reportes_vistas_usuario_homepage:
+    path:     /rvu
+    defaults: { _controller: TinkerSoftReportesBundle:Reportes:generarReportePeliculasVistasUsuarios }

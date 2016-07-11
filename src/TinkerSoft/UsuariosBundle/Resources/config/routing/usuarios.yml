@@ -7,15 +7,33 @@ usuarios_show:
     path:     /{id}/show
     defaults: { _controller: "TinkerSoftUsuariosBundle:Usuarios:show" }
     methods:  GET
+    
+usuarios_show_estandar:
+    path:     /{id}/showEstandar
+    defaults: { _controller: "TinkerSoftUsuariosBundle:Usuarios:showEstandar" }
+    methods:  GET
 
+#creacion de usuarios por parte de un administrador
 usuarios_new:
     path:     /new
     defaults: { _controller: "TinkerSoftUsuariosBundle:Usuarios:new" }
     methods:  [GET, POST]
 
+
+#registro de usuarios estandard
+usuarios_registro:
+    path:     /registro
+    defaults: { _controller: "TinkerSoftUsuariosBundle:Usuarios:registro" }
+    methods:  [GET, POST]
+
 usuarios_edit:
     path:     /{id}/edit
     defaults: { _controller: "TinkerSoftUsuariosBundle:Usuarios:edit" }
+    methods:  [GET, POST]
+    
+usuarios_edit_estandar:
+    path:     /{id}/editEstandar
+    defaults: { _controller: "TinkerSoftUsuariosBundle:Usuarios:editEstandar" }
     methods:  [GET, POST]
 
 usuarios_delete:
