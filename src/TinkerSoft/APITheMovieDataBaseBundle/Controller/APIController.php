@@ -200,7 +200,7 @@ class APIController extends Controller
         if($numero_pagina > $contentJSON['total_pages']){
             
                     $numero_pagina = $contentJSON['total_pages'];
-                    $urlAPI = "https://api.themoviedb.org/3/discover/movie?with_genres=" . $generos . "page=" . $numero_pagina . "&&api_key=be961f58626a1b5bb01ccf04da21d18f";
+                    $urlAPI = "https://api.themoviedb.org/3/discover/movie?with_genres=" . $generos . "&page=" . $numero_pagina . "&&api_key=be961f58626a1b5bb01ccf04da21d18f";
                     $content = file_get_contents($urlAPI);
                     $contentJSON = (array) json_decode($content);
                     
@@ -209,6 +209,42 @@ class APIController extends Controller
         
     }
     
+    
+    public function obtenerPeliculasActorAction($id_actor,$numero_pagina){
+        
+        $id_actor = str_replace(" ", "-", $id_actor);
+        
+        if(is_numeric($numero_pagina)){
+            
+            if($numero_pagina <= 0){
+                    $numero_pagina = 1;
+              }
+            
+            if($numero_pagina > 1000){
+                    $numero_pagina = 1000;
+              }
+            
+        }else{
+            
+            $numero_pagina = 1;
+                
+        }
+        
+        $urlAPI = "https://api.themoviedb.org/3/discover/movie?with_people=" . $id_actor . "&page=" . $numero_pagina . "&api_key=be961f58626a1b5bb01ccf04da21d18f";
+        $content = file_get_contents($urlAPI);
+        $contentJSON = (array) json_decode($content);
+        
+        if($numero_pagina > $contentJSON['total_pages']){
+            
+                    $numero_pagina = $contentJSON['total_pages'];
+                    $urlAPI = "https://api.themoviedb.org/3/discover/movie?with_people=" . $id_actor . "&page=" . $numero_pagina . "&api_key=be961f58626a1b5bb01ccf04da21d18f";
+                    $content = file_get_contents($urlAPI);
+                    $contentJSON = (array) json_decode($content);
+                    
+              }
+        return $contentJSON;
+        
+    }
     
     
     private function codigosLenguaje($codigo){

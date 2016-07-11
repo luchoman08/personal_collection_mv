@@ -1,21 +1,32 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseSinFondo.html.twig' %}
+
 
 {% block body %}
-    <h1>Usuarios edit</h1>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                                 <div style="float:right;  margin-top:20px;">
+                                  <a   class="btn btn-sm btn-default"  href="{{ path('usuarios_index') }}">Atras</a>
+                                  </div>
+                                 <h1>Editar usuario</h1>
+
+                        </div>
+                        <div class="panel-body">
+
+
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <br>
+        <center>
+        <input type="submit" class="btn btn-primary" value="Guardar" />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('usuarios_index') }}">Back to the list</a>
-        </li>
-        <li>
+
+   
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+ 
+    </center>
+    
+    </div>
+    </div>
 {% endblock %}

@@ -100,10 +100,10 @@
                                     <li class="listas dropdown" id ="listas"> <div class="glyphicon glyphicon-plus"></div> 
                                         <a id="listas" href="#" data-toggle="dropdown" class="dropdown-toggle">Listas&nbsp;<b class="caret"></b></a>&nbsp;
                                             <ul id = "ulListaColecciones" class="dropdown-menu">
-                                                 <li><a id="crearListas" href="#lista"><span class="glyphicon glyphicon-plus"></span>&nbsp;Crear</a> </li>
+                                                 <li > <a id="crearListas" href="#lista"><span class="glyphicon glyphicon-plus"></span>&nbsp;Crear</a> </li>
                                                  <li class="divider"></li>
                                                 {%for lista in params.listaColecciones%}
-                                                <li><a idColeccion="{{lista.id}}" class="a_lista" id="crearListas" >{{lista.nombre}}</a> </li>
+                                                <li id ="li_coleccion"><a idColeccion="{{lista.id}}" class="a_lista" id="crearListas" >{{lista.nombre}}</a> </li>
                                                 {%endfor%}
                                             
                                             </ul>
@@ -400,11 +400,64 @@
                     //if received a response from the server
                     success: function( data, textStatus, jqXHR) {
                          if(data.success){
+    
+                               
+                           // var respuesta = jQuery.parseJSON(  );
+                           
+                        
+                           }
+                         
+                         //display error message
+                         else {
+                             $("#mensajeEmergente").html("Error ¬_¬");
+                             $("#mensajeEmergente").html(jQuery.parseJSON(jqXHR.responseText).mensaje);   
+                            $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
+                            $('#divEmergente').show(1000).delay(3000);
+                            $('#divEmergente').hide(1000);
+                            $('#ulListaColecciones').append('<li><a idColeccion="'+ jQuery.parseJSON(jqXHR.responseText).idColeccion +'"id="crearListas" class="a_lista">'+$('#nombreNuevaColeccion').val()+'</a> </li>');
+                            $("#popup_nueva_coleccion_personalizada").attr("style","visibility: invisible; opacity: 0;");
+                            $(".a_lista").on("click", (function(){
+              $.ajax({
+                    type: "GET",
+                    url: "{{url('adicionar_pelicula_lista_personalizada')}}",
+                    data: { idColeccion:$(this).attr("idColeccion"), idPelicula:{{params.id}}},
+                    dataType: "json",
+                   
+                    //if received a response from the server
+                    success: function( data, textStatus, jqXHR) {
+                         if(data.success){
                              $("#mensajeEmergente").html("");
                          } 
                          //display error message
                          else {
                              $("#mensajeEmergente").html("Error ¬_¬");
+                         }
+                    },
+                   
+                    //If there was no resonse from the server
+                    error: function(jqXHR, textStatus, errorThrown){
+                        
+                           if(jqXHR.status == 405)
+                           {
+                            $("#mensajeEmergente").html(jqXHR.responseText);
+                            $('#divEmergente').attr("class","alert alert-danger alert-dismissible" );
+                            $('#divEmergente').show(1000).delay(3000);
+                            $('#divEmergente').hide(1000);
+                           }
+                           if(jqXHR.status == 200)
+                           {
+                            $("#mensajeEmergente").html(jqXHR.responseText);   
+                            $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
+                            $('#divEmergente').show(1000).delay(3000);
+                            $('#divEmergente').hide(1000);
+                     
+                           }  
+                    },
+                   
+    
+         
+                });   
+           }));
                          }
                     },
                    
@@ -422,18 +475,7 @@
                             $('#divEmergenteCrearListas').show(1000).delay(3000);
                             $('#divEmergenteCrearListas').hide(1000);
                            }
-                             if(jqXHR.status == 200)
-                           {
-                               
-                           // var respuesta = jQuery.parseJSON(  );
-                            alert("que mira prro >:v");
-                            $("#mensajeEmergente").html(jQuery.parseJSON(jqXHR.responseText).mensaje);   
-                            $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
-                            $('#divEmergente').show(1000).delay(3000);
-                            $('#divEmergente').hide(1000);    
-                            $('#ulListaColecciones').append('<li><a idColeccion="'+ jQuery.parseJSON(jqXHR.responseText).idColeccion +'"id="crearListas" href="#lista">'+$('#nombreNuevaColeccion').val()+'</a> </li>');
-                            $("#popup_nueva_coleccion_personalizada").attr("style","visibility: invisible; opacity: 0;");
-                           }
+                         
                         
                      
                            
@@ -511,13 +553,19 @@
                         if(porVer == 1){
                         vista = 0;
                         estiloBotonVistas(vista);
-                        }
                         estiloBotonPorVer(porVer);
                         $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
                         $("#mensajeEmergente").html(jqXHR.responseText);
                         $('#divEmergente').show(1000).delay( 3000 );
                         $('#divEmergente').hide(1000);
-                           
+                        }
+                        else{
+                        $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
+                        $("#mensajeEmergente").html(jqXHR.responseText);
+                        $('#divEmergente').show(1000).delay( 3000 );
+                        $('#divEmergente').hide(1000);
+                        }
+                         estiloBotonPorVer(porVer);
                     },
                    
     
@@ -548,12 +596,19 @@
                         if(vista ==1){
                             porVer=0;
                             estiloBotonPorVer(porVer);
-                        }
-                           estiloBotonVistas(vista);
-                           $("#mensajeEmergente").html(jqXHR.responseText);
+                             $("#mensajeEmergente").html(jqXHR.responseText);
                            $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
                            $('#divEmergente').show(1000).delay( 3000 );
                            $('#divEmergente').hide(1000);
+                        }
+                        else{
+                             $("#mensajeEmergente").html(jqXHR.responseText);
+                           $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
+                           $('#divEmergente').show(1000).delay( 3000 );
+                           $('#divEmergente').hide(1000);
+                        }
+                           estiloBotonVistas(vista);
+                          
                            
                     },
                    
@@ -614,7 +669,8 @@
                     $("#calificacionPersonal").val(data.rating);
     
                 });
-                 $(".a_lista").click(function(){
+                
+                 $(".a_lista").on("click", (function(){
               $.ajax({
                     type: "GET",
                     url: "{{url('adicionar_pelicula_lista_personalizada')}}",
@@ -655,7 +711,7 @@
     
          
                 });   
-           });
+           }));
             
     	        $("#calificacionPersonal").click(function(){
     		    calificacion_semaphore=1;

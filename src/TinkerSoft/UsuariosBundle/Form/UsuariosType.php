@@ -5,7 +5,12 @@ namespace TinkerSoft\UsuariosBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class UsuariosType extends AbstractType
 {
     /**
@@ -15,13 +20,13 @@ class UsuariosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombres')
-            ->add('apellidos')
-            ->add('nickname')
-            ->add('correoElectronico')
-            ->add('password')
-            ->add('rol')
-            ->add('estado')
+            ->add('nombres', TextType::class, array('label' => 'Nombres', 'attr' =>array('class'=> 'form-control') ))
+            ->add('apellidos', TextType::class, array('label' => 'Apellidos', 'attr' =>array('class'=> 'form-control') ))
+            ->add('nickname', TextType::class, array('label' => 'NickName', 'attr' =>array('class'=> 'form-control') ))
+            ->add('correoElectronico', EmailType::class, array('label' => 'Correo electronico', 'attr' =>array('class'=> 'form-control') ))
+            ->add('password', TextType::class, array('label' => 'Contraseña', 'attr' =>array('class'=> 'form-control', 'type'=>'password') ))
+            ->add('rol', ChoiceType::class, array('label' => 'Rol', 'choices'=> array('Estandar'=>"0", 'Auditor'=>"1", "Administrador"=>2)  ,'attr' =>array('class'=> 'form-control') ))
+            ->add('estado', CheckboxType::class, array('label' => 'Estado', 'required'=>false, 'attr' =>array('class'=> 'form-control') ))
         ;
     }
     

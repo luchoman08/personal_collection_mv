@@ -11,6 +11,7 @@
     
     {% endif %}
 {% endblock %}
+{% block classcontenido %}col-md-12 fondoContenido{% endblock %}
 {% block contenido %}
     
      <div class="resultados-header">N&uacute;mero de resultados para <b>"{{ consulta }}"</b>: {{params.total_results}}  Pagina:{{ params.page }} de {{ params.total_pages }} </div> <br>
@@ -84,6 +85,8 @@
        
 
 {% endblock %}
+
+{% block barraderecha %} {% endblock %}
 
 {% set i = 0 %}
 

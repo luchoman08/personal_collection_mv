@@ -65,11 +65,11 @@ ALTER TABLE peliculas_coleccion ADD PRIMARY KEY (ID);
 -- Llaves foraneas
 ALTER TABLE registro_gustos ADD CONSTRAINT 
 registro_gustos_fk FOREIGN KEY (id_usuario)
-REFERENCES usuarios (ID);
+REFERENCES usuarios (ID) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE valoracion_peliculas ADD CONSTRAINT
 registro_calificacion_fk FOREIGN KEY (id_usuario)
-REFERENCES usuarios(ID);
+REFERENCES usuarios(ID) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE peliculas_coleccion ADD CONSTRAINT 
 peliculas_coleccion_fk FOREIGN KEY (id_coleccion)
@@ -77,7 +77,7 @@ REFERENCES coleccion (ID) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE coleccion ADD CONSTRAINT 
 coleccion_personalizada_fk FOREIGN KEY (id_usuario)
-REFERENCES usuarios (ID) ON UPDATE;
+REFERENCES usuarios (ID) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE valoracion_peliculas
 ADD CONSTRAINT valoracion_peliculas_unique UNIQUE (id_pelicula,id_usuario);

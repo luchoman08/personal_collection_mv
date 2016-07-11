@@ -36,7 +36,7 @@ class DefaultController extends Controller
         
         $backdrops=array($peliculaTendencia, $peliculaMejoresValoradas,$peliculaEstrenos,$peliculaProximamente);
         
-        $numPeliculasDivisibleTres= count($tendencia['results']) - (count($tendencia['results']) % 3);
+        $numPeliculasDivisibleTres= count($tendencia['results']) - (count($tendencia['results']) % 4);
         
         
         $usuarioLogueado=0;
@@ -190,6 +190,19 @@ class DefaultController extends Controller
            $em = $this->getDoctrine()->getManager();
            $usuario = $this->get('app.funciones_controler')->getusuario($request,$em,$request->getSession()->get('id'));
            $listaColecciones = array('listaColecciones'=>$this->get('app.funciones_controler')->getListasPersonalizadas($request, $em));
+           $listaPeliculasColeccion = array();
+           for($i=0; $i<sizeof($listaColecciones["listaColecciones"]); $i++){
+               
+               $peliculas=$this->get('app.funciones_controler')->listarPeliculasColeccion( $request, $em, $listaColecciones["listaColecciones"][$i]->getId());
+               $peliculasTMDB=array();
+               for($j=0; $j<sizeof($peliculas); $j++){
+                   $pelicula = $this->get('app.api_controller')->obtenerPeliculaRipeadaAction($request, $peliculas[$j]->getIdPelicula());
+                  array_push($peliculasTMDB, $pelicula);
+               }
+               
+               array_push($listaPeliculasColeccion, array('nombreColeccion'=> $listaColecciones["listaColecciones"][$i]->getNombre(),'idColeccion'=>  $listaColecciones["listaColecciones"][$i]->getId(), 'peliculas'=>$peliculasTMDB));  
+               
+           }
            $gustos = $em->getRepository('FuncionesSitioBundle:RegistroGustos')->findBy(array('idUsuario'=>$request->getSession()->get('id')));
            
            $generos = $this->get('app.api_controller')->listaGenerosAction("en");
@@ -228,11 +241,34 @@ class DefaultController extends Controller
             
             for ($i = 0; $i < count($vistas); $i++){
                 $movie = $this->get('app.api_controller')->obtenerPeliculaRipeadaAction($request, $vistas[$i]->getIdPelicula());
+                
+                $tamano_overview =  strlen($movie["overview"]);
+                   
+                   if($tamano_overview > 285){
+                       $nueva_overview = "";
+                       for($j = 0 ; $j < 285 ; $j++ ){
+                           $nueva_overview = $nueva_overview . $movie["overview"][$j];
+                       }
+                       $movie["overview"] = $nueva_overview . "...";
+                   }
+                $fecha_Adicion = array('fecha_adicion' => $vistas[$i]->getFechaAdicion());
+                array_push($movie , $fecha_Adicion);  
                 array_push($peliculasVistas,$movie);
             }
             
             for ($i = 0; $i < count($pendientes); $i++){
                 $movie = $this->get('app.api_controller')->obtenerPeliculaRipeadaAction($request, $pendientes[$i]->getIdPelicula());
+                $tamano_overview =  strlen($movie["overview"]);
+                   
+                   if($tamano_overview > 285){
+                       $nueva_overview = "";
+                       for($j = 0 ; $j < 285 ; $j++ ){
+                           $nueva_overview = $nueva_overview . $movie["overview"][$j];
+                       }
+                       $movie["overview"] = $nueva_overview . "...";
+                   }
+                $fecha_Adicion = array('fecha_adicion' => $pendientes[$i]->getFechaAdicion());
+                array_push($movie , $fecha_Adicion);  
                 array_push($peliculasPendientes,$movie);
             }
             
@@ -276,8 +312,7 @@ class DefaultController extends Controller
                 }
             }
           
-            
-           return $this->render('VistaBundle:Default:panelUsuario.html.twig',array('usuarioLogueado'=>$usuarioLogueado,'nickname' => $nickname, 'usuario' => $usuario, 'listacolecciones' => $listaColecciones, 'gustos' => $gustosNombres, 'descubiertas' => $peliculasDescubiertas, 'generos' => $argumentoGeneros, 'vistas' => $peliculasVistas, 'pendientes' => $peliculasPendientes, 'calificadas' => $peliculasCalificadas, 'ultimomes' => $peliculasVistasUltimoMes, 'generosvistos' => $generosVistos));
+           return $this->render('VistaBundle:Default:panelUsuario.html.twig',array('usuarioLogueado'=>$usuarioLogueado,'nickname' => $nickname, 'usuario' => $usuario, 'listacolecciones' => $listaColecciones, 'peliculas_coleccion'=>$listaPeliculasColeccion ,'gustos' => $gustosNombres, 'descubiertas' => $peliculasDescubiertas, 'generos' => $argumentoGeneros, 'vistas' => $peliculasVistas, 'pendientes' => $peliculasPendientes, 'calificadas' => $peliculasCalificadas, 'ultimomes' => $peliculasVistasUltimoMes, 'generosvistos' => $generosVistos));
         }else{
             return $this->render('VistaBundle:Default:login.html.twig', array('error'=>2));
         }
@@ -314,6 +349,46 @@ class DefaultController extends Controller
            
            
             return $this->render('VistaBundle:Default:auditor.html.twig',array('usuarioLogueado'=>$usuarioLogueado,'nickname' => $nickname, 'usuario' => $usuario, 'peliculasvistas' => $peliculasVistas, 'peliculasultimomes' => $peliculasVistasUltimoMes ));
+        }else{
+            return $this->render('VistaBundle:Default:login.html.twig', array('error'=>2));
+        }
+    }
+    
+    public function panelAdministradorAction(Request $request){
+        
+        $usuarioLogueado=0;
+        $nickname = "";
+        if($request->getSession()->get('id')){
+           $usuarioLogueado=1;
+           $nickname = $request->getSession()->get('nickname');   
+           if (!($request->getSession()->get('rol') == 2) ){
+               return $this->render('VistaBundle:Default:login.html.twig', array('error'=>3));
+           }
+           $em = $this->getDoctrine()->getManager();
+           $usuario = $this->get('app.funciones_controler')->getusuario($request,$em,$request->getSession()->get('id'));
+           
+           $peliculasVistas = $this->get('app.funciones_controler')->getPeliculasVistasAuditor($em);
+           
+            /* Vistas último mes */
+            $peliculasVistasUltimoMes = array();
+            for($i = 0; $i < count($peliculasVistas); $i++){
+                
+                $diff = time() - strtotime($peliculasVistas[$i]['fechaAdicionPelicula']->format("Y-m-d")) ; 
+               
+                if  ($diff/(60) < 43200){
+                    
+                    array_push($peliculasVistasUltimoMes,$peliculasVistas[$i]);
+                    
+                } 
+            }
+       
+        $em = $this->getDoctrine()->getManager();
+
+        $usuarios = $em->getRepository('TinkerSoftUsuariosBundle:Usuarios')->findAll();
+
+           
+           
+            return $this->render('VistaBundle:Default:administrador.html.twig',array('usuarioLogueado'=>$usuarioLogueado,'nickname' => $nickname, 'usuario' => $usuario, 'peliculasvistas' => $peliculasVistas, 'peliculasultimomes' => $peliculasVistasUltimoMes, 'usuarios' => $usuarios));
         }else{
             return $this->render('VistaBundle:Default:login.html.twig', array('error'=>2));
         }

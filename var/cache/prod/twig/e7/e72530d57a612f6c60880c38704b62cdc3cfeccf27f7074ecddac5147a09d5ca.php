@@ -8,17 +8,15 @@ class __TwigTemplate_416df7c4e1083052b7ac774137a5ab6f8e068b97bf2efd1dc9f605b0fab
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("index.html.twig", ":usuarios:new.html.twig", 1);
+        $this->parent = $this->loadTemplate("baseSinFondo.html.twig", ":usuarios:new.html.twig", 1);
         $this->blocks = array(
-            'classcontenido' => array($this, 'block_classcontenido'),
-            'contenido' => array($this, 'block_contenido'),
-            'barraderecha' => array($this, 'block_barraderecha'),
+            'body' => array($this, 'block_body'),
         );
     }
 
     protected function doGetParent(array $context)
     {
-        return "index.html.twig";
+        return "baseSinFondo.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
@@ -26,47 +24,42 @@ class __TwigTemplate_416df7c4e1083052b7ac774137a5ab6f8e068b97bf2efd1dc9f605b0fab
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
-    // line 2
-    public function block_classcontenido($context, array $blocks = array())
-    {
-        echo "col-md-12 fondoContenido";
-    }
-
     // line 3
-    public function block_contenido($context, array $blocks = array())
+    public function block_body($context, array $blocks = array())
     {
         // line 4
-        echo "    <h1>Usuarios creation (UI bajo construcción xdd)</h1>
+        echo "
+
+                       <div class=\"panel panel-default\">
+                        <div class=\"panel-heading\">
+                                 <div style=\"float:right;  margin-top:20px;\">
+                                  <input   type=\"submit\" value=\"Atras\" class=\"btn btn-sm btn-default\"  onclick=\"window.history.back();\">
+                                  </div>
+                                 <h1>Registro de nuevos usuarios</h1>
+
+                        </div>
+                        <div class=\"panel-body\">
 
     ";
-        // line 6
+        // line 16
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : null), 'form_start');
         echo "
         ";
-        // line 7
+        // line 17
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : null), 'widget');
         echo "
-        <input type=\"submit\" value=\"Create\" />
+        <br>
+        <center>
+        <input type=\"submit\" value=\"Crear\" class=\"btn btn-primary btn-sm\" />
+        </center>
     ";
-        // line 9
+        // line 22
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : null), 'form_end');
         echo "
 
-    <ul>
-        <li>
-            <a href=\"";
-        // line 13
-        echo $this->env->getExtension('routing')->getPath("usuarios_index");
-        echo "\">Back to the list</a>
-        </li>
-    </ul>
-    ";
-        // line 16
-        $this->displayBlock('barraderecha', $context, $blocks);
-    }
-
-    public function block_barraderecha($context, array $blocks = array())
-    {
+</div>
+</div>
+";
     }
 
     public function getTemplateName()
@@ -81,24 +74,33 @@ class __TwigTemplate_416df7c4e1083052b7ac774137a5ab6f8e068b97bf2efd1dc9f605b0fab
 
     public function getDebugInfo()
     {
-        return array (  65 => 16,  59 => 13,  52 => 9,  47 => 7,  43 => 6,  39 => 4,  36 => 3,  30 => 2,  11 => 1,);
+        return array (  57 => 22,  49 => 17,  45 => 16,  31 => 4,  28 => 3,  11 => 1,);
     }
 }
-/* {% extends 'index.html.twig' %}*/
-/* {% block classcontenido %}col-md-12 fondoContenido{% endblock %}*/
-/* {% block contenido %}*/
-/*     <h1>Usuarios creation (UI bajo construcción xdd)</h1>*/
+/* {% extends 'baseSinFondo.html.twig' %}*/
+/* */
+/* {% block body %}*/
+/* */
+/* */
+/*                        <div class="panel panel-default">*/
+/*                         <div class="panel-heading">*/
+/*                                  <div style="float:right;  margin-top:20px;">*/
+/*                                   <input   type="submit" value="Atras" class="btn btn-sm btn-default"  onclick="window.history.back();">*/
+/*                                   </div>*/
+/*                                  <h1>Registro de nuevos usuarios</h1>*/
+/* */
+/*                         </div>*/
+/*                         <div class="panel-body">*/
 /* */
 /*     {{ form_start(form) }}*/
 /*         {{ form_widget(form) }}*/
-/*         <input type="submit" value="Create" />*/
+/*         <br>*/
+/*         <center>*/
+/*         <input type="submit" value="Crear" class="btn btn-primary btn-sm" />*/
+/*         </center>*/
 /*     {{ form_end(form) }}*/
 /* */
-/*     <ul>*/
-/*         <li>*/
-/*             <a href="{{ path('usuarios_index') }}">Back to the list</a>*/
-/*         </li>*/
-/*     </ul>*/
-/*     {% block barraderecha %}{%endblock%}*/
+/* </div>*/
+/* </div>*/
 /* {% endblock %}*/
 /* */

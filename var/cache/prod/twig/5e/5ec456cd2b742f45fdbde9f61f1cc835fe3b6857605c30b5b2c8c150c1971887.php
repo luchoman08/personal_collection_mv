@@ -149,16 +149,16 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
     // line 19
     public function block_login($context, array $blocks = array())
     {
-        echo "<div class=\"usuario-login-index\" > ";
+        echo "<div class=\"usuario-login-index\">";
         $this->displayBlock('loginoptions', $context, $blocks);
-        echo " </div>";
+        echo "</div>";
     }
 
     public function block_loginoptions($context, array $blocks = array())
     {
-        echo " <a href=\"";
+        echo "<a href=\"";
         echo $this->env->getExtension('routing')->getUrl("login");
-        echo "\">Ingresar</a> ";
+        echo "\">Ingresar</a>";
     }
 
     // line 22
@@ -499,7 +499,7 @@ window.location.href =url;
 /* */
 /*     <div id ="cabezera" class="cabezera"> */
 /*     */
-/*         {%block login%}<div class="usuario-login-index" > {% block loginoptions %} <a href="{{url('login')}}">Ingresar</a> {% endblock %} </div>{%endblock%}*/
+/*         {%block login%}<div class="usuario-login-index">{% block loginoptions %}<a href="{{url('login')}}">Ingresar</a>{% endblock %}</div>{%endblock%}*/
 /*     */
 /*         <div id="watermark" class="watermark">*/
 /*            {%block moviename%}{% endblock %}*/

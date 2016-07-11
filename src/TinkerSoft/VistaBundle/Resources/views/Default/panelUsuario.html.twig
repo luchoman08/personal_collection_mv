@@ -25,17 +25,47 @@
         <li><a data-toggle="tab" href="#perfil">Mi perfil</a></li>
     </ul>
 </div>
-
+  <div id="divEmergente" style="display:none" class="alert alert-success alert-dismissible" role="alert">
+                   <p id="mensajeEmergente"></p>
+               </div>
 <div class="tab-content">
     <div id="listas" class="tab-pane fade">
-
+    
         <div class="listasPersonalizadas">
-            <h3> Listas personalizadas </h3> {% for coleccion in listacolecciones.listaColecciones %}
-            <div class="elementoLista">{{coleccion.nombre}}</div>
+            <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API</div>
+            <h3> Listas personalizadas </h3> 
+             
+                {% for coleccion in peliculas_coleccion %}
+                <br>
+                <div id="divPrimario{{coleccion.idColeccion}}"idLista="{{coleccion.idColeccion}}" class="panel panel-primary" >
+                
+                
+                    <div id="div{{coleccion.idColeccion}}" class="panel-heading">
+                        
+                             <strong> <input class="tituloPanelColeccionReadOnly"  value =  "{{coleccion.nombreColeccion}}" size="25" type="text"  id="tituloPanelColeccion{{coleccion.idColeccion}}" readOnly></strong>
+                        
+                   <div style="float: right; ">
+                        <a  idLista="{{coleccion.idColeccion}}" style="display:none;" class="btn btn-success btn-xs {{coleccion.idColeccion}}_botonTerminarEdicion botonTerminarEdicion">Guardar</a>
+                        <a  idLista="{{coleccion.idColeccion}}" class="btn btn-success btn-xs {{coleccion.idColeccion}}_botonEditarColeccion">Editar</a>
+                        <a  idLista="{{coleccion.idColeccion}}" class="btn btn-danger btn-xs {{coleccion.idColeccion}}_botonEliminarColeccion botonEliminarColeccion">Eliminar</a>
+                    </div>
+                    
+            </div>
+                <div class="panel-body">
+                
+                    {%for pelicula in coleccion.peliculas%}
+                    
+                        <div class="miniaturas"  id="divPeliculaColeccion_{{coleccion.idColeccion}}_{{pelicula.id}}" style="background-image: url(https://image.tmdb.org/t/p/w185{{pelicula.poster_path}});" onclick="window.open('{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}','_blank');" > 
+                            <a idColeccion="{{coleccion.idColeccion}}" idPelicula="{{pelicula.id}}" id="pelicula_{{pelicula.id}}" style="display:none;"  class="glyphicon glyphicon-remove-circle borrar_de_lista {{coleccion.idColeccion}}_selector" aria-hidden="true" href="#P" ></a> 
+                        </div>
+                    
+                    {%endfor%}
+                    </div>
+                </div>
             {% endfor %}
         </div>
-        <br/>
-    </div>
+        </div> 
+        
     <div id="descubrir" class="tab-pane fade in active">
         {% for gusto in gustos%}
         <div class="gustos"> {{gusto}}</div>
@@ -51,11 +81,11 @@
         {%set i=0%} 
         {% for pelicula in descubiertas.results %}
 
-        <div class="resultado" onclick="location.href='{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}'">
-            <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}">
+        <div class="resultado" onclick="window.open('{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}','_blank');">
+            <a>
             {% if pelicula.poster_path == "" %}
                 
-                <img src="{{asset('assets/images/movie.png')}}" alt="...">
+                <img class="img-pendientes"; src="{{asset('assets/images/movie.png')}}" alt="...">
                            
                 {% else %}
                         
@@ -79,7 +109,17 @@
         <br/>
     </div>
     <div id="perfil" class="tab-pane fade">
-        Perfil
+        <div class="datos">
+            <strong>Nombre:</strong> {{usuario.nombres}} {{usuario.apellidos}}<br/>
+            <strong>Nickname:</strong> {{usuario.nickname}}<br/>
+            <strong>E-Mail:</strong> {{usuario.correoElectronico}}</br>
+            <strong>Géneros que me gustan:</strong></br>
+            <ul>
+                {% for gusto in gustos %}
+                    <li>{{gusto}}</li>
+                {% endfor %}
+            </ul>
+        </div>
         <br/>
     </div>
     <div id="vistas" class="tab-pane fade">
@@ -97,16 +137,17 @@
                 <div id="totalvistas" class="tab-pane fade in active">
                     {% set i = 0 %}
                         {% for pelicula in vistas %}
+                        
                         <div class="vistas-pendientes">
                              <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" >
                             {% if pelicula.poster_path == "" %}
                                 <img {%if i == ((vistas|length)-1) %}
-                                class="espacio-bot";
-                                {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="..."> 
+                                class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
+                                {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}"> 
                                 {% else %}
                                 <img {%if i == ((vistas|length)-1) %}
-                                class="espacio-bot";
-                                {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="...">  
+                                class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
+                                {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}">  
                             {% endif %}
                             </a>
                         </div>
@@ -120,12 +161,12 @@
                              <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" >
                             {% if pelicula.poster_path == "" %}
                                 <img {%if i == ((ultimomes|length)-1) %}
-                                class="espacio-bot";
-                                {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="..."> 
+                                class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
+                                {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}"> 
                                 {% else %}
                                 <img {%if i == ((ultimomes|length)-1) %}
-                                class="espacio-bot";
-                                {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="...">  
+                                class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
+                                {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}">  
                             {% endif %}
                             </a>
                         </div>
@@ -155,11 +196,11 @@
                  <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" >
                 {% if pelicula.poster_path == "" %}
                 <img {%if i == ((pendientes|length)-1) %}
-                    class="espacio-bot";
-                    {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="..."> {% else %}
+                    class="espacio-bot img-pendientes"; {%else%} class="img-pendientes";
+                    {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}"> {% else %}
                 <img {%if i == ((pendientes|length)-1) %}
-                    class="espacio-bot";
-                    {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="...">   {% endif %}
+                    class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
+                    {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}">   {% endif %}
                     </a>
             </div>
             {% set i = i + 1 %}
@@ -176,17 +217,19 @@
                  <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" >
                 {% if pelicula.poster_path == "" %}
                 <img {%if i == ((calificadas|length)-1) %}
-                    class="espacio-bot";
-                    {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="..."> {% else %}
+                    class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
+                    {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}"> {% else %}
                 <img {%if i == ((calificadas|length)-1) %}
-                    class="espacio-bot";
-                    {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="...">   {% endif %}
+                    class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
+                    {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}">   {% endif %}
                     </a>
             </div>
             {% set i = i + 1 %}
             {% endfor %}
         
     </div>
+    
+   
     
 </div>
 {% endblock %}
@@ -199,6 +242,18 @@
             <label>{{ usuario.nombres }} {{ usuario.apellidos }}</label>
             
         </div>
+        
+        
+    </div>
+    
+    <div class="col-md-3 columna-index-boostrap" style="display:none;">
+            <div id="bloqueDetalle" class="columna-index columna-index-top" >
+            <img id="img-detalles" src=""  height="278" width="185" alt="..."><br/>
+            <label id="titulo-detalles" class="titulo-detalles">  ... </label><br/>
+            <label id="fecha-detalles" class="fecha-detalles">  ... </label><br/>
+            <label id="synopsis-detalles" class="synopsis-detalles">  ... </label>
+            
+        </div>
     </div>
 
 {% endblock %}
@@ -206,7 +261,169 @@
 {%block javascripts%}
  {{ parent() }}
 <script>
+        
+        
+        $(".img-pendientes").hover(function(){
+            var imagen= $(this).attr("src");
+            var titulo= $(this).attr("alt");
+            var synopsis= $(this).attr("synopsis");
+            var fecha= $(this).attr("fechaAdicion");
+            $("#img-detalles").attr("src", imagen);
+            $("#img-detalles").attr("alt", titulo);
+            $("#titulo-detalles").html("<strong>"+titulo+"</strong>");
+            $("#synopsis-detalles").html(synopsis);
+            $("#fecha-detalles").html("Adicionada: " + fecha);
+            $(".col-md-3").attr("style","display:inline;");
+        });
+        
+        $(document).scroll(function() {
+          var y = $(this).scrollTop();
+          if (y > 380) {
+            $('#bloqueDetalle').attr("class","columna-index columna-index-top bajar");
+          }else{
+            $('#bloqueDetalle').attr("class","columna-index columna-index-top");
+          }
+        });
+
+         $(".botonTerminarEdicion").click(function(){
+             
+                    var idLista = $(this).attr("idlista");
+                    $.ajax({
+                    type: "GET",
+                    url: "{{url('cambiar_nombre_coleccion')}}",
+                    data: { idColeccion:idLista, nuevoNombre:$("#tituloPanelColeccion"+idLista).val()},
+                    dataType: "json",
+                   
+                    //if received a response from the server
+                    success: function( data, textStatus, jqXHR) {
+                         if(data.success){
+                             $("#mensajeEmergente").html("");
+                         } 
+                         //display error message
+                         else {
+                             $("#mensajeEmergente").html("Error ¬_¬");
+                         }
+                    },
+                   
+                    //If there was no resonse from the server
+                    error: function(jqXHR, textStatus, errorThrown){
+                        
+                           if(jqXHR.status == 405)
+                           {
+                            $("#mensajeEmergente").html(jqXHR.responseText);
+                            $('#divEmergente').attr("class","alert alert-danger alert-dismissible" );
+                            $('#divEmergente').show(1000).delay(3000);
+                            $('#divEmergente').hide(1000);
+                           }
+                           if(jqXHR.status == 200)
+                           {
+
+                            $(divEliminar).hide(1000);
+                            
+                            
+                           }  
+                    },
+                   
+    
+         
+                }); 
+        
+    });
+         $(".botonEliminarColeccion").click(function(){
+             
+                    var idLista = $(this).attr("idlista");
+                    var divEliminar="#divPrimario"+idLista;
+                    $.ajax({
+                    type: "GET",
+                    url: "{{url('eliminar_coleccion_personalizada')}}",
+                    data: { idColeccion:idLista},
+                    dataType: "json",
+                   
+                    //if received a response from the server
+                    success: function( data, textStatus, jqXHR) {
+                         if(data.success){
+                             $("#mensajeEmergente").html("");
+                         } 
+                         //display error message
+                         else {
+                             $("#mensajeEmergente").html("Error ¬_¬");
+                         }
+                    },
+                   
+                    //If there was no resonse from the server
+                    error: function(jqXHR, textStatus, errorThrown){
+                        
+                           if(jqXHR.status == 405)
+                           {
+                            $("#mensajeEmergente").html(jqXHR.responseText);
+                            $('#divEmergente').attr("class","alert alert-danger alert-dismissible" );
+                            $('#divEmergente').show(1000).delay(3000);
+                            $('#divEmergente').hide(1000);
+                           }
+                           if(jqXHR.status == 200)
+                           {
+
+                            $(divEliminar).hide(1000);
+                            
+                            
+                           }  
+                    },
+                   
+    
+         
+                }); 
+        
+    });
+
+         $(".borrar_de_lista").click(function(){
+             
+             var nombre= "#divPeliculaColeccion_"+$(this).attr("idcoleccion")+"_"+$(this).attr("idpelicula");
+             var divImagenEliminar = $(this).parent();
+             divImagenEliminar.attr("onclick","");
+                    $.ajax({
+                    type: "GET",
+                    url: "{{url('eliminar_pelicula_lista_personalizada')}}",
+                    data: { idColeccion:$(this).attr("idcoleccion"), idPelicula:$(this).attr("idpelicula")},
+                    dataType: "json",
+                   
+                    //if received a response from the server
+                    success: function( data, textStatus, jqXHR) {
+                         if(data.success){
+                             $("#mensajeEmergente").html("");
+                         } 
+                         //display error message
+                         else {
+                             $("#mensajeEmergente").html("Error ¬_¬");
+                         }
+                    },
+                   
+                    //If there was no resonse from the server
+                    error: function(jqXHR, textStatus, errorThrown){
+                        
+                           if(jqXHR.status == 405)
+                           {
+                            $("#mensajeEmergente").html(jqXHR.responseText);
+                            $('#divEmergente').attr("class","alert alert-danger alert-dismissible" );
+                            $('#divEmergente').show(1000).delay(3000);
+                            $('#divEmergente').hide(1000);
+                           }
+                           if(jqXHR.status == 200)
+                           {
+
+                            divImagenEliminar.hide(1000);
+                            
+                            
+                           }  
+                    },
+                   
+    
+         
+                }); 
+        
+    });
+
      $(function() {
+         {%set i = i + 0%}
         {% for pelicula in descubiertas.results%}
             var rating = {{pelicula.vote_average}};
             $(".counter").text(rating);
@@ -220,8 +437,32 @@
             }).on("rateyo.change", function(e, data) {
                 $("#c{{i}}").val(data.rating);
             });
+            
                 {%set i = i + 1%}
         {%endfor%}
      });
+     
+
+     {% for coleccion in peliculas_coleccion %}
+     $(".{{coleccion.idColeccion}}_botonEditarColeccion").click(function(){
+               $(".{{coleccion.idColeccion}}_botonEliminarColeccion").attr("style","display:inline;"); 
+               $(".{{coleccion.idColeccion}}_botonEditarColeccion").attr("style","display:none;");
+               $(".{{coleccion.idColeccion}}_botonTerminarEdicion").attr("style","display:inline;");
+               $(".{{coleccion.idColeccion}}_selector").attr("style","display:inline;");
+               $("#tituloPanelColeccion"+$(this).attr("idlista")).prop("readonly", false);
+               $("#tituloPanelColeccion"+$(this).attr("idlista")).attr("class", "tituloPanelColeccionReadable");
+            });
+    $(".{{coleccion.idColeccion}}_botonTerminarEdicion").click(function(){
+               $(".{{coleccion.idColeccion}}_botonEliminarColeccion").attr("style","display:inline;"); 
+               $(".{{coleccion.idColeccion}}_botonEditarColeccion").attr("style","display:inline;");
+               $(".{{coleccion.idColeccion}}_botonTerminarEdicion").attr("style","display:none;");
+               $(".{{coleccion.idColeccion}}_selector").attr("style","display:none;");
+               $("#tituloPanelColeccion"+$(this).attr("idlista")).prop("readonly", true);
+               $("#tituloPanelColeccion"+$(this).attr("idlista")).attr("class", "tituloPanelColeccionReadOnly");
+               
+    });
+    {%endfor%}
+    
+
     </script>   
 {%endblock%}

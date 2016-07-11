@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new TinkerSoft\VistaBundle\VistaBundle(),
             new LoginBundle\LoginBundle(),
             new TinkerSoft\FuncionesSitioBundle\FuncionesSitioBundle(),
+            new TinkerSoft\ReportesBundle\TinkerSoftReportesBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

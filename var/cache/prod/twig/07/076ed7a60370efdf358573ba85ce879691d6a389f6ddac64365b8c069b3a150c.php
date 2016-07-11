@@ -46,9 +46,8 @@ class __TwigTemplate_ba482072fc4da96097ff412c0850c5f124990c2c934b37fe333cee9d9fe
         // line 22
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 37
-        echo "    </body>
-</html>
+        // line 38
+        echo "
 ";
     }
 
@@ -106,7 +105,8 @@ class __TwigTemplate_ba482072fc4da96097ff412c0850c5f124990c2c934b37fe333cee9d9fe
         // line 34
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/bootstrap/js/bootstrap.min.js"), "html", null, true);
         echo "\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\"></script>
-    
+    </body>
+</html>
         ";
     }
 
@@ -122,7 +122,7 @@ class __TwigTemplate_ba482072fc4da96097ff412c0850c5f124990c2c934b37fe333cee9d9fe
 
     public function getDebugInfo()
     {
-        return array (  107 => 34,  94 => 23,  91 => 22,  86 => 21,  79 => 14,  73 => 11,  69 => 10,  65 => 8,  62 => 7,  56 => 6,  50 => 37,  47 => 22,  45 => 21,  39 => 17,  37 => 7,  33 => 6,  29 => 5,  23 => 1,);
+        return array (  106 => 34,  93 => 23,  90 => 22,  85 => 21,  78 => 14,  72 => 11,  68 => 10,  64 => 8,  61 => 7,  55 => 6,  50 => 38,  47 => 22,  45 => 21,  39 => 17,  37 => 7,  33 => 6,  29 => 5,  23 => 1,);
     }
 }
 /* <!DOCTYPE html>*/
@@ -159,8 +159,8 @@ class __TwigTemplate_ba482072fc4da96097ff412c0850c5f124990c2c934b37fe333cee9d9fe
 /*             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>*/
 /*             <!-- Latest compiled and minified JavaScript -->*/
 /*             <script src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>*/
-/*     */
-/*         {% endblock %}*/
 /*     </body>*/
 /* </html>*/
+/*         {% endblock %}*/
+/* */
 /* */

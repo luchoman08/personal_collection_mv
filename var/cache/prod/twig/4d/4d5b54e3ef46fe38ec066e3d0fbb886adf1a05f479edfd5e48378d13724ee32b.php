@@ -8,7 +8,7 @@ class __TwigTemplate_a69e79a7f0f5383ba1de18ff64275b17b98333928d03c4d24649df59c7a
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("base.html.twig", ":usuarios:edit.html.twig", 1);
+        $this->parent = $this->loadTemplate("baseSinFondo.html.twig", ":usuarios:edit.html.twig", 1);
         $this->blocks = array(
             'body' => array($this, 'block_body'),
         );
@@ -16,7 +16,7 @@ class __TwigTemplate_a69e79a7f0f5383ba1de18ff64275b17b98333928d03c4d24649df59c7a
 
     protected function doGetParent(array $context)
     {
-        return "base.html.twig";
+        return "baseSinFondo.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
@@ -24,45 +24,52 @@ class __TwigTemplate_a69e79a7f0f5383ba1de18ff64275b17b98333928d03c4d24649df59c7a
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
-    // line 3
+    // line 4
     public function block_body($context, array $blocks = array())
     {
-        // line 4
-        echo "    <h1>Usuarios edit</h1>
+        // line 5
+        echo "                    <div class=\"panel panel-default\">
+                        <div class=\"panel-heading\">
+                                 <div style=\"float:right;  margin-top:20px;\">
+                                  <a   class=\"btn btn-sm btn-default\"  href=\"";
+        // line 8
+        echo $this->env->getExtension('routing')->getPath("usuarios_index");
+        echo "\">Atras</a>
+                                  </div>
+                                 <h1>Editar usuario</h1>
+
+                        </div>
+                        <div class=\"panel-body\">
+
+
 
     ";
-        // line 6
+        // line 17
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["edit_form"]) ? $context["edit_form"] : null), 'form_start');
         echo "
         ";
-        // line 7
+        // line 18
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["edit_form"]) ? $context["edit_form"] : null), 'widget');
         echo "
-        <input type=\"submit\" value=\"Edit\" />
+        <br>
+        <center>
+        <input type=\"submit\" class=\"btn btn-primary\" value=\"Guardar\" />
     ";
-        // line 9
+        // line 22
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["edit_form"]) ? $context["edit_form"] : null), 'form_end');
         echo "
 
-    <ul>
-        <li>
-            <a href=\"";
-        // line 13
-        echo $this->env->getExtension('routing')->getPath("usuarios_index");
-        echo "\">Back to the list</a>
-        </li>
-        <li>
+
+   
             ";
-        // line 16
+        // line 26
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["delete_form"]) ? $context["delete_form"] : null), 'form_start');
         echo "
-                <input type=\"submit\" value=\"Delete\">
-            ";
-        // line 18
-        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["delete_form"]) ? $context["delete_form"] : null), 'form_end');
-        echo "
-        </li>
-    </ul>
+ 
+    </center>
+    
+    </div>
+    </div>
 ";
     }
 
@@ -78,28 +85,39 @@ class __TwigTemplate_a69e79a7f0f5383ba1de18ff64275b17b98333928d03c4d24649df59c7a
 
     public function getDebugInfo()
     {
-        return array (  62 => 18,  57 => 16,  51 => 13,  44 => 9,  39 => 7,  35 => 6,  31 => 4,  28 => 3,  11 => 1,);
+        return array (  66 => 26,  59 => 22,  52 => 18,  48 => 17,  36 => 8,  31 => 5,  28 => 4,  11 => 1,);
     }
 }
-/* {% extends 'base.html.twig' %}*/
+/* {% extends 'baseSinFondo.html.twig' %}*/
+/* */
 /* */
 /* {% block body %}*/
-/*     <h1>Usuarios edit</h1>*/
+/*                     <div class="panel panel-default">*/
+/*                         <div class="panel-heading">*/
+/*                                  <div style="float:right;  margin-top:20px;">*/
+/*                                   <a   class="btn btn-sm btn-default"  href="{{ path('usuarios_index') }}">Atras</a>*/
+/*                                   </div>*/
+/*                                  <h1>Editar usuario</h1>*/
+/* */
+/*                         </div>*/
+/*                         <div class="panel-body">*/
+/* */
+/* */
 /* */
 /*     {{ form_start(edit_form) }}*/
 /*         {{ form_widget(edit_form) }}*/
-/*         <input type="submit" value="Edit" />*/
+/*         <br>*/
+/*         <center>*/
+/*         <input type="submit" class="btn btn-primary" value="Guardar" />*/
 /*     {{ form_end(edit_form) }}*/
 /* */
-/*     <ul>*/
-/*         <li>*/
-/*             <a href="{{ path('usuarios_index') }}">Back to the list</a>*/
-/*         </li>*/
-/*         <li>*/
+/* */
+/*    */
 /*             {{ form_start(delete_form) }}*/
-/*                 <input type="submit" value="Delete">*/
-/*             {{ form_end(delete_form) }}*/
-/*         </li>*/
-/*     </ul>*/
+/*  */
+/*     </center>*/
+/*     */
+/*     </div>*/
+/*     </div>*/
 /* {% endblock %}*/
 /* */

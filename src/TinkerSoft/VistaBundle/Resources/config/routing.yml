@@ -115,3 +115,10 @@ auditor_barra:
     path:      /auditor/
     defaults:  { _controller: VistaBundle:Default:panelAuditor }
  
+administrador:
+    path:      /administrador
+    defaults:  { _controller: VistaBundle:Default:panelAdministrador }
+
+administrador_barra:
+    path:      /administrador/
+    defaults:  { _controller: VistaBundle:Default:panelAdministrador }

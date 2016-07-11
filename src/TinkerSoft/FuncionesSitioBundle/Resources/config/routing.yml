@@ -29,3 +29,15 @@ adicionar_lista:
 adicionar_pelicula_lista_personalizada:
     path: /adicionarPeliculaListaPersonalizada
     defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:adicionarPeliculaListaPersonalizada}
+
+eliminar_pelicula_lista_personalizada:
+    path: /eliminarPeliculaColeccionPersonalizada
+    defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:eliminarPeliculaColeccionPersonalizada}
+
+eliminar_coleccion_personalizada:
+    path: /eliminarColeccionPersonalizada
+    defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:eliminarColeccionPersonalizada}
+    
+cambiar_nombre_coleccion:
+    path: /cambiarNombreColeccion
+    defaults: { _controller: FuncionesSitioBundle:FuncionesSitio:cambiarNombreColeccion}

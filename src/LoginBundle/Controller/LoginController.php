@@ -36,6 +36,10 @@ class LoginController extends Controller
                if ($usuario->getRol() == 1){
                    return $this->redirectToRoute('auditor');
                }
+               /*Rol 2 = administrador*/
+               if ($usuario->getRol() == 2){
+                   return $this->redirectToRoute('administrador');
+               }
                 $gustos = $em->getRepository('FuncionesSitioBundle:RegistroGustos')->
                 findOneBy(array('idUsuario'=>$usuario->getId()));
                 

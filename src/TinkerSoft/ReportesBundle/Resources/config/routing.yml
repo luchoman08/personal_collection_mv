@@ -1,0 +1,13 @@
+tinker_soft_reportes_vistas_homepage:
+    path:     /rv
+    defaults: { _controller: TinkerSoftReportesBundle:Reportes:generarReportePeliculasVistas }
+
+tinker_soft_reportes_vistas_usuarios_homepage:
+    path:     /rvu
+    defaults: { _controller: TinkerSoftReportesBundle:Reportes:generarReportePeliculasVistasUsuarios }
+
+tinker_soft_reportes_vistas_usuarios_genero_homepage:
+    path:     /rvug
+    defaults: { _controller: TinkerSoftReportesBundle:Reportes:generarReportePeliculasVistasUsuariosGeneros }
+
+

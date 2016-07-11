@@ -1,3 +1,7 @@
+tinker_soft_reportes:
+    resource: "@TinkerSoftReportesBundle/Resources/config/routing.yml"
+    prefix:   /
+
 funciones_sitio:
     resource: "@FuncionesSitioBundle/Resources/config/routing.yml"
     prefix:   /

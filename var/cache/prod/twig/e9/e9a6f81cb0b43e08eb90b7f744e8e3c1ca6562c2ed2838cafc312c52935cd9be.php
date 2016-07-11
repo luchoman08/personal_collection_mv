@@ -8,7 +8,7 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("base.html.twig", ":usuarios:show.html.twig", 1);
+        $this->parent = $this->loadTemplate("baseSinFondo.html.twig", ":usuarios:show.html.twig", 1);
         $this->blocks = array(
             'body' => array($this, 'block_body'),
         );
@@ -16,7 +16,7 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
 
     protected function doGetParent(array $context)
     {
-        return "base.html.twig";
+        return "baseSinFondo.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
@@ -28,63 +28,94 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
     public function block_body($context, array $blocks = array())
     {
         // line 4
-        echo "    <h1>Usuarios</h1>
+        echo "
+      <!-- Advanced Tables -->
+                    <div class=\"panel panel-default\">
+                        <div class=\"panel-heading\">
+                          
+                           <div style=\"float:right; margin-top:20px;\">
+                            ";
+        // line 10
+        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["delete_form"]) ? $context["delete_form"] : null), 'form_start');
+        echo "
+                             <a class=\"btn btn-primary btn-sm\"  href=\"";
+        // line 11
+        echo $this->env->getExtension('routing')->getPath("usuarios_index");
+        echo "\">Atras</a>
+                             <a class=\"btn  btn-success btn-sm\"  href=\"";
+        // line 12
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("usuarios_edit", array("id" => $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "id", array()))), "html", null, true);
+        echo "\">Editar</a>&nbsp;
+                             <input class=\"btn  btn-danger btn-sm\"  type=\"submit\" value=\"Borrar\">
 
-    <table>
-        <tbody>
+                             
+                            ";
+        // line 16
+        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["delete_form"]) ? $context["delete_form"] : null), 'form_end');
+        echo "
+                              
+                              
+                           </div>
+                            <h1>Datos de usuario </h1>
+                        </div>
+                        <div class=\"panel-body\">
+                            <div class=\"table-responsive\">
+                                <table class=\"table table-striped table-bordered table-hover\" id=\"dataTables-example\">
+                                    
+  <tbody>
             <tr>
                 <th>Id</th>
                 <td>";
-        // line 10
+        // line 29
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "id", array()), "html", null, true);
         echo "</td>
             </tr>
             <tr>
                 <th>Nombres</th>
                 <td>";
-        // line 14
+        // line 33
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "nombres", array()), "html", null, true);
         echo "</td>
             </tr>
             <tr>
                 <th>Apellidos</th>
                 <td>";
-        // line 18
+        // line 37
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "apellidos", array()), "html", null, true);
         echo "</td>
             </tr>
             <tr>
                 <th>Nickname</th>
                 <td>";
-        // line 22
+        // line 41
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "nickname", array()), "html", null, true);
         echo "</td>
             </tr>
             <tr>
                 <th>Correoelectronico</th>
                 <td>";
-        // line 26
+        // line 45
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "correoElectronico", array()), "html", null, true);
         echo "</td>
             </tr>
             <tr>
                 <th>Password</th>
                 <td>";
-        // line 30
+        // line 49
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "password", array()), "html", null, true);
         echo "</td>
             </tr>
             <tr>
                 <th>Rol</th>
                 <td>";
-        // line 34
+        // line 53
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "rol", array()), "html", null, true);
         echo "</td>
             </tr>
             <tr>
                 <th>Estado</th>
                 <td>";
-        // line 38
+        // line 57
         if ($this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "estado", array())) {
             echo "Yes";
         } else {
@@ -93,33 +124,22 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
         echo "</td>
             </tr>
         </tbody>
-    </table>
 
-    <ul>
-        <li>
-            <a href=\"";
-        // line 45
-        echo $this->env->getExtension('routing')->getPath("usuarios_index");
-        echo "\">Back to the list</a>
-        </li>
-        <li>
-            <a href=\"";
-        // line 48
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("usuarios_edit", array("id" => $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "id", array()))), "html", null, true);
-        echo "\">Edit</a>
-        </li>
-        <li>
-            ";
-        // line 51
-        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["delete_form"]) ? $context["delete_form"] : null), 'form_start');
-        echo "
-                <input type=\"submit\" value=\"Delete\">
-            ";
-        // line 53
-        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["delete_form"]) ? $context["delete_form"] : null), 'form_end');
-        echo "
-        </li>
-    </ul>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                 <ul>
+
+
+      
+
+           
+                        
+                    </div>
+                    <!--End Advanced Tables -->
+
 ";
     }
 
@@ -135,16 +155,35 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
 
     public function getDebugInfo()
     {
-        return array (  119 => 53,  114 => 51,  108 => 48,  102 => 45,  88 => 38,  81 => 34,  74 => 30,  67 => 26,  60 => 22,  53 => 18,  46 => 14,  39 => 10,  31 => 4,  28 => 3,  11 => 1,);
+        return array (  119 => 57,  112 => 53,  105 => 49,  98 => 45,  91 => 41,  84 => 37,  77 => 33,  70 => 29,  54 => 16,  47 => 12,  43 => 11,  39 => 10,  31 => 4,  28 => 3,  11 => 1,);
     }
 }
-/* {% extends 'base.html.twig' %}*/
+/* {% extends 'baseSinFondo.html.twig' %}*/
 /* */
 /* {% block body %}*/
-/*     <h1>Usuarios</h1>*/
 /* */
-/*     <table>*/
-/*         <tbody>*/
+/*       <!-- Advanced Tables -->*/
+/*                     <div class="panel panel-default">*/
+/*                         <div class="panel-heading">*/
+/*                           */
+/*                            <div style="float:right; margin-top:20px;">*/
+/*                             {{ form_start(delete_form) }}*/
+/*                              <a class="btn btn-primary btn-sm"  href="{{ path('usuarios_index') }}">Atras</a>*/
+/*                              <a class="btn  btn-success btn-sm"  href="{{ path('usuarios_edit', { 'id': usuario.id }) }}">Editar</a>&nbsp;*/
+/*                              <input class="btn  btn-danger btn-sm"  type="submit" value="Borrar">*/
+/* */
+/*                              */
+/*                             {{ form_end(delete_form) }}*/
+/*                               */
+/*                               */
+/*                            </div>*/
+/*                             <h1>Datos de usuario </h1>*/
+/*                         </div>*/
+/*                         <div class="panel-body">*/
+/*                             <div class="table-responsive">*/
+/*                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">*/
+/*                                     */
+/*   <tbody>*/
 /*             <tr>*/
 /*                 <th>Id</th>*/
 /*                 <td>{{ usuario.id }}</td>*/
@@ -178,20 +217,21 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
 /*                 <td>{% if usuario.estado %}Yes{% else %}No{% endif %}</td>*/
 /*             </tr>*/
 /*         </tbody>*/
-/*     </table>*/
 /* */
-/*     <ul>*/
-/*         <li>*/
-/*             <a href="{{ path('usuarios_index') }}">Back to the list</a>*/
-/*         </li>*/
-/*         <li>*/
-/*             <a href="{{ path('usuarios_edit', { 'id': usuario.id }) }}">Edit</a>*/
-/*         </li>*/
-/*         <li>*/
-/*             {{ form_start(delete_form) }}*/
-/*                 <input type="submit" value="Delete">*/
-/*             {{ form_end(delete_form) }}*/
-/*         </li>*/
-/*     </ul>*/
+/*                                     </tbody>*/
+/*                                 </table>*/
+/*                             </div>*/
+/*                             */
+/*                         </div>*/
+/*                  <ul>*/
+/* */
+/* */
+/*       */
+/* */
+/*            */
+/*                         */
+/*                     </div>*/
+/*                     <!--End Advanced Tables -->*/
+/* */
 /* {% endblock %}*/
 /* */

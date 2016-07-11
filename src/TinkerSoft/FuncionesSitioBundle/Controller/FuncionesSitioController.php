@@ -78,6 +78,53 @@ class FuncionesSitioController extends Controller
                    
     }
     
+    public function getPeliculasVistaUsuariossAuditor($em){
+      
+      
+            $coleccion = $em->getRepository('FuncionesSitioBundle:Coleccion')->
+                findBy(array('tipo' => 0));
+                
+            
+             $qb = $em->createQueryBuilder('c');
+        
+                $query = $em->createQuery(
+                    '
+                    select c.id as id_coleccion, pc.idPelicula as idPelicula, pc.fechaAdicion as fechaAdicionPelicula, IDENTITY(c.idUsuario) as idUsuario, u.nickname as nickname
+                    FROM FuncionesSitioBundle:Coleccion c
+                    INNER JOIN FuncionesSitioBundle:PeliculasColeccion pc WITH c.id = pc.idColeccion
+                    INNER JOIN FuncionesSitioBundle:Usuarios u WITH c.idUsuario = u.id
+                    WHERE c.tipo = 0
+                    ORDER BY idUsuario DESC'
+                );
+                
+                return $query->getResult();
+                   
+    }
+    
+    public function getPeliculasVistasContadasAuditor($em){
+      
+      
+            $coleccion = $em->getRepository('FuncionesSitioBundle:Coleccion')->
+                findBy(array('tipo' => 0));
+                
+            
+             $qb = $em->createQueryBuilder('c');
+        
+                $query = $em->createQuery(
+                    'select pc.idPelicula as idPelicula, Count(pc.idPelicula) as cantidad
+                     FROM FuncionesSitioBundle:Coleccion c
+                     INNER JOIN FuncionesSitioBundle:PeliculasColeccion pc
+                     WITH c.id = pc.idColeccion
+                     WHERE c.tipo = 0
+                     GROUP BY pc.idPelicula
+                     ORDER BY cantidad DESC'
+                     
+                );
+                
+                return $query->getResult();
+                   
+    }
+    
     /*
     verifica si la pelicula con id dado 
     ya fue marcada como vista por el usuario
@@ -117,7 +164,124 @@ class FuncionesSitioController extends Controller
     /*
     si le objeto existe, este se elimina y se retorna 0, en caso contrario se retorna 1
     */
+    public function cambiarNombreColeccionAction(Request  $request){
+         if($request->getSession()->get('id')){
+        $em = $this->getDoctrine()->getManager();
+        $coleccion = $em->getRepository('FuncionesSitioBundle:Coleccion')->
+        findOneBy(array('id'=>$request->query->get("idColeccion")));
+        if($coleccion) {
+        if($coleccion->getNombre()!=$request->query->get('nuevoNombre')){
+            $coleccion->setNombre($request->query->get('nuevoNombre'));
+            $em->merge($coleccion);
+            $em->flush();  
+            $response = new Response();
+            $response->setContent("Nombre actualizdo");
+            $response->setStatusCode(200);
+            $response->headers->set('Content-Type', 'text/html');
+                                
+            // prints the HTTP headers followed by the content
+            return $response;
+        }
+        else{
+            $response = new Response();
+            $response->setContent("Nombre sin cambios");
+            $response->setStatusCode(201);
+            $response->headers->set('Content-Type', 'text/html');
+                                
+            // prints the HTTP headers followed by the content
+            return $response;  
+        }
+        
+        }
+        else{
+             $response = new Response();
+            $response->setContent("Ha ocurrido un error");
+            $response->setStatusCode(405);
+            $response->headers->set('Content-Type', 'text/html');
+                                
+            // prints the HTTP headers followed by the content
+            return $response;  
+        }
+         }
+         
+         else{
+            $this->redireccionErrorAction();
+        }
+    }
+    public function eliminarColeccionPersonalizadaAction(Request $request){
+        
+         
+        if($request->getSession()->get('id')){
+            
+        $em = $this->getDoctrine()->getManager();
+        $coleccion = $em->getRepository('FuncionesSitioBundle:Coleccion')->
+        findOneBy(array('id'=>$request->query->get("idColeccion")));
+        if($coleccion){
+            
+            $em->remove($coleccion);
+            $em->flush();
+            $response = new Response();
+            $response->setContent('Coleccion eliminada');
+            $response->setStatusCode(200);
+            $response->headers->set('Content-Type', 'text/html');
+                                
+            // prints the HTTP headers followed by the content
+            return $response;
+        }
+        else{
+            $response = new Response();
+            $response->setContent('No se pudo eliminar la coleccion');
+            $response->setStatusCode(405);
+            $response->headers->set('Content-Type', 'text/html');
+            return $response;
+        }
+        }
+        
+            
+            else{
+            $this->redireccionErrorAction();
+        }
     
+    }
+ 
+     public function eliminarPeliculaColeccionPersonalizadaAction(Request $request){
+        
+        if($request->getSession()->get('id')){
+            /* 
+            
+            */
+            $em = $this->getDoctrine()->getManager();
+            $peliculaColeccion=$this->getPeliculaColeccionAction($request, $request->query->get('idPelicula'), $request->query->get('idColeccion'), $em);
+            if($peliculaColeccion){
+  
+             $em->remove($peliculaColeccion);
+             $em->flush();
+             
+            $response = new Response();
+            $response->setContent('Pelicula eliminada de la lista');
+            $response->setStatusCode(200);
+            $response->headers->set('Content-Type', 'text/html');
+                                
+            // prints the HTTP headers followed by the content
+            return $response;
+             
+             return 0;
+            }
+            else{
+                $response = new Response();
+                $response->setContent('No se ha podido eliminar la pelicula de la lista');
+                $response->setStatusCode(405);
+                $response->headers->set('Content-Type', 'text/html');
+                                
+                // prints the HTTP headers followed by the content
+                return $response;
+            }
+        }
+        else{
+            $this->redireccionErrorAction();
+        }
+        
+    }
     
     public function eliminarPeliculaColeccion(Request $request, $idPelicula, $idColeccion, $em){
         
@@ -239,6 +403,7 @@ class FuncionesSitioController extends Controller
           }
           if($resultado==0)
           {
+          $this->eliminarPeliculaColeccion($request, $request->query->get('idPelicula'), $listaPorVer->getId(), $em);
           $response->setContent('Eliminada de la lista de peliculas por ver');
           }
           $response->setStatusCode(Response::HTTP_OK);
@@ -470,6 +635,20 @@ class FuncionesSitioController extends Controller
                  $this->redireccionErrorAction();
         }
     }
+    
+    
+    public function listarPeliculasColeccion(Request $request, $em, $idColeccion)
+    {
+     if($request->getSession()->get('id')){
+      $objeto = $em->getRepository('FuncionesSitioBundle:PeliculasColeccion')->
+        findBy(array('idColeccion'=>$idColeccion));
+        return $objeto;
+        }
+        else{
+                 $this->redireccionErrorAction();
+        }
+    }
+    
     
     /* funcion general para crear cualquier lista */
     /* si existe el nombre de la lista para el usuario nado retorna 0, si no, crea la lista y retorna 1*/
