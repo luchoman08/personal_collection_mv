@@ -1,1 +1,1 @@
-_sf2_attributes|a:1:{s:23:"_csrf/usuarios_estandar";s:43:"TwBkPor2zsn9PqiU9h_iKsSY0HImRnBrhnTmkSoW1Go";}_sf2_flashes|a:0:{}_sf2_meta|a:3:{s:1:"u";i:1468396840;s:1:"c";i:1468395573;s:1:"l";s:1:"0";}
+_sf2_attributes|a:5:{s:23:"_csrf/usuarios_estandar";s:43:"TwBkPor2zsn9PqiU9h_iKsSY0HImRnBrhnTmkSoW1Go";s:4:"name";s:7:"Auditor";s:8:"nickname";s:7:"auditor";s:2:"id";i:77;s:3:"rol";i:1;}_sf2_flashes|a:0:{}_sf2_meta|a:3:{s:1:"u";i:1468396901;s:1:"c";i:1468395573;s:1:"l";s:1:"0";}

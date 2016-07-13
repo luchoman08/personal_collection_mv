@@ -84,7 +84,7 @@ class __TwigTemplate_b6066491e8ce7ddfef9662b244e9e21eba5e4d8af7c5da167892fb18cc2
  <div class=\"menu-pelicula-border-black\">
                 <ul class=\"menu-pelicula-tab\">
                     <li class=\"active\"><a data-toggle=\"tab\" href=\"#totalvistas\">Pel&iacute;culas vistas&nbsp;</a></li>
-                    <li><a data-toggle=\"tab\" href=\"#vistasUsuarios\">Vistas por los usuario&nbsp;</a></li>
+                    <li><a data-toggle=\"tab\" href=\"#vistasUsuarios\">Vistas por los usuarios&nbsp;</a></li>
                     <li><a data-toggle=\"tab\" href=\"#ultimomes\">Vistas en el último mes&nbsp;</a></li>
                     <li><a data-toggle=\"tab\" href=\"#generosvistos\">G&eacute;neros vistos&nbsp;</a></li>
                     <li><a data-toggle=\"tab\" href=\"#generosvistosultimomes\">G&eacute;neros vistos en el &uacute;ltimo mes&nbsp;</a></li>
@@ -448,7 +448,7 @@ class __TwigTemplate_b6066491e8ce7ddfef9662b244e9e21eba5e4d8af7c5da167892fb18cc2
 /*  <div class="menu-pelicula-border-black">*/
 /*                 <ul class="menu-pelicula-tab">*/
 /*                     <li class="active"><a data-toggle="tab" href="#totalvistas">Pel&iacute;culas vistas&nbsp;</a></li>*/
-/*                     <li><a data-toggle="tab" href="#vistasUsuarios">Vistas por los usuario&nbsp;</a></li>*/
+/*                     <li><a data-toggle="tab" href="#vistasUsuarios">Vistas por los usuarios&nbsp;</a></li>*/
 /*                     <li><a data-toggle="tab" href="#ultimomes">Vistas en el último mes&nbsp;</a></li>*/
 /*                     <li><a data-toggle="tab" href="#generosvistos">G&eacute;neros vistos&nbsp;</a></li>*/
 /*                     <li><a data-toggle="tab" href="#generosvistosultimomes">G&eacute;neros vistos en el &uacute;ltimo mes&nbsp;</a></li>*/
