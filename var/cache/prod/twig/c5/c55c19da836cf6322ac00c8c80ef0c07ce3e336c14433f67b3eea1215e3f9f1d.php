@@ -16,7 +16,14 @@ class __TwigTemplate_3d11b29a2c84ddcf7a67072de99eee6642630d5cafe47f5d19a694c44ae
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "Hola mundo!
+        echo "<script>
+    
+    window.location=\"";
+        // line 3
+        echo $this->env->getExtension('routing')->getUrl("vista_homepage");
+        echo "\";
+    
+</script>
 ";
     }
 
@@ -25,10 +32,19 @@ class __TwigTemplate_3d11b29a2c84ddcf7a67072de99eee6642630d5cafe47f5d19a694c44ae
         return "TinkerSoftUsuariosBundle:Default:index.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  19 => 1,);
+        return array (  23 => 3,  19 => 1,);
     }
 }
-/* Hola mundo!*/
+/* <script>*/
+/*     */
+/*     window.location="{{url('vista_homepage')}}";*/
+/*     */
+/* </script>*/
 /* */
