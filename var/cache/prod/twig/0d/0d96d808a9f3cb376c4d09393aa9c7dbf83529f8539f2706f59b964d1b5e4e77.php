@@ -76,39 +76,47 @@ class __TwigTemplate_f760e1d6a894b0faea0f6fd330f996890d48b7cdc31f3e08dbe5b779a80
         // line 32
         $context["contador_generos"] = 0;
         // line 33
-        echo "            ";
+        echo "            <input type=\"checkbox\" style=\"display:none;\" style=\"\" id = \"origen\" value=\"";
+        echo twig_escape_filter($this->env, (isset($context["origen"]) ? $context["origen"] : null), "html", null, true);
+        echo "\" name=\"origen\" checked>
+            ";
+        // line 34
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["params"]) ? $context["params"] : null), "genres", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["genero"]) {
-            // line 34
+            // line 35
             echo "            <div class=\"checkbox\">
                 <label>
-                    <input type=\"checkbox\" value=\"";
-            // line 36
+                    <input type=\"checkbox\"  value=\"";
+            // line 37
             echo twig_escape_filter($this->env, $this->getAttribute($context["genero"], "id", array()), "html", null, true);
             echo "\" name=\"genero_";
             echo twig_escape_filter($this->env, (isset($context["contador_generos"]) ? $context["contador_generos"] : null), "html", null, true);
-            echo "\"> ";
+            echo "\" > ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["genero"], "name", array()), "html", null, true);
             echo "
+                     
                 </label>
             </div>
             ";
-            // line 39
+            // line 41
             $context["contador_generos"] = ((isset($context["contador_generos"]) ? $context["contador_generos"] : null) + 1);
-            // line 40
+            // line 42
             echo "            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['genero'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 41
+        // line 43
         echo "            <input type=\"submit\" class=\"btn btn-primary\" type=\"button\" value=\"Continuar\">
             </form>
         </div>
 
         <div class=\"col-sm-5 imagen-generos\">
-            <img src=\"http://images6.fanpop.com/image/photos/37600000/Transparent-Baymax-big-hero-6-37653147-347-500.png\" />
+            <img src=\"";
+        // line 48
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/images/baymaxpaleta.png"), "html", null, true);
+        echo "\" />
         </div>
         
     </div>
@@ -128,7 +136,7 @@ class __TwigTemplate_f760e1d6a894b0faea0f6fd330f996890d48b7cdc31f3e08dbe5b779a80
 
     public function getDebugInfo()
     {
-        return array (  106 => 41,  100 => 40,  98 => 39,  88 => 36,  84 => 34,  79 => 33,  77 => 32,  73 => 31,  66 => 26,  59 => 21,  57 => 20,  53 => 18,  50 => 17,  32 => 3,  29 => 2,  11 => 1,);
+        return array (  118 => 48,  111 => 43,  105 => 42,  103 => 41,  92 => 37,  88 => 35,  84 => 34,  79 => 33,  77 => 32,  73 => 31,  66 => 26,  59 => 21,  57 => 20,  53 => 18,  50 => 17,  32 => 3,  29 => 2,  11 => 1,);
     }
 }
 /* {% extends 'base.html.twig' %}*/
@@ -163,10 +171,12 @@ class __TwigTemplate_f760e1d6a894b0faea0f6fd330f996890d48b7cdc31f3e08dbe5b779a80
 /*             <h5>Ellige tus géneros favoritos:</h5>*/
 /*             <form method = "POST" action="{{url('registro_generos_action')}}">*/
 /*             {% set contador_generos = 0 %}*/
+/*             <input type="checkbox" style="display:none;" style="" id = "origen" value="{{origen}}" name="origen" checked>*/
 /*             {% for genero in params.genres %}*/
 /*             <div class="checkbox">*/
 /*                 <label>*/
-/*                     <input type="checkbox" value="{{genero.id}}" name="genero_{{contador_generos}}"> {{genero.name}}*/
+/*                     <input type="checkbox"  value="{{genero.id}}" name="genero_{{contador_generos}}" > {{genero.name}}*/
+/*                      */
 /*                 </label>*/
 /*             </div>*/
 /*             {% set contador_generos = contador_generos + 1 %}*/
@@ -176,7 +186,7 @@ class __TwigTemplate_f760e1d6a894b0faea0f6fd330f996890d48b7cdc31f3e08dbe5b779a80
 /*         </div>*/
 /* */
 /*         <div class="col-sm-5 imagen-generos">*/
-/*             <img src="http://images6.fanpop.com/image/photos/37600000/Transparent-Baymax-big-hero-6-37653147-347-500.png" />*/
+/*             <img src="{{asset('assets/images/baymaxpaleta.png')}}" />*/
 /*         </div>*/
 /*         */
 /*     </div>*/

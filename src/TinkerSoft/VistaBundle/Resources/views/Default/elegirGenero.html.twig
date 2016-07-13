@@ -30,10 +30,12 @@
             <h5>Ellige tus géneros favoritos:</h5>
             <form method = "POST" action="{{url('registro_generos_action')}}">
             {% set contador_generos = 0 %}
+            <input type="checkbox" style="display:none;" style="" id = "origen" value="{{origen}}" name="origen" checked>
             {% for genero in params.genres %}
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" value="{{genero.id}}" name="genero_{{contador_generos}}"> {{genero.name}}
+                    <input type="checkbox"  value="{{genero.id}}" name="genero_{{contador_generos}}" > {{genero.name}}
+                     
                 </label>
             </div>
             {% set contador_generos = contador_generos + 1 %}
@@ -43,7 +45,7 @@
         </div>
 
         <div class="col-sm-5 imagen-generos">
-            <img src="http://images6.fanpop.com/image/photos/37600000/Transparent-Baymax-big-hero-6-37653147-347-500.png" />
+            <img src="{{asset('assets/images/baymaxpaleta.png')}}" />
         </div>
         
     </div>

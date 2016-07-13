@@ -110,7 +110,7 @@
                                     </li>
                                     {%endif%}
                                     <li class="dropdown trailers" id="test"> 
-                                        <a id="trailers" href="#" data-toggle="dropdown" class="dropdown-toggle"> 
+                                        <a id="trailers" href="#" data-toggle="dropdown" class="dropdown-toggle abrirTrailer"> 
                                             <div class="glyphicon glyphicon-film"></div> Trailers&nbsp;<b class="caret"></b>
                                         </a>&nbsp;
                                         <ul class="dropdown-menu">
@@ -374,8 +374,15 @@
            
       
            
-               
+           $(".abrirTrailer").click(function(){
+                            $("#valorBuscar").attr("style","display:none;");
+                            $("#btnBuscar").attr("style","display:none;");
+           });
            
+           $(".close").click(function(){
+                            $("#valorBuscar").attr("style","display:inline;");
+                            $("#btnBuscar").attr("style","display:inline;");
+           });
                 
         // funciones para nuevas colecciones            
          $("#close_nueva_coleccion_p").click(function(){
@@ -387,6 +394,9 @@
       $('#crearListas').click(function(){
         $("#popup_nueva_coleccion_personalizada").attr("style","visibility: visible; opacity: 1;");
         var x = document.getElementById("popup_nueva_coleccion_personalizada");
+        $("#valorBuscar").attr("style","display:none;");
+        $("#btnBuscar").attr("style","display:none;");
+        $("#calificacionPersonal").attr("style","display:none;");
         var y = x;
         $("#ctn").append(y);
       });
@@ -409,13 +419,16 @@
                          
                          //display error message
                          else {
-                             $("#mensajeEmergente").html("Error ¬_¬");
-                             $("#mensajeEmergente").html(jQuery.parseJSON(jqXHR.responseText).mensaje);   
+
+                            $("#valorBuscar").attr("style","display:inline;");
+                            $("#btnBuscar").attr("style","display:inline;");
+                            $("#mensajeEmergente").html(jQuery.parseJSON(jqXHR.responseText).mensaje);   
                             $('#divEmergente').attr("class","alert alert-success alert-dismissible" );
                             $('#divEmergente').show(1000).delay(3000);
                             $('#divEmergente').hide(1000);
                             $('#ulListaColecciones').append('<li><a idColeccion="'+ jQuery.parseJSON(jqXHR.responseText).idColeccion +'"id="crearListas" class="a_lista">'+$('#nombreNuevaColeccion').val()+'</a> </li>');
                             $("#popup_nueva_coleccion_personalizada").attr("style","visibility: invisible; opacity: 0;");
+                            $("#calificacionPersonal").attr("style","display:inline;");
                             $(".a_lista").on("click", (function(){
               $.ajax({
                     type: "GET",

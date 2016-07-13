@@ -7,11 +7,16 @@
                                  <div style="float:right;  margin-top:20px;">
                                   <a   class="btn btn-sm btn-default"  href="{{url('usuarios_index')}} {{usuario.id}}/showEstandar">Atras</a>
                                   </div>
-                                 <h1>Modificar mis datos</h1>
+                                 <h3>Modificar mis datos</h3>
 
                         </div>
                         <div class="panel-body">
-
+                            {%if accion ==1%}
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  Se han guardado los cambios 
+</div>
+{%endif%}
 
 
     {{ form_start(edit_form) }}

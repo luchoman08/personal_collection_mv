@@ -31,35 +31,47 @@ class __TwigTemplate_a69e79a7f0f5383ba1de18ff64275b17b98333928d03c4d24649df59c7a
         echo "                    <div class=\"panel panel-default\">
                         <div class=\"panel-heading\">
                                  <div style=\"float:right;  margin-top:20px;\">
-                                  <a   class=\"btn btn-sm btn-default\"  onclick=\"window.history.back();\">Atras</a>
+                                  <a   class=\"btn btn-sm btn-default\"  onclick=\"location.href = '";
+        // line 8
+        echo $this->env->getExtension('routing')->getUrl("usuarios_index");
+        echo "';\">Atras</a>
                                   </div>
-                                 <h1>Editar usuario</h1>
+                                 <h3>Editar usuario</h3>
 
                         </div>
                         <div class=\"panel-body\">
-
-
-
+                            ";
+        // line 14
+        if (((isset($context["accion"]) ? $context["accion"] : null) == 1)) {
+            // line 15
+            echo "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+  Se han guardado los cambios 
+</div>
+";
+        }
+        // line 20
+        echo "
     ";
-        // line 17
+        // line 21
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["edit_form"]) ? $context["edit_form"] : null), 'form_start');
         echo "
         ";
-        // line 18
+        // line 22
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["edit_form"]) ? $context["edit_form"] : null), 'widget');
         echo "
         <br>
         <center>
         <input type=\"submit\" class=\"btn btn-primary\" value=\"Guardar\" />
     ";
-        // line 22
+        // line 26
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["edit_form"]) ? $context["edit_form"] : null), 'form_end');
         echo "
 
 
    
             ";
-        // line 26
+        // line 30
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["delete_form"]) ? $context["delete_form"] : null), 'form_start');
         echo "
  
@@ -82,7 +94,7 @@ class __TwigTemplate_a69e79a7f0f5383ba1de18ff64275b17b98333928d03c4d24649df59c7a
 
     public function getDebugInfo()
     {
-        return array (  63 => 26,  56 => 22,  49 => 18,  45 => 17,  31 => 5,  28 => 4,  11 => 1,);
+        return array (  75 => 30,  68 => 26,  61 => 22,  57 => 21,  54 => 20,  47 => 15,  45 => 14,  36 => 8,  31 => 5,  28 => 4,  11 => 1,);
     }
 }
 /* {% extends 'baseSinFondo.html.twig' %}*/
@@ -92,14 +104,18 @@ class __TwigTemplate_a69e79a7f0f5383ba1de18ff64275b17b98333928d03c4d24649df59c7a
 /*                     <div class="panel panel-default">*/
 /*                         <div class="panel-heading">*/
 /*                                  <div style="float:right;  margin-top:20px;">*/
-/*                                   <a   class="btn btn-sm btn-default"  onclick="window.history.back();">Atras</a>*/
+/*                                   <a   class="btn btn-sm btn-default"  onclick="location.href = '{{url('usuarios_index')}}';">Atras</a>*/
 /*                                   </div>*/
-/*                                  <h1>Editar usuario</h1>*/
+/*                                  <h3>Editar usuario</h3>*/
 /* */
 /*                         </div>*/
 /*                         <div class="panel-body">*/
-/* */
-/* */
+/*                             {%if accion ==1%}*/
+/* <div class="alert alert-success alert-dismissible" role="alert">*/
+/*   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>*/
+/*   Se han guardado los cambios */
+/* </div>*/
+/* {%endif%}*/
 /* */
 /*     {{ form_start(edit_form) }}*/
 /*         {{ form_widget(edit_form) }}*/

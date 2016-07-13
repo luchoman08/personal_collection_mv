@@ -20,11 +20,11 @@ class UsuariosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombres', TextType::class, array('label' => 'Nombres', 'attr' =>array('class'=> 'form-control') ))
-            ->add('apellidos', TextType::class, array('label' => 'Apellidos', 'attr' =>array('class'=> 'form-control') ))
-            ->add('nickname', TextType::class, array('label' => 'NickName', 'attr' =>array('class'=> 'form-control') ))
-            ->add('correoElectronico', EmailType::class, array('label' => 'Correo electronico', 'attr' =>array('class'=> 'form-control') ))
-            ->add('password', TextType::class, array('label' => 'Contraseña', 'attr' =>array('class'=> 'form-control', 'type'=>'password') ))
+             ->add('nombres', TextType::class, array('label' => 'Nombres', 'attr' =>array('class'=> 'form-control',  'pattern' => "[a-zA-Z]+[ ]*[a-zA-Zñ]+", 'oninvalid'=>"setCustomValidity('Este campo solo puede contener letras')",'oninput'=>"setCustomValidity('')" ) ))
+            ->add('apellidos', TextType::class, array('label' => 'Apellidos', 'attr' =>array('class'=> 'form-control',  'pattern' => "[a-zA-Z]+[ ]*[a-zA-Zñ]+", 'oninvalid'=>"setCustomValidity('Este campo solo puede contener letras')",'oninput'=>"setCustomValidity('')" )))
+            ->add('nickname', TextType::class, array('label' => 'NickName', 'attr' =>array('class'=> 'form-control',  'pattern' => "[a-zA-Z0-9-]+" , 'oninvalid'=>"setCustomValidity('Este campo solo puede contener letras o números sin espacios')",'oninput'=>"setCustomValidity('')")))
+            ->add('correoElectronico', EmailType::class, array('label' => 'Correo electronico',  'attr' =>array('class'=> 'form-control') ))
+            ->add('password', TextType::class, array('label' => 'Contraseña', 'attr' =>array('class'=> 'form-control','type'=>'password',  'pattern' => "[a-zA-Z0-9-]+", 'oninvalid'=>"setCustomValidity('Este campo solo puede contener letras o números')",'oninput'=>"setCustomValidity('')")) )
             ->add('rol', ChoiceType::class, array('label' => 'Rol', 'choices'=> array('Estandar'=>"0", 'Auditor'=>"1", "Administrador"=>2)  ,'attr' =>array('class'=> 'form-control') ))
             ->add('estado', CheckboxType::class, array('label' => 'Estado', 'required'=>false, 'attr' =>array('class'=> 'form-control') ))
         ;

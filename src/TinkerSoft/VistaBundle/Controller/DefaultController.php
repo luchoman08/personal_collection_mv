@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 use TinkerSoft\FuncionesSitioBundle\Entity\Coleccion;
+use TinkerSoft\ReportesBundle\Controller\ReportesController;
 
 class DefaultController extends Controller
 {
@@ -126,12 +127,12 @@ class DefaultController extends Controller
         return $this->render('VistaBundle:Default:mostrarPelicula.html.twig', array('usuarioLogueado'=>$usuarioLogueado, 'params' => $datos, 'similares' => $similares, 'nickname' => $nickname, 'fondos' => $fondos, 'votos_imdb' => $votos['imdbVotes'],'funcionesOcultas' => $funcionesOcultas));
     }
     
-    
     public function verListaGenerosAction(Request $request){
         
         $usuarioLogueado=0;
         if($request->getSession()->get('id')){
             $usuarioLogueado=1;
+            $origen = 0;
                 $em = $this->getDoctrine()->getManager();
                 $gustos = $em->getRepository('FuncionesSitioBundle:RegistroGustos')->
                 findOneBy(array('idUsuario'=>$request->getSession()->get('id')));
@@ -139,16 +140,18 @@ class DefaultController extends Controller
                 if($gustos){
                 $q = $em->createQuery('delete from FuncionesSitioBundle:RegistroGustos r where r.idUsuario = '.$request->getSession()->get('id'));
                 $numDeleted = $q->execute();
+                $origen=1;
                 }
             
             
             $datos = $this->get('app.api_controller')->listaGenerosAction("en");
-            return $this->render('VistaBundle:Default:elegirGenero.html.twig', array('params' => $datos));
+            return $this->render('VistaBundle:Default:elegirGenero.html.twig', array('params' => $datos, 'origen'=>$origen));
         }else{
             return $this->render('VistaBundle:Default:login.html.twig', array('error'=>2));
         }
         
     }
+    
     public function mostrarLoginAction(Request $request){
          if($request->getSession()->get('id'))
          {
@@ -159,6 +162,7 @@ class DefaultController extends Controller
          }
         
     }
+    
     public function demoAction(){
         return $this->render('VistaBundle:Default:demo.html.twig');
     
@@ -277,7 +281,9 @@ class DefaultController extends Controller
             for ($i = 0; $i < count($califcadas); $i++){
                 for($j = 0; $j<count($peliculasVistas); $j++ ){
                     if ($califcadas[$i]->getIdPelicula() == $peliculasVistas[$j]['id']){
-                        array_push($peliculasCalificadas,$peliculasVistas[$j]);
+                        $tmp = $peliculasVistas[$j];
+                        $tmp = array_merge($tmp,array('valoracion' => $califcadas[$i]->getValoracion()));
+                        array_push($peliculasCalificadas,$tmp);
                     }
                 }
             }
@@ -313,7 +319,7 @@ class DefaultController extends Controller
                 }
             }
           
-           return $this->render('VistaBundle:Default:panelUsuario.html.twig',array('usuarioLogueado'=>$usuarioLogueado,'nickname' => $nickname, 'usuario' => $usuario, 'listacolecciones' => $listaColecciones, 'peliculas_coleccion'=>$listaPeliculasColeccion ,'gustos' => $gustosNombres, 'descubiertas' => $peliculasDescubiertas, 'generos' => $argumentoGeneros, 'vistas' => $peliculasVistas, 'pendientes' => $peliculasPendientes, 'calificadas' => $peliculasCalificadas, 'ultimomes' => $peliculasVistasUltimoMes, 'generosvistos' => $generosVistos));
+           return $this->render('VistaBundle:Default:panelUsuario.html.twig',array('usuarioLogueado'=>$usuarioLogueado,'nickname' => $nickname, 'usuario' => $usuario, 'listacolecciones' => $listaColecciones, 'peliculas_coleccion'=>$listaPeliculasColeccion ,'gustos' => $gustosNombres, 'descubiertas' => $peliculasDescubiertas, 'generos' => $argumentoGeneros, 'vistas' => $peliculasVistas, 'pendientes' => $peliculasPendientes, 'calificadas' => $peliculasCalificadas, 'ultimomes' => $peliculasVistasUltimoMes, 'generosvistos' => $generosVistos, 'rol' => $request->getSession()->get('rol')));
         }else{
             return $this->render('VistaBundle:Default:login.html.twig', array('error'=>2));
         }
@@ -330,26 +336,127 @@ class DefaultController extends Controller
            if (!($request->getSession()->get('rol') == 1) ){
                return $this->render('VistaBundle:Default:login.html.twig', array('error'=>3));
            }
+           
            $em = $this->getDoctrine()->getManager();
            $usuario = $this->get('app.funciones_controler')->getusuario($request,$em,$request->getSession()->get('id'));
            
-           $peliculasVistas = $this->get('app.funciones_controler')->getPeliculasVistasAuditor($em);
-           
-            /* Vistas último mes */
-            $peliculasVistasUltimoMes = array();
+           // Vistas
+            $peliculasVistas = $this->get('app.funciones_controler')->getPeliculasVistasContadasAuditor($em);
+            $peliculas_tmp = array();
             for($i = 0; $i < count($peliculasVistas); $i++){
+                    $movie = $this->get('app.api_controller')->obtenerPeliculaRipeadaAction($request, $peliculasVistas[$i]['idPelicula']);
+                    $fila = array($peliculasVistas[$i]['idPelicula'],$movie['title'],$peliculasVistas[$i]['cantidad'],$movie['genres']);
+                    array_push($peliculas_tmp,$fila);
+            }
+            
+           $peliculasVistas = $peliculas_tmp;
+           // End vistas
+           
+           //Vistas x Usuario
+           
+           $vistas = $this->get('app.funciones_controler')->getPeliculasVistaUsuariossAuditor($em);
+        
+            $data = array();
+            for($i = 0; $i < count($vistas) ; $i++){
                 
-                $diff = time() - strtotime($peliculasVistas[$i]['fechaAdicionPelicula']->format("Y-m-d")) ; 
-               
-                if  ($diff/(60) < 43200){
-                    
-                    array_push($peliculasVistasUltimoMes,$peliculasVistas[$i]);
-                    
-                } 
+                $titulo;
+                for($r = 0; $r < count($peliculasVistas); $r++ ){
+                    if($vistas[$i]['idPelicula'] == $peliculasVistas[$r][0] ){
+                        $titulo = $peliculasVistas[$r][1];
+                    }
+                }
+                
+                $fila = array($vistas[$i]['idPelicula'],$titulo,$vistas[$i]['fechaAdicionPelicula']->format("Y-m-d G:i:s"),$vistas[$i]['nickname']);
+                array_push($data,$fila);
+            }
+           $peliculasvistasusuarios = $data;
+           //End vistas x usuario
+           
+            //Vistas Ultimo mes
+           
+            $vistas = $this->get('app.funciones_controler')->getPeliculasVistaUsuariossAuditor($em);
+        
+            $peliculasVistasUltimoMes = array();
+                for($i = 0; $i < count($vistas); $i++){
+                    $diff = time() - strtotime($vistas[$i]['fechaAdicionPelicula']->format("Y-m-d")) ; 
+                    if  ($diff/(60) < 43200){
+                        array_push($peliculasVistasUltimoMes,$vistas[$i]);
+                    } 
+                }
+            
+            $data = array();
+            for($i = 0; $i < count($peliculasVistasUltimoMes) ; $i++){
+                $titulo;
+                for($r = 0; $r < count($peliculasVistas); $r++ ){
+                    if($peliculasVistasUltimoMes[$i]['idPelicula'] == $peliculasVistas[$r][0] ){
+                        $titulo = $peliculasVistas[$r][1];
+                        break;
+                    }
+                }
+                $fila = array($peliculasVistasUltimoMes[$i]['idPelicula'],$titulo,$peliculasVistasUltimoMes[$i]['fechaAdicionPelicula']->format("Y-m-d G:i:s"),$peliculasVistasUltimoMes[$i]['nickname']);
+                array_push($data,$fila);
             }
            
+           $peliculasVistasUltimoMes = $data;
            
-            return $this->render('VistaBundle:Default:auditor.html.twig',array('usuarioLogueado'=>$usuarioLogueado,'nickname' => $nickname, 'usuario' => $usuario, 'peliculasvistas' => $peliculasVistas, 'peliculasultimomes' => $peliculasVistasUltimoMes ));
+           //End vistas ultimo mes
+           
+           
+           //Generos vistos
+           
+           $vistas = $this->get('app.funciones_controler')->getPeliculasVistaUsuariossAuditor($em);
+        
+            $generos = array();
+            for($i = 0; $i < count($vistas) ; $i++){
+                //$movie = $this->get('app.api_controller')->obtenerPeliculaRipeadaAction($request, $vistas[$i]['idPelicula']);
+                $movie;
+                for($r = 0; $r < count($peliculasVistas); $r++ ){
+                    if($vistas[$i]['idPelicula'] == $peliculasVistas[$r][0] ){
+                        $movie = $peliculasVistas[$r];
+                    }
+                }
+              
+                for($j = 0; $j < count($movie[3]); $j++){
+                    if(!in_array(array($vistas[$i]['nickname'], $movie[3][$j]->name), $generos)){
+                        array_push($generos, array($vistas[$i]['nickname'], $movie[3][$j]->name));
+                    }
+                }
+            }
+            
+           //End generos vistos
+           
+           //Generos vistos ultimo mes
+           
+           $vistas = $this->get('app.funciones_controler')->getPeliculasVistaUsuariossAuditor($em);
+        
+            $peliculasVistasUltimoMesGenero = array();
+                for($i = 0; $i < count($vistas); $i++){
+                    $diff = time() - strtotime($vistas[$i]['fechaAdicionPelicula']->format("Y-m-d")) ; 
+                    if  ($diff/(60) < 43200){
+                        array_push($peliculasVistasUltimoMesGenero,$vistas[$i]);
+                    } 
+                }
+        
+            $generosUltimoMes = array();
+            for($i = 0; $i < count($peliculasVistasUltimoMesGenero) ; $i++){
+                //$movie = $this->get('app.api_controller')->obtenerPeliculaRipeadaAction($request, $vistas[$i]['idPelicula']);
+                $movie;
+                for($r = 0; $r < count($peliculasVistas); $r++ ){
+                    if($peliculasVistasUltimoMesGenero[$i]['idPelicula'] == $peliculasVistas[$r][0] ){
+                        $movie = $peliculasVistas[$r];
+                    }
+                }
+              
+                for($j = 0; $j < count($movie[3]); $j++){
+                    if(!in_array(array($peliculasVistasUltimoMesGenero[$i]['nickname'], $movie[3][$j]->name), $generosUltimoMes)){
+                        array_push($generosUltimoMes, array($peliculasVistasUltimoMesGenero[$i]['nickname'], $movie[3][$j]->name));
+                    }
+                }
+            }
+           
+           //End generos vistos ultimo mes
+           
+            return $this->render('VistaBundle:Default:auditor.html.twig',array('usuarioLogueado'=>$usuarioLogueado,'nickname' => $nickname, 'usuario' => $usuario, 'peliculasvistas' => $peliculasVistas, 'peliculasvistasusuarios' => $peliculasvistasusuarios, 'peliculasultimomes' => $peliculasVistasUltimoMes, 'generosvistos' => $generos, 'generosultimomes' => $generosUltimoMes ));
         }else{
             return $this->render('VistaBundle:Default:login.html.twig', array('error'=>2));
         }

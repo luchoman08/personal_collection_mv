@@ -10,6 +10,8 @@ services:
         class: TinkerSoft\APITheMovieDataBaseBundle\Controller\APIController
     app.funciones_controler:
         class: TinkerSoft\FuncionesSitioBundle\Controller\FuncionesSitioController
+    app.reportes_controller:
+        class: TinkerSoft\ReportesBundle\Controller\ReportesController
         
 #    service_name:
 #        class: AppBundle\Directory\ClassName

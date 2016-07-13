@@ -4,14 +4,29 @@
 
 
                        <div class="panel panel-default">
+                         
                         <div class="panel-heading">
                                  <div style="float:right;  margin-top:20px;">
-                                  <input   type="submit" value="Atras" class="btn btn-sm btn-default"  onclick="window.history.back();">
+                                  <input   type="submit" value="Atras" class="btn btn-sm btn-default" onclick="location.href = '{{url('usuarios_index')}}';">
                                   </div>
-                                 <h1>Registro de nuevos usuarios</h1>
+                                 <h3>Registro de nuevos usuarios</h3>
 
                         </div>
                         <div class="panel-body">
+                            {%if error ==1%}
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  El nickname "{{usuario.nickname}}" ya esta registrado 
+</div>
+{%endif%}
+
+                            {%if error ==2%}
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  El correo "{{usuario.correoElectronico}}" ya esta registrado 
+</div>
+{%endif%}
+
 
     {{ form_start(form) }}
         {{ form_widget(form) }}

@@ -8,7 +8,7 @@
                           
                            <div style="float:right; margin-top:20px;">
                             {{ form_start(delete_form) }}
-                             <a class="btn btn-primary btn-sm" onclick="window.history.back();">Atras</a>
+                             <a class="btn btn-primary btn-sm" onclick="location.href = '{{url('usuarios_index')}}';">Atras</a>
                              <a class="btn  btn-success btn-sm"  href="{{ path('usuarios_edit', { 'id': usuario.id }) }}">Editar</a>&nbsp;
                              <input class="btn  btn-danger btn-sm"  type="submit" value="Borrar">
 
@@ -17,17 +17,14 @@
                               
                               
                            </div>
-                            <h1>Datos de usuario </h1>
+                            <h3>Datos de usuario </h3>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     
   <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ usuario.id }}</td>
-            </tr>
+
             <tr>
                 <th>Nombres</th>
                 <td>{{ usuario.nombres }}</td>
@@ -50,11 +47,21 @@
             </tr>
             <tr>
                 <th>Rol</th>
-                <td>{{ usuario.rol }}</td>
+                <td>
+                    {%if usuario.rol == 0%}
+                    Estandar
+                    {%endif%}
+                    {%if usuario.rol == 1%}
+                    Auditor
+                    {%endif%}
+                    {%if usuario.rol == 2%}
+                    Administrador
+                    {%endif%}
+                </td>
             </tr>
             <tr>
                 <th>Estado</th>
-                <td>{% if usuario.estado %}Yes{% else %}No{% endif %}</td>
+                <td>{% if usuario.estado %}Habilitado{% else %}Deshabilitado{% endif %}</td>
             </tr>
         </tbody>
 

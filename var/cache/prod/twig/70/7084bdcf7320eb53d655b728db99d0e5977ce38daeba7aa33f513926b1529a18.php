@@ -83,62 +83,18 @@ class __TwigTemplate_90c717f650e0fb9d817713dcf03c03a91ac409ec91bb2cbf3f11e7e986e
  <div class=\"menu-pelicula-border-black\">
                 <ul class=\"menu-pelicula-tab\">
                     <li class=\"active\"><a data-toggle=\"tab\" href=\"#totalvistas\">Administracion de usuarios&nbsp;</a></li>
-                    <li><a data-toggle=\"tab\" href=\"#ultimomes\">Informes</a></li>
                 </ul>
             </div>
 
             
             <div class=\"tab-content\">
                 <div id=\"totalvistas\" class=\"tab-pane fade in active\">
-                    <object width=\"100%\" height=\"1100\"  data=\"";
-        // line 27
+                    <object style=\"overflow-x:false;\" width=\"100%\" height=\"900\"  data=\"";
+        // line 26
         echo $this->env->getExtension('routing')->getUrl("usuarios_index");
         echo "\"></object>
-                    
                 </div>
-                <div id=\"ultimomes\" class=\"tab-pane fade\">
-                     <div class=\"alert alert-warning\" role=\"alert\"><strong>Warning!!</strong> Limitación de la API</div>
-                    <table class=\"table\">
-                        <thead>
-                          <tr>
-                           <td>Id de pelicula</td>
-                            <td>Id de usuario</td>
-                            <td>Fecha vista</td>
-                          </tr>
-                        </thead>
-                        <tbody>
-                         
-                          ";
-        // line 42
-        $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["peliculasultimomes"]) ? $context["peliculasultimomes"] : null));
-        foreach ($context['_seq'] as $context["_key"] => $context["pelicula"]) {
-            // line 43
-            echo "                              <tr>
-                                <th>";
-            // line 44
-            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "idPelicula", array()), "html", null, true);
-            echo "</th>
-                                <th>";
-            // line 45
-            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "idUsuario", array()), "html", null, true);
-            echo "</th>
-                                <th>";
-            // line 46
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["pelicula"], "fechaAdicionPelicula", array()), "m/d/Y"), "html", null, true);
-            echo "</th>
-                            </tr>
-                            ";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pelicula'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 49
-        echo "                         
-                        </tbody>
-                      </table>
-                </div>
-                
+
                 <div id=\"generosvistos\" class=\"tab-pane fade\">
                    
                 </div>
@@ -149,10 +105,10 @@ class __TwigTemplate_90c717f650e0fb9d817713dcf03c03a91ac409ec91bb2cbf3f11e7e986e
 ";
     }
 
-    // line 63
+    // line 38
     public function block_barraderecha($context, array $blocks = array())
     {
-        // line 64
+        // line 39
         echo "
 
 ";
@@ -170,7 +126,7 @@ class __TwigTemplate_90c717f650e0fb9d817713dcf03c03a91ac409ec91bb2cbf3f11e7e986e
 
     public function getDebugInfo()
     {
-        return array (  156 => 64,  153 => 63,  137 => 49,  128 => 46,  124 => 45,  120 => 44,  117 => 43,  113 => 42,  95 => 27,  82 => 16,  79 => 15,  73 => 14,  65 => 10,  61 => 8,  51 => 6,  48 => 5,  45 => 4,  42 => 3,  32 => 2,  11 => 1,);
+        return array (  112 => 39,  109 => 38,  94 => 26,  82 => 16,  79 => 15,  73 => 14,  65 => 10,  61 => 8,  51 => 6,  48 => 5,  45 => 4,  42 => 3,  32 => 2,  11 => 1,);
     }
 }
 /* {%extends 'index.html.twig'%}*/
@@ -192,40 +148,15 @@ class __TwigTemplate_90c717f650e0fb9d817713dcf03c03a91ac409ec91bb2cbf3f11e7e986e
 /*  <div class="menu-pelicula-border-black">*/
 /*                 <ul class="menu-pelicula-tab">*/
 /*                     <li class="active"><a data-toggle="tab" href="#totalvistas">Administracion de usuarios&nbsp;</a></li>*/
-/*                     <li><a data-toggle="tab" href="#ultimomes">Informes</a></li>*/
 /*                 </ul>*/
 /*             </div>*/
 /* */
 /*             */
 /*             <div class="tab-content">*/
 /*                 <div id="totalvistas" class="tab-pane fade in active">*/
-/*                     <object width="100%" height="1100"  data="{{url('usuarios_index')}}"></object>*/
-/*                     */
+/*                     <object style="overflow-x:false;" width="100%" height="900"  data="{{url('usuarios_index')}}"></object>*/
 /*                 </div>*/
-/*                 <div id="ultimomes" class="tab-pane fade">*/
-/*                      <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API</div>*/
-/*                     <table class="table">*/
-/*                         <thead>*/
-/*                           <tr>*/
-/*                            <td>Id de pelicula</td>*/
-/*                             <td>Id de usuario</td>*/
-/*                             <td>Fecha vista</td>*/
-/*                           </tr>*/
-/*                         </thead>*/
-/*                         <tbody>*/
-/*                          */
-/*                           {% for pelicula in peliculasultimomes %}*/
-/*                               <tr>*/
-/*                                 <th>{{pelicula.idPelicula}}</th>*/
-/*                                 <th>{{pelicula.idUsuario}}</th>*/
-/*                                 <th>{{pelicula.fechaAdicionPelicula |date("m/d/Y")}}</th>*/
-/*                             </tr>*/
-/*                             {% endfor %}*/
-/*                          */
-/*                         </tbody>*/
-/*                       </table>*/
-/*                 </div>*/
-/*                 */
+/* */
 /*                 <div id="generosvistos" class="tab-pane fade">*/
 /*                    */
 /*                 </div>*/

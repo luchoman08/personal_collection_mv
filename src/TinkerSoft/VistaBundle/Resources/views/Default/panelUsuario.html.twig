@@ -4,6 +4,13 @@
     {% if usuarioLogueado == 1  %}
 
             <a href="{{url('usuario')}}">{{nickname}}</a> | <a href="{{url('logout_action')}}">Salir</a>
+            {% if rol == 1  %}
+                <br/><a href="{{url('auditor')}}">Auditar</a>
+            {% endif %}
+            
+            {% if rol == 2  %}
+                <br/><a href="{{url('administrador')}}">Administrar</a>
+            {% endif %}
        
     {% else %} 
 
@@ -148,11 +155,11 @@
                             {% if pelicula.poster_path == "" %}
                                 <img {%if i == ((vistas|length)-1) %}
                                 class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
-                                {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}"> 
+                                {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}" valoracion ="-1" iterador="-1"> 
                                 {% else %}
                                 <img {%if i == ((vistas|length)-1) %}
                                 class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
-                                {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}">  
+                                {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}" valoracion ="-1" iterador="-1">  
                             {% endif %}
                             </a>
                         </div>
@@ -231,10 +238,10 @@
                 {% if pelicula.poster_path == "" %}
                 <img {%if i == ((pendientes|length)-1) %}
                     class="espacio-bot img-pendientes"; {%else%} class="img-pendientes";
-                    {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}"> {% else %}
+                    {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}" valoracion ="-1" iterador="-1"> {% else %}
                 <img {%if i == ((pendientes|length)-1) %}
                     class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
-                    {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}">   {% endif %}
+                    {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}" valoracion ="-1" iterador="-1">   {% endif %}
                     </a>
             </div>
             {% set i = i + 1 %}
@@ -249,13 +256,16 @@
             {% for pelicula in calificadas %}
             <div class="vistas-pendientes">
                  <a href="{{ url('homepage') }}vista/mostrarpelicula/{{pelicula.id}}" >
+                  
                 {% if pelicula.poster_path == "" %}
                 <img {%if i == ((calificadas|length)-1) %}
                     class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
-                    {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}"> {% else %}
+                    {%endif%} src="{{asset('assets/images/movie.png')}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}" valoracion ="{{pelicula.valoracion}}" iterador="{{i}}"> {% else %}
                 <img {%if i == ((calificadas|length)-1) %}
                     class="espacio-bot img-pendientes";  {%else%} class="img-pendientes";
-                    {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}">   {% endif %}
+                    {%endif%} src="https://image.tmdb.org/t/p/w185/{{pelicula.poster_path}}" height="278" width="185" alt="{{pelicula.title}}" synopsis="{{pelicula.overview}}" fechaAdicion="{{pelicula.fecha_adicion|date("d/m/Y")}}" valoracion ="{{pelicula.valoracion}}" iterador="{{i}}">
+                    
+                    {% endif %}
                     </a>
             </div>
             {% set i = i + 1 %}
@@ -283,6 +293,14 @@
     <div class="col-md-3 columna-index-boostrap" style="display:none;">
             <div id="bloqueDetalle" class="columna-index columna-index-top" >
             <img id="img-detalles" src=""  height="278" width="185" alt="..."><br/>
+            <br>
+            <center>
+            {%set i = 0%}
+            {%for pelicula in calificadas%}
+             <span style="display:none;" id="calificacionPersonal{{i}}" class="rateyo-readonly-widg estrellas"></span>
+             {%set i = i +1%}
+             {%endfor%}
+             </center>
             <label id="titulo-detalles" class="titulo-detalles">  ... </label><br/>
             <label id="fecha-detalles" class="fecha-detalles">  ... </label><br/>
             <label id="synopsis-detalles" class="synopsis-detalles">  ... </label>
@@ -295,13 +313,36 @@
 {%block javascripts%}
  {{ parent() }}
 <script>
-        
+      
+        {% set i = 0 %}
+     {% for pelicula in calificadas %}
+            $("#calificacionPersonal{{i}}").rateYo({
+                    
+                    readOnly: true,
+                    rating: {{pelicula.valoracion}},
+                    numStars: 10,
+                    precision: 10,
+                    minValue: 1,
+                    maxValue: 10
+                });
+          {% set i = i+1 %}      
+    {%endfor%}
         
         $(".img-pendientes").hover(function(){
+            $('.estrellas').attr("style","display:none; width:120px;");
             var imagen= $(this).attr("src");
             var titulo= $(this).attr("alt");
             var synopsis= $(this).attr("synopsis");
             var fecha= $(this).attr("fechaAdicion");
+            var valoracion= $(this).attr("valoracion");
+            var iterador= $(this).attr("iterador");
+            
+            if(iterador>-1){
+                
+                $('#calificacionPersonal'+iterador).attr("style","width:120px;");
+                
+            }
+            
             $("#img-detalles").attr("src", imagen);
             $("#img-detalles").attr("alt", titulo);
             $("#titulo-detalles").html("<strong>"+titulo+"</strong>");
@@ -497,6 +538,5 @@
     });
     {%endfor%}
     
-
     </script>   
 {%endblock%}

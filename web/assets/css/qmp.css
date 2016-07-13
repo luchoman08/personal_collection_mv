@@ -929,3 +929,36 @@
     padding-bottom: 15px;
     padding-right: 15px;
 }
+
+.btn-generarPDFS{
+    margin-bottom:10px;
+    
+}
+
+.registro{
+    max-width: 100%;
+}
+
+.registro > div{
+    border-width:0px;
+    border-style:solid;
+    border-color:black;
+}
+
+.saludo{
+    width: 50%;
+    float:left;
+}
+
+.formulario-registro{
+     max-width: 50%;
+     min-width:50%;
+     float:left;
+     padding-left:150px;
+}
+
+.saludo > img {
+    max-height:300px;
+    float:left;
+    padding-left:100px;
+}

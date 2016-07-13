@@ -6,17 +6,20 @@
     .fondo{
         background-image="";
     }
+    .table-responsive{
+        overflow-x:hidden;
+    }
 </style>
 {%endblock%}
 {% block body %}
-
+    
       <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading" >
                              <div style="float:right; margin-top:20px;">
                                 <a class ="btn btn-sm  btn-success" href="{{ path('usuarios_new') }}">Nuevo usuario</a>
                                 </div>
-                              <h1>Usuarios </h1>
+                              <h3>Usuarios </h3>
                              
                                 </div>
                         </div>
@@ -28,7 +31,7 @@
                                             <th>Nombres</th>
                                             <th>Apellidos</th>
                                             <th>Nickname</th>
-                                            <th>Correoelectronico</th>
+                                            <th>Correo Electronico</th>
                                             <th>Rol</th>
                                             <th>Estado</th>
                                             <th>Men&uacute;</th>
@@ -36,44 +39,42 @@
                                     </thead>
                                     <tbody>
                                          {% for usuario in usuarios %}
-            <tr>
-                <td>{{ usuario.nombres }}</td>
-                <td>{{ usuario.apellidos }}</td>
-                <td>{{ usuario.nickname }}</td>
-                <td>{{ usuario.correoElectronico }}</td>
-                <td>
-                        {% if usuario.rol == "0" %}
-                            Estandar
-                        {%endif%}
-                         {% if usuario.rol == "1" %}
-                            Auditor
-                        {%endif%}
-                         {% if usuario.rol == "2" %}
-                            Administrador
-                        {%endif%}
-                </td>
-                <td>{% if usuario.estado %}Habilitado{% else %}Deshabilitado{% endif %}</td>
-                <td>
-                   
-                        <div class="panel-heading">
-                            <a class="btn btn-primary btn-sm" style="float:left;" href="{{ path('usuarios_show', { 'id': usuario.id }) }}">Opciones</a>
-                         
-                 
-                            </div>
-                 
-                </td>
-            </tr>
-        {% endfor %}
+                                            <tr>
+                                                <td>{{ usuario.nombres }}</td>
+                                                <td>{{ usuario.apellidos }}</td>
+                                                <td>{{ usuario.nickname }}</td>
+                                                <td>{{ usuario.correoElectronico }}</td>
+                                                <td>
+                                                        {% if usuario.rol == "0" %}
+                                                            Estandar
+                                                        {%endif%}
+                                                         {% if usuario.rol == "1" %}
+                                                            Auditor
+                                                        {%endif%}
+                                                         {% if usuario.rol == "2" %}
+                                                            Administrador
+                                                        {%endif%}
+                                                </td>
+                                                <td>{% if usuario.estado %}Habilitado{% else %}Deshabilitado{% endif %}</td>
+                                                <td>
+                                                   
+                                                        <div class="panel-heading">
+                                                            <a class="btn btn-primary btn-sm" style="float:left;" href="{{ path('usuarios_show', { 'id': usuario.id }) }}">Opciones</a>
+                                                         
+                                                 
+                                                            </div>
+                                                 
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
 
                                     </tbody>
                                 </table>
                             </div>
                             
                         </div>
-                    </div>
                     <!--End Advanced Tables -->
  
-    
           
 
 {% endblock %}
@@ -83,8 +84,6 @@
 {%block javascripts%}
 {{parent()}}
  <!-- DATA TABLE SCRIPTS -->
- 
-
     <script src="{{asset('assets/js/jquery.dataTables.js')}}"></script>
     <script src="{{asset('assets/js/dataTables.bootstrap.js')}}"></script>
        

@@ -14,7 +14,7 @@ class PDF extends \FPDF{
     
     // Tabla coloreada
     function FancyTable($header, $data, $tamaño_columna)
-    {
+{
         // Colores, ancho de línea y fuente en negrita
         $this->SetFillColor(70,130,180);
         $this->SetTextColor(255);
@@ -88,14 +88,11 @@ class ReportesController extends Controller
         
     }
     
-    public function indexAction()
-    {
+    public function indexAction(){
         return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
     }
     
-    public function generarReportePeliculasVistasAction(Request $request){
-        $columnas = array('IDPelicula','Nombre película','Veces vista');
-        $tamaño_columna = array(25,130,25);
+    public function reportePeliculasVistas(Request $request){
         $em = $this->getDoctrine()->getManager();
         $vistas = $this->get('app.funciones_controler')->getPeliculasVistasContadasAuditor($em);
         
@@ -105,14 +102,31 @@ class ReportesController extends Controller
             $fila = array($vistas[$i]['idPelicula'],$movie['title'],$vistas[$i]['cantidad']);
             array_push($data,$fila);
         }
-        
-        $this->generarReporteAction("Películas vistas",$columnas,$data, $tamaño_columna);
-        return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
+        return $data;
     }
     
-    public function generarReportePeliculasVistasUsuariosAction(Request $request){
-        $columnas = array('IDPelicula','Nombre película','Fecha vista','@nickname');
-        $tamaño_columna = array(20,90,40,30);
+    public function generarReportePeliculasVistasAction(Request $request){
+        if($request->getSession()->get('id')){
+           if (!($request->getSession()->get('rol') == 1) ){
+               return $this->render('VistaBundle:Default:login.html.twig', array('error'=>3));
+           }else{
+                $columnas = array('IDPelicula','Nombre película','Veces vista');
+                $tamaño_columna = array(25,130,25);
+                
+                $this->generarReporteAction("Películas vistas",$columnas,$this->reportePeliculasVistas($request), $tamaño_columna);
+                return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
+           }
+        }else{
+            return $this->render('VistaBundle:Default:login.html.twig', array('error'=>3));
+            
+        }
+        
+        
+    }
+    
+    public function reportePeliculasVistasUsuarios(Request $request){
+        
+        
         $em = $this->getDoctrine()->getManager();
         $vistas = $this->get('app.funciones_controler')->getPeliculasVistaUsuariossAuditor($em);
         
@@ -123,13 +137,29 @@ class ReportesController extends Controller
             array_push($data,$fila);
         }
         
-        $this->generarReporteAction("Películas vistas por usuarios",$columnas,$data,$tamaño_columna);
-        return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
+        return $data;
     }
     
-    public function generarReportePeliculasVistasUsuariosGenerosUltimoMesAction(Request $request){
-         
-        $columnas = array('@nickname','Género visto');
+    public function generarReportePeliculasVistasUsuariosAction(Request $request){
+        if($request->getSession()->get('id')){
+           if (!($request->getSession()->get('rol') == 1) ){
+               return $this->render('VistaBundle:Default:login.html.twig', array('error'=>3));
+           }else{
+                $columnas = array('IDPelicula','Nombre película','Fecha vista','@nickname');
+                $tamaño_columna = array(20,90,40,30);
+                
+                $this->generarReporteAction("Películas vistas por usuarios",$columnas,$this->reportePeliculasVistasUsuarios($request),$tamaño_columna);
+                return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
+           }
+        }else{
+            return $this->render('VistaBundle:Default:login.html.twig', array('error'=>3));
+            
+        }
+        
+    }
+    
+    public function reportePeliculasVistasUsuariosGenerosUltimoMes(Request $request){
+        
         $em = $this->getDoctrine()->getManager();
         $vistas = $this->get('app.funciones_controler')->getPeliculasVistaUsuariossAuditor($em);
         
@@ -159,14 +189,27 @@ class ReportesController extends Controller
             }
         }
         
-        $this->generarReporteAction("Géneros vistos por los usuarios en el último mes",$columnas,$generos,array());
-        
-        return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
+        return $generos;
     }
     
-    public function generarReportePeliculasVistasUsuariosGenerosAction(Request $request){
-         
-        $columnas = array('@nickname','Género visto');
+    public function generarReportePeliculasVistasUsuariosGenerosUltimoMesAction(Request $request){
+         if($request->getSession()->get('id')){
+           if (!($request->getSession()->get('rol') == 1) ){
+               return $this->render('VistaBundle:Default:login.html.twig', array('error'=>3));
+           }else{
+                $columnas = array('@nickname','Género visto');
+        
+                $this->generarReporteAction("Géneros vistos por los usuarios en el último mes",$columnas,$this->reportePeliculasVistasUsuariosGenerosUltimoMes($request),array());
+                return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
+           }
+        }else{
+            return $this->render('VistaBundle:Default:login.html.twig', array('error'=>3));
+            
+        }
+        
+    }
+    
+    public function reportePeliculasVistasUsuariosGeneros(Request $request){
         $em = $this->getDoctrine()->getManager();
         $vistas = $this->get('app.funciones_controler')->getPeliculasVistaUsuariossAuditor($em);
         
@@ -181,14 +224,29 @@ class ReportesController extends Controller
             }
         }
         
-        $this->generarReporteAction("Géneros vistos por los usuarios",$columnas,$generos,array());
-        
-        return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
+        return $generos;
     }
     
-    public function generarReportePeliculasVistasUsuariosUltimoMesAction(Request $request){
-        $columnas = array('IDPelicula','Nombre película','Fecha vista','@nickname');
-        $tamaño_columna = array(20,90,40,30);
+    public function generarReportePeliculasVistasUsuariosGenerosAction(Request $request){
+        
+        if($request->getSession()->get('id')){
+           if (!($request->getSession()->get('rol') == 1) ){
+               return $this->render('VistaBundle:Default:login.html.twig', array('error'=>3));
+           }else{
+                $columnas = array('@nickname','Género visto');
+        
+                $this->generarReporteAction("Géneros vistos por los usuarios",$columnas,$this->reportePeliculasVistasUsuariosGeneros($request),array());
+                return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
+           }
+        }else{
+            return $this->render('VistaBundle:Default:login.html.twig', array('error'=>3));
+            
+        }
+        
+        
+    }
+    
+    public function reportePeliculasVistasUsuariosUltimoMes(Request $request){
         $em = $this->getDoctrine()->getManager();
         $vistas = $this->get('app.funciones_controler')->getPeliculasVistaUsuariossAuditor($em);
         
@@ -212,8 +270,26 @@ class ReportesController extends Controller
             array_push($data,$fila);
         }
         
-        $this->generarReporteAction("Películas vistas por usuario en el último mes",$columnas,$data,$tamaño_columna);
-        return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
+        return $data;
+    }
+    
+    public function generarReportePeliculasVistasUsuariosUltimoMesAction(Request $request){
+        if($request->getSession()->get('id')){
+           if (!($request->getSession()->get('rol') == 1) ){
+               return $this->render('VistaBundle:Default:login.html.twig', array('error'=>3));
+           }else{
+               $columnas = array('IDPelicula','Nombre película','Fecha vista','@nickname');
+                $tamaño_columna = array(20,90,40,30);
+                
+                
+                $this->generarReporteAction("Películas vistas por usuario en el último mes",$columnas,$this->reportePeliculasVistasUsuariosUltimoMes($request),$tamaño_columna);
+                return $this->render('TinkerSoftReportesBundle:Default:index.html.twig');
+           }
+        }else{
+            return $this->render('VistaBundle:Default:login.html.twig', array('error'=>3));
+            
+        }
+        
     }
  
 }

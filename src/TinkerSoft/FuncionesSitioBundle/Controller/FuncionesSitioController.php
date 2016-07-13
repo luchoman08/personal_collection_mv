@@ -14,16 +14,14 @@ use TinkerSoft\FuncionesSitioBundle\Entity\ValoracionPeliculas;
 
 class FuncionesSitioController extends Controller
 {
-    public function indexAction()
-    {
+    public function indexAction(){
         return $this->render('FuncionesSitioBundle:Default:index.html.twig');
         
         
     }
     
     
-    public function getPeliculasCalificadasUsuario(Request $request,$em)
-    {
+    public function getPeliculasCalificadasUsuario(Request $request,$em){
         if($request->getSession()->get('id')){ 
             $usuario = $this->getusuario($request,$em,$request->getSession()->get('id'));
             return $em->getRepository('FuncionesSitioBundle:ValoracionPeliculas')->
@@ -97,6 +95,7 @@ class FuncionesSitioController extends Controller
                     ORDER BY idUsuario DESC'
                 );
                 
+                
                 return $query->getResult();
                    
     }
@@ -130,8 +129,7 @@ class FuncionesSitioController extends Controller
     ya fue marcada como vista por el usuario
     logueado 
     */
-    public function preguntarPorPeliculaEnColeccionAction(Request $request, $idPelicula, $idColeccion, $em)
-    {
+    public function preguntarPorPeliculaEnColeccionAction(Request $request, $idPelicula, $idColeccion, $em){
         if($request->getSession()->get('id')){ 
         $objeto = $em->getRepository('FuncionesSitioBundle:PeliculasColeccion')->
         findOneBy(array('idColeccion'=>$idColeccion, 'idPelicula'=>$idPelicula));
@@ -144,8 +142,8 @@ class FuncionesSitioController extends Controller
         }
     }
     }
-     public function getPeliculaColeccionAction(Request $request, $idPelicula, $idColeccion, $em)
-    {
+    
+    public function getPeliculaColeccionAction(Request $request, $idPelicula, $idColeccion, $em){
         if($request->getSession()->get('id')){ 
         $objeto = $em->getRepository('FuncionesSitioBundle:PeliculasColeccion')->
         findOneBy(array('idColeccion'=>$idColeccion, 'idPelicula'=>$idPelicula));
@@ -161,6 +159,7 @@ class FuncionesSitioController extends Controller
          return $this->render('VistaBundle:Default:login.html.twig');
     }
     }
+    
     /*
     si le objeto existe, este se elimina y se retorna 0, en caso contrario se retorna 1
     */
@@ -244,7 +243,7 @@ class FuncionesSitioController extends Controller
     
     }
  
-     public function eliminarPeliculaColeccionPersonalizadaAction(Request $request){
+    public function eliminarPeliculaColeccionPersonalizadaAction(Request $request){
         
         if($request->getSession()->get('id')){
             /* 
@@ -304,8 +303,7 @@ class FuncionesSitioController extends Controller
         }
         
     }
-     public function preguntarPorPeliculaPorVerAction(Request $request, $idPelicula, $em)
-    {
+    public function preguntarPorPeliculaPorVerAction(Request $request, $idPelicula, $em){
         if($request->getSession()->get('id')){
         $idColeccionVistas = $this->getIdColeccionPorVer($request, $em);
         return $this->preguntarPorPeliculaEnColeccionAction($request, $idPelicula, $idColeccionVistas, $em);
@@ -315,8 +313,7 @@ class FuncionesSitioController extends Controller
     }
     }   
     
-    public function preguntarPorPeliculaVistaAction(Request $request, $idPelicula, $em)
-    {
+    public function preguntarPorPeliculaVistaAction(Request $request, $idPelicula, $em){
         if($request->getSession()->get('id')){
         $idColeccionVistas = $this->getIdColeccionVistas($request, $em);
         return $this->preguntarPorPeliculaEnColeccionAction($request, $idPelicula, $idColeccionVistas, $em);
@@ -325,13 +322,13 @@ class FuncionesSitioController extends Controller
          return $this->render('VistaBundle:Default:login.html.twig');
     }
     }
+    
     /*
     retorna el id de la coleccion vistas para el usuario logueado
     si no existe retorna -1
     */
     
-     public function getIdColeccionPorVer(Request $request, $em)
-    {
+    public function getIdColeccionPorVer(Request $request, $em){
         if($request->getSession()->get('id')){
            $id = $this->getIdColeccion($request, 'Peliculas por Ver', 1, $em);
            return $id;
@@ -341,8 +338,7 @@ class FuncionesSitioController extends Controller
         }
     }
     
-    public function getIdColeccionVistas(Request $request, $em)
-    {
+    public function getIdColeccionVistas(Request $request, $em){
         if($request->getSession()->get('id')){
            $id = $this->getIdColeccion($request, 'Peliculas Vistas', 0, $em);
            return $id;
@@ -351,6 +347,7 @@ class FuncionesSitioController extends Controller
             $this->redireccionErrorAction();
         }
     }
+   
     //retorna el id de la coleccion, si no existe retorna -1
     public function getIdColeccion(Request $request, $nombreColeccion, $tipo, $em){
         if($request->getSession()->get('id')){
@@ -374,8 +371,7 @@ class FuncionesSitioController extends Controller
         return $this->render('VistaBundle:Default:login.html.twig');   
     }
     
-    public function getColeccion(Request $request, $idColeccion, $em )
-    {
+    public function getColeccion(Request $request, $idColeccion, $em ){
         if($request->getSession()->get('id')){
         $coleccion = $em->getRepository('FuncionesSitioBundle:Coleccion')->findOneBy(array('id'=>$idColeccion));
         return $coleccion;
@@ -384,8 +380,8 @@ class FuncionesSitioController extends Controller
             $this->redireccionErrorAction();
         }
     }
-     public function adicionarPeliculaListaPorVerAction(Request $request)
-    {
+    
+     public function adicionarPeliculaListaPorVerAction(Request $request){
         if($request->getSession()->get('id')){
           $listaPorVer=$this->crearListaPorVerAction($request);
           $em = $this->getDoctrine()->getManager();
@@ -415,8 +411,7 @@ class FuncionesSitioController extends Controller
         }
     }
     
-    public function adicionarPeliculaListaVistasAction(Request $request)
-    {
+    public function adicionarPeliculaListaVistasAction(Request $request){
         
         if($request->getSession()->get('id')){
           $listaVistas=$this->crearListaVistasAction($request);
@@ -521,10 +516,7 @@ class FuncionesSitioController extends Controller
         }
     }
     
-    
-    
-     public function adicionarPeliculaListaAction($request, $idColeccion, $idPelicula)
-    {
+     public function adicionarPeliculaListaAction($request, $idColeccion, $idPelicula){
       if($request->getSession()->get('id')){   
         $em = $this->getDoctrine()->getManager();
         $objeto = $em->getRepository('FuncionesSitioBundle:PeliculasColeccion')->
@@ -557,8 +549,7 @@ class FuncionesSitioController extends Controller
     retorna objeto lista de peliculas vistas del usuario que indica
     el request
     */
-    public function crearListaPorVerAction(Request $request)
-    {
+    public function crearListaPorVerAction(Request $request){
     
      if($request->getSession()->get('id')){
         $em = $this->getDoctrine()->getManager();
@@ -579,6 +570,7 @@ class FuncionesSitioController extends Controller
                  return $this->render('VistaBundle:Default:login.html.twig');
         }
     }
+    
     /*entrada:
     {request-request-getSession()-get(id)}
     salida:
@@ -614,8 +606,7 @@ class FuncionesSitioController extends Controller
         }
     }
     
-    public function crearListaVistasAction(Request $request)
-    {
+    public function crearListaVistasAction(Request $request){
      if($request->getSession()->get('id')){
         $em = $this->getDoctrine()->getManager();
         $objeto = $em->getRepository('FuncionesSitioBundle:Coleccion')->
@@ -636,9 +627,7 @@ class FuncionesSitioController extends Controller
         }
     }
     
-    
-    public function listarPeliculasColeccion(Request $request, $em, $idColeccion)
-    {
+    public function listarPeliculasColeccion(Request $request, $em, $idColeccion){
      if($request->getSession()->get('id')){
       $objeto = $em->getRepository('FuncionesSitioBundle:PeliculasColeccion')->
         findBy(array('idColeccion'=>$idColeccion));
@@ -649,11 +638,9 @@ class FuncionesSitioController extends Controller
         }
     }
     
-    
     /* funcion general para crear cualquier lista */
     /* si existe el nombre de la lista para el usuario nado retorna 0, si no, crea la lista y retorna 1*/
-      public function crearListaAction($idUsuario, $nombreLista, $tipo)
-    {
+      public function crearListaAction($idUsuario, $nombreLista, $tipo){
         if($idUsuario){
         $em = $this->getDoctrine()->getManager();
         $objeto = $em->getRepository('FuncionesSitioBundle:Coleccion')->
@@ -680,11 +667,11 @@ class FuncionesSitioController extends Controller
                  return $this->render('VistaBundle:Default:login.html.twig');
         }
     }
+    
     /*entrada:
     {idPelicula}
     */
-    public function retornarCalificacionAction($idUsuario, $idPelicula, $em)
-    {
+    public function retornarCalificacionAction($idUsuario, $idPelicula, $em){
         if($idUsuario)
         {
         /*$em = $this->getDoctrine()->getManager();*/
@@ -709,9 +696,7 @@ class FuncionesSitioController extends Controller
         
     }
     
-    
-      public function calificarPeliculaAction(Request $request)
-    {
+    public function calificarPeliculaAction(Request $request){
  
  
             if($request->getSession()->get('id')){

@@ -38,7 +38,10 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
         // line 10
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["delete_form"]) ? $context["delete_form"] : null), 'form_start');
         echo "
-                             <a class=\"btn btn-primary btn-sm\" onclick=\"window.history.back();\">Atras</a>
+                             <a class=\"btn btn-primary btn-sm\" onclick=\"location.href = '";
+        // line 11
+        echo $this->env->getExtension('routing')->getUrl("usuarios_index");
+        echo "';\">Atras</a>
                              <a class=\"btn  btn-success btn-sm\"  href=\"";
         // line 12
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("usuarios_edit", array("id" => $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "id", array()))), "html", null, true);
@@ -53,70 +56,84 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
                               
                               
                            </div>
-                            <h1>Datos de usuario </h1>
+                            <h3>Datos de usuario </h3>
                         </div>
                         <div class=\"panel-body\">
                             <div class=\"table-responsive\">
                                 <table class=\"table table-striped table-bordered table-hover\" id=\"dataTables-example\">
                                     
   <tbody>
-            <tr>
-                <th>Id</th>
-                <td>";
-        // line 29
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "id", array()), "html", null, true);
-        echo "</td>
-            </tr>
+
             <tr>
                 <th>Nombres</th>
                 <td>";
-        // line 33
+        // line 30
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "nombres", array()), "html", null, true);
         echo "</td>
             </tr>
             <tr>
                 <th>Apellidos</th>
                 <td>";
-        // line 37
+        // line 34
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "apellidos", array()), "html", null, true);
         echo "</td>
             </tr>
             <tr>
                 <th>Nickname</th>
                 <td>";
-        // line 41
+        // line 38
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "nickname", array()), "html", null, true);
         echo "</td>
             </tr>
             <tr>
                 <th>Correoelectronico</th>
                 <td>";
-        // line 45
+        // line 42
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "correoElectronico", array()), "html", null, true);
         echo "</td>
             </tr>
             <tr>
                 <th>Password</th>
                 <td>";
-        // line 49
+        // line 46
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "password", array()), "html", null, true);
         echo "</td>
             </tr>
             <tr>
                 <th>Rol</th>
-                <td>";
-        // line 53
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "rol", array()), "html", null, true);
-        echo "</td>
+                <td>
+                    ";
+        // line 51
+        if (($this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "rol", array()) == 0)) {
+            // line 52
+            echo "                    Estandar
+                    ";
+        }
+        // line 54
+        echo "                    ";
+        if (($this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "rol", array()) == 1)) {
+            // line 55
+            echo "                    Auditor
+                    ";
+        }
+        // line 57
+        echo "                    ";
+        if (($this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "rol", array()) == 2)) {
+            // line 58
+            echo "                    Administrador
+                    ";
+        }
+        // line 60
+        echo "                </td>
             </tr>
             <tr>
                 <th>Estado</th>
                 <td>";
-        // line 57
+        // line 64
         if ($this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "estado", array())) {
-            echo "Yes";
+            echo "Habilitado";
         } else {
-            echo "No";
+            echo "Deshabilitado";
         }
         echo "</td>
             </tr>
@@ -152,7 +169,7 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
 
     public function getDebugInfo()
     {
-        return array (  116 => 57,  109 => 53,  102 => 49,  95 => 45,  88 => 41,  81 => 37,  74 => 33,  67 => 29,  51 => 16,  44 => 12,  39 => 10,  31 => 4,  28 => 3,  11 => 1,);
+        return array (  133 => 64,  127 => 60,  123 => 58,  120 => 57,  116 => 55,  113 => 54,  109 => 52,  107 => 51,  99 => 46,  92 => 42,  85 => 38,  78 => 34,  71 => 30,  54 => 16,  47 => 12,  43 => 11,  39 => 10,  31 => 4,  28 => 3,  11 => 1,);
     }
 }
 /* {% extends 'baseSinFondo.html.twig' %}*/
@@ -165,7 +182,7 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
 /*                           */
 /*                            <div style="float:right; margin-top:20px;">*/
 /*                             {{ form_start(delete_form) }}*/
-/*                              <a class="btn btn-primary btn-sm" onclick="window.history.back();">Atras</a>*/
+/*                              <a class="btn btn-primary btn-sm" onclick="location.href = '{{url('usuarios_index')}}';">Atras</a>*/
 /*                              <a class="btn  btn-success btn-sm"  href="{{ path('usuarios_edit', { 'id': usuario.id }) }}">Editar</a>&nbsp;*/
 /*                              <input class="btn  btn-danger btn-sm"  type="submit" value="Borrar">*/
 /* */
@@ -174,17 +191,14 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
 /*                               */
 /*                               */
 /*                            </div>*/
-/*                             <h1>Datos de usuario </h1>*/
+/*                             <h3>Datos de usuario </h3>*/
 /*                         </div>*/
 /*                         <div class="panel-body">*/
 /*                             <div class="table-responsive">*/
 /*                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">*/
 /*                                     */
 /*   <tbody>*/
-/*             <tr>*/
-/*                 <th>Id</th>*/
-/*                 <td>{{ usuario.id }}</td>*/
-/*             </tr>*/
+/* */
 /*             <tr>*/
 /*                 <th>Nombres</th>*/
 /*                 <td>{{ usuario.nombres }}</td>*/
@@ -207,11 +221,21 @@ class __TwigTemplate_f48b4c895089306c8154df84000e54253305f1c77ab6dc49cde2c5580de
 /*             </tr>*/
 /*             <tr>*/
 /*                 <th>Rol</th>*/
-/*                 <td>{{ usuario.rol }}</td>*/
+/*                 <td>*/
+/*                     {%if usuario.rol == 0%}*/
+/*                     Estandar*/
+/*                     {%endif%}*/
+/*                     {%if usuario.rol == 1%}*/
+/*                     Auditor*/
+/*                     {%endif%}*/
+/*                     {%if usuario.rol == 2%}*/
+/*                     Administrador*/
+/*                     {%endif%}*/
+/*                 </td>*/
 /*             </tr>*/
 /*             <tr>*/
 /*                 <th>Estado</th>*/
-/*                 <td>{% if usuario.estado %}Yes{% else %}No{% endif %}</td>*/
+/*                 <td>{% if usuario.estado %}Habilitado{% else %}Deshabilitado{% endif %}</td>*/
 /*             </tr>*/
 /*         </tbody>*/
 /* */

@@ -12,8 +12,10 @@ class __TwigTemplate_b6066491e8ce7ddfef9662b244e9e21eba5e4d8af7c5da167892fb18cc2
         $this->blocks = array(
             'title' => array($this, 'block_title'),
             'loginoptions' => array($this, 'block_loginoptions'),
+            'classcontenido' => array($this, 'block_classcontenido'),
             'contenido' => array($this, 'block_contenido'),
             'barraderecha' => array($this, 'block_barraderecha'),
+            'javascripts' => array($this, 'block_javascripts'),
         );
     }
 
@@ -68,6 +70,12 @@ class __TwigTemplate_b6066491e8ce7ddfef9662b244e9e21eba5e4d8af7c5da167892fb18cc2
         }
     }
 
+    // line 14
+    public function block_classcontenido($context, array $blocks = array())
+    {
+        echo "col-md-12 fondoContenido";
+    }
+
     // line 15
     public function block_contenido($context, array $blocks = array())
     {
@@ -75,87 +83,101 @@ class __TwigTemplate_b6066491e8ce7ddfef9662b244e9e21eba5e4d8af7c5da167892fb18cc2
         echo "
  <div class=\"menu-pelicula-border-black\">
                 <ul class=\"menu-pelicula-tab\">
-                    <li class=\"active\"><a data-toggle=\"tab\" href=\"#totalvistas\">Total de peliculas vistas&nbsp;</a></li>
+                    <li class=\"active\"><a data-toggle=\"tab\" href=\"#totalvistas\">Pel&iacute;culas vistas&nbsp;</a></li>
+                    <li><a data-toggle=\"tab\" href=\"#vistasUsuarios\">Vistas por los usuario&nbsp;</a></li>
                     <li><a data-toggle=\"tab\" href=\"#ultimomes\">Vistas en el último mes&nbsp;</a></li>
-                    <li><a data-toggle=\"tab\" href=\"#generosvistos\">Generos vistos&nbsp;</a></li>
+                    <li><a data-toggle=\"tab\" href=\"#generosvistos\">G&eacute;neros vistos&nbsp;</a></li>
+                    <li><a data-toggle=\"tab\" href=\"#generosvistosultimomes\">G&eacute;neros vistos en el &uacute;ltimo mes&nbsp;</a></li>
+                    
+                    
                 </ul>
             </div>
 
             
             <div class=\"tab-content\">
                 <div id=\"totalvistas\" class=\"tab-pane fade in active\">
-                     <div class=\"alert alert-warning\" role=\"alert\"><strong>Warning!!</strong> Limitación de la API</div>
-                    <table class=\"table\">
-                        <thead>
-                          <tr>
-                           <td>Id de pelicula</td>
-                            <td>Id de usuario</td>
-                            <td>Fecha vista</td>
-                          </tr>
-                        </thead>
-                        <tbody>
-                         
-                          ";
-        // line 39
+                    <div class=\"alert alert-warning\" role=\"alert\"><strong>Warning!!</strong> Limitación de la API </div>
+                    <button id=\"generarReportePeliculasVistas\" type=\"button\" class=\"btn btn-xs btn-default btn-generarPDFS\"> Generar reporte en PDF </button>
+                    
+                  
+                        
+                            <table class=\"table table-striped table-bordered table-hover\">
+                                <thead>
+                                  <tr>
+                                   <td>IDPelicula</td>
+                                    <td>Nombre película</td>
+                                    <td>Veces vista</td>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                 
+                                  ";
+        // line 47
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["peliculasvistas"]) ? $context["peliculasvistas"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["pelicula"]) {
-            // line 40
-            echo "                              <tr>
-                                <th>";
-            // line 41
-            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "idPelicula", array()), "html", null, true);
+            // line 48
+            echo "                                      <tr>
+                                        <th>";
+            // line 49
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], 0, array(), "array"), "html", null, true);
             echo "</th>
-                                <th>";
-            // line 42
-            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "idUsuario", array()), "html", null, true);
+                                        <th>";
+            // line 50
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], 1, array(), "array"), "html", null, true);
             echo "</th>
-                                <th>";
-            // line 43
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["pelicula"], "fechaAdicionPelicula", array()), "m/d/Y"), "html", null, true);
+                                        <th>";
+            // line 51
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], 2, array(), "array"), "html", null, true);
             echo "</th>
-                            </tr>
-                            ";
+                                    </tr>
+                                    ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pelicula'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 46
-        echo "                         
-                        </tbody>
-                      </table>
-                    
+        // line 54
+        echo "                                 
+                                </tbody>
+                              </table>
                 </div>
-                <div id=\"ultimomes\" class=\"tab-pane fade\">
-                     <div class=\"alert alert-warning\" role=\"alert\"><strong>Warning!!</strong> Limitación de la API</div>
-                    <table class=\"table\">
+                
+                <div id=\"vistasUsuarios\" class=\"tab-pane fade\">
+                   <div class=\"alert alert-warning\" role=\"alert\"><strong>Warning!!</strong> Limitación de la API</div>
+                    <button id=\"generarReportePeliculasVistasUsuarios\" type=\"button\" class=\"btn btn-xs btn-default btn-generarPDFS\"> Generar reporte en PDF </button>
+                    <table class=\"table table-striped table-bordered table-hover\">
                         <thead>
                           <tr>
-                           <td>Id de pelicula</td>
-                            <td>Id de usuario</td>
+                           <td>IDPel&iacute;cula</td>
+                            <td>Nombre pel&iacute;cula </td>
                             <td>Fecha vista</td>
+                            <td>@nickname</td>
                           </tr>
                         </thead>
                         <tbody>
                          
                           ";
-        // line 63
+        // line 73
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["peliculasultimomes"]) ? $context["peliculasultimomes"] : null));
+        $context['_seq'] = twig_ensure_traversable((isset($context["peliculasvistasusuarios"]) ? $context["peliculasvistasusuarios"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["pelicula"]) {
-            // line 64
+            // line 74
             echo "                              <tr>
                                 <th>";
-            // line 65
-            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "idPelicula", array()), "html", null, true);
+            // line 75
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], 0, array(), "array"), "html", null, true);
             echo "</th>
                                 <th>";
-            // line 66
-            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], "idUsuario", array()), "html", null, true);
+            // line 76
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], 1, array(), "array"), "html", null, true);
             echo "</th>
                                 <th>";
-            // line 67
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["pelicula"], "fechaAdicionPelicula", array()), "m/d/Y"), "html", null, true);
+            // line 77
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["pelicula"], 2, array(), "array"), "Y/m/d"), "html", null, true);
+            echo "</th>
+                                <th>";
+            // line 78
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], 3, array(), "array"), "html", null, true);
             echo "</th>
                             </tr>
                             ";
@@ -163,14 +185,137 @@ class __TwigTemplate_b6066491e8ce7ddfef9662b244e9e21eba5e4d8af7c5da167892fb18cc2
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pelicula'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 70
+        // line 81
+        echo "                         
+                        </tbody>
+                      </table>
+                </div>
+                
+                <div id=\"ultimomes\" class=\"tab-pane fade\">
+                    <div class=\"alert alert-warning\" role=\"alert\"><strong>Warning!!</strong> Limitación de la API</div>
+                    <button id=\"generarReportePeliculasVistasUltimoMes\" type=\"button\" class=\"btn btn-xs btn-default btn-generarPDFS\"> Generar reporte en PDF </button>
+                    <table class=\"table table-striped table-bordered table-hover\">
+                        <thead>
+                          <tr>
+                           <td>IDPel&iacute;cula</td>
+                            <td>Nombre pel&iacute;cula </td>
+                            <td>Fecha vista</td>
+                            <td>@nickname</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                         
+                          ";
+        // line 100
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["peliculasultimomes"]) ? $context["peliculasultimomes"] : null));
+        foreach ($context['_seq'] as $context["_key"] => $context["pelicula"]) {
+            // line 101
+            echo "                              <tr>
+                                <th>";
+            // line 102
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], 0, array(), "array"), "html", null, true);
+            echo "</th>
+                                <th>";
+            // line 103
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], 1, array(), "array"), "html", null, true);
+            echo "</th>
+                                <th>";
+            // line 104
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["pelicula"], 2, array(), "array"), "Y/m/d"), "html", null, true);
+            echo "</th>
+                                <th>";
+            // line 105
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], 3, array(), "array"), "html", null, true);
+            echo "</th>
+                            </tr>
+                            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pelicula'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 108
         echo "                         
                         </tbody>
                       </table>
                 </div>
                 
                 <div id=\"generosvistos\" class=\"tab-pane fade\">
-                   
+                   <div class=\"alert alert-warning\" role=\"alert\"><strong>Warning!!</strong> Limitación de la API</div>
+                    <button id=\"generarReportePeliculasGenerosVistos\" type=\"button\" class=\"btn btn-xs btn-default btn-generarPDFS\"> Generar reporte en PDF </button>
+                    <table class=\"table table-striped table-bordered table-hover\">
+                        <thead>
+                          <tr>
+                           <td>@nickname</td>
+                            <td>G&eacute;nero visto</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                         
+                          ";
+        // line 125
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["generosvistos"]) ? $context["generosvistos"] : null));
+        foreach ($context['_seq'] as $context["_key"] => $context["pelicula"]) {
+            // line 126
+            echo "                              <tr>
+                                <th>";
+            // line 127
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], 0, array(), "array"), "html", null, true);
+            echo "</th>
+                                <th>";
+            // line 128
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], 1, array(), "array"), "html", null, true);
+            echo "</th>
+                            </tr>
+                            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pelicula'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 131
+        echo "                         
+                        </tbody>
+                      </table>
+                </div>
+                
+                <div id=\"generosvistosultimomes\" class=\"tab-pane fade\">
+                   <div class=\"alert alert-warning\" role=\"alert\"><strong>Warning!!</strong> Limitación de la API</div>
+                    <button id=\"generarReportePeliculasGenerosVistosUltimoMes\" type=\"button\" class=\"btn btn-xs btn-default btn-generarPDFS\"> Generar reporte en PDF </button>
+                    <table class=\"table table-striped table-bordered table-hover\">
+                        <thead>
+                          <tr>
+                           <td>@nickname</td>
+                            <td>G&eacute;nero visto</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                         
+                          ";
+        // line 148
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["generosultimomes"]) ? $context["generosultimomes"] : null));
+        foreach ($context['_seq'] as $context["_key"] => $context["pelicula"]) {
+            // line 149
+            echo "                              <tr>
+                                <th>";
+            // line 150
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], 0, array(), "array"), "html", null, true);
+            echo "</th>
+                                <th>";
+            // line 151
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pelicula"], 1, array(), "array"), "html", null, true);
+            echo "</th>
+                            </tr>
+                            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pelicula'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 154
+        echo "                         
+                        </tbody>
+                      </table>
                 </div>
                
           
@@ -179,24 +324,93 @@ class __TwigTemplate_b6066491e8ce7ddfef9662b244e9e21eba5e4d8af7c5da167892fb18cc2
 ";
     }
 
-    // line 84
+    // line 164
     public function block_barraderecha($context, array $blocks = array())
     {
-        // line 85
+        // line 165
         echo "
-    <div class=\"col-md-3 columna-index-boostrap\">
-        <div class=\"columna-index\">
-            
-            <label>";
-        // line 89
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "nombres", array()), "html", null, true);
-        echo " ";
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "apellidos", array()), "html", null, true);
-        echo "</label>
-            
-        </div>
-    </div>
 
+";
+    }
+
+    // line 169
+    public function block_javascripts($context, array $blocks = array())
+    {
+        // line 170
+        echo "<script>
+ \$(\"#generarReportePeliculasVistas\").click(function () {
+                 
+                    var url = \"";
+        // line 173
+        echo $this->env->getExtension('routing')->getUrl("tinker_soft_reportes_vistas_homepage");
+        echo "\";
+                    window.location.href =url;
+        
+            });
+
+ \$(\"#generarReportePeliculasVistasUsuarios\").click(function () {
+                 
+                    var url = \"";
+        // line 180
+        echo $this->env->getExtension('routing')->getUrl("tinker_soft_reportes_vistas_usuarios_homepage");
+        echo "\";
+                    window.location.href =url;
+        
+            });
+            
+ \$(\"#generarReportePeliculasVistasUltimoMes\").click(function () {
+                 
+                    var url = \"";
+        // line 187
+        echo $this->env->getExtension('routing')->getUrl("tinker_soft_reportes_vistas_usuarios_ultimo_mes_homepage");
+        echo "\";
+                    window.location.href =url;
+        
+            });
+
+ \$(\"#generarReportePeliculasGenerosVistos\").click(function () {
+                 
+                    var url = \"";
+        // line 194
+        echo $this->env->getExtension('routing')->getUrl("tinker_soft_reportes_vistas_usuarios_genero_homepage");
+        echo "\";
+                    window.location.href =url;
+        
+            });
+
+ \$(\"#generarReportePeliculasGenerosVistosUltimoMes\").click(function () {
+                 
+                    var url = \"";
+        // line 201
+        echo $this->env->getExtension('routing')->getUrl("tinker_soft_reportes_vistas_usuarios_genero_ultimo_mes_homepage");
+        echo "\";
+                    window.location.href =url;
+        
+            });
+
+
+
+</script>
+
+ ";
+        // line 210
+        $this->displayParentBlock("javascripts", $context, $blocks);
+        echo "
+  <script src=\"";
+        // line 211
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/js/jquery.dataTables.js"), "html", null, true);
+        echo "\"></script>
+    <script src=\"";
+        // line 212
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/js/dataTables.bootstrap.js"), "html", null, true);
+        echo "\"></script>
+    
+       
+     <script>
+            \$(document).ready(function () {
+                \$('.table').dataTable();
+            });
+    </script>
 ";
     }
 
@@ -212,7 +426,7 @@ class __TwigTemplate_b6066491e8ce7ddfef9662b244e9e21eba5e4d8af7c5da167892fb18cc2
 
     public function getDebugInfo()
     {
-        return array (  192 => 89,  186 => 85,  183 => 84,  167 => 70,  158 => 67,  154 => 66,  150 => 65,  147 => 64,  143 => 63,  124 => 46,  115 => 43,  111 => 42,  107 => 41,  104 => 40,  100 => 39,  75 => 16,  72 => 15,  64 => 10,  60 => 8,  50 => 6,  47 => 5,  44 => 4,  41 => 3,  31 => 2,  11 => 1,);
+        return array (  405 => 212,  401 => 211,  397 => 210,  385 => 201,  375 => 194,  365 => 187,  355 => 180,  345 => 173,  340 => 170,  337 => 169,  331 => 165,  328 => 164,  316 => 154,  307 => 151,  303 => 150,  300 => 149,  296 => 148,  277 => 131,  268 => 128,  264 => 127,  261 => 126,  257 => 125,  238 => 108,  229 => 105,  225 => 104,  221 => 103,  217 => 102,  214 => 101,  210 => 100,  189 => 81,  180 => 78,  176 => 77,  172 => 76,  168 => 75,  165 => 74,  161 => 73,  140 => 54,  131 => 51,  127 => 50,  123 => 49,  120 => 48,  116 => 47,  83 => 16,  80 => 15,  74 => 14,  66 => 10,  62 => 8,  52 => 6,  49 => 5,  46 => 4,  43 => 3,  33 => 2,  11 => 1,);
     }
 }
 /* {%extends 'index.html.twig'%}*/
@@ -228,60 +442,98 @@ class __TwigTemplate_b6066491e8ce7ddfef9662b244e9e21eba5e4d8af7c5da167892fb18cc2
 /*     */
 /*     {% endif %}*/
 /* {% endblock %}*/
-/* */
+/* {% block classcontenido %}col-md-12 fondoContenido{% endblock %}*/
 /* {% block contenido %}*/
 /* */
 /*  <div class="menu-pelicula-border-black">*/
 /*                 <ul class="menu-pelicula-tab">*/
-/*                     <li class="active"><a data-toggle="tab" href="#totalvistas">Total de peliculas vistas&nbsp;</a></li>*/
+/*                     <li class="active"><a data-toggle="tab" href="#totalvistas">Pel&iacute;culas vistas&nbsp;</a></li>*/
+/*                     <li><a data-toggle="tab" href="#vistasUsuarios">Vistas por los usuario&nbsp;</a></li>*/
 /*                     <li><a data-toggle="tab" href="#ultimomes">Vistas en el último mes&nbsp;</a></li>*/
-/*                     <li><a data-toggle="tab" href="#generosvistos">Generos vistos&nbsp;</a></li>*/
+/*                     <li><a data-toggle="tab" href="#generosvistos">G&eacute;neros vistos&nbsp;</a></li>*/
+/*                     <li><a data-toggle="tab" href="#generosvistosultimomes">G&eacute;neros vistos en el &uacute;ltimo mes&nbsp;</a></li>*/
+/*                     */
+/*                     */
 /*                 </ul>*/
 /*             </div>*/
 /* */
 /*             */
 /*             <div class="tab-content">*/
 /*                 <div id="totalvistas" class="tab-pane fade in active">*/
-/*                      <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API</div>*/
-/*                     <table class="table">*/
+/*                     <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API </div>*/
+/*                     <button id="generarReportePeliculasVistas" type="button" class="btn btn-xs btn-default btn-generarPDFS"> Generar reporte en PDF </button>*/
+/*                     */
+/*                   */
+/*                         */
+/*                             <table class="table table-striped table-bordered table-hover">*/
+/*                                 <thead>*/
+/*                                   <tr>*/
+/*                                    <td>IDPelicula</td>*/
+/*                                     <td>Nombre película</td>*/
+/*                                     <td>Veces vista</td>*/
+/*                                   </tr>*/
+/*                                 </thead>*/
+/*                                 <tbody>*/
+/*                                  */
+/*                                   {% for pelicula in peliculasvistas %}*/
+/*                                       <tr>*/
+/*                                         <th>{{pelicula[0]}}</th>*/
+/*                                         <th>{{pelicula[1]}}</th>*/
+/*                                         <th>{{pelicula[2]}}</th>*/
+/*                                     </tr>*/
+/*                                     {% endfor %}*/
+/*                                  */
+/*                                 </tbody>*/
+/*                               </table>*/
+/*                 </div>*/
+/*                 */
+/*                 <div id="vistasUsuarios" class="tab-pane fade">*/
+/*                    <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API</div>*/
+/*                     <button id="generarReportePeliculasVistasUsuarios" type="button" class="btn btn-xs btn-default btn-generarPDFS"> Generar reporte en PDF </button>*/
+/*                     <table class="table table-striped table-bordered table-hover">*/
 /*                         <thead>*/
 /*                           <tr>*/
-/*                            <td>Id de pelicula</td>*/
-/*                             <td>Id de usuario</td>*/
+/*                            <td>IDPel&iacute;cula</td>*/
+/*                             <td>Nombre pel&iacute;cula </td>*/
 /*                             <td>Fecha vista</td>*/
+/*                             <td>@nickname</td>*/
 /*                           </tr>*/
 /*                         </thead>*/
 /*                         <tbody>*/
 /*                          */
-/*                           {% for pelicula in peliculasvistas %}*/
+/*                           {% for pelicula in peliculasvistasusuarios %}*/
 /*                               <tr>*/
-/*                                 <th>{{pelicula.idPelicula}}</th>*/
-/*                                 <th>{{pelicula.idUsuario}}</th>*/
-/*                                 <th>{{pelicula.fechaAdicionPelicula |date("m/d/Y")}}</th>*/
+/*                                 <th>{{pelicula[0]}}</th>*/
+/*                                 <th>{{pelicula[1]}}</th>*/
+/*                                 <th>{{pelicula[2] |date("Y/m/d")}}</th>*/
+/*                                 <th>{{pelicula[3]}}</th>*/
 /*                             </tr>*/
 /*                             {% endfor %}*/
 /*                          */
 /*                         </tbody>*/
 /*                       </table>*/
-/*                     */
 /*                 </div>*/
+/*                 */
 /*                 <div id="ultimomes" class="tab-pane fade">*/
-/*                      <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API</div>*/
-/*                     <table class="table">*/
+/*                     <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API</div>*/
+/*                     <button id="generarReportePeliculasVistasUltimoMes" type="button" class="btn btn-xs btn-default btn-generarPDFS"> Generar reporte en PDF </button>*/
+/*                     <table class="table table-striped table-bordered table-hover">*/
 /*                         <thead>*/
 /*                           <tr>*/
-/*                            <td>Id de pelicula</td>*/
-/*                             <td>Id de usuario</td>*/
+/*                            <td>IDPel&iacute;cula</td>*/
+/*                             <td>Nombre pel&iacute;cula </td>*/
 /*                             <td>Fecha vista</td>*/
+/*                             <td>@nickname</td>*/
 /*                           </tr>*/
 /*                         </thead>*/
 /*                         <tbody>*/
 /*                          */
 /*                           {% for pelicula in peliculasultimomes %}*/
 /*                               <tr>*/
-/*                                 <th>{{pelicula.idPelicula}}</th>*/
-/*                                 <th>{{pelicula.idUsuario}}</th>*/
-/*                                 <th>{{pelicula.fechaAdicionPelicula |date("m/d/Y")}}</th>*/
+/*                                 <th>{{pelicula[0]}}</th>*/
+/*                                 <th>{{pelicula[1]}}</th>*/
+/*                                 <th>{{pelicula[2] |date("Y/m/d")}}</th>*/
+/*                                 <th>{{pelicula[3]}}</th>*/
 /*                             </tr>*/
 /*                             {% endfor %}*/
 /*                          */
@@ -290,7 +542,49 @@ class __TwigTemplate_b6066491e8ce7ddfef9662b244e9e21eba5e4d8af7c5da167892fb18cc2
 /*                 </div>*/
 /*                 */
 /*                 <div id="generosvistos" class="tab-pane fade">*/
-/*                    */
+/*                    <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API</div>*/
+/*                     <button id="generarReportePeliculasGenerosVistos" type="button" class="btn btn-xs btn-default btn-generarPDFS"> Generar reporte en PDF </button>*/
+/*                     <table class="table table-striped table-bordered table-hover">*/
+/*                         <thead>*/
+/*                           <tr>*/
+/*                            <td>@nickname</td>*/
+/*                             <td>G&eacute;nero visto</td>*/
+/*                           </tr>*/
+/*                         </thead>*/
+/*                         <tbody>*/
+/*                          */
+/*                           {% for pelicula in generosvistos %}*/
+/*                               <tr>*/
+/*                                 <th>{{pelicula[0]}}</th>*/
+/*                                 <th>{{pelicula[1]}}</th>*/
+/*                             </tr>*/
+/*                             {% endfor %}*/
+/*                          */
+/*                         </tbody>*/
+/*                       </table>*/
+/*                 </div>*/
+/*                 */
+/*                 <div id="generosvistosultimomes" class="tab-pane fade">*/
+/*                    <div class="alert alert-warning" role="alert"><strong>Warning!!</strong> Limitación de la API</div>*/
+/*                     <button id="generarReportePeliculasGenerosVistosUltimoMes" type="button" class="btn btn-xs btn-default btn-generarPDFS"> Generar reporte en PDF </button>*/
+/*                     <table class="table table-striped table-bordered table-hover">*/
+/*                         <thead>*/
+/*                           <tr>*/
+/*                            <td>@nickname</td>*/
+/*                             <td>G&eacute;nero visto</td>*/
+/*                           </tr>*/
+/*                         </thead>*/
+/*                         <tbody>*/
+/*                          */
+/*                           {% for pelicula in generosultimomes %}*/
+/*                               <tr>*/
+/*                                 <th>{{pelicula[0]}}</th>*/
+/*                                 <th>{{pelicula[1]}}</th>*/
+/*                             </tr>*/
+/*                             {% endfor %}*/
+/*                          */
+/*                         </tbody>*/
+/*                       </table>*/
 /*                 </div>*/
 /*                */
 /*           */
@@ -300,14 +594,59 @@ class __TwigTemplate_b6066491e8ce7ddfef9662b244e9e21eba5e4d8af7c5da167892fb18cc2
 /* */
 /* {% block barraderecha %}*/
 /* */
-/*     <div class="col-md-3 columna-index-boostrap">*/
-/*         <div class="columna-index">*/
-/*             */
-/*             <label>{{ usuario.nombres }} {{ usuario.apellidos }}</label>*/
-/*             */
-/*         </div>*/
-/*     </div>*/
 /* */
 /* {% endblock %}*/
 /* */
+/* {%block javascripts%}*/
+/* <script>*/
+/*  $("#generarReportePeliculasVistas").click(function () {*/
+/*                  */
+/*                     var url = "{{url('tinker_soft_reportes_vistas_homepage')}}";*/
+/*                     window.location.href =url;*/
+/*         */
+/*             });*/
+/* */
+/*  $("#generarReportePeliculasVistasUsuarios").click(function () {*/
+/*                  */
+/*                     var url = "{{url('tinker_soft_reportes_vistas_usuarios_homepage')}}";*/
+/*                     window.location.href =url;*/
+/*         */
+/*             });*/
+/*             */
+/*  $("#generarReportePeliculasVistasUltimoMes").click(function () {*/
+/*                  */
+/*                     var url = "{{url('tinker_soft_reportes_vistas_usuarios_ultimo_mes_homepage')}}";*/
+/*                     window.location.href =url;*/
+/*         */
+/*             });*/
+/* */
+/*  $("#generarReportePeliculasGenerosVistos").click(function () {*/
+/*                  */
+/*                     var url = "{{url('tinker_soft_reportes_vistas_usuarios_genero_homepage')}}";*/
+/*                     window.location.href =url;*/
+/*         */
+/*             });*/
+/* */
+/*  $("#generarReportePeliculasGenerosVistosUltimoMes").click(function () {*/
+/*                  */
+/*                     var url = "{{url('tinker_soft_reportes_vistas_usuarios_genero_ultimo_mes_homepage')}}";*/
+/*                     window.location.href =url;*/
+/*         */
+/*             });*/
+/* */
+/* */
+/* */
+/* </script>*/
+/* */
+/*  {{ parent() }}*/
+/*   <script src="{{asset('assets/js/jquery.dataTables.js')}}"></script>*/
+/*     <script src="{{asset('assets/js/dataTables.bootstrap.js')}}"></script>*/
+/*     */
+/*        */
+/*      <script>*/
+/*             $(document).ready(function () {*/
+/*                 $('.table').dataTable();*/
+/*             });*/
+/*     </script>*/
+/* {%endblock%}*/
 /* */

@@ -46,13 +46,37 @@ class UsuariosController extends Controller
         $usuario = new Usuarios();
         $form = $this->createForm('TinkerSoft\UsuariosBundle\Form\UsuariosType', $usuario);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $objeto = $em->getRepository('FuncionesSitioBundle:Usuarios')->
+            findOneBy(array('nickname'=>$usuario->getNickname()));
+            
+            if($objeto){
+             return $this->render('usuarios/new.html.twig', array(
+            'usuario' => $usuario,
+            'form' => $form->createView(),
+            'error'=> 1,
+        ));
+            }
+            $objeto = null;
+            
+             $objeto = $em->getRepository('FuncionesSitioBundle:Usuarios')->
+            findOneBy(array('correoElectronico'=>$usuario->getCorreoElectronico()));
+            
+            if($objeto){
+             return $this->render('usuarios/new.html.twig', array(
+            'usuario' => $usuario,
+            'form' => $form->createView(),
+            'error'=> 2,
+        ));
+            }
+            
+            else{
             $em->persist($usuario);
             $em->flush();
 
             return $this->redirectToRoute('usuarios_show', array('id' => $usuario->getId()));
+            }
         }
 
         return $this->render('usuarios/new.html.twig', array(
@@ -68,10 +92,55 @@ class UsuariosController extends Controller
 /*registro por parte de los usuarios estandard*/
     public function registroAction(Request $request)
     {
+
         $usuario = new Usuarios();
         $form = $this->createForm('TinkerSoft\UsuariosBundle\Form\UsuariosEstandarType', $usuario);
         $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $objeto = $em->getRepository('FuncionesSitioBundle:Usuarios')->
+            findOneBy(array('nickname'=>$usuario->getNickname()));
+            
+            if($objeto){
+             return $this->render('usuarios/newEstandar.html.twig', array(
+            'usuario' => $usuario,
+            'form' => $form->createView(),
+            'error'=> 1,
+        ));
+            }
+            $objeto = null;
+            
+             $objeto = $em->getRepository('FuncionesSitioBundle:Usuarios')->
+            findOneBy(array('correoElectronico'=>$usuario->getCorreoElectronico()));
+            
+            if($objeto){
+             return $this->render('usuarios/newEstandar.html.twig', array(
+            'usuario' => $usuario,
+            'form' => $form->createView(),
+            'error'=> 2,
+        ));
+            }
+            
+            else{
+            $em->persist($usuario);
+            $em->flush();
 
+            return $this->render('VistaBundle:Default:login.html.twig', array('new'=>1));
+            }
+        }
+
+        return $this->render('usuarios/newEstandar.html.twig', array(
+            'usuario' => $usuario,
+            'form' => $form->createView(),
+        ));
+
+
+            return $this->render('VistaBundle:Default:login.html.twig', array('new'=>1));
+        
+        }
+        
+        
+/*
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($usuario);
@@ -79,13 +148,7 @@ class UsuariosController extends Controller
 
                return $this->redirect($this->generateUrl('login'));    
         }
-
-               return $this->render('usuarios/newEstandar.html.twig', array(
-            'usuario' => $usuario,
-            'form' => $form->createView(),
-        ));
-    }
-
+*/
 
     /**
      * Finds and displays a Usuarios entity.
@@ -130,7 +193,7 @@ class UsuariosController extends Controller
      */
     public function editAction(Request $request, Usuarios $usuario)
     {
-         if($request->getSession()->get('rol')==2 ){
+                 if($request->getSession()->get('rol')==2 ){
        
         $deleteForm = $this->createDeleteForm($usuario);
         $editForm = $this->createForm('TinkerSoft\UsuariosBundle\Form\UsuariosType', $usuario);
@@ -138,8 +201,17 @@ class UsuariosController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($usuario);
             $em->flush();
+            
+
+             return $this->render('usuarios/edit.html.twig', array(
+            'usuario' => $usuario,
+            'edit_form' => $editForm->createView(),
+            'accion'=>1,
+            'delete_form' => $deleteForm->createView(),
+        ));
 
             return $this->redirectToRoute('usuarios_edit', array('id' => $usuario->getId()));
         }
@@ -156,7 +228,7 @@ class UsuariosController extends Controller
     }
    public function editEstandarAction(Request $request, Usuarios $usuario)
     {
-         if($request->getSession()->get('rol')==2 or $request->getSession()->get('id') == $usuario->getId()){
+         if($request->getSession()->get('id')==$usuario->getId()){   
        
         $deleteForm = $this->createDeleteForm($usuario);
         $editForm = $this->createForm('TinkerSoft\UsuariosBundle\Form\UsuariosEstandarType', $usuario);
@@ -167,7 +239,12 @@ class UsuariosController extends Controller
             $em->persist($usuario);
             $em->flush();
 
-            return $this->redirectToRoute('usuarios_edit_estandar', array('id' => $usuario->getId()));
+            return $this->render('usuarios/editEstandar.html.twig', array('id' => $usuario->getId(),
+            'usuario' => $usuario,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+            'accion'=>1,
+            ));
         }
 
         return $this->render('usuarios/editEstandar.html.twig', array(

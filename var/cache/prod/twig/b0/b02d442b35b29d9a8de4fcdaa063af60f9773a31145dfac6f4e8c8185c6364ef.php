@@ -125,6 +125,16 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 \t\t\t\t\t";
         }
         // line 53
+        echo "\t\t\t\t\t";
+        if (((isset($context["new"]) ? $context["new"] : null) == 1)) {
+            // line 54
+            echo "\t\t\t\t\t<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+  \t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+  \t\t\t\t\t<strong>Aviso!</strong> Su nueva cuenta ha sido creada 
+\t\t\t\t\t</div>
+\t\t\t\t\t";
+        }
+        // line 59
         echo "\t\t\t\t<form method = \"POST\" action=\"";
         echo $this->env->getExtension('routing')->getUrl("login_action");
         echo "\">
@@ -136,15 +146,15 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 \t\t\t\t\t\t<span>Contraseña<label>*</label></span>
 \t\t\t\t\t\t<input id=\"password\" name=\"password\" type=\"password\"  required> 
 \t\t\t\t\t  </div>
-\t\t\t\t\t  <a class=\"forgot\" href=\"#\">Olvidó su contraseña?</a>
-\t\t\t\t\t  <input type=\"submit\" value=\"Iniciar sesión\">
+\t\t\t\t\t  <!--<a class=\"forgot\" href=\"#\">Olvidó su contraseña?</a>-->
+\t\t\t\t\t  <center><input type=\"submit\" value=\"Iniciar sesión\"></center>
 \t\t\t\t    </form>
 \t\t\t\t   </div>\t
 \t\t\t\t  
 \t\t\t     </div>
 \t   
 \t";
-        // line 69
+        // line 75
         $this->displayBlock('barraderecha', $context, $blocks);
     }
 
@@ -164,7 +174,7 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 
     public function getDebugInfo()
     {
-        return array (  148 => 69,  128 => 53,  121 => 48,  118 => 47,  111 => 42,  108 => 41,  101 => 36,  99 => 35,  96 => 34,  89 => 29,  87 => 28,  79 => 23,  72 => 18,  69 => 17,  64 => 16,  58 => 15,  51 => 12,  47 => 11,  38 => 5,  35 => 4,  32 => 3,  11 => 1,);
+        return array (  158 => 75,  138 => 59,  131 => 54,  128 => 53,  121 => 48,  118 => 47,  111 => 42,  108 => 41,  101 => 36,  99 => 35,  96 => 34,  89 => 29,  87 => 28,  79 => 23,  72 => 18,  69 => 17,  64 => 16,  58 => 15,  51 => 12,  47 => 11,  38 => 5,  35 => 4,  32 => 3,  11 => 1,);
     }
 }
 /* {% extends 'index.html.twig' %}*/
@@ -219,6 +229,12 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 /*   					<strong>Error!</strong> Su cuenta fue desactivada por un administrador */
 /* 					</div>*/
 /* 					{%endif%}*/
+/* 					{%if new == 1%}*/
+/* 					<div class="alert alert-success alert-dismissible" role="alert">*/
+/*   					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>*/
+/*   					<strong>Aviso!</strong> Su nueva cuenta ha sido creada */
+/* 					</div>*/
+/* 					{%endif%}*/
 /* 				<form method = "POST" action="{{url('login_action')}}">*/
 /* 					  <div>*/
 /* 						<span>Correo electrónico<label>*</label></span>*/
@@ -228,8 +244,8 @@ class __TwigTemplate_ee9fca4b0b56e08cb26d41ac8fe4b144b7cb3f20eeaed28089bcc07daff
 /* 						<span>Contraseña<label>*</label></span>*/
 /* 						<input id="password" name="password" type="password"  required> */
 /* 					  </div>*/
-/* 					  <a class="forgot" href="#">Olvidó su contraseña?</a>*/
-/* 					  <input type="submit" value="Iniciar sesión">*/
+/* 					  <!--<a class="forgot" href="#">Olvidó su contraseña?</a>-->*/
+/* 					  <center><input type="submit" value="Iniciar sesión"></center>*/
 /* 				    </form>*/
 /* 				   </div>	*/
 /* 				  */

@@ -8,18 +8,43 @@
                                  <div style="float:right;  margin-top:20px;">
                                   <input   type="submit" value="Atras" class="btn btn-sm btn-default"  onclick="window.history.back();">
                                   </div>
-                                 <h1>Registro de nuevos usuarios</h1>
+                                 <center><h2>Bienvenido ^_- </h2></center>
 
                         </div>
                         <div class="panel-body">
+                           
+                           
+                           
+{%if error ==1%}
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  El nickname "{{usuario.nickname}}" ya esta registrado 
+</div>
+{%endif%}
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <br>
-        <center>
-        <input type="submit" value="Crear" id="btnCrear" class="btn btn-primary btn-sm" />
-        </center>
-    {{ form_end(form) }}
+{%if error ==2%}
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  El correo "{{usuario.correoElectronico}}" ya esta registrado 
+</div>
+{%endif%}
+
+<div class="registro">
+      <div class="formulario-registro">
+         {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <br>
+            <center>
+            <input type="submit" value="Crear" id="btnCrear" class="btn btn-primary btn-sm" />
+            </center>
+        {{ form_end(form) }}
+      </div>
+      <div class="saludo">
+         <img src="{{asset('assets/images/baymaxsaluda.png')}}">
+      </div>
+   </div>
+
+    
 
 </div>
 </div>
@@ -27,13 +52,7 @@
 {%block javascripts%}
 
 {{parent()}}
-<script>
-$('#btnCrear').click(function(){
-   
 
-    window.location.href = "{{path('login')}}";
-});
-</script>
 {%endblock%}
 {%block barraderecha%}
 {%endblock%}

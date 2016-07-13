@@ -87,13 +87,7 @@ class __TwigTemplate_75824a82a98190ee068cb13bae27a96c9dccc6b201340e9518ec92e4d7a
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "correoElectronico", array()), "html", null, true);
         echo "</td>
             </tr>
-            <tr>
-                <th>Password</th>
-                <td>";
-        // line 44
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "password", array()), "html", null, true);
-        echo "</td>
-            </tr>
+
         </tbody>
 
                                     </tbody>
@@ -126,7 +120,7 @@ class __TwigTemplate_75824a82a98190ee068cb13bae27a96c9dccc6b201340e9518ec92e4d7a
 
     public function getDebugInfo()
     {
-        return array (  94 => 44,  87 => 40,  80 => 36,  73 => 32,  66 => 28,  49 => 14,  43 => 11,  39 => 10,  31 => 4,  28 => 3,  11 => 1,);
+        return array (  87 => 40,  80 => 36,  73 => 32,  66 => 28,  49 => 14,  43 => 11,  39 => 10,  31 => 4,  28 => 3,  11 => 1,);
     }
 }
 /* {% extends 'baseSinFondo.html.twig' %}*/
@@ -170,10 +164,7 @@ class __TwigTemplate_75824a82a98190ee068cb13bae27a96c9dccc6b201340e9518ec92e4d7a
 /*                 <th>Correo electronico</th>*/
 /*                 <td>{{ usuario.correoElectronico }}</td>*/
 /*             </tr>*/
-/*             <tr>*/
-/*                 <th>Password</th>*/
-/*                 <td>{{ usuario.password }}</td>*/
-/*             </tr>*/
+/* */
 /*         </tbody>*/
 /* */
 /*                                     </tbody>*/

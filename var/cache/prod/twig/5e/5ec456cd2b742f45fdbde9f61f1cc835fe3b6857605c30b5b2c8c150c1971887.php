@@ -105,9 +105,9 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
                     </div>
                     <button id = \"Buscar\" type=\"submit\" class=\"btn btn-default\">Buscar</button>-->
                     <div id = \"buscar_input\" class=\"input-group\" style=\"\">
-                      <input type=\"text\" id =\"valorBuscar\" class=\"form-control autocomplete\" placeholder=\"Buscar peliculas ... :)\" aria-label=\"...\" size=\"40%\">
+                      <input type=\"text\" style = \"display:inline;\" id =\"valorBuscar\" class=\"form-control autocomplete\" placeholder=\"Buscar peliculas ... :)\" aria-label=\"...\" size=\"40%\">
                       <div class=\"input-group-btn\">
-                        <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Buscar <span class=\"caret\"></span></button>
+                        <button type=\"button\"id=\"btnBuscar\" style=\"diplay:inline;\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Buscar <span class=\"caret\"></span></button>
                         <ul class=\"dropdown-menu dropdown-menu-right\">
                           <li><a id = \"Buscar_palabras\" href=\"#\">Palabras</a></li>
                           <li><a id = \"Buscar_genero\" href=\"#\">G&eacute;nero</a></li>
@@ -599,9 +599,9 @@ class __TwigTemplate_150204315ec32c6b9d6901dcfaf26a247fbd1ada805a3badc37c63a61cd
 /*                     </div>*/
 /*                     <button id = "Buscar" type="submit" class="btn btn-default">Buscar</button>-->*/
 /*                     <div id = "buscar_input" class="input-group" style="">*/
-/*                       <input type="text" id ="valorBuscar" class="form-control autocomplete" placeholder="Buscar peliculas ... :)" aria-label="..." size="40%">*/
+/*                       <input type="text" style = "display:inline;" id ="valorBuscar" class="form-control autocomplete" placeholder="Buscar peliculas ... :)" aria-label="..." size="40%">*/
 /*                       <div class="input-group-btn">*/
-/*                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></button>*/
+/*                         <button type="button"id="btnBuscar" style="diplay:inline;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Buscar <span class="caret"></span></button>*/
 /*                         <ul class="dropdown-menu dropdown-menu-right">*/
 /*                           <li><a id = "Buscar_palabras" href="#">Palabras</a></li>*/
 /*                           <li><a id = "Buscar_genero" href="#">G&eacute;nero</a></li>*/

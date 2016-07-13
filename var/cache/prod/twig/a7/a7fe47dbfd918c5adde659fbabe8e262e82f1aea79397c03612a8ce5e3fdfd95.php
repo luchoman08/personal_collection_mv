@@ -44,56 +44,91 @@ class __TwigTemplate_50c326ece99eb7220dddbea672a32fe7b55599feab0a6dc99d86b8c6496
                                  <div style=\"float:right;  margin-top:20px;\">
                                   <input   type=\"submit\" value=\"Atras\" class=\"btn btn-sm btn-default\"  onclick=\"window.history.back();\">
                                   </div>
-                                 <h1>Registro de nuevos usuarios</h1>
+                                 <center><h2>Bienvenido ^_- </h2></center>
 
                         </div>
                         <div class=\"panel-body\">
-
-    ";
-        // line 16
+                           
+                           
+                           
+";
+        // line 18
+        if (((isset($context["error"]) ? $context["error"] : null) == 1)) {
+            // line 19
+            echo "<div class=\"alert alert-warning alert-dismissible\" role=\"alert\">
+  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+  El nickname \"";
+            // line 21
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "nickname", array()), "html", null, true);
+            echo "\" ya esta registrado 
+</div>
+";
+        }
+        // line 24
+        echo "
+";
+        // line 25
+        if (((isset($context["error"]) ? $context["error"] : null) == 2)) {
+            // line 26
+            echo "<div class=\"alert alert-warning alert-dismissible\" role=\"alert\">
+  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+  El correo \"";
+            // line 28
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "correoElectronico", array()), "html", null, true);
+            echo "\" ya esta registrado 
+</div>
+";
+        }
+        // line 31
+        echo "
+<div class=\"registro\">
+      <div class=\"formulario-registro\">
+         ";
+        // line 34
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : null), 'form_start');
         echo "
-        ";
-        // line 17
+            ";
+        // line 35
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : null), 'widget');
         echo "
-        <br>
-        <center>
-        <input type=\"submit\" value=\"Crear\" id=\"btnCrear\" class=\"btn btn-primary btn-sm\" />
-        </center>
-    ";
-        // line 22
+            <br>
+            <center>
+            <input type=\"submit\" value=\"Crear\" id=\"btnCrear\" class=\"btn btn-primary btn-sm\" />
+            </center>
+        ";
+        // line 40
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : null), 'form_end');
         echo "
+      </div>
+      <div class=\"saludo\">
+         <img src=\"";
+        // line 43
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("assets/images/baymaxsaluda.png"), "html", null, true);
+        echo "\">
+      </div>
+   </div>
+
+    
 
 </div>
 </div>
 ";
     }
 
-    // line 27
+    // line 52
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 28
+        // line 53
         echo "
 ";
-        // line 29
+        // line 54
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
-<script>
-\$('#btnCrear').click(function(){
-   
 
-    window.location.href = \"";
-        // line 34
-        echo $this->env->getExtension('routing')->getPath("login");
-        echo "\";
-});
-</script>
 ";
     }
 
-    // line 38
+    // line 57
     public function block_barraderecha($context, array $blocks = array())
     {
     }
@@ -110,7 +145,7 @@ class __TwigTemplate_50c326ece99eb7220dddbea672a32fe7b55599feab0a6dc99d86b8c6496
 
     public function getDebugInfo()
     {
-        return array (  97 => 38,  89 => 34,  81 => 29,  78 => 28,  75 => 27,  66 => 22,  58 => 17,  54 => 16,  40 => 4,  37 => 3,  31 => 2,  11 => 1,);
+        return array (  132 => 57,  125 => 54,  122 => 53,  119 => 52,  106 => 43,  100 => 40,  92 => 35,  88 => 34,  83 => 31,  77 => 28,  73 => 26,  71 => 25,  68 => 24,  62 => 21,  58 => 19,  56 => 18,  40 => 4,  37 => 3,  31 => 2,  11 => 1,);
     }
 }
 /* {%extends 'index.html.twig'%}*/
@@ -123,18 +158,43 @@ class __TwigTemplate_50c326ece99eb7220dddbea672a32fe7b55599feab0a6dc99d86b8c6496
 /*                                  <div style="float:right;  margin-top:20px;">*/
 /*                                   <input   type="submit" value="Atras" class="btn btn-sm btn-default"  onclick="window.history.back();">*/
 /*                                   </div>*/
-/*                                  <h1>Registro de nuevos usuarios</h1>*/
+/*                                  <center><h2>Bienvenido ^_- </h2></center>*/
 /* */
 /*                         </div>*/
 /*                         <div class="panel-body">*/
+/*                            */
+/*                            */
+/*                            */
+/* {%if error ==1%}*/
+/* <div class="alert alert-warning alert-dismissible" role="alert">*/
+/*   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>*/
+/*   El nickname "{{usuario.nickname}}" ya esta registrado */
+/* </div>*/
+/* {%endif%}*/
 /* */
-/*     {{ form_start(form) }}*/
-/*         {{ form_widget(form) }}*/
-/*         <br>*/
-/*         <center>*/
-/*         <input type="submit" value="Crear" id="btnCrear" class="btn btn-primary btn-sm" />*/
-/*         </center>*/
-/*     {{ form_end(form) }}*/
+/* {%if error ==2%}*/
+/* <div class="alert alert-warning alert-dismissible" role="alert">*/
+/*   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>*/
+/*   El correo "{{usuario.correoElectronico}}" ya esta registrado */
+/* </div>*/
+/* {%endif%}*/
+/* */
+/* <div class="registro">*/
+/*       <div class="formulario-registro">*/
+/*          {{ form_start(form) }}*/
+/*             {{ form_widget(form) }}*/
+/*             <br>*/
+/*             <center>*/
+/*             <input type="submit" value="Crear" id="btnCrear" class="btn btn-primary btn-sm" />*/
+/*             </center>*/
+/*         {{ form_end(form) }}*/
+/*       </div>*/
+/*       <div class="saludo">*/
+/*          <img src="{{asset('assets/images/baymaxsaluda.png')}}">*/
+/*       </div>*/
+/*    </div>*/
+/* */
+/*     */
 /* */
 /* </div>*/
 /* </div>*/
@@ -142,13 +202,7 @@ class __TwigTemplate_50c326ece99eb7220dddbea672a32fe7b55599feab0a6dc99d86b8c6496
 /* {%block javascripts%}*/
 /* */
 /* {{parent()}}*/
-/* <script>*/
-/* $('#btnCrear').click(function(){*/
-/*    */
 /* */
-/*     window.location.href = "{{path('login')}}";*/
-/* });*/
-/* </script>*/
 /* {%endblock%}*/
 /* {%block barraderecha%}*/
 /* {%endblock%}*/
